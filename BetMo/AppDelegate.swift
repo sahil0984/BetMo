@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId(parseAppId, clientKey: parseClientKey)
         PFFacebookUtils.initializeFacebook()
 
-        //This is true
 
         return true
     }
