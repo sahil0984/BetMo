@@ -7,7 +7,7 @@
         <!--Login View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="LoginViewController" customModule="BetMo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="vXZ-lx-hvc" customClass="LoginViewController" customModule="BetMo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -42,7 +42,7 @@
         <!--Home View Controller-->
         <scene sceneID="D9o-Hx-ERg">
             <objects>
-                <viewController id="8ma-hs-RMc" customClass="HomeViewController" customModule="BetMo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="8ma-hs-RMc" customClass="HomeViewController" customModule="BetMo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fWw-Pb-IHI"/>
                         <viewControllerLayoutGuide type="bottom" id="A8F-aH-Mau"/>
@@ -67,7 +67,7 @@
         <!--Navigation Controller-->
         <scene sceneID="AW2-J6-Bmu">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bvn-tM-ftx" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomeNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="Bvn-tM-ftx" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qke-5M-ALs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

@@ -13,14 +13,12 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
     }
 
-    
 
     @IBAction func onLoginButton(sender: AnyObject) {
-        
-        if PFUser.currentUser() == nil {
-            
+                    
             println("Login new user")
         
             var permissions: [String] = ["email"]
@@ -31,32 +29,18 @@ class LoginViewController: UIViewController {
                     NSLog("Uh oh. The user cancelled the Facebook login.")
                 } else if user.isNew {
                     NSLog("User signed up and logged in through Facebook!")
-                    self.performSegueWithIdentifier("loginSegue", sender: self)
+                    self.gotoHomeViewController()
                 } else {
                     NSLog("User logged in through Facebook!")
-                    self.performSegueWithIdentifier("loginSegue", sender: self)
+                    self.gotoHomeViewController()
                 }
             })
-            
-        } else {
-            
-            if !PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()) {
-                println("Attempting to Link current user")
-                PFFacebookUtils.linkUser(PFUser.currentUser(), permissions:nil, {
-                    (succeeded: Bool!, error: NSError!) -> Void in
-                    if succeeded ?? false {
-                        NSLog("Woohoo, user logged in with Facebook!")
-                        println("Linked current user")
-                        self.performSegueWithIdentifier("loginSegue", sender: self)
-                    } else {
-                        println("Error linking current user")
-                    }
-                })
-            } else {
-                println("Current user already linked")
-                self.performSegueWithIdentifier("loginSegue", sender: self)
-            }
-        }
+        
+    }
+    
+    
+    func gotoHomeViewController() {
+        self.performSegueWithIdentifier("loginSegue", sender: self)
     }
 
     

@@ -12,7 +12,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
+    var storyboard = UIStoryboard(name: "Main", bundle: nil)
+
     var parseAppId = "HLJvIWanJTZ4VmdUarEbbUPxpR9eYsaUNFiyodKe"
     var parseClientKey = "4umyNwPmXgax1yNsvEWizzsaOt7C5ryuHvIzI4Zu"
 
@@ -20,13 +21,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
+        //Initialize Parse and Facebook
         Parse.setApplicationId(parseAppId, clientKey: parseClientKey)
         PFFacebookUtils.initializeFacebook()
+        
+        //Add a notification center to monitor logout action
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: "userDidLogoutNotification", object: nil)
 
-
+        //If user is cached and linked to Facebook
+        if PFUser.currentUser() != nil && PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()) {
+            var vc = storyboard.instantiateViewControllerWithIdentifier("HomeNavigationViewController") as UIViewController
+            window?.rootViewController = vc
+        }
+        
         return true
     }
 
+    func userDidLogout() {
+        //Clear session tokens
+        PFFacebookUtils.session().closeAndClearTokenInformation()
+        
+        //Is this needed??
+        PFUser.logOut()
+
+        //Go to initial login view controller
+        var vc = storyboard.instantiateInitialViewController() as UIViewController
+        window?.rootViewController = vc
+    }
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -44,15 +66,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 
-        //[SAHILARORA]
         FBAppCall.handleDidBecomeActiveWithSession(PFFacebookUtils.session())
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
+        //Close the Facebook session
+        PFFacebookUtils.session().close()
     }
 
-    //openURL call for Facebook [SAHILARORA]
+    //openURL call for Facebook
     func application(application: UIApplication,
         openURL url: NSURL,
         sourceApplication: String,
