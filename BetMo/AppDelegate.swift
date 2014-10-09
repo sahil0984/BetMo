@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId(parseAppId, clientKey: parseClientKey)
         PFFacebookUtils.initializeFacebook()
         
+        //Parse Analytics to track app usage
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
         //Add a notification center to monitor logout action
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: "userDidLogoutNotification", object: nil)
 
