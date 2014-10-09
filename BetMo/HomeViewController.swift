@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        loadUserData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,6 +27,40 @@ class HomeViewController: UIViewController {
         NSNotificationCenter.defaultCenter().postNotificationName("userDidLogoutNotification", object: nil)
     }
 
+    
+    
+
+    
+    
+    
+    //TODO: Need to figure out a better place to do this in order to slim down this controller
+    func loadUserData() {
+        var request = FBRequest.requestForMe()
+        request.startWithCompletionHandler { (connection, result, error: NSError?) -> Void in
+            if error == nil {
+                var userData = result as NSDictionary
+                
+                var fbId = userData["id"] as String
+                var firstName = userData["first_name"] as String
+                var lastName = userData["last_name"] as String
+                var email = userData["email"] as String
+                var profileImageUrl = "https://graph.facebook.com/\(fbId)/picture?type=large&return_ssl_resources=1" as String
+                
+                var currUser = PFUser.currentUser()
+                currUser["fbId"] = fbId
+                currUser["firstName"] = firstName
+                currUser["lastName"] = lastName
+                currUser["email"] = email
+                currUser["profileImageUrl"] = profileImageUrl
+                currUser.saveInBackground()
+  
+            } else {
+                println("Facebook request error: \(error)")
+            }
+            
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

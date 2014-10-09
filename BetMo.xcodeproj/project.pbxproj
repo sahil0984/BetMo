@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		710AAFE188C84D53A654527C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C4FD64DC654F579867EC79 /* libPods.a */; };
+		9F2FD28B19E688ED00400E46 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2FD28A19E688ED00400E46 /* User.swift */; };
+		9F2FD28D19E6984200400E46 /* Bet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2FD28C19E6984200400E46 /* Bet.swift */; };
 		9FACFB4E19E60C02007E865C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FACFB4D19E60C02007E865C /* AppDelegate.swift */; };
 		9FACFB5019E60C02007E865C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FACFB4F19E60C02007E865C /* LoginViewController.swift */; };
 		9FACFB5319E60C02007E865C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FACFB5119E60C02007E865C /* Main.storyboard */; };
@@ -43,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		7FD0BCAB3DEC4CB4B71AB2E6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		9F2FD28A19E688ED00400E46 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9F2FD28C19E6984200400E46 /* Bet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bet.swift; sourceTree = "<group>"; };
 		9FACFB4819E60C02007E865C /* BetMo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BetMo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FACFB4C19E60C02007E865C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FACFB4D19E60C02007E865C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -200,6 +204,8 @@
 		9FACFBA819E61DBC007E865C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9F2FD28A19E688ED00400E46 /* User.swift */,
+				9F2FD28C19E6984200400E46 /* Bet.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -346,6 +352,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F2FD28D19E6984200400E46 /* Bet.swift in Sources */,
+				9F2FD28B19E688ED00400E46 /* User.swift in Sources */,
 				9FACFB5019E60C02007E865C /* LoginViewController.swift in Sources */,
 				9FACFB4E19E60C02007E865C /* AppDelegate.swift in Sources */,
 				9FACFBA619E61CA1007E865C /* HomeViewController.swift in Sources */,

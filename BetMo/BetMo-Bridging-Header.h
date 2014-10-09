@@ -6,4 +6,6 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 
+#import <Parse/PFObject+Subclass.h>
+
 #import "UIImageView+AFNetworking.h"
