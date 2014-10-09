@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
         if PFUser.currentUser() == nil {
             
             println("Login new user")
-            
+        
             var permissions: [String] = ["email"]
             
             PFFacebookUtils.logInWithPermissions(permissions, {
@@ -67,14 +67,3 @@ class LoginViewController: UIViewController {
 
 }
 
-
-//---------SAHILARORA---------
-//Reference code that I will use for logout
-//    func onLogout() {
-//        PFFacebookUtils.unlinkUserInBackground(user, {
-//            (succeeded: Bool!, error: NSError!) -> Void in
-//            if succeeded {
-//                NSLog("The user is no longer associated with their Facebook account.")
-//            }
-//        })
-//    }

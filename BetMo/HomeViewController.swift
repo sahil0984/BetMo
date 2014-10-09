@@ -21,6 +21,16 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onLogoutButton(sender: AnyObject) {
+        PFFacebookUtils.unlinkUserInBackground(PFUser.currentUser(), {
+            (succeeded: Bool!, error: NSError!) -> Void in
+            if succeeded ?? false {
+                NSLog("The user is no longer associated with their Facebook account.")
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+        })
+    }
 
     /*
     // MARK: - Navigation
