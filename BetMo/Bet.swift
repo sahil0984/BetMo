@@ -16,7 +16,7 @@ class Bet : PFObject, PFSubclassing {
     }
     
     class func parseClassName() -> String! {
-        return "User"
+        return "Bet"
     }
     
     
