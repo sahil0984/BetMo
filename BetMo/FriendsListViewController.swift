@@ -20,6 +20,17 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
     var delegate: FriendsListViewControllerDelegate?
     var friendsList: [User] = []
     
+    var fbAllFriendIds: [String] = [] {
+        didSet {
+            // Construct a PFUser query that will find friends whose facebook ids
+            // are contained in the current user's friend list.
+            
+
+            
+        }
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,6 +38,28 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
         friendsListTableView.dataSource = self
         friendsListTableView.delegate = self
         friendsListTableView.rowHeight = UITableViewAutomaticDimension
+        
+        
+        // Issue a Facebook Graph API request to get your user's friend list
+        FBRequestConnection.startForMyFriendsWithCompletionHandler({ (connection, result, error: NSError!) -> Void in
+            if error == nil {
+                //println(result)
+                // result will contain an array with your user's friends in the "data" key
+                var friendObjects = result["data"] as [NSDictionary]
+                
+                // Create a list of friends' Facebook IDs
+                for friendObject in friendObjects {
+                    self.fbAllFriendIds.append(friendObject["id"] as NSString)
+                    //var tt = friendObject["id"] as NSString
+                    //println("fid = \(tt)")
+                }
+                
+                println("\(friendObjects.count)")
+            } else {
+                println("Error requesting friends list form facebook")
+                println("\(error)")
+            }
+        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,81 +74,27 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
             self.friendsList = []
             self.friendsListTableView.reloadData()
         } else {
-            // Issue a Facebook Graph API request to get your user's friend list
-            FBRequestConnection.startForMyFriendsWithCompletionHandler({ (connection, result, error: NSError!) -> Void in
+
+            var friendsQuery = PFQuery(className: "_User")
+            friendsQuery.whereKey("fbId", containedIn: fbAllFriendIds)
+            
+            friendsQuery.whereKey("searchName", hasPrefix: friendNameTextField.text)
+            friendsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
                 if error == nil {
-                    //println(result)
-                    // result will contain an array with your user's friends in the "data" key
-                    var friendObjects = result["data"] as [NSDictionary]
-                    var friendIds: [String] = []
-                    
-                    // Create a list of friends' Facebook IDs
-                    for friendObject in friendObjects {
-                        friendIds.append(friendObject["id"] as NSString)
-                        //var tt = friendObject["id"] as NSString
-                        //println("fid = \(tt)")
+                    var friends = objects as [User]
+                    if friends.count == 0 {
+                        println("Not Found: \(self.friendNameTextField.text)")
+                        self.friendsList = []
+                    } else {
+                        println("Found: \(self.friendNameTextField.text)")
+                        self.friendsList = friends
                     }
-                    
-                    
-                    
-                    println("\(friendObjects.count)")
+                    self.friendsListTableView.reloadData()
                 } else {
-                    println("Error requesting friends list form facebook")
-                    println("\(error)")
+                    println("Error finding")
                 }
-            })
+            }
             
-            
-            
-            
-            
-            
-            
-//            // Issue a Facebook Graph API request to get your user's friend list
-//            [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-//                if (!error) {
-//                // result will contain an array with your user's friends in the "data" key
-//                NSArray *friendObjects = [result objectForKey:@"data"];
-//                NSMutableArray *friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
-//                // Create a list of friends' Facebook IDs
-//                for (NSDictionary *friendObject in friendObjects) {
-//                [friendIds addObject:[friendObject objectForKey:@"id"]];
-//                }
-//                
-//                // Construct a PFUser query that will find friends whose facebook ids
-//                // are contained in the current user's friend list.
-//                PFQuery *friendQuery = [PFUser query];
-//                [friendQuery whereKey:@"fbId" containedIn:friendIds];
-//                
-//                // findObjects will return a list of PFUsers that are friends
-//                // with the current user
-//                NSArray *friendUsers = [friendQuery findObjects];
-//                }
-//                }];
-            
-            
-            
-            
-            
-        
-//            //Search Parse for facebook friends
-//            var friendsQuery = PFQuery(className: "_User")
-//            friendsQuery.whereKey("searchName", hasPrefix: friendNameTextField.text)
-//            friendsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-//                if error == nil {
-//                    var friends = objects as [User]
-//                    if friends.count == 0 {
-//                        println("Not Found: \(self.friendNameTextField.text)")
-//                        self.friendsList = []
-//                    } else {
-//                        println("Found: \(self.friendNameTextField.text)")
-//                        self.friendsList = friends
-//                    }
-//                    self.friendsListTableView.reloadData()
-//                } else {
-//                    println("Error finding")
-//                }
-//            }
         }
     }
     
