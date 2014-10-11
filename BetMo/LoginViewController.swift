@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
                     
             println("Login new user")
         
-            var permissions: [String] = ["email"]
+            var permissions: [String] = ["email", "user_friends"]
             
             PFFacebookUtils.logInWithPermissions(permissions, {
                 (user: PFUser!, error: NSError!) -> Void in
