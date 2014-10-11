@@ -26,4 +26,4 @@ DerivedData
 Pods/
 
 #Adding this for now. Check this is correct:
-*.xcodeproj
+*.xcodeproj/
