@@ -20,15 +20,7 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
     var delegate: FriendsListViewControllerDelegate?
     var friendsList: [User] = []
     
-    var fbAllFriendIds: [String] = [] {
-        didSet {
-            // Construct a PFUser query that will find friends whose facebook ids
-            // are contained in the current user's friend list.
-            
-
-            
-        }
-    }
+    var fbAllFriendIds: [String] = []
 
     
     override func viewDidLoad() {

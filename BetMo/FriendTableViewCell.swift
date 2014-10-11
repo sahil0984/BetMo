@@ -10,13 +10,21 @@ import UIKit
 
 class FriendTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
     var friend: User? {
         willSet {
         }
         didSet {
-            nameLabel.text = friend!["firstName"] as? String
+            nameLabel.text = friend?.getName()
+            
+            var urlRequest = NSURLRequest(URL: NSURL(string: (friend!.getProfileImageUrl())))
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
+                if connectionError == nil && data != nil {
+                    self.profileImageView.image = UIImage(data: data!)
+                }
+            }
         }
     }
     
