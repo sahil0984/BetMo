@@ -9,10 +9,42 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    
+    @IBOutlet weak var viewContainer: UIView!
+
+    var homeFeedContainer: UIViewController!
+
+    // Containers handler
+    var activeViewController: UIViewController? {
+        didSet(oldViewControllerOrNil) {
+            if let oldVC = oldViewControllerOrNil {
+                oldVC.willMoveToParentViewController(nil)
+                oldVC.view.removeFromSuperview()
+                oldVC.removeFromParentViewController()
+                self.view.layoutIfNeeded()
+            }
+            if let newVC = activeViewController {
+                self.addChildViewController(newVC)
+                newVC.view.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+                newVC.view.frame = self.viewContainer.bounds
+                self.viewContainer.addSubview(newVC.view)
+                newVC.didMoveToParentViewController(self)
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+        // Create all view controllers
+        homeFeedContainer = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as FeedViewController
+
+        //////////////// Create other feed controllers
+
+        activeViewController = homeFeedContainer
         // Do any additional setup after loading the view.
         loadUserData()
     }
