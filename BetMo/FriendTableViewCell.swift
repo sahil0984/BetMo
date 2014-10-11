@@ -19,7 +19,7 @@ class FriendTableViewCell: UITableViewCell {
         didSet {
             nameLabel.text = friend?.getName()
             
-            var urlRequest = NSURLRequest(URL: NSURL(string: (friend!.getProfileImageUrl())))
+            var urlRequest = NSURLRequest(URL: NSURL(string: (friend!.getProfileImageUrl())!))
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
                 if connectionError == nil && data != nil {
                     self.profileImageView.image = UIImage(data: data!)
