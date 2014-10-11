@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol FriendsListViewControllerDelegate {
+    func friendSelected(selectedFriend : User) -> Void
+}
+
 class FriendsListViewController: UIViewController, UITextViewDelegate, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var friendNameTextField: UITextField!
     @IBOutlet weak var friendsListTableView: UITableView!
     
+    var delegate: FriendsListViewControllerDelegate?
     var friendsList: [User] = []
     
     override func viewDidLoad() {
@@ -69,7 +74,9 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         
+        delegate?.friendSelected(friendsList[indexPath.row])
         
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     /*

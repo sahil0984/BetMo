@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateBetViewController: UIViewController {
+class CreateBetViewController: UIViewController, FriendsListViewControllerDelegate {
 
     @IBOutlet weak var currUserNameLabel: UILabel!
     @IBOutlet weak var currUserImageView: UIImageView!
@@ -18,7 +18,6 @@ class CreateBetViewController: UIViewController {
     
     @IBOutlet weak var betOnLabel: UITextView!
     @IBOutlet weak var betAmountLabel: UITextField!
-    
     
     var currUser = User()
     var vsUser = User()
@@ -81,18 +80,34 @@ class CreateBetViewController: UIViewController {
     
     @IBAction func onTouchVsUser(sender: AnyObject) {
         println("text field touched")
+        
         self.performSegueWithIdentifier("friendsListSegue", sender: self)
     }
     
-
-    /*
+    func friendSelected(selectedFriend: User) {
+        self.vsUser = selectedFriend
+        self.vsUserNameTextField.text = selectedFriend.getName()
+        
+        var urlRequest = NSURLRequest(URL: NSURL(string: (self.vsUser.getProfileImageUrl())))
+        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
+            if connectionError == nil && data != nil {
+                self.vsUserImageView.image = UIImage(data: data!)
+            }
+        }
+    }
+    
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        var friendsListViewController = segue.destinationViewController as FriendsListViewController
+        
+        friendsListViewController.delegate = self
     }
-    */
+
 
 }
