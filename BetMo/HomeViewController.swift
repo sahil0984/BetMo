@@ -38,22 +38,20 @@ class HomeViewController: UIViewController {
         var request = FBRequest.requestForMe()
         request.startWithCompletionHandler { (connection, result, error: NSError?) -> Void in
             if error == nil {
+                println(result)
                 var userData = result as NSDictionary
-                
                 var fbId = userData["id"] as String
-                var firstName = userData["first_name"] as String
-                var lastName = userData["last_name"] as String
-                var email = userData["email"] as String
-                var profileImageUrl = "https://graph.facebook.com/\(fbId)/picture?type=large&return_ssl_resources=1" as String
-                var searchName = "\(firstName.lowercaseString) \(lastName.lowercaseString)"
+
+                var currUser = PFUser.currentUser() as User
+                currUser.setFbId(userData["id"] as String)
+                currUser.setFirstName(userData["first_name"] as String)
+                currUser.setLastName(userData["last_name"] as String)
+                currUser.setEmail(userData["email"] as String)
+                currUser.setProfileImageUrl("https://graph.facebook.com/\(fbId)/picture?type=large&return_ssl_resources=1" as String)
                 
-                var currUser = PFUser.currentUser()
-                currUser["fbId"] = fbId
-                currUser["firstName"] = firstName
-                currUser["lastName"] = lastName
-                currUser["email"] = email
-                currUser["profileImageUrl"] = profileImageUrl
-                currUser["searchName"] = searchName
+                var searchName = currUser.getName().lowercaseString
+                currUser.setSearchName(searchName)
+                
                 currUser.saveInBackground()
   
             } else {

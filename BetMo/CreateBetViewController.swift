@@ -28,12 +28,10 @@ class CreateBetViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.currUser = PFUser.currentUser() as User
+
+        self.currUserNameLabel.text = "\(self.currUser.getName())"
         
-        var firstName = self.currUser["firstName"] as? String
-        var lastName = self.currUser["lastName"] as? String
-        self.currUserNameLabel.text = "\(firstName!) \(lastName!)"
-        
-        var urlRequest = NSURLRequest(URL: NSURL(string: (self.currUser["profileImageUrl"] as String)))
+        var urlRequest = NSURLRequest(URL: NSURL(string: (self.currUser.getProfileImageUrl())))
         NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
             if connectionError == nil && data != nil {
                 self.currUserImageView.image = UIImage(data: data!)
@@ -51,13 +49,16 @@ class CreateBetViewController: UIViewController {
     @IBAction func onCreateButton(sender: AnyObject) {
         var newBet = Bet()
         
-        newBet["owner"] = currUser as User
-        newBet["description"] = betOnLabel.text as String
+        var winnerUser = User()
+        
+        newBet.setOwner(currUser as User)
+        newBet.setDescription(betOnLabel.text as String)
         if vsUserNameTextField.text != "" {
-            newBet["opponent"] = vsUser as User
+            newBet.setOpponent(vsUser as User)
         }
-        newBet["amount"] = betAmountLabel.text as String
-        newBet["isAccepted"] = false
+        newBet.setAmount(betAmountLabel.text as String)
+        //newBet.setWinner(winnerUser as User)
+        newBet.setIsAccepted(false)
         
         newBet.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
             if isSaved {

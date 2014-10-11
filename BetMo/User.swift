@@ -20,17 +20,58 @@ class User : PFUser, PFSubclassing {
         //Nil User object
     }
 
+    // Getters and Setters for all User properties
 
-/////////NOTE: We might not need to add any getters and setters as Parse adds them automatically when you set key
-/////////      But then we still want to add them for other purposes
+    func getFirstName() -> String {
+        return self["firstName"] as String
+    }
     
-//This is the general format for how to add getters/setters
-//    //Getters
-//    func getFirstName() -> String {
-//        return self["firstName"] as String
-//    }
-//    func getLastName() -> String {
-//        return self["lastName"] as String
-//    }
+    func setFirstName(firstName: String) {
+        self["firstName"] = firstName
+    }
+
+    func getLastName() -> String {
+        return self["lastName"] as String
+    }
+    
+    func setLastName(lastName: String) {
+        self["lastName"] = lastName
+    }
+
+    func getName() -> String {
+        return (getFirstName() + " " + getLastName())
+    }
+    
+    func getEmail() -> String {
+        return self["email"] as String
+    }
+
+    func setEmail(email: String) {
+        self["email"] = email
+    }
+
+    func getFbId() -> String {
+        return self["fbId"] as String
+    }
+    
+    func setFbId(fbId: String) {
+        self["fbId"] = fbId
+    }
+
+    func getProfileImageUrl() -> String {
+        return self["profileImageUrl"] as String
+    }
+
+    func setProfileImageUrl(profileImageUrl: String) {
+        self["profileImageUrl"] = profileImageUrl
+    }
+    
+    func getSearchName() -> String {
+        return self["searchName"] as String
+    }
+    
+    func setSearchName(searchName: String) {
+        self["searchName"] = searchName
+    }
     
 }
