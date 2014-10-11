@@ -28,6 +28,8 @@
 		9FACFB8519E60F18007E865C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FACFB7B19E60F18007E865C /* StoreKit.framework */; };
 		9FACFB8619E60F18007E865C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FACFB7C19E60F18007E865C /* SystemConfiguration.framework */; };
 		9FACFBA619E61CA1007E865C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FACFBA519E61CA1007E865C /* HomeViewController.swift */; };
+		9FB9428019E7D73300D72264 /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9427F19E7D73300D72264 /* FriendsListViewController.swift */; };
+		9FB9428219E8FF3100D72264 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9428119E8FF3100D72264 /* FriendTableViewCell.swift */; };
 		9FEB2E6F19E6284900FFF066 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FEB2E6E19E6284900FFF066 /* ParseFacebookUtils.framework */; };
 		9FEB2E7119E6288F00FFF066 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FEB2E7019E6288F00FFF066 /* Bolts.framework */; };
 		9FEB2E7319E628E700FFF066 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FEB2E7219E628E700FFF066 /* Parse.framework */; };
@@ -71,6 +73,8 @@
 		9FACFB7B19E60F18007E865C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9FACFB7C19E60F18007E865C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9FACFBA519E61CA1007E865C /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		9FB9427F19E7D73300D72264 /* FriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
+		9FB9428119E8FF3100D72264 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		9FEB2E6E19E6284900FFF066 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = "../../parse-library-1.4.1/ParseFacebookUtils.framework"; sourceTree = "<group>"; };
 		9FEB2E7019E6288F00FFF066 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../parse-library-1.4.1/Bolts.framework"; sourceTree = "<group>"; };
 		9FEB2E7219E628E700FFF066 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../parse-library-1.4.1/Parse.framework"; sourceTree = "<group>"; };
@@ -200,6 +204,7 @@
 				9FACFB4F19E60C02007E865C /* LoginViewController.swift */,
 				9FACFBA519E61CA1007E865C /* HomeViewController.swift */,
 				9F2FD28E19E76C5F00400E46 /* CreateBetViewController.swift */,
+				9FB9427F19E7D73300D72264 /* FriendsListViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -216,6 +221,7 @@
 		9FACFBA919E61DC4007E865C /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				9FB9428119E8FF3100D72264 /* FriendTableViewCell.swift */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -359,8 +365,10 @@
 				9F2FD28B19E688ED00400E46 /* User.swift in Sources */,
 				9FACFB5019E60C02007E865C /* LoginViewController.swift in Sources */,
 				9FACFB4E19E60C02007E865C /* AppDelegate.swift in Sources */,
+				9FB9428019E7D73300D72264 /* FriendsListViewController.swift in Sources */,
 				9F2FD28F19E76C5F00400E46 /* CreateBetViewController.swift in Sources */,
 				9FACFBA619E61CA1007E865C /* HomeViewController.swift in Sources */,
+				9FB9428219E8FF3100D72264 /* FriendTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

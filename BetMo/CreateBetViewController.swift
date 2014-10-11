@@ -13,7 +13,7 @@ class CreateBetViewController: UIViewController {
     @IBOutlet weak var currUserNameLabel: UILabel!
     @IBOutlet weak var currUserImageView: UIImageView!
     
-    @IBOutlet weak var vsUserNameLabel: UITextField!
+    @IBOutlet weak var vsUserNameTextField: UITextField!
     @IBOutlet weak var vsUserImageView: UIImageView!
     
     @IBOutlet weak var betOnLabel: UITextView!
@@ -21,6 +21,7 @@ class CreateBetViewController: UIViewController {
     
     
     var currUser = User()
+    var vsUser = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,6 @@ class CreateBetViewController: UIViewController {
         }
         
         self.betOnLabel.text = "Describe your bet..."
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,26 +51,38 @@ class CreateBetViewController: UIViewController {
     @IBAction func onCreateButton(sender: AnyObject) {
         var newBet = Bet()
         
-        var vsUser = User()
-        var winnerUser = User()
-        
         newBet["owner"] = currUser as User
         newBet["description"] = betOnLabel.text as String
-        newBet["opponent"] = vsUser as User
+        if vsUserNameTextField.text != "" {
+            newBet["opponent"] = vsUser as User
+        }
         newBet["amount"] = betAmountLabel.text as String
-        newBet["winner"] = winnerUser as User
         newBet["isAccepted"] = false
         
         newBet.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
             if isSaved {
-                println("Success saving bet");
-                println("\(error!)")
+                println("Successfully created bet");
             } else {
-                println("Failed saving bet");
+                println("Failed creating the bet");
                 println("\(error!)")
             }
         }
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
+    
+    @IBAction func onCancelButton(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    
+    @IBAction func onTouchVsUser(sender: AnyObject) {
+        println("text field touched")
+        self.performSegueWithIdentifier("friendsListSegue", sender: self)
+    }
+    
 
     /*
     // MARK: - Navigation

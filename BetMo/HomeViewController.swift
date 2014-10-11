@@ -45,6 +45,7 @@ class HomeViewController: UIViewController {
                 var lastName = userData["last_name"] as String
                 var email = userData["email"] as String
                 var profileImageUrl = "https://graph.facebook.com/\(fbId)/picture?type=large&return_ssl_resources=1" as String
+                var searchName = "\(firstName.lowercaseString) \(lastName.lowercaseString)"
                 
                 var currUser = PFUser.currentUser()
                 currUser["fbId"] = fbId
@@ -52,6 +53,7 @@ class HomeViewController: UIViewController {
                 currUser["lastName"] = lastName
                 currUser["email"] = email
                 currUser["profileImageUrl"] = profileImageUrl
+                currUser["searchName"] = searchName
                 currUser.saveInBackground()
   
             } else {

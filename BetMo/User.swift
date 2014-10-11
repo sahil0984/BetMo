@@ -14,6 +14,11 @@ class User : PFUser, PFSubclassing {
         superclass()?.load()
         self.registerSubclass()
     }
+    
+    override init() {
+        super.init()
+        //Nil User object
+    }
 
 
 /////////NOTE: We might not need to add any getters and setters as Parse adds them automatically when you set key

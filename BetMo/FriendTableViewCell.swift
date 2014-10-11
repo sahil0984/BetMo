@@ -10,6 +10,16 @@ import UIKit
 
 class FriendTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    var friend: User? {
+        willSet {
+        }
+        didSet {
+            nameLabel.text = friend!["firstName"] as? String
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

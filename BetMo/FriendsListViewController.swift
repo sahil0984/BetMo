@@ -8,19 +8,69 @@
 
 import UIKit
 
-class FriendListViewController: UIViewController {
+class FriendsListViewController: UIViewController, UITextViewDelegate, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var friendNameTextField: UITextField!
+    @IBOutlet weak var friendsListTableView: UITableView!
+    
+    var friendsList: [User] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        friendsListTableView.dataSource = self
+        friendsListTableView.delegate = self
+        friendsListTableView.rowHeight = UITableViewAutomaticDimension
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    
+    @IBAction func onEditingChanged(sender: AnyObject) {
+        println("Edit changed")
+        if friendNameTextField.text == "" {
+            self.friendsList = []
+            self.friendsListTableView.reloadData()
+        } else {
+        
+            //Search Parse for facebook friends
+            var friendsQuery = PFQuery(className: "_User")
+            friendsQuery.whereKey("searchName", hasPrefix: friendNameTextField.text)
+            friendsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+                if error == nil {
+                    var friends = objects as [User]
+                    if friends.count == 0 {
+                        println("Not Found: \(self.friendNameTextField.text)")
+                        self.friendsList = []
+                    } else {
+                        println("Found: \(self.friendNameTextField.text)")
+                        self.friendsList = friends
+                    }
+                    self.friendsListTableView.reloadData()
+                } else {
+                    println("Error finding")
+                }
+            }
+        }
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return friendsList.count
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("friendCell") as FriendTableViewCell
+            cell.friend = friendsList[indexPath.row]
+        return cell
+    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        
+        
+    }
 
     /*
     // MARK: - Navigation
