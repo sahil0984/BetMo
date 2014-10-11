@@ -163,7 +163,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="exR-k7-Nwc">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="dRq-sM-eWA"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="dRq-sM-eWA">
+                            <connections>
+                                <action selector="onCancelButton:" destination="tgW-ST-SmE" id="60p-tB-Nl7"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Create" id="roK-cU-XRQ">
                             <connections>
                                 <action selector="onCreateButton:" destination="tgW-ST-SmE" id="pOF-s4-hCr"/>

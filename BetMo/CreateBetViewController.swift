@@ -27,12 +27,10 @@ class CreateBetViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.currUser = PFUser.currentUser() as User
+
+        self.currUserNameLabel.text = "\(self.currUser.getName())"
         
-        var firstName = self.currUser["firstName"] as? String
-        var lastName = self.currUser["lastName"] as? String
-        self.currUserNameLabel.text = "\(firstName!) \(lastName!)"
-        
-        var urlRequest = NSURLRequest(URL: NSURL(string: (self.currUser["profileImageUrl"] as String)))
+        var urlRequest = NSURLRequest(URL: NSURL(string: (self.currUser.getProfileImageUrl())))
         NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
             if connectionError == nil && data != nil {
                 self.currUserImageView.image = UIImage(data: data!)
@@ -54,12 +52,12 @@ class CreateBetViewController: UIViewController {
         var vsUser = User()
         var winnerUser = User()
         
-        newBet["owner"] = currUser as User
-        newBet["description"] = betOnLabel.text as String
-        newBet["opponent"] = vsUser as User
-        newBet["amount"] = betAmountLabel.text as String
-        newBet["winner"] = winnerUser as User
-        newBet["isAccepted"] = false
+        newBet.setOwner(currUser as User)
+        newBet.setDescription(betOnLabel.text as String)
+        newBet.setOpponent(vsUser as User)
+        newBet.setAmount(betAmountLabel.text as String)
+        newBet.setWinner(winnerUser as User)
+        newBet.setIsAccepted(false)
         
         newBet.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
             if isSaved {
@@ -70,6 +68,10 @@ class CreateBetViewController: UIViewController {
                 println("\(error!)")
             }
         }
+    }
+
+    @IBAction func onCancelButton(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in })
     }
 
     /*
