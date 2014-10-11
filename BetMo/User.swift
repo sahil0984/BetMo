@@ -22,16 +22,16 @@ class User : PFUser, PFSubclassing {
 
     // Getters and Setters for all User properties
 
-    func getFirstName() -> String {
-        return self["firstName"] as String
+    func getFirstName() -> String? {
+        return self["firstName"] as? String
     }
     
     func setFirstName(firstName: String) {
         self["firstName"] = firstName
     }
 
-    func getLastName() -> String {
-        return self["lastName"] as String
+    func getLastName() -> String? {
+        return self["lastName"] as? String
     }
     
     func setLastName(lastName: String) {
@@ -39,35 +39,35 @@ class User : PFUser, PFSubclassing {
     }
 
     func getName() -> String {
-        return (getFirstName() + " " + getLastName())
+        return (getFirstName()! + " " + getLastName()!)
     }
     
-    func getEmail() -> String {
-        return self["email"] as String
+    func getEmail() -> String? {
+        return self["email"] as? String
     }
 
     func setEmail(email: String) {
         self["email"] = email
     }
 
-    func getFbId() -> String {
-        return self["fbId"] as String
+    func getFbId() -> String? {
+        return self["fbId"] as? String
     }
     
     func setFbId(fbId: String) {
         self["fbId"] = fbId
     }
 
-    func getProfileImageUrl() -> String {
-        return self["profileImageUrl"] as String
+    func getProfileImageUrl() -> String? {
+        return self["profileImageUrl"] as? String
     }
 
     func setProfileImageUrl(profileImageUrl: String) {
         self["profileImageUrl"] = profileImageUrl
     }
     
-    func getSearchName() -> String {
-        return self["searchName"] as String
+    func getSearchName() -> String? {
+        return self["searchName"] as? String
     }
     
     func setSearchName(searchName: String) {

@@ -30,7 +30,7 @@ class CreateBetViewController: UIViewController, FriendsListViewControllerDelega
 
         self.currUserNameLabel.text = "\(self.currUser.getName())"
         
-        var urlRequest = NSURLRequest(URL: NSURL(string: (self.currUser.getProfileImageUrl())))
+        var urlRequest = NSURLRequest(URL: NSURL(string: (self.currUser.getProfileImageUrl())!))
         NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
             if connectionError == nil && data != nil {
                 self.currUserImageView.image = UIImage(data: data!)
@@ -88,7 +88,7 @@ class CreateBetViewController: UIViewController, FriendsListViewControllerDelega
         self.vsUser = selectedFriend
         self.vsUserNameTextField.text = selectedFriend.getName()
         
-        var urlRequest = NSURLRequest(URL: NSURL(string: (self.vsUser.getProfileImageUrl())))
+        var urlRequest = NSURLRequest(URL: NSURL(string: (self.vsUser.getProfileImageUrl())!))
         NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
             if connectionError == nil && data != nil {
                 self.vsUserImageView.image = UIImage(data: data!)

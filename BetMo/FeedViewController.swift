@@ -18,8 +18,15 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         betsTableView.delegate = self
         betsTableView.dataSource = self
-
-        // Do any additional setup after loading the view.
+        BetMoClient.sharedInstance.getAllBets({ (bets, error) -> () in
+            if error != nil {
+                println("Error while getting all bets")
+            } else {
+                self.bets = bets!
+                self.betsTableView.reloadData()
+            }
+            
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,14 +36,12 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return bets.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = betsTableView.dequeueReusableCellWithIdentifier("BetCell") as BetCell
-        var bet = Bet()
-        var curuser = PFUser.currentUser() as User
-        println(curuser.getProfileImageUrl())
+        cell.bet = bets[indexPath.row] as Bet
         return cell
     }
 

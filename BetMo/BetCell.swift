@@ -18,7 +18,11 @@ class BetCell: UITableViewCell {
     var bet: Bet! {
         willSet(betInfo) {
             // Setup cell
-            println("woot")
+            var owner = betInfo.getOwner() as User
+            var opponent = betInfo.getOppenent()!
+            var ownerName = owner.getName()
+            headlineLabel.text = ownerName
+            descriptionLabel.text = betInfo.getDescription()
         }
     }
     

@@ -10,6 +10,7 @@
 		710AAFE188C84D53A654527C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C4FD64DC654F579867EC79 /* libPods.a */; };
 		8516DF2E19E9D30300D1E3AB /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8516DF2D19E9D30300D1E3AB /* ParseFacebookUtils.framework */; };
 		8516DF3019E9D33500D1E3AB /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8516DF2F19E9D33500D1E3AB /* Parse.framework */; };
+		8516DF3319E9D8A100D1E3AB /* BetMoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516DF3219E9D8A100D1E3AB /* BetMoClient.swift */; };
 		853F392519E901A500915A5B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853F392419E901A500915A5B /* FeedViewController.swift */; };
 		853F392719E90BDE00915A5B /* BetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853F392619E90BDE00915A5B /* BetCell.swift */; };
 		9F2FD28B19E688ED00400E46 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2FD28A19E688ED00400E46 /* User.swift */; };
@@ -50,6 +51,7 @@
 		7FD0BCAB3DEC4CB4B71AB2E6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		8516DF2D19E9D30300D1E3AB /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = Pods/ParseFacebookUtils/ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		8516DF2F19E9D33500D1E3AB /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Pods/Parse/Parse.framework; sourceTree = "<group>"; };
+		8516DF3219E9D8A100D1E3AB /* BetMoClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetMoClient.swift; sourceTree = "<group>"; };
 		853F392419E901A500915A5B /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		853F392619E90BDE00915A5B /* BetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetCell.swift; sourceTree = "<group>"; };
 		9F2FD28A19E688ED00400E46 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -113,6 +115,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8516DF3119E9D88700D1E3AB /* API */ = {
+			isa = PBXGroup;
+			children = (
+				8516DF3219E9D8A100D1E3AB /* BetMoClient.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 		9FACFB3F19E60C02007E865C = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +146,7 @@
 		9FACFB4A19E60C02007E865C /* BetMo */ = {
 			isa = PBXGroup;
 			children = (
+				8516DF3119E9D88700D1E3AB /* API */,
 				9FACFBA919E61DC4007E865C /* TableViewCells */,
 				9FACFBA819E61DBC007E865C /* Models */,
 				9FACFBA719E61DAC007E865C /* ViewControllers */,
@@ -368,6 +379,7 @@
 				9F2FD28F19E76C5F00400E46 /* CreateBetViewController.swift in Sources */,
 				9FACFBA619E61CA1007E865C /* HomeViewController.swift in Sources */,
 				9FB9428219E8FF3100D72264 /* FriendTableViewCell.swift in Sources */,
+				8516DF3319E9D8A100D1E3AB /* BetMoClient.swift in Sources */,
 				853F392519E901A500915A5B /* FeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
