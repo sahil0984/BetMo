@@ -22,7 +22,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if error != nil {
                 println("Error while getting all bets")
             } else {
-                self.bets = bets!
+                self.bets = BetMoClient.sharedInstance.betsCompleted
                 self.betsTableView.reloadData()
             }
             
