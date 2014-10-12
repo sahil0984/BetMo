@@ -75,11 +75,57 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //        println("selectedBet1: \(self.selectedBet)")
 //        self.selectedBet = bets[indexPath.row]
 //    }
-    
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("hi2")
     }
 
+    // This is needed for the swiping cell ability
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    }
+
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        var bet = bets[indexPath.row] as Bet
+        var currentUser = PFUser.currentUser() as User
+        var owner = bet.getOwner() as User
+        var opponent = bet.getOppenent()
+        var button1: UITableViewRowAction!
+        var button2: UITableViewRowAction!
+
+        if owner.getFbId() == currentUser.getFbId() {
+            if opponent == nil || bet.getIsAccepted() == false {
+                button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Cancel Bet", handler:{action, indexpath in
+                    println("Bet Cancelled");
+                });
+                return [button1]
+            }
+        }
+
+        if opponent != nil {
+            if opponent!.getFbId() == currentUser.getFbId() && bet.getIsAccepted() == false {
+                button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Accept", handler:{action, indexpath in
+                    println("Accepted Bet Request");
+                });
+                button1.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
+
+                button2 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Reject", handler:{action, indexpath in
+                    println("Rejected Bet Request");
+                });
+
+                return [button1, button2]
+            }
+        }
+
+        if opponent == nil {
+            button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Accept Bet", handler:{action, indexpath in
+                println("Accepted Open Bet");
+            });
+            button1.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
+            return [button1]
+        }
+
+        return []
+    }
     
     // MARK: - Navigation
 
