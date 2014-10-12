@@ -55,7 +55,7 @@ class BetDetailViewController: UIViewController {
         betAmountLabel.text = currBet.getAmount()
         
         if let winner = currBet.getWinner() {
-            if winner.getFbId() == currBet.getOwner() {
+            if winner.getFbId() == currBet.getOwner().getFbId() {
                 setOwnerWinner()
             } else {
                 setOpponentWinner()
@@ -70,11 +70,23 @@ class BetDetailViewController: UIViewController {
     
     
     @IBAction func onWinnerSelect(sender: AnyObject) {
+        var currUser = PFUser.currentUser() as User
+        
         if betDecisionSegmentControl.selectedSegmentIndex == 0 {
             setOwnerWinner()
-            //currBet.
+            if currUser.getFbId() == currBet.getOwner().getFbId() {
+                println("hereiam")
+                currBet.won()
+            } else if currUser.getFbId() == currBet.getOppenent()?.getFbId() {
+                currBet.lost()
+            }
         } else {
             setOpponentWinner()
+            if currUser.getFbId() == currBet.getOppenent()?.getFbId() {
+                currBet.won()
+            } else if currUser.getFbId() == currBet.getOwner().getFbId() {
+                currBet.lost()
+            }
         }
     }
     
