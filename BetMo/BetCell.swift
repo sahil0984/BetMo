@@ -92,6 +92,7 @@ class BetCell: UITableViewCell {
             
             headlineLabel.text = betHeadline
             descriptionLabel.text = betInfo.getDescription()
+            timestampLabel.text = betInfo.getCreatedAt()
 
             var urlRequest = NSURLRequest(URL: NSURL(string: (owner.getProfileImageUrl())!))
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
