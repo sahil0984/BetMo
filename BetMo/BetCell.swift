@@ -24,7 +24,6 @@ class BetCell: UITableViewCell {
             var opponent = betInfo.getOppenent()
             var currentUser = PFUser.currentUser() as User
             var profileImageUrl = owner.getProfileImageUrl()!
-
             var opponentName = ""
             if  opponent != nil {
                 opponentName = opponent!.getName()
@@ -45,10 +44,10 @@ class BetCell: UITableViewCell {
             }
             // Set the appropriate headline
             if !opponentName.isEmpty && !winnerName.isEmpty {
-                if winnerName == opponentName {
-                    betHeadline = "\(winnerName) won $\(amount) from \(ownerName) "
+                if winner?.getFbId()! == opponent?.getFbId()! {
+                    betHeadline = "\(opponentName) won $\(amount) from \(ownerName) "
                 } else {
-                    betHeadline = "\(winnerName) won $\(amount) from \(opponentName)"
+                    betHeadline = "\(ownerName) won $\(amount) from \(opponentName)"
                 }
                 // set the winner's profile image
                 profileImageUrl = winner!.getProfileImageUrl()!

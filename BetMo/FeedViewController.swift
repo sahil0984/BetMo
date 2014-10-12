@@ -75,6 +75,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var currentUser = PFUser.currentUser() as User
         var owner = bet.getOwner() as User
         var opponent = bet.getOppenent()
+        var winner = bet.getWinner()
         var button1: UITableViewRowAction!
         var button2: UITableViewRowAction!
 
@@ -88,6 +89,21 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     self.betsTableView.reloadData()
                 });
                 return [button1]
+            } else if opponent != nil && bet.getIsAccepted() == true && winner == nil {
+                button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Won", handler:{action, indexpath in
+                    println("I won the bet")
+                    bet.won()
+                    self.betsTableView.reloadData()
+                });
+                button1.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
+                
+                button2 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Lost", handler:{action, indexpath in
+                    println("I lost the bet");
+                    bet.lost()
+                    self.betsTableView.reloadData()
+                });
+                
+                return [button1, button2]
             }
         }
 
@@ -104,6 +120,21 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     println("Rejected Bet Request");
                     bet.reject()
                     self.bets.removeAtIndex(indexPath.row)
+                    self.betsTableView.reloadData()
+                });
+
+                return [button1, button2]
+            } else if opponent!.getFbId() == currentUser.getFbId() && bet.getIsAccepted() == true && winner == nil {
+                button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Won", handler:{action, indexpath in
+                    println("I won the bet");
+                    bet.won()
+                    self.betsTableView.reloadData()
+                });
+                button1.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
+                
+                button2 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Lost", handler:{action, indexpath in
+                    println("I lost the bet");
+                    bet.lost()
                     self.betsTableView.reloadData()
                 });
 
