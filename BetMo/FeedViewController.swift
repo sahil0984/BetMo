@@ -126,7 +126,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             // Invoke details view segue
             println("More Info");
             self.selectedBet = bet
-            self.performSegueWithIdentifier("betDetail", sender: self)
+            self.performSegueWithIdentifier("betDetail", sender: "More")
         });
         button1.backgroundColor = UIColor.grayColor()
         return [button1]
@@ -144,10 +144,11 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if segue.identifier == "betDetail" {
             var betDetailViewController = segue.destinationViewController as BetDetailViewController
             
-            
-            var selectedRow = betsTableView.indexPathForSelectedRow()?.row
-            self.selectedBet = bets[selectedRow!]
-            println("selectedBet2: \(self.selectedBet)")
+            if (sender as String) != "More" {
+                var selectedRow = self.betsTableView.indexPathForSelectedRow()?.row
+                self.selectedBet = self.bets[selectedRow!]
+                println("selectedBet2: \(self.selectedBet)")
+            }
             betDetailViewController.currBet = self.selectedBet
             
             //betDetailViewController.delegate = self
