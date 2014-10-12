@@ -79,6 +79,46 @@ class Bet : PFObject, PFSubclassing {
             }
         }
     }
+    
+    func accept() {
+        var currentUser = PFUser.currentUser() as User
+        setOpponent(currentUser)
+        setIsAccepted(true)
+        self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
+            if isSaved {
+                println("Successfully accepted bet");
+            } else {
+                println("Failed to accept bet");
+                println("\(error!)")
+            }
+        }
+    }
+
+    // For now remove the current user as the opponent when they reject the bet
+    func reject() {
+        var currentUser = PFUser.currentUser() as User
+        self["opponent"] = nil
+        setIsAccepted(false)
+        self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
+            if isSaved {
+                println("Successfully rejected bet");
+            } else {
+                println("Failed to reject bet");
+                println("\(error!)")
+            }
+        }
+    }
+
+    func cancel() {
+        self.deleteInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
+            if isSaved {
+                println("Successfully deleted bet");
+            } else {
+                println("Failed to delete bet");
+                println("\(error!)")
+            }
+        }
+    }
 
     override class func load() {
         superclass()?.load()

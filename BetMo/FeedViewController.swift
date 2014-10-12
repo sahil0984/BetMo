@@ -92,10 +92,14 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var button1: UITableViewRowAction!
         var button2: UITableViewRowAction!
 
+        println(bet)
         if owner.getFbId() == currentUser.getFbId() {
             if opponent == nil || bet.getIsAccepted() == false {
                 button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Cancel Bet", handler:{action, indexpath in
                     println("Bet Cancelled");
+                    bet.cancel()
+                    self.bets.removeAtIndex(indexPath.row)
+                    self.betsTableView.reloadData()
                 });
                 return [button1]
             }
@@ -105,11 +109,16 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if opponent!.getFbId() == currentUser.getFbId() && bet.getIsAccepted() == false {
                 button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Accept", handler:{action, indexpath in
                     println("Accepted Bet Request");
+                    bet.accept()
+                    self.betsTableView.reloadData()
                 });
                 button1.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
 
                 button2 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Reject", handler:{action, indexpath in
                     println("Rejected Bet Request");
+                    bet.reject()
+                    self.bets.removeAtIndex(indexPath.row)
+                    self.betsTableView.reloadData()
                 });
 
                 return [button1, button2]
@@ -119,14 +128,24 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if opponent == nil {
             button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Accept Bet", handler:{action, indexpath in
                 println("Accepted Open Bet");
+                bet.accept()
+                self.bets.removeAtIndex(indexPath.row)
+                self.betsTableView.reloadData()
             });
             button1.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
             return [button1]
         }
 
-        return []
+        button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "More", handler:{action, indexpath in
+            // Invoke details view segue
+            println("More Info");
+            self.selectedBet = bet
+            self.performSegueWithIdentifier("betDetail", sender: self)
+        });
+        button1.backgroundColor = UIColor.grayColor()
+        return [button1]
     }
-    
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
