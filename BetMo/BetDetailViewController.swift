@@ -19,6 +19,8 @@ class BetDetailViewController: UIViewController {
     @IBOutlet weak var betDescriptionLabel: UILabel!
     @IBOutlet weak var betAmountLabel: UILabel!
     
+    @IBOutlet weak var betDecisionSegmentControl: UISegmentedControl!
+    
     var currBet: Bet = Bet()
     
     override func viewDidLoad() {
@@ -48,10 +50,17 @@ class BetDetailViewController: UIViewController {
         } else {
             opponentUserNameLabel.text = "No opponent!"
         }
-
         
         betDescriptionLabel.text = currBet.getDescription()
         betAmountLabel.text = currBet.getAmount()
+        
+        if let winner = currBet.getWinner() {
+            if winner.getFbId() == currBet.getOwner() {
+                setOwnerWinner()
+            } else {
+                setOpponentWinner()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,7 +68,29 @@ class BetDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
+    @IBAction func onWinnerSelect(sender: AnyObject) {
+        if betDecisionSegmentControl.selectedSegmentIndex == 0 {
+            setOwnerWinner()
+            //currBet.
+        } else {
+            setOpponentWinner()
+        }
+    }
+    
+    
+    
+    func setOwnerWinner() {
+        betDecisionSegmentControl.selectedSegmentIndex = 0
+        betDecisionSegmentControl.setTitle("Won", forSegmentAtIndex: 0)
+        betDecisionSegmentControl.setTitle("Lost", forSegmentAtIndex: 1)
+    }
+    func setOpponentWinner() {
+        betDecisionSegmentControl.selectedSegmentIndex = 1
+        betDecisionSegmentControl.setTitle("Won", forSegmentAtIndex: 1)
+        betDecisionSegmentControl.setTitle("Lost", forSegmentAtIndex: 0)
+    }
+    
     /*
     // MARK: - Navigation
 

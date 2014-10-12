@@ -155,7 +155,7 @@
                                     <constraint firstAttribute="height" constant="110" id="I2d-65-sUb"/>
                                 </constraints>
                             </imageView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6VJ-sv-QGd">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="6VJ-sv-QGd">
                                 <rect key="frame" x="250" y="81" width="100" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="fLf-zc-ILr"/>
@@ -164,6 +164,9 @@
                                     <segment title="?"/>
                                     <segment title="?"/>
                                 </segments>
+                                <connections>
+                                    <action selector="onWinnerSelect:" destination="7fh-UA-fA5" eventType="valueChanged" id="All-8F-hpD"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EnT-hC-frq">
                                 <rect key="frame" x="74" y="165" width="42" height="20.5"/>
@@ -213,6 +216,7 @@
                     </view>
                     <connections>
                         <outlet property="betAmountLabel" destination="ELi-gU-leG" id="U2M-oW-8nz"/>
+                        <outlet property="betDecisionSegmentControl" destination="6VJ-sv-QGd" id="w6f-8T-KkD"/>
                         <outlet property="betDescriptionLabel" destination="LnP-rP-whS" id="4Hg-R7-ok1"/>
                         <outlet property="opponentUserImageView" destination="YXu-hr-ijo" id="HBk-OK-CH6"/>
                         <outlet property="opponentUserNameLabel" destination="8U6-LU-iQJ" id="yKd-Hd-x6Q"/>
