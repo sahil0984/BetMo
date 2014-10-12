@@ -139,12 +139,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        println("adass")
-        
         if segue.identifier == "betDetail" {
             var betDetailViewController = segue.destinationViewController as BetDetailViewController
             
-            if (sender as String) != "More" {
+            if (sender as? String) != "More" {
                 var selectedRow = self.betsTableView.indexPathForSelectedRow()?.row
                 self.selectedBet = self.bets[selectedRow!]
                 println("selectedBet2: \(self.selectedBet)")
