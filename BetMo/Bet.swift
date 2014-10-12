@@ -119,6 +119,37 @@ class Bet : PFObject, PFSubclassing {
             }
         }
     }
+    
+    func lost() {
+        var currentUser = PFUser.currentUser() as User
+        if currentUser.getFbId() == self.getOwner().getFbId() {
+            self["winner"] = self.getOppenent()!
+        } else {
+            self["winner"] = self.getOwner()
+        }
+
+        self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
+            if isSaved {
+                println("Successfully saved that I lost");
+            } else {
+                println("Failed to save that I lost");
+                println("\(error!)")
+            }
+        }
+    }
+
+    func won() {
+        var currentUser = PFUser.currentUser() as User
+        self["winner"] = currentUser
+        self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
+            if isSaved {
+                println("Successfully saved that I won");
+            } else {
+                println("Failed to save that I won");
+                println("\(error!)")
+            }
+        }
+    }
 
     override class func load() {
         superclass()?.load()
