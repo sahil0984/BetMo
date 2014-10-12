@@ -25,11 +25,8 @@ class BetDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-
-        //var tt = currBet.getOwner()
-        //var ttName = tt.getName()
-        ownerUserNameLabel.text = currBet.getOwner().getName()
-        opponentUserNameLabel.text = currBet.getOppenent()?.getName() ?? ""
+        
+        self.ownerUserNameLabel.text = currBet.getOwner().getName()
         
         var urlRequest = NSURLRequest(URL: NSURL(string: (currBet.getOwner().getProfileImageUrl())!))
         NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
@@ -38,12 +35,20 @@ class BetDetailViewController: UIViewController {
             }
         }
         
-        urlRequest = NSURLRequest(URL: NSURL(string: (currBet.getOppenent()?.getProfileImageUrl())!))
-        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
-            if connectionError == nil && data != nil {
-                self.opponentUserImageView.image = UIImage(data: data!)
+        
+        if (currBet.getOppenent()? != nil) {
+            opponentUserNameLabel.text = currBet.getOppenent()?.getName()
+            
+            urlRequest = NSURLRequest(URL: NSURL(string: (currBet.getOppenent()?.getProfileImageUrl())!))
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
+                if connectionError == nil && data != nil {
+                    self.opponentUserImageView.image = UIImage(data: data!)
+                }
             }
+        } else {
+            opponentUserNameLabel.text = "No opponent!"
         }
+
         
         betDescriptionLabel.text = currBet.getDescription()
         betAmountLabel.text = currBet.getAmount()
