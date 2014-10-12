@@ -32,12 +32,16 @@ class BetMoClient {
         betsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 var bets = objects as [Bet]
+                // reset values
+                self.openBets = [Bet]()
+                self.betsCompleted = [Bet]()
+                self.myBets = [Bet]()
+
                 for bet in bets {
                     let currentUser = PFUser.currentUser() as User
                     let owner = bet.getOwner()
                     let winner = bet.getWinner()
                     let opponent = bet.getOppenent()
-
                     // Open Bets -- bets that don't have an opponent and the owner isn't the current User
                     if owner.getFbId() != currentUser.getFbId() && opponent == nil {
                         self.openBets.append(bet)

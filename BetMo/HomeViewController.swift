@@ -11,9 +11,13 @@ import UIKit
 class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
     
     @IBOutlet weak var viewContainer: UIView!
+    @IBOutlet weak var feedSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var viewContainerTopConstraint: NSLayoutConstraint!
 
-    var homeFeedContainer: UIViewController!
-    
+    var homeFeedContainer: FeedViewController!
+    var openBetsFeedContainer: FeedViewController!
+    var myBetsFeedContainer: FeedViewController!
+    var allViewControllers: [FeedViewController] = [FeedViewController]()
     var newBet: Bet?
 
     // Containers handler
@@ -44,8 +48,14 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
         // Create all view controllers
         homeFeedContainer = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as FeedViewController
 
-        //////////////// Create other feed controllers
+        openBetsFeedContainer = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as FeedViewController
+        openBetsFeedContainer.feedViewType = "Open Bets"
 
+        myBetsFeedContainer = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as FeedViewController
+        myBetsFeedContainer.feedViewType = "My Bets"
+
+        // For easier access when using segmented control
+        allViewControllers = [openBetsFeedContainer, homeFeedContainer, myBetsFeedContainer]
         activeViewController = homeFeedContainer
         // Do any additional setup after loading the view.
         loadUserData()
@@ -57,18 +67,17 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
     }
     
     @IBAction func onLogoutButton(sender: AnyObject) {
-
         NSNotificationCenter.defaultCenter().postNotificationName("userDidLogoutNotification", object: nil)
     }
 
-    
     func createdBet(betCreated: Bet) {
         self.newBet = betCreated
         //println("newBet: \(newBet?.getDescription())")
     }
 
-    
-    
+    @IBAction func onFeedChange(sender: UISegmentedControl) {
+        activeViewController = allViewControllers[sender.selectedSegmentIndex]
+    }
     
     //TODO: Need to figure out a better place to do this in order to slim down this controller
     func loadUserData() {

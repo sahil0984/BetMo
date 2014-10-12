@@ -11,6 +11,7 @@ import UIKit
 class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var bets: [Bet] = [Bet]()
+    var feedViewType: String = "Home"
 
     @IBOutlet weak var betsTableView: UITableView!
 
@@ -18,22 +19,38 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         betsTableView.delegate = self
         betsTableView.dataSource = self
-        BetMoClient.sharedInstance.getAllBets({ (bets, error) -> () in
-            if error != nil {
-                println("Error while getting all bets")
-            } else {
-                self.bets = BetMoClient.sharedInstance.betsCompleted
-                self.betsTableView.reloadData()
-            }
-            
-        })
+        if feedViewType == "My Bets" {
+            self.bets = BetMoClient.sharedInstance.myBets
+            betsTableView.reloadData()
+        } else if feedViewType == "Open Bets" {
+            self.bets = BetMoClient.sharedInstance.openBets
+            betsTableView.reloadData()
+        } else {
+            BetMoClient.sharedInstance.getAllBets({ (bets, error) -> () in
+                if error != nil {
+                    println("Error while getting all bets")
+                } else {
+                    self.bets = BetMoClient.sharedInstance.betsCompleted
+                    self.betsTableView.reloadData()
+                }
+                
+            })
+        }
+        betsTableView.rowHeight = UITableViewAutomaticDimension
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        if feedViewType == "My Bets" {
+            self.bets = BetMoClient.sharedInstance.myBets
+        } else if feedViewType == "Open Bets" {
+            self.bets = BetMoClient.sharedInstance.openBets
+        }
+        betsTableView.reloadData()
+    }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bets.count
