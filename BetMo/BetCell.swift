@@ -23,14 +23,14 @@ class BetCell: UITableViewCell {
             var winner = betInfo.getWinner()
             var opponent = betInfo.getOppenent()
             var currentUser = PFUser.currentUser() as User
-            
+            var profileImageUrl = owner.getProfileImageUrl()!
+
             var opponentName = ""
             if  opponent != nil {
                 opponentName = opponent!.getName()
             }
             var winnerName = ""
             if winner != nil {
-        
                 winnerName = winner!.getName()
             }
             var amount = betInfo.getAmount()!
@@ -50,6 +50,8 @@ class BetCell: UITableViewCell {
                 } else {
                     betHeadline = "\(winnerName) won $\(amount) from \(opponentName)"
                 }
+                // set the winner's profile image
+                profileImageUrl = winner!.getProfileImageUrl()!
             } else if opponentName.isEmpty {
                 betHeadline = "\(ownerName) \(wantString) to bet $\(amount)"
             } else if owner.getFbId() == currentUser.getFbId() {
@@ -59,9 +61,11 @@ class BetCell: UITableViewCell {
                 } else if betInfo.getIsAccepted() == false {
                     // bet hasn't been accepted
                     betHeadline = "\(ownerName) asked to bet $\(amount) against \(opponentName)"
+                    profileImageUrl = opponent!.getProfileImageUrl()!
                 } else if winnerName.isEmpty {
                     // bet is still ongoing
                     betHeadline = "\(ownerName) bet $\(amount) against \(opponentName)"
+                    profileImageUrl = opponent!.getProfileImageUrl()!
                 } else {
                     // bet is complete
                     if winnerName == owner.getName() {
@@ -69,6 +73,7 @@ class BetCell: UITableViewCell {
                     } else {
                         betHeadline = "\(opponentName) won $\(amount) from \(ownerName)"
                     }
+                    profileImageUrl = opponent!.getProfileImageUrl()!
                 }
             } else if !opponentName.isEmpty {
                 // Someone bet me
@@ -87,6 +92,7 @@ class BetCell: UITableViewCell {
                             betHeadline = "\(ownerName) won $\(amount) from \(opponentName)"
                         }
                     }
+                    profileImageUrl = owner.getProfileImageUrl()!
                 }
             }
             
@@ -94,7 +100,7 @@ class BetCell: UITableViewCell {
             descriptionLabel.text = betInfo.getDescription()
             timestampLabel.text = betInfo.getCreatedAt()
 
-            var urlRequest = NSURLRequest(URL: NSURL(string: (owner.getProfileImageUrl())!))
+            var urlRequest = NSURLRequest(URL: NSURL(string: profileImageUrl))
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
                 if connectionError == nil && data != nil {
                     self.profileImageView.image = UIImage(data: data!)
