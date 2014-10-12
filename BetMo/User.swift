@@ -22,16 +22,16 @@ class User : PFUser, PFSubclassing {
 
     // Getters and Setters for all User properties
 
-    func getFirstName() -> String? {
-        return self["firstName"] as? String
+    func getFirstName() -> String {
+        return self["firstName"] as String
     }
     
     func setFirstName(firstName: String) {
         self["firstName"] = firstName
     }
 
-    func getLastName() -> String? {
-        return self["lastName"] as? String
+    func getLastName() -> String {
+        return self["lastName"] as String
     }
     
     func setLastName(lastName: String) {
@@ -39,7 +39,7 @@ class User : PFUser, PFSubclassing {
     }
 
     func getName() -> String {
-        return (getFirstName()! + " " + getLastName()!)
+        return (getFirstName() + " " + getLastName())
     }
     
     func getEmail() -> String? {
