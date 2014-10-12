@@ -51,7 +51,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="l4Z-AT-DkO" userLabel="Feed Table" customClass="Feeding">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="l4Z-AT-DkO" userLabel="Feed Table">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -107,7 +107,7 @@
                                             <outlet property="headlineLabel" destination="BGK-EK-bMm" id="eq4-Xo-65C"/>
                                             <outlet property="profileImageView" destination="orL-a6-Bub" id="Zgg-MH-q8H"/>
                                             <outlet property="timestampLabel" destination="eUl-Rz-toc" id="2Vu-KF-rsL"/>
-                                            <segue destination="7fh-UA-fA5" kind="show" id="3pv-Gm-4XH"/>
+                                            <segue destination="7fh-UA-fA5" kind="show" identifier="betDetail" id="3FV-j3-KAZ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -19,31 +19,36 @@ class BetDetailViewController: UIViewController {
     @IBOutlet weak var betDescriptionLabel: UILabel!
     @IBOutlet weak var betAmountLabel: UILabel!
     
-    var currBet: Bet = Bet()
+    var currBet: Bet = Bet() {
+        didSet {
+            println("selectedBet: \(currBet.getOwner().getName())")
+            
+            ownerUserNameLabel.text = currBet.getOwner().getName()
+            opponentUserNameLabel.text = currBet.getOppenent()?.getName() ?? ""
+            
+            var urlRequest = NSURLRequest(URL: NSURL(string: (currBet.getOwner().getProfileImageUrl())!))
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
+                if connectionError == nil && data != nil {
+                    self.ownerUserImageView.image = UIImage(data: data!)
+                }
+            }
+            
+            urlRequest = NSURLRequest(URL: NSURL(string: (currBet.getOppenent()?.getProfileImageUrl())!))
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
+                if connectionError == nil && data != nil {
+                    self.opponentUserImageView.image = UIImage(data: data!)
+                }
+            }
+            
+            betDescriptionLabel.text = currBet.getDescription()
+            betAmountLabel.text = currBet.getAmount()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        ownerUserNameLabel.text = currBet.getOwner().getName()
-        opponentUserNameLabel.text = currBet.getOppenent()?.getName() ?? ""
-        
-        var urlRequest = NSURLRequest(URL: NSURL(string: (currBet.getOwner().getProfileImageUrl())!))
-        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
-            if connectionError == nil && data != nil {
-                self.ownerUserImageView.image = UIImage(data: data!)
-            }
-        }
-        
-        urlRequest = NSURLRequest(URL: NSURL(string: (currBet.getOppenent()?.getProfileImageUrl())!))
-        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
-            if connectionError == nil && data != nil {
-                self.opponentUserImageView.image = UIImage(data: data!)
-            }
-        }
-        
-        betDescriptionLabel.text = currBet.getDescription()
-        betAmountLabel.text = currBet.getAmount()
         
     }
 

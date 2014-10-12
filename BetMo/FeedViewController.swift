@@ -11,6 +11,7 @@ import UIKit
 class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var bets: [Bet] = [Bet]()
+    var selectedBet: Bet = Bet()
 
     @IBOutlet weak var betsTableView: UITableView!
 
@@ -44,15 +45,40 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.bet = bets[indexPath.row] as Bet
         return cell
     }
+    
+    func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+        println("hi1")
+    }
 
-    /*
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+//        println("selectedBet1: \(self.selectedBet)")
+//        self.selectedBet = bets[indexPath.row]
+//    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        println("hi2")
+    }
+
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "betDetail" {
+            var betDetailViewController = segue.destinationViewController as BetDetailViewController
+            
+            //var tmp = self.selectedBet
+            //var tmp1 = tmp.getOwner().getName()
+            println("selectedBet2: \(self.selectedBet)")
+            betDetailViewController.currBet = self.selectedBet
+            
+            //betDetailViewController.delegate = self
+        }
     }
-    */
+
 
 }
