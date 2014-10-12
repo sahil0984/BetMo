@@ -63,7 +63,6 @@ class CreateBetViewController: UIViewController, FriendsListViewControllerDelega
             newBet.setOpponent(vsUser as User)
         }
         newBet.setAmount(betAmountLabel.text as String)
-        //newBet.setWinner(winnerUser as User)
         newBet.setIsAccepted(false)
         
         newBet.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in

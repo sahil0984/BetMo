@@ -59,6 +59,10 @@ class Bet : PFObject, PFSubclassing {
     }
 
     func getCreatedAt() -> String? {
+        if self.createdAt == nil {
+            return "0m"
+        }
+
         let now = NSDate()
         let t = now.timeIntervalSinceDate(self.createdAt!)
         let d: Int = Int(t)/86400
@@ -72,6 +76,46 @@ class Bet : PFObject, PFSubclassing {
             } else {
                 let m: Int = Int(t)/60
                 return "\(m)m"
+            }
+        }
+    }
+    
+    func accept() {
+        var currentUser = PFUser.currentUser() as User
+        setOpponent(currentUser)
+        setIsAccepted(true)
+        self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
+            if isSaved {
+                println("Successfully accepted bet");
+            } else {
+                println("Failed to accept bet");
+                println("\(error!)")
+            }
+        }
+    }
+
+    // For now remove the current user as the opponent when they reject the bet
+    func reject() {
+        var currentUser = PFUser.currentUser() as User
+        self["opponent"] = nil
+        setIsAccepted(false)
+        self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
+            if isSaved {
+                println("Successfully rejected bet");
+            } else {
+                println("Failed to reject bet");
+                println("\(error!)")
+            }
+        }
+    }
+
+    func cancel() {
+        self.deleteInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
+            if isSaved {
+                println("Successfully deleted bet");
+            } else {
+                println("Failed to delete bet");
+                println("\(error!)")
             }
         }
     }
