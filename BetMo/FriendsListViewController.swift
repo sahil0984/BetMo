@@ -105,6 +105,7 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
 
     /*
     // MARK: - Navigation

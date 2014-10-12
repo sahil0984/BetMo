@@ -20,6 +20,8 @@ class BetDetailViewController: UIViewController {
     @IBOutlet weak var betAmountLabel: UILabel!
     
     var currBet: Bet = Bet() {
+        willSet {
+        }
         didSet {
             println("selectedBet: \(currBet.getOwner().getName())")
             
