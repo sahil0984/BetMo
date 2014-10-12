@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CreateBetViewControllerDelegate {
+    func createdBet(betCreated : Bet) -> Void
+}
+
 class CreateBetViewController: UIViewController, FriendsListViewControllerDelegate {
 
     @IBOutlet weak var currUserNameLabel: UILabel!
@@ -21,6 +25,9 @@ class CreateBetViewController: UIViewController, FriendsListViewControllerDelega
     
     var currUser = User()
     var vsUser = User()
+    
+    var newBet: Bet = Bet()
+    var delegate: CreateBetViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +53,7 @@ class CreateBetViewController: UIViewController, FriendsListViewControllerDelega
     }
     
     @IBAction func onCreateButton(sender: AnyObject) {
-        var newBet = Bet()
+        newBet = Bet()
         
         var winnerUser = User()
         
@@ -67,6 +74,8 @@ class CreateBetViewController: UIViewController, FriendsListViewControllerDelega
                 println("\(error!)")
             }
         }
+        
+        delegate?.createdBet(newBet)
         
         self.dismissViewControllerAnimated(true, completion: nil)
         

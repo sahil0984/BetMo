@@ -8,11 +8,13 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
     
     @IBOutlet weak var viewContainer: UIView!
 
     var homeFeedContainer: UIViewController!
+    
+    var newBet: Bet?
 
     // Containers handler
     var activeViewController: UIViewController? {
@@ -60,7 +62,10 @@ class HomeViewController: UIViewController {
     }
 
     
-    
+    func createdBet(betCreated: Bet) {
+        self.newBet = betCreated
+        //println("newBet: \(newBet?.getDescription())")
+    }
 
     
     
@@ -93,14 +98,17 @@ class HomeViewController: UIViewController {
         }
     }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        var createBetViewController = segue.destinationViewController as CreateBetViewController
+        
+        createBetViewController.delegate = self
     }
-    */
 
 }

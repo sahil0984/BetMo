@@ -77,7 +77,7 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
                     if friends.count == 0 {
                         println("Not Found: \(self.friendNameTextField.text)")
                         self.friendsList = []
-                    } else {
+                    } else {    
                         println("Found: \(self.friendNameTextField.text)")
                         self.friendsList = friends
                     }
