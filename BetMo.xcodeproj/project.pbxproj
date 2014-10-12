@@ -35,6 +35,7 @@
 		9FACFBA619E61CA1007E865C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FACFBA519E61CA1007E865C /* HomeViewController.swift */; };
 		9FB9428019E7D73300D72264 /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9427F19E7D73300D72264 /* FriendsListViewController.swift */; };
 		9FB9428219E8FF3100D72264 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9428119E8FF3100D72264 /* FriendTableViewCell.swift */; };
+		9FD517D619E9FF970056EE54 /* BetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD517D519E9FF970056EE54 /* BetDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		9FACFBA519E61CA1007E865C /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9FB9427F19E7D73300D72264 /* FriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
 		9FB9428119E8FF3100D72264 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
+		9FD517D519E9FF970056EE54 /* BetDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetDetailViewController.swift; sourceTree = "<group>"; };
 		A5C4FD64DC654F579867EC79 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -213,6 +215,7 @@
 				9F2FD28E19E76C5F00400E46 /* CreateBetViewController.swift */,
 				9FB9427F19E7D73300D72264 /* FriendsListViewController.swift */,
 				853F392419E901A500915A5B /* FeedViewController.swift */,
+				9FD517D519E9FF970056EE54 /* BetDetailViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				9F2FD28F19E76C5F00400E46 /* CreateBetViewController.swift in Sources */,
 				9FACFBA619E61CA1007E865C /* HomeViewController.swift in Sources */,
 				9FB9428219E8FF3100D72264 /* FriendTableViewCell.swift in Sources */,
+				9FD517D619E9FF970056EE54 /* BetDetailViewController.swift in Sources */,
 				8516DF3319E9D8A100D1E3AB /* BetMoClient.swift in Sources */,
 				853F392519E901A500915A5B /* FeedViewController.swift in Sources */,
 			);
