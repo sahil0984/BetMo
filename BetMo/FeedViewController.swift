@@ -50,6 +50,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.bets = BetMoClient.sharedInstance.myBets
         } else if feedViewType == "Open Bets" {
             self.bets = BetMoClient.sharedInstance.openBets
+        } else if feedViewType == "Home" {
+            self.bets = BetMoClient.sharedInstance.betsCompleted
         }
         betsTableView.reloadData()
     }

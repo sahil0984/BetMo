@@ -59,6 +59,10 @@ class Bet : PFObject, PFSubclassing {
     }
 
     func getCreatedAt() -> String? {
+        if self.createdAt == nil {
+            return "0m"
+        }
+
         let now = NSDate()
         let t = now.timeIntervalSinceDate(self.createdAt!)
         let d: Int = Int(t)/86400

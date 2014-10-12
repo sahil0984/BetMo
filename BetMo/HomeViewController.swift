@@ -72,7 +72,7 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
 
     func createdBet(betCreated: Bet) {
         self.newBet = betCreated
-        //println("newBet: \(newBet?.getDescription())")
+        BetMoClient.sharedInstance.allBets.insert(betCreated, atIndex: 0)
     }
 
     @IBAction func onFeedChange(sender: UISegmentedControl) {
