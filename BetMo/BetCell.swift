@@ -19,10 +19,25 @@ class BetCell: UITableViewCell {
         willSet(betInfo) {
             // Setup cell
             var owner = betInfo.getOwner() as User
-            var opponent = betInfo.getOppenent()!
+            var opponent = betInfo.getOppenent()
             var ownerName = owner.getName()
-            headlineLabel.text = ownerName
+            var winner = betInfo.getWinner()
+
+            var opponentName = ""
+            if let opponentObject = opponent {
+                opponentName = opponentObject.getName()
+            }
+            
+            var amount = betInfo.getAmount()!
+            headlineLabel.text = "\(ownerName) bet \(opponentName) for $\(amount)"
             descriptionLabel.text = betInfo.getDescription()
+
+            var urlRequest = NSURLRequest(URL: NSURL(string: (owner.getProfileImageUrl())!))
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
+                if connectionError == nil && data != nil {
+                    self.profileImageView.image = UIImage(data: data!)
+                }
+            }
         }
     }
     
