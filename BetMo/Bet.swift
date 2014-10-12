@@ -58,6 +58,24 @@ class Bet : PFObject, PFSubclassing {
         self["opponent"] = opponent
     }
 
+    func getCreatedAt() -> String? {
+        let now = NSDate()
+        let t = now.timeIntervalSinceDate(self.createdAt!)
+        let d: Int = Int(t)/86400
+
+        if d > 0 {
+            return "\(d)d"
+        } else {
+            let h: Int = Int(t)/3600
+            if h>0 {
+                return "\(h)h"
+            } else {
+                let m: Int = Int(t)/60
+                return "\(m)m"
+            }
+        }
+    }
+
     override class func load() {
         superclass()?.load()
         self.registerSubclass()
