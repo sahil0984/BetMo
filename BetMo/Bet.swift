@@ -10,6 +10,11 @@ import Foundation
 
 class Bet : PFObject, PFSubclassing {
 
+    //Only getter for objectId. No setter since it is generated only by Parse
+    func getObjectId() -> String {
+        return self.objectId as String
+    }
+    
     func getOwner() -> User {
         return self["owner"] as User
     }

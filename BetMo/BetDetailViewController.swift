@@ -8,7 +8,11 @@
 
 import UIKit
 
-class BetDetailViewController: UIViewController {
+protocol BetDetailViewControllerDelegate {
+    func acceptedBet(betAccepted : Bet) -> Void
+}
+
+class BetDetailViewController: UIViewController, UIAlertViewDelegate {
 
     @IBOutlet weak var ownerUserNameLabel: UILabel!
     @IBOutlet weak var ownerUserImageView: UIImageView!
@@ -25,6 +29,8 @@ class BetDetailViewController: UIViewController {
     @IBOutlet weak var requestButton: UIButton!
 
     var currBet: Bet = Bet()
+    
+    var delegate: BetDetailViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,7 +121,15 @@ class BetDetailViewController: UIViewController {
     
     @IBAction func onAcceptButton(sender: AnyObject) {
         if currBet.getOppenent()? == nil {
-           UIAlertView(title: "Accept Bet", message: "Do you want to accept this bet?", delegate: nil, cancelButtonTitle: "Cancel", otherButtonTitles: "Yes").show()
+           UIAlertView(title: "Accept Bet", message: "Do you want to accept this bet?", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Yes").show()
+        }
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        println("clicked \(buttonIndex)")
+        if buttonIndex == 1 {
+            currBet.accept()
+            delegate?.acceptedBet(currBet)
         }
     }
     

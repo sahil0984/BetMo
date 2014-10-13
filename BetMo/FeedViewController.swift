@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, BetDetailViewControllerDelegate {
 
     var bets: [Bet] = [Bet]()
     var selectedBet: Bet = Bet()
@@ -181,13 +181,22 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if (sender as? String) != "More" {
                 var selectedRow = self.betsTableView.indexPathForSelectedRow()?.row
                 self.selectedBet = self.bets[selectedRow!]
-                println("selectedBet2: \(self.selectedBet)")
             }
             betDetailViewController.currBet = self.selectedBet
             
-            //betDetailViewController.delegate = self
+            betDetailViewController.delegate = self
         }
     }
-
+    
+    func acceptedBet(betAccepted: Bet) {
+        for (index,bet) in enumerate(bets) {
+            if bet.getObjectId() == betAccepted.getObjectId() {
+                bets.removeAtIndex(index)
+                println("removed : \(index)")
+                betsTableView.reloadData()
+                break
+            }
+        }
+    }
 
 }
