@@ -62,33 +62,37 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
     
     @IBAction func onEditingChanged(sender: AnyObject) {
         println("Edit changed")
-        if friendNameTextField.text == "" {
-            self.friendsList = []
-            self.friendsListTableView.reloadData()
-        } else {
-
-            var friendsQuery = PFQuery(className: "_User")
-            friendsQuery.whereKey("fbId", containedIn: fbAllFriendIds)
-            
-            friendsQuery.whereKey("searchName", hasPrefix: friendNameTextField.text)
-            friendsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-                if error == nil {
-                    var friends = objects as [User]
-                    if friends.count == 0 {
-                        println("Not Found: \(self.friendNameTextField.text)")
-                        self.friendsList = []
-                    } else {    
-                        println("Found: \(self.friendNameTextField.text)")
-                        self.friendsList = friends
-                    }
-                    self.friendsListTableView.reloadData()
+        updateFriendsList()
+    }
+    
+    @IBAction func onEditTextTouchDown(sender: AnyObject) {
+        println("Edit text touch")
+        updateFriendsList()
+    }
+    
+    
+    func updateFriendsList() {
+        var friendsQuery = PFQuery(className: "_User")
+        friendsQuery.whereKey("fbId", containedIn: fbAllFriendIds)
+        
+        friendsQuery.whereKey("searchName", hasPrefix: friendNameTextField.text)
+        friendsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                var friends = objects as [User]
+                if friends.count == 0 {
+                    println("Not Found: \(self.friendNameTextField.text)")
+                    self.friendsList = []
                 } else {
-                    println("Error finding")
+                    println("Found: \(self.friendNameTextField.text)")
+                    self.friendsList = friends
                 }
+                self.friendsListTableView.reloadData()
+            } else {
+                println("Error finding")
             }
-            
         }
     }
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return friendsList.count

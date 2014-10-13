@@ -104,6 +104,9 @@ class CreateBetViewController: UIViewController, FriendsListViewControllerDelega
         }
     }
     
+    @IBAction func onTapView(sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
     
     // MARK: - Navigation
 

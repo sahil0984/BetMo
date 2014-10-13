@@ -571,6 +571,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="nmR-bz-29R" secondAttribute="trailing" constant="40" id="07q-ug-wd4"/>
                             <constraint firstItem="tEq-t9-R8j" firstAttribute="top" secondItem="2QM-B2-5Cf" secondAttribute="bottom" constant="20" id="3EA-iy-bFv"/>
@@ -595,6 +596,9 @@
                             <constraint firstItem="qxT-Iv-NpA" firstAttribute="centerY" secondItem="apW-rX-qXl" secondAttribute="centerY" id="qWd-Ig-Dgf"/>
                             <constraint firstItem="4t9-Eo-LDX" firstAttribute="leading" secondItem="lKe-8j-7r5" secondAttribute="leading" constant="40" id="r4s-n2-609"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="4c3-rc-iXZ" appends="YES" id="jbb-Hf-WxR"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="exR-k7-Nwc">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="dRq-sM-eWA">
@@ -619,6 +623,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QF3-4h-jWT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="4c3-rc-iXZ">
+                    <connections>
+                        <action selector="onTapView:" destination="tgW-ST-SmE" id="KGj-jm-FsZ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2313" y="136"/>
         </scene>
@@ -639,6 +648,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
+                                    <action selector="onEditTextTouchDown:" destination="C7p-bh-JvE" eventType="touchDown" id="i9B-d3-skn"/>
                                     <action selector="onEditingChanged:" destination="C7p-bh-JvE" eventType="editingChanged" id="BPP-YC-MIJ"/>
                                 </connections>
                             </textField>
@@ -683,6 +693,7 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="uQh-tr-VRY" firstAttribute="top" secondItem="C5a-Tq-HPo" secondAttribute="bottom" id="3Hr-V8-SIh"/>
                             <constraint firstItem="uQh-tr-VRY" firstAttribute="leading" secondItem="hKs-WN-eOz" secondAttribute="leading" id="IAL-fx-Yji"/>
@@ -692,6 +703,9 @@
                             <constraint firstAttribute="trailing" secondItem="uQh-tr-VRY" secondAttribute="trailing" id="m6O-Jo-B8O"/>
                             <constraint firstAttribute="trailing" secondItem="MxD-hW-781" secondAttribute="trailing" id="xK6-FM-Bf6"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="OqE-eB-vb3" appends="YES" id="De4-9y-RCT"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="friendNameTextField" destination="uQh-tr-VRY" id="qr8-Ff-EdF"/>
@@ -699,6 +713,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vk4-R6-Nwk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="OqE-eB-vb3"/>
             </objects>
             <point key="canvasLocation" x="3061" y="136"/>
         </scene>
