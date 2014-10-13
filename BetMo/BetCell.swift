@@ -133,9 +133,13 @@ class BetCell: UITableViewCell {
             timestampLabel.text = betInfo.getCreatedAt()
 
             var urlRequest = NSURLRequest(URL: NSURL(string: profileImageUrl))
+            self.profileImageView.alpha = 0
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
                 if connectionError == nil && data != nil {
                     self.profileImageView.image = UIImage(data: data!)
+                    UIView.animateWithDuration(0.5, animations: { () -> Void in
+                        self.profileImageView.alpha = 1.0
+                    })
                 }
             }
         }
