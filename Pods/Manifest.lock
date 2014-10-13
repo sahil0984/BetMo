@@ -28,6 +28,7 @@ PODS:
   - ParseFacebookUtils (1.4.1):
     - Facebook-iOS-SDK (~> 3.17.0)
     - Parse (~> 1.4.1)
+  - TTTAttributedLabel (1.10.1)
 
 DEPENDENCIES:
   - AFNetworking
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - Facebook-iOS-SDK
   - Parse
   - ParseFacebookUtils
+  - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
@@ -42,5 +44,6 @@ SPEC CHECKSUMS:
   Facebook-iOS-SDK: cb7d74759d0b1ba546e6e6f1dde407b0d4e448d6
   Parse: db1a09c832b7509edcc88a65dc07229f5e578c73
   ParseFacebookUtils: 625da00d0f36a34e25ebae7f543385a0f19ccf1e
+  TTTAttributedLabel: 94bb04f1e005616002dd2cee0262a0082e533627
 
 COCOAPODS: 0.33.1

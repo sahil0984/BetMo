@@ -10,7 +10,7 @@ import UIKit
 
 class BetCell: UITableViewCell {
 
-    @IBOutlet weak var headlineLabel: UILabel!
+    @IBOutlet weak var headlineLabel: TTTAttributedLabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
