@@ -142,21 +142,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xx6-Ze-gfp">
-                                <rect key="frame" x="40" y="40" width="110" height="110"/>
+                                <rect key="frame" x="40" y="40" width="80" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="110" id="cBS-WF-iiG"/>
-                                    <constraint firstAttribute="height" constant="110" id="x4f-OR-XTG"/>
+                                    <constraint firstAttribute="width" constant="80" id="cBS-WF-iiG"/>
+                                    <constraint firstAttribute="height" constant="80" id="x4f-OR-XTG"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YXu-hr-ijo">
-                                <rect key="frame" x="450" y="40" width="110" height="110"/>
+                                <rect key="frame" x="480" y="40" width="80" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="110" id="2Kg-KY-W1V"/>
-                                    <constraint firstAttribute="height" constant="110" id="I2d-65-sUb"/>
+                                    <constraint firstAttribute="width" constant="80" id="2Kg-KY-W1V"/>
+                                    <constraint firstAttribute="height" constant="80" id="I2d-65-sUb"/>
                                 </constraints>
                             </imageView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="6VJ-sv-QGd">
-                                <rect key="frame" x="250" y="81" width="100" height="29"/>
+                                <rect key="frame" x="250" y="66" width="100" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="fLf-zc-ILr"/>
                                 </constraints>
@@ -169,32 +169,32 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Owner" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EnT-hC-frq">
-                                <rect key="frame" x="69" y="165" width="50.5" height="20.5"/>
+                                <rect key="frame" x="54" y="135" width="50.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8U6-LU-iQJ">
-                                <rect key="frame" x="466" y="165" width="77" height="20.5"/>
+                                <rect key="frame" x="481" y="135" width="77" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LnP-rP-whS">
-                                <rect key="frame" x="40" y="205" width="520" height="41"/>
+                                <rect key="frame" x="40" y="175" width="520" height="41"/>
                                 <string key="text">This is the bet stipulation. Lets limit it to 140 characters so that we dont have to move other views down to accomodate for the length.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELi-gU-leG">
-                                <rect key="frame" x="270" y="129" width="60" height="20.5"/>
+                                <rect key="frame" x="270" y="114" width="60" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUw-cC-F5j">
-                                <rect key="frame" x="246" y="285" width="108" height="30"/>
+                                <rect key="frame" x="246" y="255" width="108" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Brt-ou-DEK"/>
                                     <constraint firstAttribute="width" constant="108" id="bPQ-re-jaf"/>
@@ -207,7 +207,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7A-8h-EtF">
-                                <rect key="frame" x="261.5" y="159.5" width="77" height="30"/>
+                                <rect key="frame" x="261.5" y="144.5" width="77" height="30"/>
                                 <state key="normal" title="Accept Bet">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
