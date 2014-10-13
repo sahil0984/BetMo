@@ -15,6 +15,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var feedViewType: String = "Home"
 
     @IBOutlet weak var betsTableView: UITableView!
+    var refreshControl: UIRefreshControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             })
         }
         betsTableView.rowHeight = UITableViewAutomaticDimension
+        addRefreshControl()
     }
     
     override func didReceiveMemoryWarning() {
@@ -207,6 +209,33 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 break
             }
         }
+    }
+
+    func refresh(sender: AnyObject) {
+        BetMoClient.sharedInstance.getAllBets({ (bets, error) -> () in
+            if error != nil {
+                println("Error while getting all bets")
+            } else {
+                if self.feedViewType == "My Bets" {
+                    self.bets = BetMoClient.sharedInstance.myBets
+                } else if self.feedViewType == "Open Bets" {
+                    self.bets = BetMoClient.sharedInstance.openBets
+                } else if self.feedViewType == "Home" {
+                    self.bets = BetMoClient.sharedInstance.betsCompleted
+                }
+                self.betsTableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        })
+    }
+
+    func addRefreshControl() {
+        refreshControl = UIRefreshControl()
+        // Add target for refresh
+        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+
+        // Add the refresh control to the table view
+        betsTableView.insertSubview(self.refreshControl, atIndex: 0)
     }
 
 }
