@@ -72,8 +72,13 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
         }
         
         self.betDecisionSegmentControl.hidden = true
-        if currBet.getIsAccepted() && (currentUser.getFbId() == currBet.getOwner().getFbId() || currentUser.getFbId() == currBet.getOppenent()?.getFbId()) {
+        if currBet.getIsAccepted() {
             self.betDecisionSegmentControl.hidden = false
+            if currentUser.getFbId() == currBet.getOwner().getFbId() || currentUser.getFbId() == currBet.getOppenent()?.getFbId() {
+                self.betDecisionSegmentControl.enabled = true
+            } else {
+                self.betDecisionSegmentControl.enabled = false
+            }
         }
 
         if let winner = currBet.getWinner()? {
