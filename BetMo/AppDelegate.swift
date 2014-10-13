@@ -28,6 +28,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Parse Analytics to track app usage
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
+        
+        //Register for Push Notifications for both pre and post iOS 8
+        if application.respondsToSelector(Selector("registerUserNotificationSettings:")) {
+            // Register for Push Notitications, if running iOS 8
+            var userNotficationTypes = (UIUserNotificationType.Alert |
+                                        UIUserNotificationType.Badge |
+                                        UIUserNotificationType.Sound)
+            var settings = UIUserNotificationSettings(forTypes: userNotficationTypes, categories: nil)
+            application.registerUserNotificationSettings(settings)
+            application.registerForRemoteNotifications()
+        } else {
+            // Register for Push Notifications before iOS 8
+            var userNotficationTypes = (UIRemoteNotificationType.Alert |
+                                        UIRemoteNotificationType.Badge |
+                                        UIRemoteNotificationType.Sound)
+            application.registerForRemoteNotificationTypes( userNotficationTypes )
+        }
+        
+        
         //Add a notification center to monitor logout action
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: "userDidLogoutNotification", object: nil)
 
@@ -50,6 +69,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Go to initial login view controller
         var vc = storyboard.instantiateInitialViewController() as UIViewController
         window?.rootViewController = vc
+    }
+    
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        
+        // Store the deviceToken in the current installation and save it to Parse.
+        var currentInstallation = PFInstallation()
+        currentInstallation.setDeviceTokenFromData(deviceToken)
+        currentInstallation.saveInBackground()
+    }
+
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: NSDictionary) {
+        
+        PFPush.handlePush(userInfo)
     }
     
     func applicationWillResignActive(application: UIApplication) {
