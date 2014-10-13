@@ -13,6 +13,8 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var feedSegmentedControl: UISegmentedControl!
     @IBOutlet weak var viewContainerTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sidebarLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var viewContainerTrailingConstraint: NSLayoutConstraint!
 
     var homeFeedContainer: FeedViewController!
     var openBetsFeedContainer: FeedViewController!
@@ -66,7 +68,15 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onLogoutButton(sender: AnyObject) {
+    @IBAction func onHamburger(sender: AnyObject) {
+        if sidebarLeadingConstraint.constant == 0 {
+            hideSideBar()
+        } else {
+            showSidebar()
+        }
+    }
+
+    @IBAction func onLogout(sender: UIButton) {
         NSNotificationCenter.defaultCenter().postNotificationName("userDidLogoutNotification", object: nil)
     }
 
@@ -118,6 +128,24 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
         var createBetViewController = segue.destinationViewController as CreateBetViewController
         
         createBetViewController.delegate = self
+    }
+
+    func hideSideBar() {
+        UIView.animateWithDuration(0.35, animations: { () -> Void in
+            self.sidebarLeadingConstraint.constant = -200
+            self.viewContainerTrailingConstraint.constant = 0
+            self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func showSidebar() {
+        UIView.animateWithDuration(0.35, animations: { () -> Void in
+            self.sidebarLeadingConstraint.constant = 0
+            self.viewContainerTrailingConstraint.constant = -200
+            self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+            self.view.layoutIfNeeded()
+        })
     }
 
 }
