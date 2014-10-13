@@ -28,16 +28,16 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.bets = BetMoClient.sharedInstance.openBets
             betsTableView.reloadData()
         } else {
-            betsTableView.hidden = true
             MBProgressHUD.showHUDAddedTo(betsTableView, animated: true)
+            betsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
             BetMoClient.sharedInstance.getAllBets({ (bets, error) -> () in
                 if error != nil {
                     println("Error while getting all bets")
                 } else {
                     self.bets = BetMoClient.sharedInstance.betsCompleted
+                    self.betsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
                     self.betsTableView.reloadData()
                     MBProgressHUD.hideHUDForView(self.betsTableView, animated: true)
-                    self.betsTableView.hidden = false
                 }
                 
             })
@@ -90,12 +90,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var button1: UITableViewRowAction!
         var button2: UITableViewRowAction!
 
-        if indexPath.row == 5 {
-            println(bet)
-            println("owner \(owner)")
-            println("opponent \(opponent)")
-            println("winner \(winner)")
-        }
         if owner.getFbId() == currentUser.getFbId() {
             if opponent == nil || bet.getIsAccepted() == false {
                 button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Cancel Bet", handler:{action, indexpath in

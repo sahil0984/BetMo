@@ -44,7 +44,6 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
 
         // Create all view controllers
@@ -59,6 +58,7 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
         // For easier access when using segmented control
         allViewControllers = [openBetsFeedContainer, homeFeedContainer, myBetsFeedContainer]
         activeViewController = homeFeedContainer
+
         // Do any additional setup after loading the view.
         loadUserData()
     }
@@ -113,7 +113,6 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
             } else {
                 println("Facebook request error: \(error)")
             }
-            
         }
     }
     
