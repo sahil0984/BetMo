@@ -27,12 +27,16 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.bets = BetMoClient.sharedInstance.openBets
             betsTableView.reloadData()
         } else {
+            betsTableView.hidden = true
+            MBProgressHUD.showHUDAddedTo(betsTableView, animated: true)
             BetMoClient.sharedInstance.getAllBets({ (bets, error) -> () in
                 if error != nil {
                     println("Error while getting all bets")
                 } else {
                     self.bets = BetMoClient.sharedInstance.betsCompleted
                     self.betsTableView.reloadData()
+                    MBProgressHUD.hideHUDForView(self.betsTableView, animated: true)
+                    self.betsTableView.hidden = false
                 }
                 
             })
