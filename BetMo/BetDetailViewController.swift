@@ -21,6 +21,7 @@ class BetDetailViewController: UIViewController {
     
     @IBOutlet weak var betDecisionSegmentControl: UISegmentedControl!
 
+    @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var requestButton: UIButton!
 
     var currBet: Bet = Bet()
@@ -56,6 +57,8 @@ class BetDetailViewController: UIViewController {
         
         betDescriptionLabel.text = currBet.getDescription()
         betAmountLabel.text = currBet.getAmount()
+        
+        acceptButton.setTitle("", forState: UIControlState.Normal)
 
         var currentUser = PFUser.currentUser() as User
         if let winner = currBet.getWinner()? {

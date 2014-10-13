@@ -243,6 +243,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="acceptButton" destination="o7A-8h-EtF" id="h4i-Ta-Wd9"/>
                         <outlet property="betAmountLabel" destination="ELi-gU-leG" id="U2M-oW-8nz"/>
                         <outlet property="betDecisionSegmentControl" destination="6VJ-sv-QGd" id="w6f-8T-KkD"/>
                         <outlet property="betDescriptionLabel" destination="LnP-rP-whS" id="4Hg-R7-ok1"/>
