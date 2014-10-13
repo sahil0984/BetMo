@@ -442,7 +442,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="HC0-iI-j2c">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" image="menu-25" id="mD5-Lk-Izb">
+                        <barButtonItem key="leftBarButtonItem" image="more" id="mD5-Lk-Izb">
                             <connections>
                                 <action selector="onHamburger:" destination="8ma-hs-RMc" id="HWn-8W-VT3"/>
                             </connections>
@@ -459,7 +459,7 @@
                                 <action selector="onFeedChange:" destination="8ma-hs-RMc" eventType="valueChanged" id="c8W-PE-hjT"/>
                             </connections>
                         </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" image="plus-25" id="jNq-rs-doz">
+                        <barButtonItem key="rightBarButtonItem" image="new" id="jNq-rs-doz">
                             <connections>
                                 <segue destination="tgW-ST-SmE" kind="presentation" id="mAf-33-j1p"/>
                             </connections>
@@ -740,7 +740,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="menu-25" width="25" height="25"/>
-        <image name="plus-25" width="25" height="25"/>
+        <image name="more" width="32" height="32"/>
+        <image name="new" width="32" height="32"/>
     </resources>
 </document>
