@@ -64,12 +64,13 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
         betDescriptionLabel.text = currBet.getDescription()
         betAmountLabel.text = currBet.getAmount()
         
-        if currBet.getOppenent()? == nil || !currBet.getIsAccepted() {
+        var currentUser = PFUser.currentUser() as User
+        
+        if currBet.getOwner().getFbId() == currentUser.getFbId() || currBet.getOppenent()? != nil || currBet.getIsAccepted() {
             //acceptButton.setTitle("", forState: UIControlState.Normal)
-            acceptButton.hidden == true
+            acceptButton.hidden = true
         }
 
-        var currentUser = PFUser.currentUser() as User
         if let winner = currBet.getWinner()? {
             if winner.getFbId() == currBet.getOwner().getFbId() {
                 setSegControlOwnerWinner()
@@ -123,7 +124,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
     
     
     @IBAction func onAcceptButton(sender: AnyObject) {
-        if currBet.getOppenent()? == nil || !currBet.getIsAccepted() {
+        if currBet.getOwner() != PFUser.currentUser() && (currBet.getOppenent()? == nil || !currBet.getIsAccepted()) {
            UIAlertView(title: "Accept Bet", message: "Do you want to accept this bet?", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Yes").show()
         }
     }
