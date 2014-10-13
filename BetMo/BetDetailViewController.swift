@@ -120,7 +120,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
     
     
     @IBAction func onAcceptButton(sender: AnyObject) {
-        if currBet.getOppenent()? == nil {
+        if currBet.getOppenent()? == nil || !currBet.getIsAccepted() {
            UIAlertView(title: "Accept Bet", message: "Do you want to accept this bet?", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Yes").show()
         }
     }
