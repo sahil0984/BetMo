@@ -9,4 +9,3 @@
 #import <Parse/PFObject+Subclass.h>
 
 #import "UIImageView+AFNetworking.h"
-#import "TTTAttributedLabel.h"
