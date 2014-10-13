@@ -70,6 +70,11 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
             //acceptButton.setTitle("", forState: UIControlState.Normal)
             acceptButton.hidden = true
         }
+        
+        self.betDecisionSegmentControl.hidden = true
+        if currBet.getIsAccepted() && (currentUser.getFbId() == currBet.getOwner().getFbId() || currentUser.getFbId() == currBet.getOppenent()?.getFbId()) {
+            self.betDecisionSegmentControl.hidden = false
+        }
 
         if let winner = currBet.getWinner()? {
             if winner.getFbId() == currBet.getOwner().getFbId() {
