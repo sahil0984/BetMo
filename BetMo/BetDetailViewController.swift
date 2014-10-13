@@ -48,6 +48,7 @@ class BetDetailViewController: UIViewController {
                 }
             }
         } else {
+
             opponentUserNameLabel.text = "No opponent!"
         }
         
@@ -56,9 +57,9 @@ class BetDetailViewController: UIViewController {
         
         if let winner = currBet.getWinner() {
             if winner.getFbId() == currBet.getOwner().getFbId() {
-                setOwnerWinner()
+                setSegControlOwnerWinner()
             } else {
-                setOpponentWinner()
+                setSegControlOpponentWinner()
             }
         }
     }
@@ -73,7 +74,7 @@ class BetDetailViewController: UIViewController {
         var currUser = PFUser.currentUser() as User
         
         if betDecisionSegmentControl.selectedSegmentIndex == 0 {
-            setOwnerWinner()
+            setSegControlOwnerWinner()
             if currUser.getFbId() == currBet.getOwner().getFbId() {
                 println("hereiam")
                 currBet.won()
@@ -81,7 +82,7 @@ class BetDetailViewController: UIViewController {
                 currBet.lost()
             }
         } else {
-            setOpponentWinner()
+            setSegControlOpponentWinner()
             if currUser.getFbId() == currBet.getOppenent()?.getFbId() {
                 currBet.won()
             } else if currUser.getFbId() == currBet.getOwner().getFbId() {
@@ -90,18 +91,26 @@ class BetDetailViewController: UIViewController {
         }
     }
     
-    
-    
-    func setOwnerWinner() {
+    func setSegControlOwnerWinner() {
         betDecisionSegmentControl.selectedSegmentIndex = 0
         betDecisionSegmentControl.setTitle("Won", forSegmentAtIndex: 0)
         betDecisionSegmentControl.setTitle("Lost", forSegmentAtIndex: 1)
     }
-    func setOpponentWinner() {
+    func setSegControlOpponentWinner() {
         betDecisionSegmentControl.selectedSegmentIndex = 1
         betDecisionSegmentControl.setTitle("Won", forSegmentAtIndex: 1)
         betDecisionSegmentControl.setTitle("Lost", forSegmentAtIndex: 0)
     }
+    
+    
+    @IBAction func onAcceptButton(sender: AnyObject) {
+        if currBet.getOppenent()? == nil {
+           UIAlertView(title: "Accept Bet", message: "Do you want to accept this bet?", delegate: nil, cancelButtonTitle: "Cancel", otherButtonTitles: "Yes").show()
+        }
+    }
+    
+    
+    
     
     /*
     // MARK: - Navigation
