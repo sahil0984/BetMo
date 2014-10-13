@@ -192,6 +192,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         for (index,bet) in enumerate(bets) {
             if bet.getObjectId() == betAccepted.getObjectId() {
                 bets.removeAtIndex(index)
+                BetMoClient.sharedInstance.openBets = bets
                 println("removed : \(index)")
                 betsTableView.reloadData()
                 break
