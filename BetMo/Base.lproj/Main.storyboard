@@ -388,20 +388,52 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m5B-YQ-LnX" userLabel="Sidebar">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="600"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cuo-xp-z7v">
+                                        <rect key="frame" x="77" y="80" width="49" height="30"/>
+                                        <state key="normal" title="Logout">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onLogout:" destination="8ma-hs-RMc" eventType="touchUpInside" id="1qg-Ju-9Lv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Z0R-C4-Vt5"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="A8F-aH-Mau" firstAttribute="top" secondItem="m5B-YQ-LnX" secondAttribute="bottom" id="1ba-jy-f7w"/>
+                            <constraint firstItem="m5B-YQ-LnX" firstAttribute="leading" secondItem="Yel-P6-pox" secondAttribute="leading" id="KsM-Ap-fkk"/>
                             <constraint firstItem="A8F-aH-Mau" firstAttribute="top" secondItem="DZi-6e-3AP" secondAttribute="bottom" id="WIC-AW-MDK"/>
                             <constraint firstItem="DZi-6e-3AP" firstAttribute="leading" secondItem="Yel-P6-pox" secondAttribute="leading" id="Wxd-iN-w8H"/>
                             <constraint firstAttribute="trailing" secondItem="DZi-6e-3AP" secondAttribute="trailing" id="ezr-wG-dX3"/>
+                            <constraint firstItem="DZi-6e-3AP" firstAttribute="leading" secondItem="m5B-YQ-LnX" secondAttribute="trailing" constant="-200" id="fLQ-pd-In5"/>
                             <constraint firstItem="DZi-6e-3AP" firstAttribute="top" secondItem="fWw-Pb-IHI" secondAttribute="bottom" id="k4V-Ke-HAs"/>
+                            <constraint firstItem="m5B-YQ-LnX" firstAttribute="top" secondItem="Yel-P6-pox" secondAttribute="top" id="sr3-uF-hV2"/>
+                            <constraint firstItem="DZi-6e-3AP" firstAttribute="leading" secondItem="m5B-YQ-LnX" secondAttribute="trailing" id="w5V-kr-Api"/>
+                            <constraint firstItem="m5B-YQ-LnX" firstAttribute="leading" secondItem="Yel-P6-pox" secondAttribute="leading" constant="-200" id="xLJ-Jf-s5o"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="KsM-Ap-fkk"/>
+                                <exclude reference="Wxd-iN-w8H"/>
+                                <exclude reference="fLQ-pd-In5"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="HC0-iI-j2c">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="mD5-Lk-Izb">
+                        <barButtonItem key="leftBarButtonItem" image="menu-25" id="mD5-Lk-Izb">
                             <connections>
-                                <action selector="onLogoutButton:" destination="8ma-hs-RMc" id="pId-zy-yyY"/>
+                                <action selector="onHamburger:" destination="8ma-hs-RMc" id="HWn-8W-VT3"/>
                             </connections>
                         </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="Te5-Y9-NeF">
@@ -416,7 +448,7 @@
                                 <action selector="onFeedChange:" destination="8ma-hs-RMc" eventType="valueChanged" id="c8W-PE-hjT"/>
                             </connections>
                         </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" title="+" id="jNq-rs-doz">
+                        <barButtonItem key="rightBarButtonItem" image="plus-25" id="jNq-rs-doz">
                             <connections>
                                 <segue destination="tgW-ST-SmE" kind="presentation" id="mAf-33-j1p"/>
                             </connections>
@@ -424,8 +456,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="feedSegmentedControl" destination="Te5-Y9-NeF" id="gd6-Pf-gdT"/>
+                        <outlet property="sidebarLeadingConstraint" destination="xLJ-Jf-s5o" id="Ifl-V4-6Cc"/>
                         <outlet property="viewContainer" destination="DZi-6e-3AP" id="gdG-u4-FJa"/>
                         <outlet property="viewContainerTopConstraint" destination="k4V-Ke-HAs" id="onB-76-tAf"/>
+                        <outlet property="viewContainerTrailingConstraint" destination="ezr-wG-dX3" id="NvS-hp-aWy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kxd-aj-O4U" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -694,4 +728,8 @@
             <point key="canvasLocation" x="1679" y="1084"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="menu-25" width="25" height="25"/>
+        <image name="plus-25" width="25" height="25"/>
+    </resources>
 </document>

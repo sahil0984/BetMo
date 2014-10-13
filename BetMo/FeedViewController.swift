@@ -84,7 +84,12 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var button1: UITableViewRowAction!
         var button2: UITableViewRowAction!
 
-        println(bet)
+        if indexPath.row == 5 {
+            println(bet)
+            println("owner \(owner)")
+            println("opponent \(opponent)")
+            println("winner \(winner)")
+        }
         if owner.getFbId() == currentUser.getFbId() {
             if opponent == nil || bet.getIsAccepted() == false {
                 button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Cancel Bet", handler:{action, indexpath in
