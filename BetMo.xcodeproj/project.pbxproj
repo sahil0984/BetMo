@@ -13,6 +13,7 @@
 		8516DF3319E9D8A100D1E3AB /* BetMoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516DF3219E9D8A100D1E3AB /* BetMoClient.swift */; };
 		853F392519E901A500915A5B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853F392419E901A500915A5B /* FeedViewController.swift */; };
 		853F392719E90BDE00915A5B /* BetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853F392619E90BDE00915A5B /* BetCell.swift */; };
+		85FF8D2A19EB4BC900396F53 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FF8D2919EB4BC900396F53 /* PaymentViewController.swift */; };
 		9F2FD28B19E688ED00400E46 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2FD28A19E688ED00400E46 /* User.swift */; };
 		9F2FD28D19E6984200400E46 /* Bet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2FD28C19E6984200400E46 /* Bet.swift */; };
 		9F2FD28F19E76C5F00400E46 /* CreateBetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2FD28E19E76C5F00400E46 /* CreateBetViewController.swift */; };
@@ -55,6 +56,7 @@
 		8516DF3219E9D8A100D1E3AB /* BetMoClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetMoClient.swift; sourceTree = "<group>"; };
 		853F392419E901A500915A5B /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		853F392619E90BDE00915A5B /* BetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetCell.swift; sourceTree = "<group>"; };
+		85FF8D2919EB4BC900396F53 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		9F2FD28A19E688ED00400E46 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9F2FD28C19E6984200400E46 /* Bet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bet.swift; sourceTree = "<group>"; };
 		9F2FD28E19E76C5F00400E46 /* CreateBetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBetViewController.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				9F2FD28E19E76C5F00400E46 /* CreateBetViewController.swift */,
 				9FB9427F19E7D73300D72264 /* FriendsListViewController.swift */,
 				9FD517D519E9FF970056EE54 /* BetDetailViewController.swift */,
+				85FF8D2919EB4BC900396F53 /* PaymentViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F2FD28D19E6984200400E46 /* Bet.swift in Sources */,
+				85FF8D2A19EB4BC900396F53 /* PaymentViewController.swift in Sources */,
 				9F2FD28B19E688ED00400E46 /* User.swift in Sources */,
 				9FACFB5019E60C02007E865C /* LoginViewController.swift in Sources */,
 				853F392719E90BDE00915A5B /* BetCell.swift in Sources */,

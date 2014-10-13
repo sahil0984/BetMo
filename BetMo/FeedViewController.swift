@@ -44,7 +44,12 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+    // @TODO HACK TO REMOVE CONSTRAINT WARNINGS
+    override func viewWillDisappear(animated: Bool) {
+        betsTableView.reloadData()
+    }
+
     override func viewWillAppear(animated: Bool) {
         if feedViewType == "My Bets" {
             self.bets = BetMoClient.sharedInstance.myBets

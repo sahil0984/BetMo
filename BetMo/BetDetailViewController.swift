@@ -20,7 +20,9 @@ class BetDetailViewController: UIViewController {
     @IBOutlet weak var betAmountLabel: UILabel!
     
     @IBOutlet weak var betDecisionSegmentControl: UISegmentedControl!
-    
+
+    @IBOutlet weak var requestButton: UIButton!
+
     var currBet: Bet = Bet()
     
     override func viewDidLoad() {
@@ -54,12 +56,17 @@ class BetDetailViewController: UIViewController {
         
         betDescriptionLabel.text = currBet.getDescription()
         betAmountLabel.text = currBet.getAmount()
-        
-        if let winner = currBet.getWinner() {
+
+        var currentUser = PFUser.currentUser() as User
+        if let winner = currBet.getWinner()? {
             if winner.getFbId() == currBet.getOwner().getFbId() {
                 setSegControlOwnerWinner()
             } else {
                 setSegControlOpponentWinner()
+            }
+            
+            if winner.getFbId() == currentUser.getFbId() {
+                requestButton.hidden = false
             }
         }
     }
@@ -109,17 +116,14 @@ class BetDetailViewController: UIViewController {
         }
     }
     
-    
-    
-    
-    /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        var paymentNavigationController = segue.destinationViewController as UINavigationController
+        var paymentViewController = paymentNavigationController.viewControllers[0] as PaymentViewController
+        paymentViewController.bet = currBet
     }
-    */
-
 }
