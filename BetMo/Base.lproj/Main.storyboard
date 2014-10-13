@@ -703,9 +703,6 @@
                             <constraint firstAttribute="trailing" secondItem="uQh-tr-VRY" secondAttribute="trailing" id="m6O-Jo-B8O"/>
                             <constraint firstAttribute="trailing" secondItem="MxD-hW-781" secondAttribute="trailing" id="xK6-FM-Bf6"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="OqE-eB-vb3" appends="YES" id="De4-9y-RCT"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="friendNameTextField" destination="uQh-tr-VRY" id="qr8-Ff-EdF"/>
@@ -713,7 +710,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vk4-R6-Nwk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="OqE-eB-vb3"/>
             </objects>
             <point key="canvasLocation" x="3061" y="136"/>
         </scene>
