@@ -181,18 +181,31 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LnP-rP-whS">
-                                <rect key="frame" x="40" y="205.5" width="520" height="41"/>
+                                <rect key="frame" x="40" y="205" width="520" height="41"/>
                                 <string key="text">This is the bet stipulation. Lets limit it to 140 characters so that we dont have to move other views down to accomodate for the length.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELi-gU-leG">
-                                <rect key="frame" x="279" y="129" width="42" height="21"/>
+                                <rect key="frame" x="279" y="129" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUw-cC-F5j">
+                                <rect key="frame" x="246" y="285" width="108" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Brt-ou-DEK"/>
+                                    <constraint firstAttribute="width" constant="108" id="bPQ-re-jaf"/>
+                                </constraints>
+                                <state key="normal" title="Request Money">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BJc-4Z-flD" kind="presentation" id="cVy-jh-wJf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -209,7 +222,9 @@
                             <constraint firstItem="8U6-LU-iQJ" firstAttribute="centerX" secondItem="YXu-hr-ijo" secondAttribute="centerX" id="bSH-Jd-4xS"/>
                             <constraint firstItem="xx6-Ze-gfp" firstAttribute="centerY" secondItem="6VJ-sv-QGd" secondAttribute="centerY" id="d2a-Nj-OGA"/>
                             <constraint firstItem="YXu-hr-ijo" firstAttribute="top" secondItem="ll3-FR-q1v" secondAttribute="bottom" constant="20" id="npl-yY-pEm"/>
+                            <constraint firstItem="aUw-cC-F5j" firstAttribute="top" secondItem="LnP-rP-whS" secondAttribute="bottom" constant="39" id="oIX-S5-zej"/>
                             <constraint firstItem="EnT-hC-frq" firstAttribute="centerX" secondItem="xx6-Ze-gfp" secondAttribute="centerX" id="pV4-Xa-Mu6"/>
+                            <constraint firstAttribute="centerX" secondItem="aUw-cC-F5j" secondAttribute="centerX" id="ruI-4c-QpK"/>
                             <constraint firstItem="LnP-rP-whS" firstAttribute="top" secondItem="8U6-LU-iQJ" secondAttribute="bottom" constant="20" id="ue7-Gl-7Wy"/>
                             <constraint firstAttribute="trailing" secondItem="YXu-hr-ijo" secondAttribute="trailing" constant="40" id="v3V-tt-jb7"/>
                         </constraints>
@@ -222,11 +237,122 @@
                         <outlet property="opponentUserNameLabel" destination="8U6-LU-iQJ" id="yKd-Hd-x6Q"/>
                         <outlet property="ownerUserImageView" destination="xx6-Ze-gfp" id="dHi-KA-Pvm"/>
                         <outlet property="ownerUserNameLabel" destination="EnT-hC-frq" id="6wO-tk-A6y"/>
+                        <outlet property="requestButton" destination="aUw-cC-F5j" id="sWM-GH-etT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ke-mn-JPq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="910" y="1084"/>
+        </scene>
+        <!--Request Payment-->
+        <scene sceneID="tIu-Ef-AxC">
+            <objects>
+                <viewController id="x9F-NN-ErX" customClass="PaymentViewController" customModule="BetMo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Pyb-pr-iU7"/>
+                        <viewControllerLayoutGuide type="bottom" id="x8t-0w-QBR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3Oh-Y6-MwU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jKp-3j-vKW">
+                                <rect key="frame" x="15" y="89" width="129" height="29"/>
+                                <segments>
+                                    <segment title="Request"/>
+                                    <segment title="Pay"/>
+                                </segments>
+                            </segmentedControl>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Tim Lee" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Ux-Js-boe">
+                                <rect key="frame" x="15" y="179" width="570" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send To:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFk-fh-1w0">
+                                <rect key="frame" x="16" y="144" width="67.5" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="67.5" id="gsQ-Tk-KyE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jay-uR-qac">
+                                <rect key="frame" x="15" y="224" width="92.5" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="92.5" id="hnS-4X-En6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Giants will win the World Series" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wtv-Pl-qwZ">
+                                <rect key="frame" x="15" y="260" width="570" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="2XN-UL-ngu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="2XN-UL-ngu"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iR6-Eo-MF0">
+                                <rect key="frame" x="548" y="89" width="37" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="wtv-Pl-qwZ" secondAttribute="trailing" constant="15" id="9YI-P6-cPV"/>
+                            <constraint firstItem="JFk-fh-1w0" firstAttribute="top" secondItem="jKp-3j-vKW" secondAttribute="bottom" constant="27" id="BOG-rA-Cxv"/>
+                            <constraint firstAttribute="trailing" secondItem="iR6-Eo-MF0" secondAttribute="trailing" constant="15" id="EKM-UQ-DoJ"/>
+                            <constraint firstItem="jKp-3j-vKW" firstAttribute="top" secondItem="Pyb-pr-iU7" secondAttribute="bottom" constant="25" id="IUH-Uk-dGl"/>
+                            <constraint firstItem="Jay-uR-qac" firstAttribute="top" secondItem="JFk-fh-1w0" secondAttribute="bottom" constant="34.5" id="KI7-UR-krB"/>
+                            <constraint firstItem="Jay-uR-qac" firstAttribute="leading" secondItem="3Oh-Y6-MwU" secondAttribute="leading" constant="15" id="OG6-uY-FUH"/>
+                            <constraint firstItem="wtv-Pl-qwZ" firstAttribute="top" secondItem="Jay-uR-qac" secondAttribute="bottom" constant="15" id="RwX-C9-QkO"/>
+                            <constraint firstItem="iR6-Eo-MF0" firstAttribute="top" secondItem="Pyb-pr-iU7" secondAttribute="bottom" constant="25" id="bLX-EV-jfM"/>
+                            <constraint firstItem="Jay-uR-qac" firstAttribute="top" secondItem="6Ux-Js-boe" secondAttribute="bottom" constant="15" id="goh-q7-QKu"/>
+                            <constraint firstItem="jKp-3j-vKW" firstAttribute="leading" secondItem="3Oh-Y6-MwU" secondAttribute="leading" constant="15" id="qLs-NM-B2i"/>
+                            <constraint firstItem="wtv-Pl-qwZ" firstAttribute="leading" secondItem="3Oh-Y6-MwU" secondAttribute="leading" constant="15" id="tIL-Bn-Tut"/>
+                            <constraint firstItem="JFk-fh-1w0" firstAttribute="leading" secondItem="3Oh-Y6-MwU" secondAttribute="leading" constant="16" id="tVY-eF-20d"/>
+                            <constraint firstItem="6Ux-Js-boe" firstAttribute="leading" secondItem="3Oh-Y6-MwU" secondAttribute="leading" constant="15" id="tce-w3-ogC"/>
+                            <constraint firstItem="6Ux-Js-boe" firstAttribute="top" secondItem="JFk-fh-1w0" secondAttribute="bottom" constant="15" id="uJG-H8-rEg"/>
+                            <constraint firstAttribute="trailing" secondItem="6Ux-Js-boe" secondAttribute="trailing" constant="15" id="zwK-qK-7wW"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="KI7-UR-krB"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="Request Payment" id="gs5-93-jlG">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="4yc-Zz-Fe1">
+                            <connections>
+                                <action selector="onCancelButton:" destination="x9F-NN-ErX" id="1Fj-p3-PeS"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Send" id="CUJ-Dd-r9F">
+                            <connections>
+                                <action selector="onSendButton:" destination="x9F-NN-ErX" id="Bhy-m9-GfO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="amountTextField" destination="iR6-Eo-MF0" id="kLy-Mc-Lpv"/>
+                        <outlet property="cancelButton" destination="4yc-Zz-Fe1" id="gNe-3G-3lV"/>
+                        <outlet property="descriptionTextField" destination="wtv-Pl-qwZ" id="eXD-WC-yTl"/>
+                        <outlet property="payOrRequestSegmnetedControl" destination="jKp-3j-vKW" id="ysg-Ss-ccq"/>
+                        <outlet property="requestToTextField" destination="6Ux-Js-boe" id="zWF-ef-mzY"/>
+                        <outlet property="sendRequestButton" destination="CUJ-Dd-r9F" id="IjT-N9-8dH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hfx-zB-KOe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2491" y="1084"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="D9o-Hx-ERg">
@@ -536,6 +662,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cIZ-j2-hBN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="874" y="136"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Unq-CO-lBh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BJc-4Z-flD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lEg-cJ-ALa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="x9F-NN-ErX" kind="relationship" relationship="rootViewController" id="RRG-aW-ElT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s9n-CM-d0n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1679" y="1084"/>
         </scene>
     </scenes>
 </document>
