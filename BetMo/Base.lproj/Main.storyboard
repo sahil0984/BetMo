@@ -175,7 +175,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8U6-LU-iQJ">
-                                <rect key="frame" x="466.5" y="165" width="77" height="20.5"/>
+                                <rect key="frame" x="466" y="165" width="77" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -193,15 +193,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7A-8h-EtF">
-                                <rect key="frame" x="450" y="40" width="110" height="145.5"/>
-                                <state key="normal" title="AcceptButton">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onAcceptButton:" destination="7fh-UA-fA5" eventType="touchUpInside" id="o8s-Tj-dAQ"/>
-                                </connections>
-                            </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUw-cC-F5j">
                                 <rect key="frame" x="246" y="285" width="108" height="30"/>
                                 <constraints>
@@ -215,22 +206,28 @@
                                     <segue destination="BJc-4Z-flD" kind="presentation" id="cVy-jh-wJf"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7A-8h-EtF">
+                                <rect key="frame" x="261.5" y="159.5" width="77" height="30"/>
+                                <state key="normal" title="Accept Bet">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onAcceptButton:" destination="7fh-UA-fA5" eventType="touchUpInside" id="o8s-Tj-dAQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ELi-gU-leG" firstAttribute="top" secondItem="6VJ-sv-QGd" secondAttribute="bottom" constant="20" id="3d3-Er-0S7"/>
-                            <constraint firstItem="YXu-hr-ijo" firstAttribute="top" secondItem="o7A-8h-EtF" secondAttribute="top" id="8cc-TM-qCz"/>
                             <constraint firstItem="8U6-LU-iQJ" firstAttribute="top" secondItem="YXu-hr-ijo" secondAttribute="bottom" constant="15" id="9eR-aT-1EM"/>
+                            <constraint firstAttribute="centerX" secondItem="o7A-8h-EtF" secondAttribute="centerX" id="AHk-X4-LuK"/>
                             <constraint firstAttribute="trailing" secondItem="LnP-rP-whS" secondAttribute="trailing" constant="40" id="D01-qz-Pfb"/>
                             <constraint firstItem="LnP-rP-whS" firstAttribute="leading" secondItem="m1t-Us-Mfi" secondAttribute="leading" constant="40" id="JW2-bR-oTU"/>
                             <constraint firstItem="EnT-hC-frq" firstAttribute="top" secondItem="xx6-Ze-gfp" secondAttribute="bottom" constant="15" id="KXN-yK-Tue"/>
-                            <constraint firstItem="8U6-LU-iQJ" firstAttribute="bottom" secondItem="o7A-8h-EtF" secondAttribute="bottom" id="McX-C3-hUt"/>
                             <constraint firstItem="xx6-Ze-gfp" firstAttribute="leading" secondItem="m1t-Us-Mfi" secondAttribute="leading" constant="40" id="Pg8-PT-Tev"/>
                             <constraint firstAttribute="centerX" secondItem="6VJ-sv-QGd" secondAttribute="centerX" id="VM1-wt-JIa"/>
                             <constraint firstAttribute="centerX" secondItem="ELi-gU-leG" secondAttribute="centerX" id="Vav-w5-s2e"/>
                             <constraint firstItem="xx6-Ze-gfp" firstAttribute="top" secondItem="ll3-FR-q1v" secondAttribute="bottom" constant="20" id="VwF-bu-DqN"/>
-                            <constraint firstItem="YXu-hr-ijo" firstAttribute="leading" secondItem="o7A-8h-EtF" secondAttribute="leading" id="Xcg-gf-Lit"/>
-                            <constraint firstItem="YXu-hr-ijo" firstAttribute="trailing" secondItem="o7A-8h-EtF" secondAttribute="trailing" id="YOA-oW-qYD"/>
                             <constraint firstItem="xx6-Ze-gfp" firstAttribute="centerY" secondItem="YXu-hr-ijo" secondAttribute="centerY" id="Zcs-SW-TCz"/>
                             <constraint firstItem="8U6-LU-iQJ" firstAttribute="centerX" secondItem="YXu-hr-ijo" secondAttribute="centerX" id="bSH-Jd-4xS"/>
                             <constraint firstItem="xx6-Ze-gfp" firstAttribute="centerY" secondItem="6VJ-sv-QGd" secondAttribute="centerY" id="d2a-Nj-OGA"/>
@@ -240,6 +237,7 @@
                             <constraint firstAttribute="centerX" secondItem="aUw-cC-F5j" secondAttribute="centerX" id="ruI-4c-QpK"/>
                             <constraint firstItem="LnP-rP-whS" firstAttribute="top" secondItem="8U6-LU-iQJ" secondAttribute="bottom" constant="20" id="ue7-Gl-7Wy"/>
                             <constraint firstAttribute="trailing" secondItem="YXu-hr-ijo" secondAttribute="trailing" constant="40" id="v3V-tt-jb7"/>
+                            <constraint firstItem="o7A-8h-EtF" firstAttribute="top" secondItem="ELi-gU-leG" secondAttribute="bottom" constant="10" id="wNI-De-sv8"/>
                         </constraints>
                     </view>
                     <connections>

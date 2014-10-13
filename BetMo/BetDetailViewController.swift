@@ -64,7 +64,10 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
         betDescriptionLabel.text = currBet.getDescription()
         betAmountLabel.text = currBet.getAmount()
         
-        acceptButton.setTitle("", forState: UIControlState.Normal)
+        if currBet.getOppenent()? == nil || !currBet.getIsAccepted() {
+            //acceptButton.setTitle("", forState: UIControlState.Normal)
+            acceptButton.hidden == true
+        }
 
         var currentUser = PFUser.currentUser() as User
         if let winner = currBet.getWinner()? {
@@ -129,6 +132,15 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
         println("clicked \(buttonIndex)")
         if buttonIndex == 1 {
             currBet.accept()
+            acceptButton.hidden = true
+            var currUser = PFUser.currentUser() as User
+            self.opponentUserNameLabel.text = currUser.getName()
+            var urlRequest = NSURLRequest(URL: NSURL(string: (currUser.getProfileImageUrl())!))
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
+                if connectionError == nil && data != nil {
+                    self.opponentUserImageView.image = UIImage(data: data!)
+                }
+            }
             delegate?.acceptedBet(currBet)
         }
     }
