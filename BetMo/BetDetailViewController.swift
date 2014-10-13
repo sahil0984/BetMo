@@ -119,6 +119,8 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
                 currBet.lost()
             }
         }
+        
+        self.requestButton.hidden = false
     }
     
     func setSegControlOwnerWinner() {
