@@ -12,7 +12,7 @@ protocol CreateBetViewControllerDelegate {
     func createdBet(betCreated : Bet) -> Void
 }
 
-class CreateBetViewController: UIViewController, FriendsListViewControllerDelegate {
+class CreateBetViewController: UIViewController, FriendsListViewControllerDelegate, UITextViewDelegate {
 
     @IBOutlet weak var currUserNameLabel: UILabel!
     @IBOutlet weak var currUserImageView: UIImageView!
@@ -29,6 +29,9 @@ class CreateBetViewController: UIViewController, FriendsListViewControllerDelega
     var newBet: Bet = Bet()
     var delegate: CreateBetViewControllerDelegate?
     
+    let betDefaultText = "Describe your bet..."
+    var betTextLength = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,7 +47,11 @@ class CreateBetViewController: UIViewController, FriendsListViewControllerDelega
             }
         }
         
-        self.betOnLabel.text = "Describe your bet..."
+        self.betOnLabel.delegate = self
+        self.betOnLabel.text = ""
+        AddEmptyBetHint()
+        betTextLength = 0
+        //self.betOnLabel.text = "Describe your bet..."
     }
 
     override func didReceiveMemoryWarning() {
@@ -104,8 +111,45 @@ class CreateBetViewController: UIViewController, FriendsListViewControllerDelega
         }
     }
     
+    func AddEmptyBetHint() {
+        var betTextLength = betOnLabel.text as NSString
+        if betTextLength.length == 0 {
+            betOnLabel.text = betDefaultText
+            setHintFont()
+        }
+    }
+    
+    
+    func textViewDidChange(textView: UITextView) {
+        var betText = betOnLabel.text as NSString
+        betTextLength = betText.length
+    }
+    
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        
+        setBetFont()
+        
+        if betTextLength == 0 {
+            betOnLabel.text = ""
+        }
+        return true
+    }
+    
+    func setHintFont() {
+        //newTweet.font = UIFont(name: newTweetFont.fontName, size: 14)
+        betOnLabel.textColor = UIColor.grayColor()
+        //newTweet.toggleItalics(self)
+    }
+    func setBetFont() {
+        //newTweet.font = UIFont(name: newTweetFont.fontName, size: 14)
+        //newTweet.toggleItalics(self)
+        betOnLabel.textColor = UIColor.blackColor()
+    }
+    
     @IBAction func onTapView(sender: UITapGestureRecognizer) {
         view.endEditing(true)
+        
+        AddEmptyBetHint()
     }
     
     // MARK: - Navigation
