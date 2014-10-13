@@ -106,21 +106,26 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
         if betDecisionSegmentControl.selectedSegmentIndex == 0 {
             setSegControlOwnerWinner()
             if currUser.getFbId() == currBet.getOwner().getFbId() {
-                println("hereiam")
                 currBet.won()
+                // We only want to show the request button if the current user won
+                self.requestButton.hidden = false
             } else if currUser.getFbId() == currBet.getOppenent()?.getFbId() {
                 currBet.lost()
+                // Reset the request button to hidden in case the user is switching back and forth like a jerk
+                self.requestButton.hidden = true
             }
         } else {
             setSegControlOpponentWinner()
             if currUser.getFbId() == currBet.getOppenent()?.getFbId() {
                 currBet.won()
+                // We only want to show the request button if the current user won
+                self.requestButton.hidden = false
             } else if currUser.getFbId() == currBet.getOwner().getFbId() {
                 currBet.lost()
+                // Reset the request button to hidden in case the user is switching back and forth like a jerk
+                self.requestButton.hidden = true
             }
         }
-        
-        self.requestButton.hidden = false
     }
     
     func setSegControlOwnerWinner() {
