@@ -73,7 +73,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
         //betDecisionSegmentControl
         //pendingAcceptLabel
         
-        if currBet.getOwner().getFbId() == currentUser.getFbId() || currBet.getOppenent()?.getFbId() != currentUser.getFbId() || currBet.getIsAccepted() {
+        if currBet.getOwner().getFbId() == currentUser.getFbId() || (currBet.getOppenent()? != nil && currBet.getOppenent()?.getFbId() != currentUser.getFbId()) || currBet.getIsAccepted() {
             //acceptButton.setTitle("", forState: UIControlState.Normal)
             acceptButton.hidden = true
         }
@@ -151,7 +151,9 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
     
     
     @IBAction func onAcceptButton(sender: AnyObject) {
-        if currBet.getOwner() != PFUser.currentUser() && (currBet.getOppenent()? == nil || !currBet.getIsAccepted()) {
+        var currUser = PFUser.currentUser() as User
+        
+        if currBet.getOwner().getFbId() != currUser.getFbId() && (currBet.getOppenent()? == nil || currBet.getOppenent()?.getFbId() == currUser.getFbId()) && !currBet.getIsAccepted() {
            UIAlertView(title: "Accept Bet", message: "Do you want to accept this bet?", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Yes").show()
         }
     }
