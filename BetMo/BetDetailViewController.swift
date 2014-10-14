@@ -68,7 +68,12 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
         
         var currentUser = PFUser.currentUser() as User
         
-        if currBet.getOwner().getFbId() == currentUser.getFbId() || currBet.getOppenent()? != nil || currBet.getIsAccepted() {
+        
+        //acceptButton
+        //betDecisionSegmentControl
+        //pendingAcceptLabel
+        
+        if currBet.getOwner().getFbId() == currentUser.getFbId() || currBet.getOppenent()?.getFbId() != currentUser.getFbId() || currBet.getIsAccepted() {
             //acceptButton.setTitle("", forState: UIControlState.Normal)
             acceptButton.hidden = true
         }
@@ -156,6 +161,8 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
         if buttonIndex == 1 {
             currBet.accept()
             acceptButton.hidden = true
+            self.pendingAcceptLabel.hidden = true
+            
             var currUser = PFUser.currentUser() as User
             self.opponentUserNameLabel.text = currUser.getName()
             var urlRequest = NSURLRequest(URL: NSURL(string: (currUser.getProfileImageUrl())!))
