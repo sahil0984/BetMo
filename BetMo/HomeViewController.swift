@@ -114,6 +114,12 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
                 println("Facebook request error: \(error)")
             }
         }
+        
+        
+        // Associate the device with a user
+        var installation = PFInstallation.currentInstallation()
+        installation["user"] = PFUser.currentUser()
+        installation.saveInBackground()
     }
     
     

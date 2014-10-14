@@ -28,6 +28,8 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var requestButton: UIButton!
 
+    @IBOutlet weak var pendingAcceptLabel: UILabel!
+    
     var currBet: Bet = Bet()
     
     var delegate: BetDetailViewControllerDelegate?
@@ -62,7 +64,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
         }
         
         betDescriptionLabel.text = currBet.getDescription()
-        betAmountLabel.text = currBet.getAmount()
+        betAmountLabel.text = "$\(currBet.getAmount()!)"
         
         var currentUser = PFUser.currentUser() as User
         
@@ -72,6 +74,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
         }
         
         self.betDecisionSegmentControl.hidden = true
+        self.pendingAcceptLabel.hidden = true
         if currBet.getIsAccepted() {
             self.betDecisionSegmentControl.hidden = false
             if currentUser.getFbId() == currBet.getOwner().getFbId() || currentUser.getFbId() == currBet.getOppenent()?.getFbId() {
@@ -79,6 +82,8 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
             } else {
                 self.betDecisionSegmentControl.enabled = false
             }
+        } else {
+            self.pendingAcceptLabel.hidden = false
         }
 
         if let winner = currBet.getWinner()? {
@@ -159,6 +164,8 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
                     self.opponentUserImageView.image = UIImage(data: data!)
                 }
             }
+            
+            
             delegate?.acceptedBet(currBet)
         }
     }

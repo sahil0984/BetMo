@@ -72,19 +72,11 @@ class CreateBetViewController: UIViewController, FriendsListViewControllerDelega
         newBet.setAmount(betAmountLabel.text as String)
         newBet.setIsAccepted(false)
         
-        newBet.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
-            if isSaved {
-                println("Successfully created bet");
-            } else {
-                println("Failed creating the bet");
-                println("\(error!)")
-            }
-        }
+        newBet.create()
         
         delegate?.createdBet(newBet)
         
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     @IBAction func onCancelButton(sender: AnyObject) {

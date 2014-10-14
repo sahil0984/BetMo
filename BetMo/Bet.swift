@@ -85,6 +85,41 @@ class Bet : PFObject, PFSubclassing {
         }
     }
     
+    func create() {
+        var currentUser = PFUser.currentUser() as User
+        self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
+            if isSaved {
+                println("Successfully created bet");
+                
+                var returnedObjectId = self.getObjectId()
+                
+                //Create a channel for push notifications in current installation
+                var currentInstallation = PFInstallation.currentInstallation()
+                currentInstallation.addUniqueObject("ch_\(returnedObjectId)", forKey: "channels")
+                currentInstallation.saveInBackground()
+                
+                
+                if let opponent = self.getOppenent() {
+                    //Find opponent
+                    var opponentQuery = PFUser.query()
+                    opponentQuery.whereKey("fbId", equalTo: opponent.getFbId())
+                    //Find devices associated with the opponent
+                    var pushQuery = PFInstallation.query()
+                    pushQuery.whereKey("user", matchesQuery: opponentQuery)
+                    //Send push notification to opponent
+                    var push = PFPush()
+                    push.setQuery(pushQuery)
+                    push.setMessage("\(currentUser.getName()) has challenged you to a bet.")
+                    push.sendPushInBackground()
+                }
+                
+            } else {
+                println("Failed creating the bet");
+                println("\(error!)")
+            }
+        }
+    }
+    
     func accept() {
         var currentUser = PFUser.currentUser() as User
         setOpponent(currentUser)
@@ -92,6 +127,26 @@ class Bet : PFObject, PFSubclassing {
         self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
             if isSaved {
                 println("Successfully accepted bet");
+                
+                //Create a channel for push notifications in current installation
+                var currentInstallation = PFInstallation.currentInstallation()
+                currentInstallation.addUniqueObject("ch_\(self.getObjectId())", forKey: "channels")
+                currentInstallation.saveInBackground()
+                
+                
+                //Find owner
+                var ownerQuery = PFUser.query()
+                ownerQuery.whereKey("fbId", equalTo: self.getOwner().getFbId())
+                //Find devices associated with the owner
+                var pushQuery = PFInstallation.query()
+                pushQuery.whereKey("user", matchesQuery: ownerQuery)
+                //Send push notification to opponent
+                var push = PFPush()
+                push.setQuery(pushQuery)
+                push.setMessage("\(currentUser.getName()) has accepted your bet.")
+                push.sendPushInBackground()
+                
+                
             } else {
                 println("Failed to accept bet");
                 println("\(error!)")
@@ -118,6 +173,12 @@ class Bet : PFObject, PFSubclassing {
         self.deleteInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
             if isSaved {
                 println("Successfully deleted bet");
+                
+                //Delete a channel for push notifications in current installation
+                var currentInstallation = PFInstallation.currentInstallation()
+                currentInstallation.removeObject("ch_\(self.getObjectId())", forKey: "channels")
+                currentInstallation.saveInBackground()
+
             } else {
                 println("Failed to delete bet");
                 println("\(error!)")
