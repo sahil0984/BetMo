@@ -102,6 +102,9 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
                 requestButton.hidden = false
             }
         }
+        
+//        var customCellView = CustomCellNib(frame: CGRect(x: 0, y: 200, width: 300, height: 200))
+//        view.addSubview(customCellView)
     }
 
     override func didReceiveMemoryWarning() {

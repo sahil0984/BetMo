@@ -74,6 +74,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = betsTableView.dequeueReusableCellWithIdentifier("BetCell") as BetCell
         cell.bet = bets[indexPath.row] as Bet
+        
+        
+        CellAnimator.animateCellAppear(cell)
+        
         return cell
     }
 
@@ -132,7 +136,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     self.bets.removeAtIndex(indexPath.row)
                     self.betsTableView.reloadData()
                 });
-
+                
                 return [button1, button2]
             } else if opponent!.getFbId() == currentUser.getFbId() && bet.getIsAccepted() == true && winner == nil {
                 button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Won", handler:{action, indexpath in
@@ -171,6 +175,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         });
         button1.backgroundColor = UIColor.grayColor()
         return [button1]
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //TipInCellAnimator.animateCellFlip(tableView.cellForRowAtIndexPath(indexPath)!)
     }
 
     // MARK: - Navigation

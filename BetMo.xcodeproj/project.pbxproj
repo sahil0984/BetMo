@@ -37,6 +37,9 @@
 		9FB9428019E7D73300D72264 /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9427F19E7D73300D72264 /* FriendsListViewController.swift */; };
 		9FB9428219E8FF3100D72264 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9428119E8FF3100D72264 /* FriendTableViewCell.swift */; };
 		9FD517D619E9FF970056EE54 /* BetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD517D519E9FF970056EE54 /* BetDetailViewController.swift */; };
+		9FFCCD5719EE5A5000AC999F /* CustomCellNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFCCD5619EE5A5000AC999F /* CustomCellNib.swift */; };
+		9FFCCD5919EE5A7600AC999F /* CustomCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FFCCD5819EE5A7600AC999F /* CustomCellNib.xib */; };
+		9FFCCD5B19EF47E400AC999F /* CellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFCCD5A19EF47E400AC999F /* CellAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +88,9 @@
 		9FB9427F19E7D73300D72264 /* FriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
 		9FB9428119E8FF3100D72264 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		9FD517D519E9FF970056EE54 /* BetDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetDetailViewController.swift; sourceTree = "<group>"; };
+		9FFCCD5619EE5A5000AC999F /* CustomCellNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellNib.swift; sourceTree = "<group>"; };
+		9FFCCD5819EE5A7600AC999F /* CustomCellNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellNib.xib; sourceTree = "<group>"; };
+		9FFCCD5A19EF47E400AC999F /* CellAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellAnimator.swift; sourceTree = "<group>"; };
 		A5C4FD64DC654F579867EC79 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -150,6 +156,7 @@
 		9FACFB4A19E60C02007E865C /* BetMo */ = {
 			isa = PBXGroup;
 			children = (
+				9FFCCD5A19EF47E400AC999F /* CellAnimator.swift */,
 				8516DF3119E9D88700D1E3AB /* API */,
 				9FACFBA919E61DC4007E865C /* TableViewCells */,
 				9FACFBA819E61DBC007E865C /* Models */,
@@ -160,6 +167,7 @@
 				9FACFB5619E60C02007E865C /* LaunchScreen.xib */,
 				9FACFB4B19E60C02007E865C /* Supporting Files */,
 				9FACFB7019E60DE5007E865C /* BetMo-Bridging-Header.h */,
+				9FFCCD5C19EF622D00AC999F /* NibExpt */,
 			);
 			path = BetMo;
 			sourceTree = "<group>";
@@ -239,6 +247,15 @@
 				853F392619E90BDE00915A5B /* BetCell.swift */,
 			);
 			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		9FFCCD5C19EF622D00AC999F /* NibExpt */ = {
+			isa = PBXGroup;
+			children = (
+				9FFCCD5619EE5A5000AC999F /* CustomCellNib.swift */,
+				9FFCCD5819EE5A7600AC999F /* CustomCellNib.xib */,
+			);
+			name = NibExpt;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,6 +342,7 @@
 			files = (
 				9FACFB5319E60C02007E865C /* Main.storyboard in Resources */,
 				9FACFB5819E60C02007E865C /* LaunchScreen.xib in Resources */,
+				9FFCCD5919EE5A7600AC999F /* CustomCellNib.xib in Resources */,
 				9FACFB5519E60C02007E865C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,7 +405,9 @@
 				9FACFBA619E61CA1007E865C /* HomeViewController.swift in Sources */,
 				9FB9428219E8FF3100D72264 /* FriendTableViewCell.swift in Sources */,
 				9FD517D619E9FF970056EE54 /* BetDetailViewController.swift in Sources */,
+				9FFCCD5B19EF47E400AC999F /* CellAnimator.swift in Sources */,
 				8516DF3319E9D8A100D1E3AB /* BetMoClient.swift in Sources */,
+				9FFCCD5719EE5A5000AC999F /* CustomCellNib.swift in Sources */,
 				853F392519E901A500915A5B /* FeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
