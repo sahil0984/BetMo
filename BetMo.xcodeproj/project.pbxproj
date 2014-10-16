@@ -22,7 +22,6 @@
 		9FACFB5319E60C02007E865C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FACFB5119E60C02007E865C /* Main.storyboard */; };
 		9FACFB5519E60C02007E865C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FACFB5419E60C02007E865C /* Images.xcassets */; };
 		9FACFB5819E60C02007E865C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FACFB5619E60C02007E865C /* LaunchScreen.xib */; };
-		9FACFB6419E60C02007E865C /* BetMoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FACFB6319E60C02007E865C /* BetMoTests.swift */; };
 		9FACFB7D19E60F18007E865C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FACFB7319E60F18007E865C /* AudioToolbox.framework */; };
 		9FACFB7E19E60F18007E865C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FACFB7419E60F18007E865C /* CFNetwork.framework */; };
 		9FACFB7F19E60F18007E865C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FACFB7519E60F18007E865C /* CoreGraphics.framework */; };
@@ -42,16 +41,6 @@
 		9FFCCD5B19EF47E400AC999F /* CellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFCCD5A19EF47E400AC999F /* CellAnimator.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		9FACFB5E19E60C02007E865C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9FACFB4019E60C02007E865C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9FACFB4719E60C02007E865C;
-			remoteInfo = BetMo;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		7FD0BCAB3DEC4CB4B71AB2E6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		8516DF2D19E9D30300D1E3AB /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = Pods/ParseFacebookUtils/ParseFacebookUtils.framework; sourceTree = "<group>"; };
@@ -70,7 +59,6 @@
 		9FACFB5219E60C02007E865C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9FACFB5419E60C02007E865C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9FACFB5719E60C02007E865C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		9FACFB5D19E60C02007E865C /* BetMoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BetMoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FACFB6219E60C02007E865C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FACFB6319E60C02007E865C /* BetMoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetMoTests.swift; sourceTree = "<group>"; };
 		9FACFB7019E60DE5007E865C /* BetMo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BetMo-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -115,13 +103,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9FACFB5A19E60C02007E865C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -148,7 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				9FACFB4819E60C02007E865C /* BetMo.app */,
-				9FACFB5D19E60C02007E865C /* BetMoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -280,24 +260,6 @@
 			productReference = 9FACFB4819E60C02007E865C /* BetMo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9FACFB5C19E60C02007E865C /* BetMoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9FACFB6A19E60C02007E865C /* Build configuration list for PBXNativeTarget "BetMoTests" */;
-			buildPhases = (
-				9FACFB5919E60C02007E865C /* Sources */,
-				9FACFB5A19E60C02007E865C /* Frameworks */,
-				9FACFB5B19E60C02007E865C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9FACFB5F19E60C02007E865C /* PBXTargetDependency */,
-			);
-			name = BetMoTests;
-			productName = BetMoTests;
-			productReference = 9FACFB5D19E60C02007E865C /* BetMoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -309,10 +271,7 @@
 				TargetAttributes = {
 					9FACFB4719E60C02007E865C = {
 						CreatedOnToolsVersion = 6.0.1;
-					};
-					9FACFB5C19E60C02007E865C = {
-						CreatedOnToolsVersion = 6.0.1;
-						TestTargetID = 9FACFB4719E60C02007E865C;
+						DevelopmentTeam = KUVH8VE7V6;
 					};
 				};
 			};
@@ -330,7 +289,6 @@
 			projectRoot = "";
 			targets = (
 				9FACFB4719E60C02007E865C /* BetMo */,
-				9FACFB5C19E60C02007E865C /* BetMoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -344,13 +302,6 @@
 				9FACFB5819E60C02007E865C /* LaunchScreen.xib in Resources */,
 				9FFCCD5919EE5A7600AC999F /* CustomCellNib.xib in Resources */,
 				9FACFB5519E60C02007E865C /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9FACFB5B19E60C02007E865C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,23 +363,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9FACFB5919E60C02007E865C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9FACFB6419E60C02007E865C /* BetMoTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		9FACFB5F19E60C02007E865C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9FACFB4719E60C02007E865C /* BetMo */;
-			targetProxy = 9FACFB5E19E60C02007E865C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9FACFB5119E60C02007E865C /* Main.storyboard */ = {
@@ -467,7 +402,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sahil Arora (DAPPG8TTKS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sahil Arora (DAPPG8TTKS)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -487,6 +423,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "39c22636-8dfe-4909-9701-90f23d5df7c1";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -509,7 +446,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sahil Arora (DAPPG8TTKS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sahil Arora (DAPPG8TTKS)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -522,6 +460,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "39c22636-8dfe-4909-9701-90f23d5df7c1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -533,6 +472,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sahil Arora (DAPPG8TTKS)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/SahilArora/Documents/iOS/parse-library-1.4.1",
@@ -558,6 +498,7 @@
 					SystemConfiguration,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "39c22636-8dfe-4909-9701-90f23d5df7c1";
 				SWIFT_OBJC_BRIDGING_HEADER = "BetMo/BetMo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -569,6 +510,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sahil Arora (DAPPG8TTKS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sahil Arora (DAPPG8TTKS)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/SahilArora/Documents/iOS/parse-library-1.4.1",
@@ -594,41 +537,8 @@
 					SystemConfiguration,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "39c22636-8dfe-4909-9701-90f23d5df7c1";
 				SWIFT_OBJC_BRIDGING_HEADER = "BetMo/BetMo-Bridging-Header.h";
-			};
-			name = Release;
-		};
-		9FACFB6B19E60C02007E865C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = BetMoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BetMo.app/BetMo";
-			};
-			name = Debug;
-		};
-		9FACFB6C19E60C02007E865C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = BetMoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BetMo.app/BetMo";
 			};
 			name = Release;
 		};
@@ -649,15 +559,6 @@
 			buildConfigurations = (
 				9FACFB6819E60C02007E865C /* Debug */,
 				9FACFB6919E60C02007E865C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9FACFB6A19E60C02007E865C /* Build configuration list for PBXNativeTarget "BetMoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9FACFB6B19E60C02007E865C /* Debug */,
-				9FACFB6C19E60C02007E865C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
