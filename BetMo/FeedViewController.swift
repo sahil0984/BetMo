@@ -9,10 +9,15 @@
 import UIKit
 
 class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, BetDetailViewControllerDelegate {
+    
+    let feedTab = "feed"
+    let requestTab = "requests"
+    let profileTab = "profile"
 
     var bets: [Bet] = [Bet]()
     var selectedBet: Bet = Bet()
-    var feedViewType: String = "Home"
+    // Default is the feeds tab
+    var feedViewType: String = "feed"
 
     @IBOutlet weak var betsTableView: UITableView!
     var refreshControl: UIRefreshControl!
@@ -21,11 +26,11 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         betsTableView.delegate = self
         betsTableView.dataSource = self
-        if feedViewType == "My Bets" {
-            self.bets = BetMoClient.sharedInstance.myBets
+        if feedViewType == profileTab {
+            self.bets = BetMoClient.sharedInstance.profileBets
             betsTableView.reloadData()
-        } else if feedViewType == "Open Bets" {
-            self.bets = BetMoClient.sharedInstance.openBets
+        } else if feedViewType == requestTab {
+            self.bets = BetMoClient.sharedInstance.getAllRequestedBets()
             betsTableView.reloadData()
         } else {
             MBProgressHUD.showHUDAddedTo(betsTableView, animated: true)
@@ -34,7 +39,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 if error != nil {
                     println("Error while getting all bets")
                 } else {
-                    self.bets = BetMoClient.sharedInstance.betsCompleted
+                    self.bets = BetMoClient.sharedInstance.feedBets
                     self.betsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
                     self.betsTableView.reloadData()
                     MBProgressHUD.hideHUDForView(self.betsTableView, animated: true)
@@ -57,12 +62,12 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     override func viewWillAppear(animated: Bool) {
-        if feedViewType == "My Bets" {
-            self.bets = BetMoClient.sharedInstance.myBets
-        } else if feedViewType == "Open Bets" {
-            self.bets = BetMoClient.sharedInstance.openBets
-        } else if feedViewType == "Home" {
-            self.bets = BetMoClient.sharedInstance.betsCompleted
+        if feedViewType == profileTab {
+            self.bets = BetMoClient.sharedInstance.profileBets
+        } else if feedViewType == requestTab {
+            self.bets = BetMoClient.sharedInstance.getAllRequestedBets()
+        } else if feedViewType == feedTab {
+            self.bets = BetMoClient.sharedInstance.feedBets
         }
         betsTableView.reloadData()
     }
@@ -74,7 +79,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = betsTableView.dequeueReusableCellWithIdentifier("BetCell") as BetCell
         cell.bet = bets[indexPath.row] as Bet
-        
         
         CellAnimator.animateCellAppear(cell)
         
@@ -218,12 +222,12 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if error != nil {
                 println("Error while getting all bets")
             } else {
-                if self.feedViewType == "My Bets" {
-                    self.bets = BetMoClient.sharedInstance.myBets
-                } else if self.feedViewType == "Open Bets" {
-                    self.bets = BetMoClient.sharedInstance.openBets
-                } else if self.feedViewType == "Home" {
-                    self.bets = BetMoClient.sharedInstance.betsCompleted
+                if self.feedViewType == self.profileTab {
+                    self.bets = BetMoClient.sharedInstance.profileBets
+                } else if self.feedViewType == self.requestTab {
+                    self.bets = BetMoClient.sharedInstance.getAllRequestedBets()
+                } else if self.feedViewType == self.feedTab {
+                    self.bets = BetMoClient.sharedInstance.feedBets
                 }
                 self.betsTableView.reloadData()
                 self.refreshControl.endRefreshing()

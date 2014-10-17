@@ -11,16 +11,22 @@ import UIKit
 class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
     
     @IBOutlet weak var viewContainer: UIView!
-    @IBOutlet weak var feedSegmentedControl: UISegmentedControl!
     @IBOutlet weak var viewContainerTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var sidebarLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewContainerTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var requestsButton: UIButton!
+    @IBOutlet weak var feedButton: UIButton!
+    @IBOutlet weak var profileButton: UIButton!
 
     var homeFeedContainer: FeedViewController!
     var openBetsFeedContainer: FeedViewController!
     var myBetsFeedContainer: FeedViewController!
     var allViewControllers: [FeedViewController] = [FeedViewController]()
     var newBet: Bet?
+
+    let feedTab = "feed"
+    let requestTab = "requests"
+    let profileTab = "profile"
 
     // Containers handler
     var activeViewController: UIViewController? {
@@ -50,10 +56,10 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
         homeFeedContainer = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as FeedViewController
 
         openBetsFeedContainer = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as FeedViewController
-        openBetsFeedContainer.feedViewType = "Open Bets"
+        openBetsFeedContainer.feedViewType = requestTab
 
         myBetsFeedContainer = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as FeedViewController
-        myBetsFeedContainer.feedViewType = "My Bets"
+        myBetsFeedContainer.feedViewType = profileTab
 
         // For easier access when using segmented control
         allViewControllers = [openBetsFeedContainer, homeFeedContainer, myBetsFeedContainer]
@@ -67,12 +73,14 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func onHamburger(sender: AnyObject) {
-        if sidebarLeadingConstraint.constant == 0 {
-            hideSideBar()
-        } else {
-            showSidebar()
+
+    @IBAction func onTabBarButton(button: UIButton) {
+        if button == profileButton {
+            activeViewController = allViewControllers[2]
+        } else if button == requestsButton {
+            activeViewController = allViewControllers[0]
+        } else if button == feedButton {
+            activeViewController = allViewControllers[1]
         }
     }
 
@@ -83,10 +91,6 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
     func createdBet(betCreated: Bet) {
         self.newBet = betCreated
         BetMoClient.sharedInstance.allBets.insert(betCreated, atIndex: 0)
-    }
-
-    @IBAction func onFeedChange(sender: UISegmentedControl) {
-        activeViewController = allViewControllers[sender.selectedSegmentIndex]
     }
     
     //TODO: Need to figure out a better place to do this in order to slim down this controller
@@ -133,24 +137,6 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
         var createBetViewController = segue.destinationViewController as CreateBetViewController
         
         createBetViewController.delegate = self
-    }
-
-    func hideSideBar() {
-        UIView.animateWithDuration(0.35, animations: { () -> Void in
-            self.sidebarLeadingConstraint.constant = -200
-            self.viewContainerTrailingConstraint.constant = 0
-            self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-            self.view.layoutIfNeeded()
-        })
-    }
-    
-    func showSidebar() {
-        UIView.animateWithDuration(0.35, animations: { () -> Void in
-            self.sidebarLeadingConstraint.constant = 0
-            self.viewContainerTrailingConstraint.constant = -200
-            self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-            self.view.layoutIfNeeded()
-        })
     }
 
 }
