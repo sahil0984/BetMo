@@ -93,25 +93,25 @@ class Bet : PFObject, PFSubclassing {
                 
                 var returnedObjectId = self.getObjectId()
                 
-                //Create a channel for push notifications in current installation
-                var currentInstallation = PFInstallation.currentInstallation()
-                currentInstallation.addUniqueObject("ch_\(returnedObjectId)", forKey: "channels")
-                currentInstallation.saveInBackground()
-                
-                
-                if let opponent = self.getOppenent() {
-                    //Find opponent
-                    var opponentQuery = PFUser.query() as PFQuery
-                    opponentQuery.whereKey("fbId", equalTo: opponent.getFbId())
-                    //Find devices associated with the opponent
-                    var pushQuery = PFInstallation.query()
-                    pushQuery.whereKey("user", matchesQuery: opponentQuery)
-                    //Send push notification to opponent
-                    var push = PFPush()
-                    push.setQuery(pushQuery)
-                    push.setMessage("\(currentUser.getName()) has challenged you to a bet.")
-                    push.sendPushInBackground()
-                }
+//                //Create a channel for push notifications in current installation
+//                var currentInstallation = PFInstallation.currentInstallation()
+//                currentInstallation.addUniqueObject("ch_\(returnedObjectId)", forKey: "channels")
+//                currentInstallation.saveInBackground()
+//                
+//                
+//                if let opponent = self.getOppenent() {
+//                    //Find opponent
+//                    var opponentQuery = PFUser.query() as PFQuery
+//                    opponentQuery.whereKey("fbId", equalTo: opponent.getFbId())
+//                    //Find devices associated with the opponent
+//                    var pushQuery = PFInstallation.query()
+//                    pushQuery.whereKey("user", matchesQuery: opponentQuery)
+//                    //Send push notification to opponent
+//                    var push = PFPush()
+//                    push.setQuery(pushQuery)
+//                    push.setMessage("\(currentUser.getName()) has challenged you to a bet.")
+//                    push.sendPushInBackground()
+//                }
                 
             } else {
                 println("Failed creating the bet");
@@ -128,23 +128,23 @@ class Bet : PFObject, PFSubclassing {
             if isSaved {
                 println("Successfully accepted bet");
                 
-                //Create a channel for push notifications in current installation
-                var currentInstallation = PFInstallation.currentInstallation()
-                currentInstallation.addUniqueObject("ch_\(self.getObjectId())", forKey: "channels")
-                currentInstallation.saveInBackground()
-                
-                
-                //Find owner
-                var ownerQuery = PFUser.query()
-                ownerQuery.whereKey("fbId", equalTo: self.getOwner().getFbId())
-                //Find devices associated with the owner
-                var pushQuery = PFInstallation.query()
-                pushQuery.whereKey("user", matchesQuery: ownerQuery)
-                //Send push notification to opponent
-                var push = PFPush()
-                push.setQuery(pushQuery)
-                push.setMessage("\(currentUser.getName()) has accepted your bet.")
-                push.sendPushInBackground()
+//                //Create a channel for push notifications in current installation
+//                var currentInstallation = PFInstallation.currentInstallation()
+//                currentInstallation.addUniqueObject("ch_\(self.getObjectId())", forKey: "channels")
+//                currentInstallation.saveInBackground()
+//                
+//                
+//                //Find owner
+//                var ownerQuery = PFUser.query()
+//                ownerQuery.whereKey("fbId", equalTo: self.getOwner().getFbId())
+//                //Find devices associated with the owner
+//                var pushQuery = PFInstallation.query()
+//                pushQuery.whereKey("user", matchesQuery: ownerQuery)
+//                //Send push notification to opponent
+//                var push = PFPush()
+//                push.setQuery(pushQuery)
+//                push.setMessage("\(currentUser.getName()) has accepted your bet.")
+//                push.sendPushInBackground()
                 
                 
             } else {
