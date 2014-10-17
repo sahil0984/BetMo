@@ -24,6 +24,10 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
     var allViewControllers: [FeedViewController] = [FeedViewController]()
     var newBet: Bet?
 
+    let feedTab = "feed"
+    let requestTab = "requests"
+    let profileTab = "profile"
+
     // Containers handler
     var activeViewController: UIViewController? {
         didSet(oldViewControllerOrNil) {
@@ -52,10 +56,10 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
         homeFeedContainer = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as FeedViewController
 
         openBetsFeedContainer = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as FeedViewController
-        openBetsFeedContainer.feedViewType = "Open Bets"
+        openBetsFeedContainer.feedViewType = requestTab
 
         myBetsFeedContainer = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as FeedViewController
-        myBetsFeedContainer.feedViewType = "My Bets"
+        myBetsFeedContainer.feedViewType = profileTab
 
         // For easier access when using segmented control
         allViewControllers = [openBetsFeedContainer, homeFeedContainer, myBetsFeedContainer]

@@ -18,21 +18,55 @@ class BetMoClient {
 
     var allBets: [Bet] = [Bet]() {
         willSet(bets) {
-            // reset values
-            self.openBets = [Bet]()
-            self.betsCompleted = [Bet]()
-            self.myBets = [Bet]()
+            self.resetAllCachedBets()
             
             for bet in bets {
                 let currentUser = PFUser.currentUser() as User
                 let owner = bet.getOwner()
                 let winner = bet.getWinner()
                 let opponent = bet.getOppenent()
+
+                ////////// Requests Tab //////////
+                
+                // Requests to Current User
+                if opponent != nil && opponent?.getFbId() == currentUser.getFbId() && bet.getIsAccepted() == false {
+                    self.requestedBets.append(bet)
+                }
+                // Request from Current User (if there is no opponent or if the opponent hasn't yet accepted)
+                if owner.getFbId() == currentUser.getFbId() && (opponent == nil || (opponent != nil && bet.getIsAccepted() == false)){
+                    self.requestedBets.append(bet)
+                }
+
+                ////////// END Requests Tab //////////
+
+                ////////// Feed Tab //////////
+
                 // Open Bets -- bets that don't have an opponent and the owner isn't the current User
                 if owner.getFbId() != currentUser.getFbId() && opponent == nil {
                     self.openBets.append(bet)
                 }
+
+                // @TODO: Should this include my bets that have not yet been decided for my FEED?
+                if opponent != nil && bet.getIsAccepted() == true {
+                    self.feedBets.append(bet)
+                }
+
+                ////////// END Feed Tab //////////
                 
+                ////////// Profile Tab //////////
+
+                // Bet must be accepted to show up in my profile
+                if  bet.getIsAccepted() == true {
+                    if owner.getFbId() == currentUser.getFbId() || (opponent != nil && opponent?.getFbId() == currentUser.getFbId()) {
+                        self.profileBets.append(bet)
+                    }
+                }
+
+                ////////// END Profile Tab //////////
+
+
+                // @TODO: NO LONGER NEEDED REMOVE REFERENCES
+
                 // Completed bets! Was accepted and has a winner!
                 if bet.getIsAccepted() && winner != nil {
                     self.betsCompleted.append(bet)
@@ -45,16 +79,7 @@ class BetMoClient {
                         self.myBets.append(bet)
                     }
                 }
-                //
-                //                    // Bet has an opponent, was accepted, but just no winner has been decided
-                //                    if bet.getIsAccepted() && opponent != nil && winner == nil {
-                //                        self.betsWithNoWinner.append(bet)
-                //                    }
-                //
-                //                    // If a bet hasn't been accepted and has an opponent -- show it in "Pending Bets under My Bets"
-                //                    if bet.getIsAccepted() == false && opponent != nil {
-                //                        self.betsNotAccepted.append(bet)
-                //                    }
+
             }
         }
     }
@@ -64,12 +89,17 @@ class BetMoClient {
     var betsNotAccepted: [Bet] = [Bet]()
     var betsCompleted: [Bet] = [Bet]()
     
+    // New stuff
+    var requestedBets: [Bet] = [Bet]()
+    var feedBets: [Bet] = [Bet]()
+    var profileBets: [Bet] = [Bet]()
+    
     func getAllBets(completion: (bets: [Bet]?, error: NSError?) -> ()) {
         var betsQuery = PFQuery(className: "Bet")
         betsQuery.includeKey("owner")
         betsQuery.includeKey("opponent")
         betsQuery.includeKey("winner")
-        betsQuery.orderByDescending("createdAt")
+        betsQuery.orderByDescending("updatedAt")
         betsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 self.allBets = objects as [Bet]
@@ -81,8 +111,19 @@ class BetMoClient {
         }
     }
 
-    func getAllBetsForUser(userId: String?, completion: (bets: [Bet], error: NSError?) -> ()) {
+    func resetAllCachedBets() {
+        // reset values
+        self.openBets = [Bet]()
+        self.betsCompleted = [Bet]()
+        self.myBets = [Bet]()
 
+        self.requestedBets = [Bet]()
+        self.feedBets = [Bet]()
+        self.profileBets = [Bet]()
+    }
+    
+    func getAllRequestedBets() -> [Bet] {
+        return self.requestedBets
     }
     
 }
