@@ -101,7 +101,7 @@ class Bet : PFObject, PFSubclassing {
                 
                 if let opponent = self.getOppenent() {
                     //Find opponent
-                    var opponentQuery = PFUser.query()
+                    var opponentQuery = PFUser.query() as PFQuery
                     opponentQuery.whereKey("fbId", equalTo: opponent.getFbId())
                     //Find devices associated with the opponent
                     var pushQuery = PFInstallation.query()
