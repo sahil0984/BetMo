@@ -46,7 +46,6 @@ class BetMoClient {
                     self.openBets.append(bet)
                 }
 
-                // @TODO: Should this include my bets that have not yet been decided for my FEED?
                 if opponent != nil && bet.getIsAccepted() == true {
                     self.feedBets.append(bet)
                 }
