@@ -18,10 +18,10 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
     @IBOutlet weak var feedButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
 
-    var homeFeedContainer: FeedViewController!
-    var openBetsFeedContainer: FeedViewController!
-    var myBetsFeedContainer: FeedViewController!
-    var allViewControllers: [FeedViewController] = [FeedViewController]()
+    var homeFeedContainer: BetsFeedViewController!
+    var openBetsFeedContainer: BetsFeedViewController!
+    var myBetsFeedContainer: BetsFeedViewController!
+    var allViewControllers: [BetsFeedViewController] = [BetsFeedViewController]()
     var newBet: Bet?
 
     let feedTab = "feed"
@@ -53,12 +53,12 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
 
         // Create all view controllers
-        homeFeedContainer = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as FeedViewController
+        homeFeedContainer = storyboard.instantiateViewControllerWithIdentifier("BetsFeedViewController") as BetsFeedViewController
 
-        openBetsFeedContainer = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as FeedViewController
+        openBetsFeedContainer = storyboard.instantiateViewControllerWithIdentifier("BetsFeedViewController") as BetsFeedViewController
         openBetsFeedContainer.feedViewType = requestTab
 
-        myBetsFeedContainer = storyboard.instantiateViewControllerWithIdentifier("FeedViewController") as FeedViewController
+        myBetsFeedContainer = storyboard.instantiateViewControllerWithIdentifier("BetsFeedViewController") as BetsFeedViewController
         myBetsFeedContainer.feedViewType = profileTab
 
         // For easier access when using segmented control
@@ -76,11 +76,17 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
 
     @IBAction func onTabBarButton(button: UIButton) {
         if button == profileButton {
-            activeViewController = allViewControllers[2]
+            if activeViewController != allViewControllers[2] {
+                activeViewController = allViewControllers[2]
+            }
         } else if button == requestsButton {
-            activeViewController = allViewControllers[0]
+            if activeViewController != allViewControllers[0] {
+                activeViewController = allViewControllers[0]
+            }
         } else if button == feedButton {
-            activeViewController = allViewControllers[1]
+            if activeViewController != allViewControllers[1] {
+                activeViewController = allViewControllers[1]
+            }
         }
     }
 

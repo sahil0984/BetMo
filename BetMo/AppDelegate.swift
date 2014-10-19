@@ -52,8 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //If user is cached and linked to Facebook
         if PFUser.currentUser() != nil && PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()) {
-            //var vc = storyboard.instantiateViewControllerWithIdentifier("HomeViewController") as UIViewController
-            var vc = storyboard.instantiateViewControllerWithIdentifier("BetsFeedViewController") as UIViewController
+            var vc = storyboard.instantiateViewControllerWithIdentifier("HomeViewController") as UIViewController
             window?.rootViewController = vc
         }
         

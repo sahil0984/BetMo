@@ -11,7 +11,13 @@ import UIKit
 class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var betsFeedTableView: UITableView!
-    
+
+    let feedTab = "feed"
+    let requestTab = "requests"
+    let profileTab = "profile"
+    // Default is the feeds tab
+    var feedViewType: String = "feed"
+
     var bets = [Bet]()
     
     override func viewDidLoad() {
@@ -22,17 +28,37 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         betsFeedTableView.delegate = self
         betsFeedTableView.rowHeight = UITableViewAutomaticDimension
         
-
-        BetMoClient.sharedInstance.getAllBets({ (bets, error) -> () in
-            if error == nil {
-                self.bets = bets!
-                self.betsFeedTableView.reloadData()
-            } else {
-                println(error)
-            }
-        })
+        if feedViewType == profileTab {
+            self.bets = BetMoClient.sharedInstance.profileBets
+            betsFeedTableView.reloadData()
+        } else if feedViewType == requestTab {
+            self.bets = BetMoClient.sharedInstance.getAllRequestedBets()
+            betsFeedTableView.reloadData()
+        } else {
+            MBProgressHUD.showHUDAddedTo(betsFeedTableView, animated: true)
+            BetMoClient.sharedInstance.getAllBets({ (bets, error) -> () in
+                if error != nil {
+                    println("Error while getting all bets")
+                } else {
+                    self.bets = BetMoClient.sharedInstance.feedBets
+                    self.betsFeedTableView.reloadData()
+                    MBProgressHUD.hideHUDForView(self.betsFeedTableView, animated: true)
+                }
+            })
+        }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        if feedViewType == profileTab {
+            self.bets = BetMoClient.sharedInstance.profileBets
+        } else if feedViewType == requestTab {
+            self.bets = BetMoClient.sharedInstance.getAllRequestedBets()
+        } else if feedViewType == feedTab {
+            self.bets = BetMoClient.sharedInstance.feedBets
+        }
+        betsFeedTableView.reloadData()
+    }
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bets.count
     }
