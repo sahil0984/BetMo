@@ -62,6 +62,21 @@ class Bet : PFObject, PFSubclassing {
     func setOpponent(opponent: User) {
         self["opponent"] = opponent
     }
+    
+    func getWatcherList() -> [User]? {
+        return self["watcherList"] as? [User]
+    }
+    
+    func setWatcherList(watcher: User) {
+        self.addObject(watcher, forKey: "watcherList")
+    }
+    
+    func getWatcherListCount() -> Int {
+        if let watcherListCount = getWatcherList()?.count {
+            return watcherListCount
+        }
+        return 0
+    }
 
     func getCreatedAt() -> String? {
         if self.createdAt == nil {
@@ -219,9 +234,27 @@ class Bet : PFObject, PFSubclassing {
     
     func watch() {
         var currentUser = PFUser.currentUser() as User
-        self.addObject(currentUser, forKey: "watchers")
+        self.addObject(currentUser, forKey: "watcherList")
         self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
-            
+            if isSaved {
+                println("Successfully saved user to watcher list");
+            } else {
+                println("Failed to save user to watcher list");
+                println("\(error!)")
+            }
+        }
+    }
+    
+    func unWatch() {
+        var currentUser = PFUser.currentUser() as User
+        self.removeObject(currentUser, forKey: "watcherList")
+        self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
+            if isSaved {
+                println("Successfully removed user from watcher list");
+            } else {
+                println("Failed to remove user from watcher list");
+                println("\(error!)")
+            }
         }
     }
 
@@ -286,6 +319,18 @@ class Bet : PFObject, PFSubclassing {
         var isOpponent = currUser.getFbId() == self.getOppenent()?.getFbId()
         
         return isOpponent
+    }
+    func isUserWatcher() -> Bool {
+        var currUser = PFUser.currentUser() as User
+        
+        if let watcherList = getWatcherList() {
+            for watcher in watcherList {
+                if watcher.objectId == currUser.objectId {
+                    return true
+                }
+            }
+        }
+        return false
     }
     
 }

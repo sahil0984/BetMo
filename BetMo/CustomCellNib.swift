@@ -107,12 +107,14 @@ class CustomCellNib: UIView {
         }
         
         //Show subscribe button
-        subscriberCountLabel.text = "(0)" //set subscribers in parse
-        if true { //if not already subscribed
-            subscribeButton.setImage(UIImage(named: "subscribeOff"), forState: UIControlState.Normal)
-        } else {
-            subscribeButton.setImage(UIImage(named: "subscribeOn"), forState: UIControlState.Normal)
-        }
+        updateWatcherViews(currBet.isUserWatcher(), watcherCount: currBet.getWatcherListCount())
+        
+//        subscriberCountLabel.text = "(\(currBet.getWatcherListCount()))"
+//        if currBet.isUserWatcher() { //if already subscribed
+//            subscribeButton.setImage(UIImage(named: "subscribeOn"), forState: UIControlState.Normal)
+//        } else {
+//            subscribeButton.setImage(UIImage(named: "subscribeOff"), forState: UIControlState.Normal)
+//        }
     }
     
     
@@ -217,6 +219,23 @@ class CustomCellNib: UIView {
     
     @IBAction func onSubscribeButton(sender: AnyObject) {
         //Handle bet subscription
+        if bet.isUserWatcher() {
+            updateWatcherViews(false, watcherCount: bet.getWatcherListCount()-1)
+            bet.unWatch()
+        } else {
+            updateWatcherViews(true, watcherCount: bet.getWatcherListCount()+1)
+            bet.watch()
+        }
+        
+    }
+    
+    func updateWatcherViews(isWatcher: Bool, watcherCount: Int) {
+        subscriberCountLabel.text = "(\(watcherCount))"
+        if isWatcher { //if already subscribed
+            subscribeButton.setImage(UIImage(named: "subscribeOn"), forState: UIControlState.Normal)
+        } else {
+            subscribeButton.setImage(UIImage(named: "subscribeOff"), forState: UIControlState.Normal)
+        }
     }
     
     //Card swap logic:
