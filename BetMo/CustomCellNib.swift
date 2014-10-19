@@ -87,7 +87,7 @@ class CustomCellNib: UIView {
         var betOwner = currBet.getOwner()
         var betOpponent = currBet.getOppenent()
         
-        if currBet.isOpenBet() {
+        if currBet.isOpenBet() && !currBet.isUserOwner() {
             //Open bets - Accept button
             actionButton.setTitle("Accept Bet", forState: UIControlState.Normal)
         } else if currBet.isPendingAcceptBet() && currBet.isUserOpponent() {
