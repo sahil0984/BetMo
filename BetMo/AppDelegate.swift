@@ -53,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //If user is cached and linked to Facebook
         if PFUser.currentUser() != nil && PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()) {
             var vc = storyboard.instantiateViewControllerWithIdentifier("HomeViewController") as UIViewController
+            //var vc = storyboard.instantiateViewControllerWithIdentifier("BetsFeedViewController") as UIViewController
             window?.rootViewController = vc
         }
         
@@ -75,18 +76,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         
         // Store the deviceToken in the current installation and save it to Parse.
-        //var currentInstallation = PFInstallation()
         var currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.setDeviceTokenFromData(deviceToken)
-        println("\(deviceToken)")
-        currentInstallation.saveInBackgroundWithBlock { (isSaved, error: NSError!) -> Void in
-            if isSaved {
-                println("\(error)")
-                
-            } else {
-                println("\(error)")
-            }
-        }
+        currentInstallation.saveInBackground()
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: NSDictionary) {
