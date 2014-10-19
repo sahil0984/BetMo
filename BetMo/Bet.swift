@@ -216,6 +216,14 @@ class Bet : PFObject, PFSubclassing {
             }
         }
     }
+    
+    func watch() {
+        var currentUser = PFUser.currentUser() as User
+        self.addObject(currentUser, forKey: "watchers")
+        self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
+            
+        }
+    }
 
     override class func load() {
         superclass()?.load()

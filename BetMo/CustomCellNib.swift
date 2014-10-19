@@ -106,18 +106,12 @@ class CustomCellNib: UIView {
             actionButton.hidden = true
         }
         
-        subscribeButton.hidden = true
-        subscriberCountLabel.hidden = true
-        //Show subscribe button for any bet that current user is not a part of
-        if currUser.getFbId() != betOwner.getFbId() && currUser.getFbId() != betOpponent?.getFbId() {
-            subscribeButton.hidden = false
-            subscriberCountLabel.hidden = false
-            subscriberCountLabel.text = "(0)" //set subscribers in parse
-            if true { //if not already subscribed
-                subscribeButton.setImage(UIImage(named: "subscribeOff"), forState: UIControlState.Normal)
-            } else {
-                subscribeButton.setImage(UIImage(named: "subscribeOn"), forState: UIControlState.Normal)
-            }
+        //Show subscribe button
+        subscriberCountLabel.text = "(0)" //set subscribers in parse
+        if true { //if not already subscribed
+            subscribeButton.setImage(UIImage(named: "subscribeOff"), forState: UIControlState.Normal)
+        } else {
+            subscribeButton.setImage(UIImage(named: "subscribeOn"), forState: UIControlState.Normal)
         }
     }
     
