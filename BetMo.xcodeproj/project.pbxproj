@@ -121,6 +121,15 @@
 			name = API;
 			sourceTree = "<group>";
 		};
+		9F24867919F44AB7006C51C8 /* NibCustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				9FFCCD5619EE5A5000AC999F /* CustomCellNib.swift */,
+				9FFCCD5819EE5A7600AC999F /* CustomCellNib.xib */,
+			);
+			name = NibCustomViews;
+			sourceTree = "<group>";
+		};
 		9FACFB3F19E60C02007E865C = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +157,7 @@
 				9FACFBA919E61DC4007E865C /* TableViewCells */,
 				9FACFBA819E61DBC007E865C /* Models */,
 				9FACFBA719E61DAC007E865C /* ViewControllers */,
+				9F24867919F44AB7006C51C8 /* NibCustomViews */,
 				9FACFB4D19E60C02007E865C /* AppDelegate.swift */,
 				9FACFB5119E60C02007E865C /* Main.storyboard */,
 				9FACFB5419E60C02007E865C /* Images.xcassets */,
@@ -239,8 +249,6 @@
 		9FFCCD5C19EF622D00AC999F /* NibExpt */ = {
 			isa = PBXGroup;
 			children = (
-				9FFCCD5619EE5A5000AC999F /* CustomCellNib.swift */,
-				9FFCCD5819EE5A7600AC999F /* CustomCellNib.xib */,
 				9F24867119F248E9006C51C8 /* BetsFeedViewController.swift */,
 				9F24867519F25039006C51C8 /* BetsFeedTableViewCell.swift */,
 			);
