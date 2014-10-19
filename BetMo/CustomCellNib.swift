@@ -96,8 +96,12 @@ class CustomCellNib: UIView {
         } else if currBet.isUndecidedBet() && (currBet.isUserOwner() || currBet.isUserOpponent()) {
             //Undecided bets - Select Winner button
             actionButton.setTitle("Pick Winner", forState: UIControlState.Normal)
-        } else { //if currBet.isClosedBet() {
-            //Either this is a closed bet or currUser is not a party to this bet
+        } else if currBet.isClosedBet() && (currBet.isUserOwner() || currBet.isUserOpponent()) {
+            //Closed bet - Select Winner button
+            actionButton.setTitle("Pick Winner", forState: UIControlState.Normal)
+            //actionButton.hidden = true
+        } else {
+            //CurrUser is not a party to this bet
             actionButton.setTitle("Closed Bet", forState: UIControlState.Normal)
             actionButton.hidden = true
         }
