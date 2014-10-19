@@ -227,10 +227,57 @@ class Bet : PFObject, PFSubclassing {
     }
     
     
-    //Getters
+    //Handy functions to check the type of the bet:
+    //There are 4 types of bets:
+    //1. Open bets
+    //2. Pending accept bets
+    //3. Undecided bets
+    //4. Closed bets
     
+    func isOpenBet() -> Bool {
+        var isOpen = (self.getOppenent() == nil)
+        return isOpen
+    }
     
-    //Setters
+    func isPendingAcceptBet() -> Bool {
+        var isPendingAccept = (self.getIsAccepted() == false)
+                            & (self.getOppenent() != nil)
+        return isPendingAccept
+    }
     
+    func isUndecidedBet() -> Bool {
+        var isUndecided = (self.isOpenBet() == false)
+                        & (self.isPendingAcceptBet() == false)
+                        & (self.getWinner() == nil)
+                        & (self.getIsAccepted() == true)
+        
+        return isUndecided
+    }
+    
+    func isClosedBet() -> Bool {
+        var isClosed = (self.isOpenBet() == false)
+                     & (self.isPendingAcceptBet() == false)
+                     & (self.isUndecidedBet() == false)
+                     & (self.getWinner() != nil)
+        
+        return isClosed
+    }
+    
+    //Handy functions to check:
+    //1. Current user is Bet Owner
+    //2. Current user is Bet Opponent
+    //3. Current user subscribed to bet
+    func isUserOwner() -> Bool {
+        var currUser = PFUser.currentUser() as User
+        var isOwner = currUser.getFbId() == self.getOwner().getFbId()
+        
+        return isOwner
+    }
+    func isUserOpponent() -> Bool {
+        var currUser = PFUser.currentUser() as User
+        var isOpponent = currUser.getFbId() == self.getOppenent()?.getFbId()
+        
+        return isOpponent
+    }
     
 }

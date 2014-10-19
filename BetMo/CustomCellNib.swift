@@ -77,13 +77,9 @@ class CustomCellNib: UIView {
         
         //There can be 4 types of bets:
         //Open bets - Accept button
-        //  - opponent == nil
         //Pending accept bets - Accept button
-        //  - isAccepted == false && currUser == opponent
         //Undecided bets - Select Winner button
-        //  - winner == nil && (currUser == opponent || currUser == owner)
         //Closed bets - No button
-        // - default case
         
         actionButton.hidden = false
         
@@ -91,16 +87,16 @@ class CustomCellNib: UIView {
         var betOwner = currBet.getOwner()
         var betOpponent = currBet.getOppenent()
         
-        if betOpponent == nil {
+        if currBet.isOpenBet() {
             //Open bets - Accept button
             actionButton.setTitle("Accept Bet", forState: UIControlState.Normal)
-        } else if !currBet.getIsAccepted() && currUser.getFbId() == betOpponent?.getFbId() {
+        } else if currBet.isPendingAcceptBet() && currBet.isUserOpponent() {
             //Pending accept bets - Accept button
             actionButton.setTitle("Accept Bet", forState: UIControlState.Normal)
-        } else if currBet.getWinner() == nil && (currUser.getFbId() == betOwner.getFbId() || currUser.getFbId() == betOpponent?.getFbId()) && currBet.getIsAccepted() {
+        } else if currBet.isUndecidedBet() && (currBet.isUserOwner() || currBet.isUserOpponent()) {
             //Undecided bets - Select Winner button
             actionButton.setTitle("Pick Winner", forState: UIControlState.Normal)
-        } else {
+        } else { //if currBet.isClosedBet() {
             //Either this is a closed bet or currUser is not a party to this bet
             actionButton.setTitle("Closed Bet", forState: UIControlState.Normal)
             actionButton.hidden = true
