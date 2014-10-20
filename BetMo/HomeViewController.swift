@@ -107,7 +107,6 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
                 println(result)
                 var userData = result as NSDictionary
                 var fbId = userData["id"] as String
-
                 var currUser = PFUser.currentUser() as User
                 currUser.setFbId(userData["id"] as String)
                 currUser.setFirstName(userData["first_name"] as String)
@@ -118,6 +117,7 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
                 var searchName = currUser.getName().lowercaseString
                 currUser.setSearchName(searchName)
                 
+                println(currUser)
                 currUser.saveInBackground()
   
             } else {

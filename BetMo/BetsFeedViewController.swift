@@ -10,6 +10,7 @@ import UIKit
 
 class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var profileHeaderHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var betsFeedTableView: UITableView!
 
     let feedTab = "feed"
@@ -27,8 +28,9 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         betsFeedTableView.dataSource = self
         betsFeedTableView.delegate = self
         betsFeedTableView.rowHeight = UITableViewAutomaticDimension
-        
+        profileHeaderHeightConstraint.constant = 0
         if feedViewType == profileTab {
+            profileHeaderHeightConstraint.constant = 250
             self.bets = BetMoClient.sharedInstance.profileBets
             betsFeedTableView.reloadData()
         } else if feedViewType == requestTab {
