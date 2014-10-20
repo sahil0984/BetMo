@@ -22,7 +22,6 @@ class BetMoGetImage {
     
     
     func getUserImage(url: String?, completion: (userImage: UIImage?, error: NSError?) -> ()) {
-        
         // Check our image cache for the existing key. This is just a dictionary of UIImages
         var userImage: UIImage? = self.imageCache.valueForKey(url!) as? UIImage
         

@@ -31,12 +31,13 @@ class ProfileHeaderView: UIView {
     func setup() {
         var nib = UINib(nibName: "ProfileHeaderView", bundle: nil)
         nib.instantiateWithOwner(self, options: nil)
-        setupCardView(headerView)
+        setupHeaderView(headerView)
         addSubview(headerView)
         
-        proflieImageView.layer.cornerRadius = 30
-        var currentUesr = PFUser.currentUser() as User
-        BetMoGetImage.sharedInstance.getUserImage(currentUesr.getProfileImageUrl(), completion: { (userImage, error) -> () in
+        proflieImageView.layer.cornerRadius = 32
+        var currentUser = PFUser.currentUser() as User
+
+        BetMoGetImage.sharedInstance.getUserImage(currentUser.getProfileImageUrl(), completion: { (userImage, error) -> () in
             if error == nil {
                 self.proflieImageView.image = userImage
             } else {
@@ -44,15 +45,15 @@ class ProfileHeaderView: UIView {
             }
         })
 
-        BetMoClient.sharedInstance.getTotalLossesForUser((PFUser.currentUser() as User), completion: { (lossCount, error) -> () in
+        BetMoClient.sharedInstance.getTotalLossesForUser(currentUser, completion: { (lossCount, error) -> () in
             self.lossesLabel.text = "\(lossCount!) Losses"
         })
-        BetMoClient.sharedInstance.getTotalWinsForUser((PFUser.currentUser() as User), completion: { (winCount, error) -> () in
+        BetMoClient.sharedInstance.getTotalWinsForUser(currentUser, completion: { (winCount, error) -> () in
             self.winsLabel.text = "\(winCount!) Wins"
         })
     }
 
-    func setupCardView(cardView: UIView) {
+    func setupHeaderView(cardView: UIView) {
         headerView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
         headerView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
         headerView.center = CGPointMake(frame.width/2, frame.height/2)
