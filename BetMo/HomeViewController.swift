@@ -17,7 +17,12 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var requestsButton: UIButton!
     @IBOutlet weak var feedButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var requestButtonContainerView: UIView!
+    @IBOutlet weak var homeButtonContainerView: UIView!
+    @IBOutlet weak var profileButtonContainerView: UIView!
 
+    var tabSelectionColor = UIColor.grayColor()
+    var tabDefaultColor: UIColor!
     var homeFeedContainer: BetsFeedViewController!
     var openBetsFeedContainer: BetsFeedViewController!
     var myBetsFeedContainer: BetsFeedViewController!
@@ -65,6 +70,8 @@ class HomeViewController: UIViewController {
         allViewControllers = [openBetsFeedContainer, homeFeedContainer, myBetsFeedContainer]
         activeViewController = homeFeedContainer
 
+        tabDefaultColor = homeButtonContainerView.backgroundColor
+        homeButtonContainerView.backgroundColor = tabSelectionColor
         // Do any additional setup after loading the view.
         loadUserData()
     }
@@ -74,20 +81,34 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func onTabBarButton(button: UIButton) {
-        if button == profileButton {
-            if activeViewController != allViewControllers[2] {
-                activeViewController = allViewControllers[2]
-            }
-        } else if button == requestsButton {
-            if activeViewController != allViewControllers[0] {
-                activeViewController = allViewControllers[0]
-            }
-        } else if button == feedButton {
-            if activeViewController != allViewControllers[1] {
-                activeViewController = allViewControllers[1]
-            }
+    @IBAction func onRequestTab(sender: UITapGestureRecognizer) {
+        if activeViewController != allViewControllers[0] {
+            resetTabBarSelection()
+            activeViewController = allViewControllers[0]
+            requestButtonContainerView.backgroundColor = tabSelectionColor
         }
+    }
+
+    @IBAction func onHomeTab(sender: AnyObject) {
+        if activeViewController != allViewControllers[1] {
+            resetTabBarSelection()
+            activeViewController = allViewControllers[1]
+            homeButtonContainerView.backgroundColor = tabSelectionColor
+        }
+    }
+
+    @IBAction func onProfileTab(sender: UITapGestureRecognizer) {
+        if activeViewController != allViewControllers[2] {
+            resetTabBarSelection()
+            activeViewController = allViewControllers[2]
+            profileButtonContainerView.backgroundColor = tabSelectionColor
+        }
+    }
+
+    func resetTabBarSelection() {
+        profileButtonContainerView.backgroundColor = tabDefaultColor
+        homeButtonContainerView.backgroundColor = tabDefaultColor
+        requestButtonContainerView.backgroundColor = tabDefaultColor
     }
 
     @IBAction func onLogout(sender: UIButton) {
