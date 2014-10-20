@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, CreateDescriptionViewControllerDelegate {
     
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var viewContainerTopConstraint: NSLayoutConstraint!
@@ -151,6 +151,10 @@ class HomeViewController: UIViewController {
         installation.saveInBackground()
     }
     
+    func addedDescToBet(addedDescToBet: Bet) {
+        self.newBet = addedDescToBet
+        BetMoClient.sharedInstance.allBets.insert(addedDescToBet, atIndex: 0)
+    }
     
     // MARK: - Navigation
 
@@ -161,7 +165,7 @@ class HomeViewController: UIViewController {
         
         var createDescriptionViewController = segue.destinationViewController as CreateDescriptionViewController
         
-        //createDescriptionViewController.delegate = self
+        createDescriptionViewController.delegate = self
     }
 
 }

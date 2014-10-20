@@ -18,7 +18,7 @@ class CreateDescriptionViewController: UIViewController, CreateAmountViewControl
     
     var newBet = Bet()
     
-    var delegate: CreateAmountViewControllerDelegate?
+    var delegate: CreateDescriptionViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +34,11 @@ class CreateDescriptionViewController: UIViewController, CreateAmountViewControl
     func addedAmountToBet(addedAmountToBet: Bet) {
         newBet = addedAmountToBet
         newBet.setDescription(betDescriptionTextView.text)
-        delegate?.addedAmountToBet(newBet)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        self.dismissViewControllerAnimated(false) { () -> Void in
+            println("")
+            self.delegate?.addedDescToBet(self.newBet)
+        }
     }
     
 
@@ -48,7 +51,7 @@ class CreateDescriptionViewController: UIViewController, CreateAmountViewControl
         
         var createAmountViewController = segue.destinationViewController as CreateAmountViewController
         
-        //createAmountViewController.delegate = self
+        createAmountViewController.delegate = self
     }
 
 }

@@ -105,9 +105,10 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         
-        delegate?.friendSelected(friendsList[indexPath.row])
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(false) { () -> Void in
+            println("")
+            self.delegate?.friendSelected(self.friendsList[indexPath.row])
+        }
     }
     
 

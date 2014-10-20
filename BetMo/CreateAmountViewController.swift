@@ -32,10 +32,17 @@ class CreateAmountViewController: UIViewController, FriendsListViewControllerDel
     }
     
     func friendSelected(selectedFriend: User) {
+        var currentUser = PFUser.currentUser() as User
+        newBet.setOwner(currentUser)
         newBet.setOpponent(selectedFriend)
         newBet.setAmount(betAmountTextField.text)
-        delegate?.addedAmountToBet(newBet)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        newBet.setIsAccepted(false)
+        
+        self.dismissViewControllerAnimated(false) { () -> Void in
+            println("")
+            self.delegate?.addedAmountToBet(self.newBet)
+        }
+        
     }
     
     

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
@@ -709,7 +709,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="cCZ-xZ-hxm" kind="presentation" id="S9K-gE-qqJ"/>
+                                    <segue destination="cCZ-xZ-hxm" kind="show" id="S9K-gE-qqJ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Bet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ny-oS-I23">
@@ -770,7 +770,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="C7p-bh-JvE" kind="presentation" id="MC8-fC-SIa"/>
+                                    <segue destination="C7p-bh-JvE" kind="show" id="MC8-fC-SIa"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PMo-oI-XCq">
@@ -974,7 +974,6 @@
                         <outlet property="currUserNameLabel" destination="55J-tL-kMT" id="cg3-3e-o4G"/>
                         <outlet property="vsUserImageView" destination="apW-rX-qXl" id="mDb-Tb-vI0"/>
                         <outlet property="vsUserNameTextField" destination="2QM-B2-5Cf" id="ZUS-zM-A9L"/>
-                        <segue destination="C7p-bh-JvE" kind="presentation" identifier="friendsListSegue" id="jZc-in-il3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QF3-4h-jWT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1128,7 +1127,4 @@
         <image name="new" width="32" height="32"/>
         <image name="user_male3-32" width="32" height="32"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="MC8-fC-SIa"/>
-    </inferredMetricsTieBreakers>
 </document>
