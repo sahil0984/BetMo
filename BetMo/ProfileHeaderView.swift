@@ -36,7 +36,7 @@ class ProfileHeaderView: UIView {
         
         proflieImageView.layer.cornerRadius = 32
         var currentUser = PFUser.currentUser() as User
-
+        var bannerUrl = currentUser.getBannerImageUrl()
         BetMoGetImage.sharedInstance.getUserImage(currentUser.getProfileImageUrl(), completion: { (userImage, error) -> () in
             if error == nil {
                 self.proflieImageView.image = userImage
@@ -44,7 +44,9 @@ class ProfileHeaderView: UIView {
                 println(error)
             }
         })
-
+        BetMoGetImage.sharedInstance.getUserBannerImage(bannerUrl, completion: { (userBannerImage, error) -> () in
+            self.bannerImageView.image = userBannerImage
+        })
         BetMoClient.sharedInstance.getTotalLossesForUser(currentUser, completion: { (lossCount, error) -> () in
             self.lossesLabel.text = "\(lossCount!) Losses"
         })
