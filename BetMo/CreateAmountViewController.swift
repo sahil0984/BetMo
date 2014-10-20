@@ -35,6 +35,7 @@ class CreateAmountViewController: UIViewController, FriendsListViewControllerDel
         newBet.setOpponent(selectedFriend)
         newBet.setAmount(betAmountTextField.text)
         delegate?.addedAmountToBet(newBet)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     

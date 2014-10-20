@@ -35,6 +35,7 @@ class CreateDescriptionViewController: UIViewController, CreateAmountViewControl
         newBet = addedAmountToBet
         newBet.setDescription(betDescriptionTextView.text)
         delegate?.addedAmountToBet(newBet)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 
