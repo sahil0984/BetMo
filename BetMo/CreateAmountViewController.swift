@@ -1,0 +1,54 @@
+//
+//  CreateAmountViewController.swift
+//  BetMo
+//
+//  Created by Sahil Arora on 10/20/14.
+//  Copyright (c) 2014 codepath. All rights reserved.
+//
+
+import UIKit
+
+protocol CreateAmountViewControllerDelegate {
+    func addedAmountToBet(addedAmountToBet : Bet) -> Void
+}
+
+class CreateAmountViewController: UIViewController, FriendsListViewControllerDelegate {
+
+    @IBOutlet weak var betAmountTextField: UITextField!
+    
+    var newBet = Bet()
+    
+    var delegate: CreateAmountViewControllerDelegate?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func friendSelected(selectedFriend: User) {
+        newBet.setOpponent(selectedFriend)
+        newBet.setAmount(betAmountTextField.text)
+        delegate?.addedAmountToBet(newBet)
+    }
+    
+    
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        var friendsListViewController = segue.destinationViewController as FriendsListViewController
+        
+        friendsListViewController.delegate = self
+    }
+
+
+}

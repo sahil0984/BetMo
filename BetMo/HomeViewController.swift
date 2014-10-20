@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
+class HomeViewController: UIViewController {
     
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var viewContainerTopConstraint: NSLayoutConstraint!
@@ -138,9 +138,9 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        var createBetViewController = segue.destinationViewController as CreateBetViewController
+        var createDescriptionViewController = segue.destinationViewController as CreateDescriptionViewController
         
-        createBetViewController.delegate = self
+        //createDescriptionViewController.delegate = self
     }
 
 }
