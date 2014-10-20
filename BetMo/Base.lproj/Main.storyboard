@@ -488,7 +488,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="tgW-ST-SmE" kind="presentation" id="s5Z-Rf-6Gb"/>
+                                    <segue destination="CAV-wp-tGh" kind="presentation" id="SxW-o3-vPU"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3lR-Bu-95Z" userLabel="TabBar">
@@ -593,12 +593,12 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="TLc-7q-64U"/>
                                         <exclude reference="4io-uQ-aUo"/>
                                         <exclude reference="I1V-b5-Xha"/>
                                         <exclude reference="IpO-Bp-T8v"/>
                                         <exclude reference="Pvt-vG-wHI"/>
                                         <exclude reference="ZTm-hT-5gl"/>
+                                        <exclude reference="TLc-7q-64U"/>
                                         <exclude reference="8Zm-1I-oR2"/>
                                         <exclude reference="B0Y-kb-2wP"/>
                                         <exclude reference="BaF-9w-xsy"/>
@@ -616,15 +616,6 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWL-wL-uC5">
-                                <rect key="frame" x="553" y="15" width="32" height="32"/>
-                                <state key="normal" image="new">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="CAV-wp-tGh" kind="presentation" id="0QS-l6-BNL"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -764,7 +755,6 @@
         <!--Create Amount View Controller-->
         <scene sceneID="1yg-BO-DyY">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cJY-Uw-VZH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="cCZ-xZ-hxm" customClass="CreateAmountViewController" customModule="BetMo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zn0-Ya-eQw"/>
@@ -828,6 +818,7 @@
                         <outlet property="betAmountTextField" destination="Z8D-2t-Kys" id="Z78-JU-8cS"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cJY-Uw-VZH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2703" y="-519"/>
         </scene>
