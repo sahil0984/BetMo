@@ -21,7 +21,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var homeButtonContainerView: UIView!
     @IBOutlet weak var profileButtonContainerView: UIView!
 
-    var tabSelectionColor = UIColor.grayColor()
+    var tabSelectionColor = UIColor.blackColor()
     var tabDefaultColor: UIColor!
     var homeFeedContainer: BetsFeedViewController!
     var openBetsFeedContainer: BetsFeedViewController!

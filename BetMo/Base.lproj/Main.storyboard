@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
@@ -501,7 +501,7 @@
                                                 <rect key="frame" x="84" y="9" width="32" height="32"/>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.26093325407608692" green="0.26093325407608692" blue="0.26093325407608692" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.17926290759999999" green="0.17926290759999999" blue="0.17926290759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="centerY" secondItem="Bln-Xq-qDi" secondAttribute="centerY" id="TsQ-BM-vzp"/>
@@ -522,7 +522,7 @@
                                                 </constraints>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.26093325407608692" green="0.26093325407608692" blue="0.26093325407608692" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.17926290760869568" green="0.17926290760869568" blue="0.17926290760869568" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="centerY" secondItem="ofc-56-u81" secondAttribute="centerY" id="8wI-H1-8Ao"/>
@@ -543,7 +543,7 @@
                                                 </constraints>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.26093325407608692" green="0.26093325407608692" blue="0.26093325407608692" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.17926290759999999" green="0.17926290759999999" blue="0.17926290759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="centerY" secondItem="SPm-0d-hDn" secondAttribute="centerY" id="5H9-XC-yef"/>
