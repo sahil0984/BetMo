@@ -65,6 +65,11 @@ class User : PFUser, PFSubclassing {
     func setProfileImageUrl(profileImageUrl: String) {
         self["profileImageUrl"] = profileImageUrl
     }
+
+    //Only getter for banner
+    func getBannerImageUrl() -> String? {
+        return "https://graph.facebook.com/\(self.getFbId()!)?fields=cover&access_token=\(PFFacebookUtils.session().accessTokenData)"
+    }
     
     func getSearchName() -> String? {
         return self["searchName"] as? String
