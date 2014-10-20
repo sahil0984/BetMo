@@ -110,43 +110,91 @@ class BetMoClient {
         }
     }
 
-    func getTotalWinsForUser(user: User, completion: (winCount: Int?, error: NSError?) -> ()) {
-        var betsQuery = PFQuery(className: "Bet")
-        betsQuery.whereKey("winner", equalTo: user)
-        betsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+//    func getTotalWinsForUser(user: User, completion: (winCount: Int?, error: NSError?) -> ()) {
+//        var betsQuery = PFQuery(className: "Bet")
+//        betsQuery.whereKey("winner", equalTo: user)
+//        betsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+//            if error == nil {
+//                println(objects.count)
+//                completion(winCount: objects.count, error: nil)
+//            } else {
+//                completion(winCount: nil, error: error)
+//            }
+//        }
+//    }
+//
+//    func getTotalLossesForUser(user: User, completion: (lossCount: Int?, error: NSError?) -> ()) {
+//        // Create query for all bets where the user is an owner and a winner has been decided
+//        var betsWithOwner = PFQuery(className: "Bet")
+//        betsWithOwner.whereKey("owner", equalTo: user)
+//        betsWithOwner.whereKeyExists("winner")
+//        // Create query for all bets where the user is an opponent and a winner has been decided
+//        var betsWithOpponent = PFQuery(className: "Bet")
+//        betsWithOpponent.whereKey("opponent", equalTo: user)
+//        betsWithOpponent.whereKeyExists("winner")
+//
+//        var winQuery = PFQuery(className: "Bet")
+//        winQuery.whereKey("winner", equalTo: user)
+//        
+//        var lossQuery = PFQuery.orQueryWithSubqueries([betsWithOwner, betsWithOpponent])
+//        lossQuery.whereKey("winner", doesNotMatchQuery: winQuery)
+//
+//        lossQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+//            if error == nil {
+//                // hardcoded count since my query is wrong
+//                completion(lossCount: 6, error: nil)
+//            } else {
+//                completion(lossCount: nil, error: error)
+//            }
+//        }
+//    }
+    
+    func getTotalWinsForUserV2(user: User, completion: (winCount: Int?, error: NSError?) -> ()) {
+        
+        var ownerBetsQuery = PFQuery(className: "Bet")
+        ownerBetsQuery.whereKey("owner", equalTo: user)
+        
+        var opponentBetsQuery = PFQuery(className: "Bet")
+        opponentBetsQuery.whereKey("opponent", equalTo: user)
+        
+        var mainQuery = PFQuery.orQueryWithSubqueries([ownerBetsQuery, opponentBetsQuery])
+        
+        mainQuery.whereKey("winner", equalTo: user)
+        
+        mainQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
-                println(objects.count)
-                completion(winCount: objects.count, error: nil)
+                var winningBets = objects as [Bet]
+                completion(winCount: winningBets.count, error: nil)
             } else {
+                println(error)
                 completion(winCount: nil, error: error)
             }
         }
     }
-
-    func getTotalLossesForUser(user: User, completion: (lossCount: Int?, error: NSError?) -> ()) {
-        // Create query for all bets where the user is an owner and a winner has been decided
-        var betsWithOwner = PFQuery(className: "Bet")
-        betsWithOwner.whereKey("owner", equalTo: user)
-        betsWithOwner.whereKeyExists("winner")
-        // Create query for all bets where the user is an opponent and a winner has been decided
-        var betsWithOpponent = PFQuery(className: "Bet")
-        betsWithOpponent.whereKey("opponent", equalTo: user)
-        betsWithOpponent.whereKeyExists("winner")
-
-        var winQuery = PFQuery(className: "Bet")
-        winQuery.whereKey("winner", equalTo: user)
+    
+    func getTotalLossesForUserV2(user: User, completion: (lossCount: Int?, error: NSError?) -> ()) {
         
-        var lossQuery = PFQuery.orQueryWithSubqueries([betsWithOwner, betsWithOpponent])
-        lossQuery.whereKey("winner", doesNotMatchQuery: winQuery)
-
-        lossQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+        var ownerBetsQuery = PFQuery(className: "Bet")
+        ownerBetsQuery.whereKey("owner", equalTo: user)
+        
+        var opponentBetsQuery = PFQuery(className: "Bet")
+        opponentBetsQuery.whereKey("opponent", equalTo: user)
+        
+        var mainQuery = PFQuery.orQueryWithSubqueries([ownerBetsQuery, opponentBetsQuery])
+        
+        mainQuery.whereKeyExists("winner")
+        mainQuery.whereKey("winner", notEqualTo: user)
+        
+        mainQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
-                // hardcoded count since my query is wrong
-                completion(lossCount: 6, error: nil)
+                var losingBets = objects as [Bet]
+                completion(lossCount: losingBets.count, error: nil)
             } else {
+                println(error)
                 completion(lossCount: nil, error: error)
             }
         }
+        
     }
     
     func resetAllCachedBets() {

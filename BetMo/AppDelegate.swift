@@ -56,6 +56,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = vc
         }
         
+//        var currUser = PFUser.currentUser() as User
+//        BetMoClient.sharedInstance.getTotalWinsForUserV2(currUser, completion: { (winCount, error) -> () in
+//            println("winningCount: \(winCount)")
+//        })
+//        BetMoClient.sharedInstance.getTotalLossesForUserV2(currUser, completion: { (lossCount, error) -> () in
+//            println("losingCount: \(lossCount)")
+//        })
+        
         return true
     }
 

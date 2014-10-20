@@ -41,10 +41,10 @@ class ProfileHeaderView: UIView {
                 println(error)
             }
         })
-        BetMoClient.sharedInstance.getTotalLossesForUser((PFUser.currentUser() as User), completion: { (lossCount, error) -> () in
+        BetMoClient.sharedInstance.getTotalLossesForUserV2((PFUser.currentUser() as User), completion: { (lossCount, error) -> () in
             println(lossCount)
         })
-        BetMoClient.sharedInstance.getTotalWinsForUser((PFUser.currentUser() as User), completion: { (winCount, error) -> () in
+        BetMoClient.sharedInstance.getTotalWinsForUserV2((PFUser.currentUser() as User), completion: { (winCount, error) -> () in
             println(winCount)
         })
     }
