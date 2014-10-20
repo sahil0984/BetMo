@@ -482,15 +482,27 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWL-wL-uC5">
-                                <rect key="frame" x="553" y="15" width="32" height="32"/>
-                                <state key="normal" image="new">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="CAV-wp-tGh" kind="presentation" id="SxW-o3-vPU"/>
-                                </connections>
-                            </button>
+                            <view alpha="0.89999999999999991" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kkj-AJ-i8f" userLabel="Create New">
+                                <rect key="frame" x="560" y="20" width="40" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWL-wL-uC5">
+                                        <rect key="frame" x="4" y="4" width="32" height="32"/>
+                                        <state key="normal" image="new">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="CAV-wp-tGh" kind="presentation" id="SxW-o3-vPU"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.86616847829999999" green="0.86616847829999999" blue="0.86616847829999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="iWL-wL-uC5" secondAttribute="centerY" id="HMQ-tw-GwN"/>
+                                    <constraint firstAttribute="height" constant="40" id="PBB-mp-uzf"/>
+                                    <constraint firstAttribute="width" constant="40" id="X1r-Sb-oTE"/>
+                                    <constraint firstAttribute="centerX" secondItem="iWL-wL-uC5" secondAttribute="centerX" id="mRM-vv-sYS"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3lR-Bu-95Z" userLabel="TabBar">
                                 <rect key="frame" x="0.0" y="550" width="600" height="50"/>
                                 <subviews>
@@ -620,7 +632,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="A8F-aH-Mau" firstAttribute="top" secondItem="3lR-Bu-95Z" secondAttribute="bottom" id="0ZV-dM-utW"/>
-                            <constraint firstItem="iWL-wL-uC5" firstAttribute="top" secondItem="Yel-P6-pox" secondAttribute="top" constant="15" id="34D-3B-Zyy"/>
+                            <constraint firstAttribute="trailing" secondItem="kkj-AJ-i8f" secondAttribute="trailing" id="Bab-ha-8bJ"/>
                             <constraint firstItem="3lR-Bu-95Z" firstAttribute="leading" secondItem="Yel-P6-pox" secondAttribute="leading" id="KoN-wR-A3l"/>
                             <constraint firstItem="3lR-Bu-95Z" firstAttribute="top" secondItem="DZi-6e-3AP" secondAttribute="bottom" id="LoC-XQ-VPs"/>
                             <constraint firstItem="A8F-aH-Mau" firstAttribute="top" secondItem="DZi-6e-3AP" secondAttribute="bottom" id="TJJ-e5-TbY"/>
@@ -629,8 +641,8 @@
                             <constraint firstItem="DZi-6e-3AP" firstAttribute="leading" secondItem="Yel-P6-pox" secondAttribute="leading" id="Wxd-iN-w8H"/>
                             <constraint firstAttribute="trailing" secondItem="3lR-Bu-95Z" secondAttribute="trailing" id="auT-d5-Hgb"/>
                             <constraint firstAttribute="trailing" secondItem="DZi-6e-3AP" secondAttribute="trailing" id="ezr-wG-dX3"/>
+                            <constraint firstItem="kkj-AJ-i8f" firstAttribute="top" secondItem="fWw-Pb-IHI" secondAttribute="bottom" id="g1A-CX-OsL"/>
                             <constraint firstItem="DZi-6e-3AP" firstAttribute="top" secondItem="fWw-Pb-IHI" secondAttribute="bottom" id="k4V-Ke-HAs"/>
-                            <constraint firstAttribute="trailing" secondItem="iWL-wL-uC5" secondAttribute="trailing" constant="15" id="pjB-DO-hDr"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

@@ -68,11 +68,13 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
             var offsetY = scrollView.contentOffset.y
             var isBottomBounce = (offsetY >= (self.betsFeedTableView.contentSize.height - self.betsFeedTableView.bounds.size.height))
 
-            if offsetY > 0 && offsetY < 100 && isBottomBounce == false {
+            if offsetY > 0 && offsetY < 111 && isBottomBounce == false {
                 profileHeaderTopConstraint.constant = -1*scrollView.contentOffset.y
-            } else if offsetY < 100 && profileHeaderTopConstraint.constant != 0 {
+            } else if offsetY < 111 && profileHeaderTopConstraint.constant != 0 {
                 // TOP BOUNCE CASE
                 profileHeaderTopConstraint.constant = 0
+            } else if offsetY > 110 && profileHeaderTopConstraint.constant != -110 {
+                profileHeaderTopConstraint.constant = -110
             }
         }
     }
