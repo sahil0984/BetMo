@@ -116,8 +116,6 @@ class HomeViewController: UIViewController, CreateBetViewControllerDelegate {
                 
                 var searchName = currUser.getName().lowercaseString
                 currUser.setSearchName(searchName)
-                
-                println(currUser)
                 currUser.saveInBackground()
   
             } else {

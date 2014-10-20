@@ -11,6 +11,7 @@ import UIKit
 class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var profileHeaderHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var profileHeaderTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var betsFeedTableView: UITableView!
 
     let feedTab = "feed"
@@ -20,6 +21,7 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     var feedViewType: String = "feed"
 
     var bets = [Bet]()
+    var isDragging = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +61,20 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
             self.bets = BetMoClient.sharedInstance.feedBets
         }
         betsFeedTableView.reloadData()
+    }
+
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if feedViewType == profileTab {
+            var offsetY = scrollView.contentOffset.y
+            var isBottomBounce = (offsetY >= (self.betsFeedTableView.contentSize.height - self.betsFeedTableView.bounds.size.height))
+
+            if offsetY > 0 && offsetY < 100 && isBottomBounce == false {
+                profileHeaderTopConstraint.constant = -1*scrollView.contentOffset.y
+            } else if offsetY < 100 && profileHeaderTopConstraint.constant != 0 {
+                // TOP BOUNCE CASE
+                profileHeaderTopConstraint.constant = 0
+            }
+        }
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
