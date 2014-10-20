@@ -54,20 +54,23 @@ class BetMoGetImage {
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
                 if connectionError == nil && data != nil {
                     var object = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as NSDictionary
+                    var coverObject = object["cover"] as? NSDictionary
                     
-                    var coverObject =
-                    object["cover"] as NSDictionary
-                    var bannerRealUrl = coverObject["source"] as NSString
-                    
-                    var urlRequest = NSURLRequest(URL: NSURL(string: bannerRealUrl))
-                    NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
-                        if connectionError == nil && data != nil {
-                            let image = UIImage(data: data!)
-                            self.imageCache.setValue(image, forKey: url!)
-                            completion(userBannerImage: image, error:nil)
-                        } else {
-                            completion(userBannerImage: nil, error: connectionError)
+                    if coverObject != nil {
+                        var bannerRealUrl = coverObject!["source"] as NSString
+                        
+                        var urlRequest = NSURLRequest(URL: NSURL(string: bannerRealUrl))
+                        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
+                            if connectionError == nil && data != nil {
+                                let image = UIImage(data: data!)
+                                self.imageCache.setValue(image, forKey: url!)
+                                completion(userBannerImage: image, error:nil)
+                            } else {
+                                completion(userBannerImage: nil, error: connectionError)
+                            }
                         }
+                    } else {
+                        completion(userBannerImage: nil, error: nil)
                     }
                     
                 } else {
