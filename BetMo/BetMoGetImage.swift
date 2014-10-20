@@ -11,6 +11,7 @@ import Foundation
 class BetMoGetImage {
     
     var imageCache = NSMutableDictionary()
+    var ciContenxt = CIContext(options:nil)
     
     class var sharedInstance: BetMoGetImage {
         struct Static {
@@ -41,5 +42,9 @@ class BetMoGetImage {
         } else {
             completion(userImage: userImage, error:nil)
         }
+    }
+    
+    func getSharedCIContext() -> CIContext {
+        return self.ciContenxt
     }
 }

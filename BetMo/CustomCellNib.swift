@@ -9,7 +9,6 @@
 import UIKit
 
 class CustomCellNib: UIView {
-
     @IBOutlet var mainContentView: UIView!
     @IBOutlet var acceptContentView: UIView!
     @IBOutlet var winnerContentView: UIView!
@@ -44,7 +43,13 @@ class CustomCellNib: UIView {
         ownerNameLabel.text = currBet.getOwner().getName()
         BetMoGetImage.sharedInstance.getUserImage(currBet.getOwner().getProfileImageUrl(), completion: { (userImage, error) -> () in
             if error == nil {
-                self.ownerImageView.image = userImage
+                var image = userImage
+                
+                if currBet.isClosedBet() {
+                    image = self.getFilteredImage(userImage!, isWinner: currBet.isOwnerWinner())
+                }
+
+                self.ownerImageView.image = image
             } else {
                 println(error)
             }
@@ -55,7 +60,13 @@ class CustomCellNib: UIView {
             opponentNameLabel.text = currOpponent.getName()
             BetMoGetImage.sharedInstance.getUserImage(currBet.getOppenent()?.getProfileImageUrl(), completion: { (userImage, error) -> () in
                 if error == nil {
-                    self.opponentImageView.image = userImage
+                    var image = userImage
+
+                    if currBet.isClosedBet() {
+                        image = self.getFilteredImage(userImage!, isWinner: currBet.isOpponentWinner())
+                    }
+
+                    self.opponentImageView.image = image
                 } else {
                     println(error)
                 }
@@ -317,5 +328,25 @@ class CustomCellNib: UIView {
         }
     }
     
-    
+    // Filter Helper
+    func getFilteredImage(image: UIImage, isWinner: Bool) -> UIImage {
+        var ciContext = BetMoGetImage.sharedInstance.getSharedCIContext()
+        // we create a CIImage, think of a CIImage as image data for processing, nothing is displayed or can be displayed at this point
+        let coreImage = CIImage(image: image)
+        // we pick the filter we want
+        let filter = CIFilter(name: "CIFalseColor")
+        // we pass our image as input
+        filter.setValue(coreImage, forKey: kCIInputImageKey)
+        if isWinner == true {
+            filter.setValue(CIColor(color: UIColor(red: 0, green: 1.0, blue: 0, alpha: 0.2)), forKey: "inputColor0")
+        } else {
+            filter.setValue(CIColor(color: UIColor(red: 1.0, green: 0, blue: 0, alpha: 0.3)), forKey: "inputColor0")
+        }
+        // we retrieve the processed image
+        let filteredImageData = filter.valueForKey(kCIOutputImageKey) as CIImage
+        // returns a Quartz image from the Core Image context
+        let filteredImageRef = ciContext.createCGImage(filteredImageData, fromRect: filteredImageData.extent())
+        // this is our final UIImage ready to be displayed
+        return UIImage(CGImage: filteredImageRef);
+    }
 }

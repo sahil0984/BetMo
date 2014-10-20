@@ -332,5 +332,17 @@ class Bet : PFObject, PFSubclassing {
         }
         return false
     }
-    
+    func isOpponentWinner() -> Bool {
+        var opponent = getOppenent()
+        var winner = getWinner()
+
+        return (opponent != nil && winner != nil && (opponent?.objectId == winner?.objectId))
+    }
+
+    func isOwnerWinner() -> Bool {
+        var owner = getOwner()
+        var winner = getWinner()
+        
+        return (winner != nil && (owner.objectId == winner?.objectId))
+    }
 }
