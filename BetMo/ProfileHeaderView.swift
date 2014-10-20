@@ -13,6 +13,8 @@ class ProfileHeaderView: UIView {
     @IBOutlet var headerView: UIView!
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var proflieImageView: UIImageView!
+    @IBOutlet weak var winsLabel: UILabel!
+    @IBOutlet weak var lossesLabel: UILabel!
 
     //View Init logic:
     //-------------------
@@ -41,13 +43,15 @@ class ProfileHeaderView: UIView {
                 println(error)
             }
         })
-        BetMoClient.sharedInstance.getTotalLossesForUserV2((PFUser.currentUser() as User), completion: { (lossCount, error) -> () in
-            println(lossCount)
+
+        BetMoClient.sharedInstance.getTotalLossesForUser((PFUser.currentUser() as User), completion: { (lossCount, error) -> () in
+            self.lossesLabel.text = "\(lossCount!) Losses"
         })
-        BetMoClient.sharedInstance.getTotalWinsForUserV2((PFUser.currentUser() as User), completion: { (winCount, error) -> () in
-            println(winCount)
+        BetMoClient.sharedInstance.getTotalWinsForUser((PFUser.currentUser() as User), completion: { (winCount, error) -> () in
+            self.winsLabel.text = "\(winCount!) Wins"
         })
     }
+
     func setupCardView(cardView: UIView) {
         headerView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
         headerView.autoresizingMask = .FlexibleWidth | .FlexibleHeight

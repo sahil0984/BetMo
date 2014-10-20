@@ -109,47 +109,8 @@ class BetMoClient {
             }
         }
     }
-
-//    func getTotalWinsForUser(user: User, completion: (winCount: Int?, error: NSError?) -> ()) {
-//        var betsQuery = PFQuery(className: "Bet")
-//        betsQuery.whereKey("winner", equalTo: user)
-//        betsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-//            if error == nil {
-//                println(objects.count)
-//                completion(winCount: objects.count, error: nil)
-//            } else {
-//                completion(winCount: nil, error: error)
-//            }
-//        }
-//    }
-//
-//    func getTotalLossesForUser(user: User, completion: (lossCount: Int?, error: NSError?) -> ()) {
-//        // Create query for all bets where the user is an owner and a winner has been decided
-//        var betsWithOwner = PFQuery(className: "Bet")
-//        betsWithOwner.whereKey("owner", equalTo: user)
-//        betsWithOwner.whereKeyExists("winner")
-//        // Create query for all bets where the user is an opponent and a winner has been decided
-//        var betsWithOpponent = PFQuery(className: "Bet")
-//        betsWithOpponent.whereKey("opponent", equalTo: user)
-//        betsWithOpponent.whereKeyExists("winner")
-//
-//        var winQuery = PFQuery(className: "Bet")
-//        winQuery.whereKey("winner", equalTo: user)
-//        
-//        var lossQuery = PFQuery.orQueryWithSubqueries([betsWithOwner, betsWithOpponent])
-//        lossQuery.whereKey("winner", doesNotMatchQuery: winQuery)
-//
-//        lossQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-//            if error == nil {
-//                // hardcoded count since my query is wrong
-//                completion(lossCount: 6, error: nil)
-//            } else {
-//                completion(lossCount: nil, error: error)
-//            }
-//        }
-//    }
     
-    func getTotalWinsForUserV2(user: User, completion: (winCount: Int?, error: NSError?) -> ()) {
+    func getTotalWinsForUser(user: User, completion: (winCount: Int?, error: NSError?) -> ()) {
         
         var ownerBetsQuery = PFQuery(className: "Bet")
         ownerBetsQuery.whereKey("owner", equalTo: user)
@@ -172,7 +133,7 @@ class BetMoClient {
         }
     }
     
-    func getTotalLossesForUserV2(user: User, completion: (lossCount: Int?, error: NSError?) -> ()) {
+    func getTotalLossesForUser(user: User, completion: (lossCount: Int?, error: NSError?) -> ()) {
         
         var ownerBetsQuery = PFQuery(className: "Bet")
         ownerBetsQuery.whereKey("owner", equalTo: user)
