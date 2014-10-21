@@ -10,6 +10,7 @@ import UIKit
 
 class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var profileHeaderView: ProfileHeaderView!
     @IBOutlet weak var profileHeaderHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileHeaderTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var betsFeedTableView: UITableView!
@@ -68,6 +69,7 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
             var offsetY = scrollView.contentOffset.y
             var isBottomBounce = (offsetY >= (self.betsFeedTableView.contentSize.height - self.betsFeedTableView.bounds.size.height))
 
+            var scale = 1 + (-1 * offsetY/150)
             if offsetY > 0 && offsetY < 111 && isBottomBounce == false {
                 profileHeaderTopConstraint.constant = -1*scrollView.contentOffset.y
             } else if offsetY < 111 && profileHeaderTopConstraint.constant != 0 {
@@ -75,6 +77,9 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
                 profileHeaderTopConstraint.constant = 0
             } else if offsetY > 110 && profileHeaderTopConstraint.constant != -110 {
                 profileHeaderTopConstraint.constant = -110
+            } else if offsetY <= 0 {
+                // Zoom header image!
+                profileHeaderView.bannerImageView.transform = CGAffineTransformMakeScale(scale, scale)
             }
         }
     }

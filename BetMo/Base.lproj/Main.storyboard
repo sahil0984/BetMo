@@ -199,6 +199,7 @@
                         <outlet property="betsFeedTableView" destination="WuD-4N-h45" id="KPr-io-xCE"/>
                         <outlet property="profileHeaderHeightConstraint" destination="2Es-0e-Wre" id="MQD-8c-xDl"/>
                         <outlet property="profileHeaderTopConstraint" destination="3pe-w2-cJr" id="1sZ-iK-uM7"/>
+                        <outlet property="profileHeaderView" destination="li2-xm-XGV" id="ZLx-lP-bhF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9J8-TX-rC7" userLabel="First Responder" sceneMemberID="firstResponder"/>
