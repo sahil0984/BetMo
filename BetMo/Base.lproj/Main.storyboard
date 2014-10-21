@@ -751,7 +751,7 @@
                         <outlet property="viewContainer" destination="DZi-6e-3AP" id="gdG-u4-FJa"/>
                         <outlet property="viewContainerTopConstraint" destination="k4V-Ke-HAs" id="onB-76-tAf"/>
                         <outlet property="viewContainerTrailingConstraint" destination="ezr-wG-dX3" id="NvS-hp-aWy"/>
-                        <segue destination="CAV-wp-tGh" kind="presentation" identifier="NewBet" id="MId-xh-RaM"/>
+                        <segue destination="rzM-5v-Qej" kind="show" identifier="NewBet" id="Tlv-RE-fL9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kxd-aj-O4U" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -874,7 +874,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Bet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tt5-Ga-axM">
-                                <rect key="frame" x="267" y="34.5" width="66" height="20.5"/>
+                                <rect key="frame" x="267" y="34" width="66" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -895,16 +895,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1mU-0S-lfj">
-                                <rect key="frame" x="20" y="241" width="560" height="140"/>
+                                <rect key="frame" x="20" y="211" width="560" height="112"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$500" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQZ-TR-Hd0">
-                                        <rect key="frame" x="213.5" y="8" width="133.5" height="82"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$250" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQZ-TR-Hd0">
+                                        <rect key="frame" x="213" y="0.0" width="133.5" height="82"/>
                                         <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="60"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="amu-tC-cGm">
-                                        <rect key="frame" x="18" y="100" width="524" height="31"/>
+                                        <rect key="frame" x="18" y="82" width="524" height="31"/>
                                         <connections>
                                             <action selector="onAmountSlider:" destination="rzM-5v-Qej" eventType="valueChanged" id="rdl-0n-HIb"/>
                                         </connections>
@@ -912,11 +912,11 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.83565127610000001" green="0.89006020119999996" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="amu-tC-cGm" secondAttribute="bottom" constant="10" id="7Dn-ss-8SC"/>
+                                    <constraint firstAttribute="bottom" secondItem="amu-tC-cGm" secondAttribute="bottom" id="7Dn-ss-8SC"/>
                                     <constraint firstAttribute="trailing" secondItem="amu-tC-cGm" secondAttribute="trailing" constant="20" id="9B6-Jk-YWO"/>
                                     <constraint firstItem="amu-tC-cGm" firstAttribute="leading" secondItem="1mU-0S-lfj" secondAttribute="leading" constant="20" id="OPa-NM-1GB"/>
-                                    <constraint firstItem="qQZ-TR-Hd0" firstAttribute="top" secondItem="1mU-0S-lfj" secondAttribute="top" constant="8" id="jJu-3s-put"/>
-                                    <constraint firstItem="amu-tC-cGm" firstAttribute="top" secondItem="qQZ-TR-Hd0" secondAttribute="bottom" constant="10" id="mEB-56-lRb"/>
+                                    <constraint firstItem="qQZ-TR-Hd0" firstAttribute="top" secondItem="1mU-0S-lfj" secondAttribute="top" id="jJu-3s-put"/>
+                                    <constraint firstItem="amu-tC-cGm" firstAttribute="top" secondItem="qQZ-TR-Hd0" secondAttribute="bottom" id="mEB-56-lRb"/>
                                     <constraint firstAttribute="centerX" secondItem="qQZ-TR-Hd0" secondAttribute="centerX" id="rmb-zp-o8l"/>
                                 </constraints>
                             </view>
@@ -928,10 +928,10 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Describe your bet..." translatesAutoresizingMaskIntoConstraints="NO" id="Cbc-5Y-iFq">
-                                <rect key="frame" x="20" y="81" width="560" height="150"/>
+                                <rect key="frame" x="20" y="81" width="560" height="120"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="S0d-Cd-luZ"/>
+                                    <constraint firstAttribute="height" constant="120" id="S0d-Cd-luZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

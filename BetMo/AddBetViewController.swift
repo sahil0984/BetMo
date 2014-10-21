@@ -66,8 +66,8 @@ class AddBetViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func onAmountSlider(sender: UISlider) {
-        var betAmount:Int = Int(1000 * sender.value)
-        betAmountLabel.text = "$\(betAmount)"
+        var betAmount:Int = Int(100 * sender.value / 5)
+        betAmountLabel.text = "$\(betAmount * 5)"
     }
     
     
