@@ -592,11 +592,11 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="trr-WL-u0y" userLabel="new bet">
                                         <rect key="frame" x="240" y="0.0" width="120" height="50"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus-32-1" translatesAutoresizingMaskIntoConstraints="NO" id="n5Q-C8-KF4">
-                                                <rect key="frame" x="44" y="9" width="32" height="32"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus-26" translatesAutoresizingMaskIntoConstraints="NO" id="n5Q-C8-KF4">
+                                                <rect key="frame" x="47" y="12" width="26" height="26"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="32" id="B5Y-VY-rlr"/>
-                                                    <constraint firstAttribute="height" constant="32" id="WgH-HH-PUr"/>
+                                                    <constraint firstAttribute="width" constant="26" id="B5Y-VY-rlr"/>
+                                                    <constraint firstAttribute="height" constant="26" id="WgH-HH-PUr"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
@@ -1460,7 +1460,7 @@
         <image name="empty_user" width="256" height="256"/>
         <image name="home-25" width="25" height="25"/>
         <image name="new" width="32" height="32"/>
-        <image name="plus-32-1" width="32" height="32"/>
+        <image name="plus-26" width="26" height="26"/>
         <image name="user_male3-25" width="25" height="25"/>
     </resources>
 </document>
