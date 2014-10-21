@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -38,6 +39,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="371" y="161"/>
         </scene>
         <!--Feed View Controller-->
         <scene sceneID="PhE-lr-iUS">
@@ -484,14 +486,14 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWL-wL-uC5">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWL-wL-uC5">
                                 <rect key="frame" x="553" y="25" width="32" height="32"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="plus-blue">
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="CAV-wp-tGh" kind="presentation" id="SxW-o3-vPU"/>
+                                    <segue destination="rzM-5v-Qej" kind="presentation" id="iZh-kv-zn4"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3lR-Bu-95Z" userLabel="TabBar">
@@ -673,7 +675,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1116" y="136"/>
+            <point key="canvasLocation" x="1141" y="161"/>
         </scene>
         <!--Create Description View Controller-->
         <scene sceneID="xXm-q1-GuM">
@@ -757,6 +759,123 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OqD-WP-5IH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1999" y="-519"/>
+        </scene>
+        <!--Add Bet View Controller-->
+        <scene sceneID="zTO-xv-lEz">
+            <objects>
+                <viewController id="rzM-5v-Qej" customClass="AddBetViewController" customModule="BetMo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GLR-jN-p3I"/>
+                        <viewControllerLayoutGuide type="bottom" id="u4b-OY-BDG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AR1-rH-uuO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Bet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tt5-Ga-axM">
+                                <rect key="frame" x="267" y="34.5" width="66" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gK-fr-fNQ">
+                                <rect key="frame" x="553" y="30" width="37" height="30"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onDone:" destination="rzM-5v-Qej" eventType="touchUpInside" id="TTM-gt-cuK"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="04p-6j-1HD">
+                                <rect key="frame" x="26" y="30" width="29" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1mU-0S-lfj">
+                                <rect key="frame" x="20" y="241" width="560" height="140"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$500" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQZ-TR-Hd0">
+                                        <rect key="frame" x="213.5" y="8" width="133.5" height="82"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="60"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="amu-tC-cGm">
+                                        <rect key="frame" x="18" y="100" width="524" height="31"/>
+                                        <connections>
+                                            <action selector="onAmountSlider:" destination="rzM-5v-Qej" eventType="valueChanged" id="rdl-0n-HIb"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                                <color key="backgroundColor" red="0.83565127610000001" green="0.89006020119999996" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="amu-tC-cGm" secondAttribute="bottom" constant="10" id="7Dn-ss-8SC"/>
+                                    <constraint firstAttribute="trailing" secondItem="amu-tC-cGm" secondAttribute="trailing" constant="20" id="9B6-Jk-YWO"/>
+                                    <constraint firstItem="amu-tC-cGm" firstAttribute="leading" secondItem="1mU-0S-lfj" secondAttribute="leading" constant="20" id="OPa-NM-1GB"/>
+                                    <constraint firstItem="qQZ-TR-Hd0" firstAttribute="top" secondItem="1mU-0S-lfj" secondAttribute="top" constant="8" id="jJu-3s-put"/>
+                                    <constraint firstItem="amu-tC-cGm" firstAttribute="top" secondItem="qQZ-TR-Hd0" secondAttribute="bottom" constant="10" id="mEB-56-lRb"/>
+                                    <constraint firstAttribute="centerX" secondItem="qQZ-TR-Hd0" secondAttribute="centerX" id="rmb-zp-o8l"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sa4-Ut-6To">
+                                <rect key="frame" x="10" y="70" width="580" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="JeG-9a-Qg4"/>
+                                </constraints>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Describe your bet..." translatesAutoresizingMaskIntoConstraints="NO" id="Cbc-5Y-iFq">
+                                <rect key="frame" x="20" y="81" width="560" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="S0d-Cd-luZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="04p-6j-1HD" firstAttribute="leading" secondItem="AR1-rH-uuO" secondAttribute="leadingMargin" constant="10" id="3zQ-Vu-SDr"/>
+                            <constraint firstAttribute="trailing" secondItem="Cbc-5Y-iFq" secondAttribute="trailing" constant="20" id="5bb-b7-bXW"/>
+                            <constraint firstItem="tt5-Ga-axM" firstAttribute="centerY" secondItem="04p-6j-1HD" secondAttribute="centerY" id="6LX-Jt-XeI"/>
+                            <constraint firstItem="sa4-Ut-6To" firstAttribute="top" secondItem="6gK-fr-fNQ" secondAttribute="bottom" constant="10" id="9xN-lB-ObP"/>
+                            <constraint firstAttribute="trailing" secondItem="sa4-Ut-6To" secondAttribute="trailing" constant="10" id="Bk3-NE-26z"/>
+                            <constraint firstItem="tt5-Ga-axM" firstAttribute="centerY" secondItem="6gK-fr-fNQ" secondAttribute="centerY" id="IeL-kG-Tan"/>
+                            <constraint firstAttribute="trailing" secondItem="6gK-fr-fNQ" secondAttribute="trailing" constant="10" id="L86-c7-9AG"/>
+                            <constraint firstAttribute="trailing" secondItem="1mU-0S-lfj" secondAttribute="trailing" constant="20" id="Nrp-Ca-O1o"/>
+                            <constraint firstItem="Cbc-5Y-iFq" firstAttribute="top" secondItem="sa4-Ut-6To" secondAttribute="bottom" constant="10" id="TM9-Qg-aZO"/>
+                            <constraint firstItem="Cbc-5Y-iFq" firstAttribute="leading" secondItem="AR1-rH-uuO" secondAttribute="leading" constant="20" id="TVF-Ib-ke2"/>
+                            <constraint firstItem="04p-6j-1HD" firstAttribute="top" secondItem="GLR-jN-p3I" secondAttribute="bottom" constant="10" id="ToQ-j0-jcP"/>
+                            <constraint firstItem="1mU-0S-lfj" firstAttribute="top" secondItem="Cbc-5Y-iFq" secondAttribute="bottom" constant="10" id="Tu2-uj-WCN"/>
+                            <constraint firstItem="sa4-Ut-6To" firstAttribute="leading" secondItem="AR1-rH-uuO" secondAttribute="leading" constant="10" id="UDl-IH-0hr"/>
+                            <constraint firstItem="1mU-0S-lfj" firstAttribute="leading" secondItem="AR1-rH-uuO" secondAttribute="leading" constant="20" id="fLR-yR-6yf"/>
+                            <constraint firstItem="6gK-fr-fNQ" firstAttribute="top" secondItem="GLR-jN-p3I" secondAttribute="bottom" constant="10" id="iNQ-qT-ohp"/>
+                            <constraint firstAttribute="centerX" secondItem="tt5-Ga-axM" secondAttribute="centerX" id="tIL-AR-Ed8"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="wW3-qF-VtW" appends="YES" id="qq4-u5-jVV"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="betAmountLabel" destination="qQZ-TR-Hd0" id="6dK-f0-B0d"/>
+                        <outlet property="betAmountSlider" destination="amu-tC-cGm" id="xOH-kq-2Ne"/>
+                        <outlet property="betAmountView" destination="1mU-0S-lfj" id="PEh-Eq-kaV"/>
+                        <outlet property="betDescView" destination="Cbc-5Y-iFq" id="obz-pF-VS2"/>
+                        <outlet property="descCharCountLabel" destination="04p-6j-1HD" id="tC5-Ym-zxm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fDw-22-fKg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="wW3-qF-VtW">
+                    <connections>
+                        <action selector="onTapOutside:" destination="rzM-5v-Qej" id="p5B-y9-oCs"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1999" y="161"/>
         </scene>
         <!--Create Amount View Controller-->
         <scene sceneID="1yg-BO-DyY">
@@ -992,7 +1111,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2002" y="136"/>
+            <point key="canvasLocation" x="3412" y="191"/>
         </scene>
         <!--Friends List View Controller-->
         <scene sceneID="FMd-zo-CXc">

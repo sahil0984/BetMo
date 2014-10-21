@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, CreateDescriptionViewControllerDelegate {
+class HomeViewController: UIViewController {
     
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var viewContainerTopConstraint: NSLayoutConstraint!
@@ -115,10 +115,10 @@ class HomeViewController: UIViewController, CreateDescriptionViewControllerDeleg
         NSNotificationCenter.defaultCenter().postNotificationName("userDidLogoutNotification", object: nil)
     }
 
-    func createdBet(betCreated: Bet) {
-        self.newBet = betCreated
-        BetMoClient.sharedInstance.allBets.insert(betCreated, atIndex: 0)
-    }
+//    func createdBet(betCreated: Bet) {
+//        self.newBet = betCreated
+//        BetMoClient.sharedInstance.allBets.insert(betCreated, atIndex: 0)
+//    }
     
     //TODO: Need to figure out a better place to do this in order to slim down this controller
     func loadUserData() {
@@ -151,10 +151,10 @@ class HomeViewController: UIViewController, CreateDescriptionViewControllerDeleg
         installation.saveInBackground()
     }
     
-    func addedDescToBet(addedDescToBet: Bet) {
-        self.newBet = addedDescToBet
-        BetMoClient.sharedInstance.allBets.insert(addedDescToBet, atIndex: 0)
-    }
+//    func addedDescToBet(addedDescToBet: Bet) {
+//        self.newBet = addedDescToBet
+//        BetMoClient.sharedInstance.allBets.insert(addedDescToBet, atIndex: 0)
+//    }
     
     // MARK: - Navigation
 
@@ -163,9 +163,9 @@ class HomeViewController: UIViewController, CreateDescriptionViewControllerDeleg
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        var createDescriptionViewController = segue.destinationViewController as CreateDescriptionViewController
+        //var createDescriptionViewController = segue.destinationViewController as CreateDescriptionViewController
         
-        createDescriptionViewController.delegate = self
+        //createDescriptionViewController.delegate = self
     }
 
 }
