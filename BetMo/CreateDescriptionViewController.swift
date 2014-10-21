@@ -33,7 +33,6 @@ class CreateDescriptionViewController: UIViewController, CreateAmountViewControl
     
     func addedAmountToBet(addedAmountToBet: Bet) {
         newBet = addedAmountToBet
-        newBet.setDescription(betDescriptionTextView.text)
         
         self.dismissViewControllerAnimated(false) { () -> Void in
             println("")
@@ -41,6 +40,9 @@ class CreateDescriptionViewController: UIViewController, CreateAmountViewControl
         }
     }
     
+    @IBAction func onCancel(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 
     // MARK: - Navigation
 
@@ -50,6 +52,9 @@ class CreateDescriptionViewController: UIViewController, CreateAmountViewControl
         // Pass the selected object to the new view controller.
         
         var createAmountViewController = segue.destinationViewController as CreateAmountViewController
+                
+        newBet.setDescription(betDescriptionTextView.text)
+        createAmountViewController.newBet = newBet
         
         createAmountViewController.delegate = self
     }

@@ -35,7 +35,6 @@ class CreateAmountViewController: UIViewController, FriendsListViewControllerDel
         var currentUser = PFUser.currentUser() as User
         newBet.setOwner(currentUser)
         newBet.setOpponent(selectedFriend)
-        newBet.setAmount(betAmountTextField.text)
         newBet.setIsAccepted(false)
         
         self.dismissViewControllerAnimated(false) { () -> Void in
@@ -45,6 +44,9 @@ class CreateAmountViewController: UIViewController, FriendsListViewControllerDel
         
     }
     
+    @IBAction func onBack(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     // MARK: - Navigation
 
@@ -54,6 +56,9 @@ class CreateAmountViewController: UIViewController, FriendsListViewControllerDel
         // Pass the selected object to the new view controller.
         
         var friendsListViewController = segue.destinationViewController as FriendsListViewController
+        
+        newBet.setAmount(betAmountTextField.text)
+        friendsListViewController.newBet = newBet
         
         friendsListViewController.delegate = self
     }

@@ -22,6 +22,7 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
     
     var fbAllFriendIds: [String] = []
 
+    var newBet = Bet()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,24 +103,35 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
             cell.friend = friendsList[indexPath.row]
         return cell
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        
-        self.dismissViewControllerAnimated(false) { () -> Void in
-            println("")
-            self.delegate?.friendSelected(self.friendsList[indexPath.row])
-        }
-    }
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+//        
+//        self.dismissViewControllerAnimated(false) { () -> Void in
+//            println("")
+//            self.delegate?.friendSelected(self.friendsList[indexPath.row])
+//        }
+//    }
     
+    
+    @IBAction func onBack(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        var confirmNewBetViewController = segue.destinationViewController as ConfirmNewBetViewController
+        
+        newBet.setOpponent(friendsList[(friendsListTableView.indexPathForSelectedRow()?.row)!])
+        confirmNewBetViewController.newBet = newBet
+        
+        //confirmNewBetViewController.delegate = self
     }
-    */
+
 
 }
