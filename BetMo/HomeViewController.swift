@@ -81,6 +81,10 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func onNewBet(sender: UITapGestureRecognizer) {
+        performSegueWithIdentifier("NewBet", sender: self)
+    }
+
     @IBAction func onRequestTab(sender: UITapGestureRecognizer) {
         if activeViewController != allViewControllers[0] {
             resetTabBarSelection()
