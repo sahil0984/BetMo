@@ -201,13 +201,14 @@ class CustomCellNib: UIView {
         cardView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
         cardView.center = CGPointMake(frame.width/2, frame.height/2)
         // Had to comment out rounded corners so that shadow works
-//        cardView.layer.cornerRadius = 20
-//        cardView.layer.masksToBounds = true
+        cardView.layer.cornerRadius = 20
+        cardView.layer.masksToBounds = true
 
         layer.shadowColor = UIColor.blackColor().CGColor
         layer.shadowOffset = CGSize(width: 1, height: 1)
         layer.shadowOpacity = 0.4
         layer.shadowRadius = 2
+        layer.cornerRadius = 20
     }
     
     
