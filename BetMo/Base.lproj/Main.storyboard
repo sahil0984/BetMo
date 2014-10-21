@@ -592,7 +592,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="trr-WL-u0y" userLabel="new bet">
                                         <rect key="frame" x="240" y="0.0" width="120" height="50"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus-26" translatesAutoresizingMaskIntoConstraints="NO" id="n5Q-C8-KF4">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="action-26" translatesAutoresizingMaskIntoConstraints="NO" id="n5Q-C8-KF4">
                                                 <rect key="frame" x="47" y="12" width="26" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="26" id="B5Y-VY-rlr"/>
@@ -1455,12 +1455,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="action-26" width="26" height="26"/>
         <image name="bell_service-25" width="25" height="25"/>
         <image name="discover" width="25" height="25"/>
         <image name="empty_user" width="256" height="256"/>
         <image name="home-25" width="25" height="25"/>
         <image name="new" width="32" height="32"/>
-        <image name="plus-26" width="26" height="26"/>
         <image name="user_male3-25" width="25" height="25"/>
     </resources>
 </document>
