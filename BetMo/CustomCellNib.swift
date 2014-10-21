@@ -28,7 +28,11 @@ class CustomCellNib: UIView {
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var subscribeButton: UIButton!
     @IBOutlet weak var subscriberCountLabel: UILabel!
-    
+    @IBOutlet weak var firstArrowImageView: UIImageView!
+    @IBOutlet weak var secondArrowImageView: UIImageView!
+
+    var arrowOriginalY: CGFloat!
+
     var bet: Bet = Bet() {
         willSet(currBet) {
             fillMainCard(currBet)
@@ -191,11 +195,13 @@ class CustomCellNib: UIView {
         setupCardView(mainContentView)
         setupCardView(acceptContentView)
         setupCardView(winnerContentView)
+        // For the winner card we need to save the original Y location of the arrow (for animation)
+        arrowOriginalY = firstArrowImageView.frame.origin.y
         
         addSubview(acceptContentView)
         addSubview(mainContentView)
         addSubview(winnerContentView)
-        
+
         mainContentView.hidden = false
         acceptContentView.hidden = true
         winnerContentView.hidden = true
@@ -300,6 +306,9 @@ class CustomCellNib: UIView {
     func swapViewWithWinnerView() {
         mainContentView.hidden = true
         acceptContentView.hidden = true
+
+        // Animate the arrows to pick the winner before showing thes screen
+        animateArrows()
         winnerContentView.hidden = false
     }
     
@@ -379,5 +388,16 @@ class CustomCellNib: UIView {
                 opponentEmoji.hidden = false
             }
         }
+    }
+
+    func animateArrows() {
+        // The animation may have ended when the view disappeared but the state of the arrow might be the "animated" state -- reset arrow y positions back to their original
+        firstArrowImageView.frame.origin.y = arrowOriginalY
+        secondArrowImageView.frame.origin.y = arrowOriginalY
+
+        UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.Repeat | UIViewAnimationOptions.Autoreverse, animations: { () -> Void in
+            self.firstArrowImageView.frame.origin.y -= 10
+            self.secondArrowImageView.frame.origin.y -= 10
+        }, completion: nil)
     }
 }
