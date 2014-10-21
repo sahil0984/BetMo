@@ -31,9 +31,9 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         betsFeedTableView.dataSource = self
         betsFeedTableView.delegate = self
         betsFeedTableView.rowHeight = UITableViewAutomaticDimension
-        profileHeaderHeightConstraint.constant = 0
+        profileHeaderTopConstraint.constant = -192
         if feedViewType == profileTab {
-            profileHeaderHeightConstraint.constant = 192
+            profileHeaderTopConstraint.constant = 0
             self.bets = BetMoClient.sharedInstance.profileBets
             betsFeedTableView.reloadData()
         } else if feedViewType == requestTab {

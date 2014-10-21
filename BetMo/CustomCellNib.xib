@@ -11,8 +11,10 @@
                 <outlet property="betAmount" destination="iXb-gi-FWE" id="xGi-8B-QzP"/>
                 <outlet property="betDescription" destination="c6k-0C-CNq" id="Hcw-9f-1ua"/>
                 <outlet property="mainContentView" destination="GFN-jk-cJ9" id="W4w-qX-FL5"/>
+                <outlet property="opponentEmoji" destination="IxM-ll-Ros" id="Qcq-ek-dDd"/>
                 <outlet property="opponentImageView" destination="mqN-tO-rOq" id="UUR-Yj-9wl"/>
                 <outlet property="opponentNameLabel" destination="Ccc-uF-SKi" id="iYl-OK-gyN"/>
+                <outlet property="ownerEmoji" destination="Mc2-KE-nxN" id="s12-du-pkh"/>
                 <outlet property="ownerImageView" destination="2fW-x2-csz" id="29B-Kc-IQr"/>
                 <outlet property="ownerNameLabel" destination="0jk-Xb-qVj" id="Ohc-q0-SIT"/>
                 <outlet property="subscribeButton" destination="VTB-Pn-lno" id="OSE-3J-5kd"/>
@@ -104,14 +106,24 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cool-25" translatesAutoresizingMaskIntoConstraints="NO" id="Mc2-KE-nxN">
+                    <rect key="frame" x="10" y="133" width="25" height="25"/>
+                </imageView>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sad-25" translatesAutoresizingMaskIntoConstraints="NO" id="IxM-ll-Ros">
+                    <rect key="frame" x="215" y="133" width="25" height="25"/>
+                </imageView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="qjU-OI-9g1" secondAttribute="centerX" id="0EF-mV-Pkn"/>
                 <constraint firstAttribute="trailing" secondItem="Ccc-uF-SKi" secondAttribute="trailing" constant="5" id="14C-q8-Yw8"/>
+                <constraint firstAttribute="trailing" secondItem="IxM-ll-Ros" secondAttribute="trailing" constant="10" id="1QK-qg-u9h"/>
                 <constraint firstItem="0jk-Xb-qVj" firstAttribute="top" secondItem="GFN-jk-cJ9" secondAttribute="top" constant="100" id="CJH-vs-Yxg"/>
                 <constraint firstItem="Ccc-uF-SKi" firstAttribute="top" secondItem="GFN-jk-cJ9" secondAttribute="top" constant="100" id="Daz-HY-IFx"/>
                 <constraint firstItem="iXb-gi-FWE" firstAttribute="top" secondItem="mqN-tO-rOq" secondAttribute="bottom" constant="10" id="Df5-Ic-VSl"/>
                 <constraint firstAttribute="trailing" secondItem="mqN-tO-rOq" secondAttribute="trailing" id="EnP-HU-IC5"/>
+                <constraint firstItem="Mc2-KE-nxN" firstAttribute="leading" secondItem="GFN-jk-cJ9" secondAttribute="leading" constant="10" id="LVs-ht-HCp"/>
+                <constraint firstItem="Mc2-KE-nxN" firstAttribute="top" secondItem="2fW-x2-csz" secondAttribute="bottom" constant="8" id="OPC-aD-02O"/>
+                <constraint firstItem="IxM-ll-Ros" firstAttribute="top" secondItem="mqN-tO-rOq" secondAttribute="bottom" constant="8" id="Utp-Lp-j4U"/>
                 <constraint firstItem="mqN-tO-rOq" firstAttribute="width" secondItem="2fW-x2-csz" secondAttribute="width" id="Vt5-xM-uRa"/>
                 <constraint firstItem="mqN-tO-rOq" firstAttribute="centerY" secondItem="qjU-OI-9g1" secondAttribute="centerY" id="Wn5-8W-vPg"/>
                 <constraint firstAttribute="centerX" secondItem="zcy-gZ-red" secondAttribute="centerX" id="ZZT-Uy-IwL"/>
@@ -300,6 +312,8 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="cool-25" width="25" height="25"/>
+        <image name="sad-25" width="25" height="25"/>
         <image name="subscribeOff" width="256" height="256"/>
     </resources>
 </document>

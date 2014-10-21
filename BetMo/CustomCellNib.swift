@@ -13,6 +13,8 @@ class CustomCellNib: UIView {
     @IBOutlet var acceptContentView: UIView!
     @IBOutlet var winnerContentView: UIView!
     
+    @IBOutlet weak var ownerEmoji: UIImageView!
+    @IBOutlet weak var opponentEmoji: UIImageView!
     
     @IBOutlet weak var ownerNameLabel: UILabel!
     @IBOutlet weak var opponentNameLabel: UILabel!
@@ -40,6 +42,9 @@ class CustomCellNib: UIView {
     }
     
     func fillMainCard(currBet: Bet) {
+        // sets up bet emojis
+        setEmojisIfNeeded(currBet)
+
         ownerNameLabel.text = currBet.getOwner().getName()
         BetMoGetImage.sharedInstance.getUserImage(currBet.getOwner().getProfileImageUrl(), completion: { (userImage, error) -> () in
             if error == nil {
@@ -201,13 +206,14 @@ class CustomCellNib: UIView {
         cardView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
         cardView.center = CGPointMake(frame.width/2, frame.height/2)
         // Had to comment out rounded corners so that shadow works
-//        cardView.layer.cornerRadius = 20
-//        cardView.layer.masksToBounds = true
+        cardView.layer.cornerRadius = 20
+        cardView.layer.masksToBounds = true
 
         layer.shadowColor = UIColor.blackColor().CGColor
         layer.shadowOffset = CGSize(width: 1, height: 1)
         layer.shadowOpacity = 0.4
         layer.shadowRadius = 2
+        layer.cornerRadius = 20
     }
     
     
@@ -354,5 +360,24 @@ class CustomCellNib: UIView {
         let filteredImageRef = ciContext.createCGImage(filteredImageData, fromRect: filteredImageData.extent())
         // this is our final UIImage ready to be displayed
         return UIImage(CGImage: filteredImageRef);
+    }
+
+    func setEmojisIfNeeded(bet: Bet) {
+        if let winner = bet.getWinner() {
+            let owner = bet.getOwner()
+            let opponent = bet.getOppenent()!
+
+            if winner.objectId == bet.getOwner().objectId {
+                ownerEmoji.image = UIImage(named: "cool-25")
+                opponentEmoji.image = UIImage(named: "sad-25")
+                ownerEmoji.hidden = false
+                opponentEmoji.hidden = false
+            } else {
+                opponentEmoji.image = UIImage(named: "cool-25")
+                ownerEmoji.image = UIImage(named: "sad-25")
+                ownerEmoji.hidden = false
+                opponentEmoji.hidden = false
+            }
+        }
     }
 }
