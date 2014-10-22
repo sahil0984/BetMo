@@ -393,7 +393,7 @@ class CustomCellNib: UIView {
         firstArrowImageView.frame.origin.y = arrowOriginalY
         secondArrowImageView.frame.origin.y = arrowOriginalY
 
-        UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.Repeat | UIViewAnimationOptions.Autoreverse, animations: { () -> Void in
+        UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.Repeat | UIViewAnimationOptions.Autoreverse, animations: { () -> Void in
             self.firstArrowImageView.frame.origin.y -= 10
             self.secondArrowImageView.frame.origin.y -= 10
         }, completion: nil)
