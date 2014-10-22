@@ -240,12 +240,8 @@
 				9FACFBA519E61CA1007E865C /* HomeViewController.swift */,
 				9FACFB4F19E60C02007E865C /* LoginViewController.swift */,
 				9F24867119F248E9006C51C8 /* BetsFeedViewController.swift */,
-				9F2FD28E19E76C5F00400E46 /* CreateBetViewController.swift */,
 				9FB9427F19E7D73300D72264 /* FriendsListViewController.swift */,
 				85FF8D2919EB4BC900396F53 /* PaymentViewController.swift */,
-				9F24868019F4FFE0006C51C8 /* CreateDescriptionViewController.swift */,
-				9F24868219F500E1006C51C8 /* CreateAmountViewController.swift */,
-				9F54C00119F5F13D00AFA29F /* ConfirmNewBetViewController.swift */,
 				9F54C03119F64E6200AFA29F /* AddBetViewController.swift */,
 			);
 			name = ViewControllers;
@@ -272,6 +268,10 @@
 		9FFCCD5C19EF622D00AC999F /* Unused files */ = {
 			isa = PBXGroup;
 			children = (
+				9F2FD28E19E76C5F00400E46 /* CreateBetViewController.swift */,
+				9F24868019F4FFE0006C51C8 /* CreateDescriptionViewController.swift */,
+				9F24868219F500E1006C51C8 /* CreateAmountViewController.swift */,
+				9F54C00119F5F13D00AFA29F /* ConfirmNewBetViewController.swift */,
 				853F392419E901A500915A5B /* FeedViewController.swift */,
 				853F392619E90BDE00915A5B /* BetCell.swift */,
 				9FD517D519E9FF970056EE54 /* BetDetailViewController.swift */,

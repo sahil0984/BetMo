@@ -21,6 +21,8 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
     var friendsList: [User] = []
     
     var fbAllFriendIds: [String] = []
+    
+    var openBetFriend = User()
 
     var newBet = Bet()
     
@@ -32,6 +34,8 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
         friendsListTableView.delegate = self
         friendsListTableView.rowHeight = UITableViewAutomaticDimension
         
+        openBetFriend.setFirstName("Open Bet")
+        openBetFriend.setLastName("")
         
         // Issue a Facebook Graph API request to get your user's friend list
         FBRequestConnection.startForMyFriendsWithCompletionHandler({ (connection, result, error: NSError!) -> Void in
@@ -46,6 +50,8 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
                     //var tt = friendObject["id"] as NSString
                     //println("fid = \(tt)")
                 }
+                
+                self.updateFriendsList()
                 
                 println("\(friendObjects.count)")
             } else {
@@ -63,11 +69,7 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
     
     @IBAction func onEditingChanged(sender: AnyObject) {
         println("Edit changed")
-        updateFriendsList()
-    }
-    
-    @IBAction func onEditTextTouchDown(sender: AnyObject) {
-        println("Edit text touch")
+        friendsListTableView.hidden = false
         updateFriendsList()
     }
     
@@ -87,6 +89,7 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
                     println("Found: \(self.friendNameTextField.text)")
                     self.friendsList = friends
                 }
+                self.friendsList.insert(self.openBetFriend, atIndex: 0)
                 self.friendsListTableView.reloadData()
             } else {
                 println("Error finding")
@@ -100,37 +103,34 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("friendCell") as FriendTableViewCell
+        
+        if indexPath.row == 0 {
+            cell.nameLabel.text = "Open Bet"
+            cell.profileImageView.image = UIImage(named: "empty_user")
+        } else {
             cell.friend = friendsList[indexPath.row]
+        }
+        
         return cell
     }
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        tableView.deselectRowAtIndexPath(indexPath, animated: false)
-//        
-//        self.dismissViewControllerAnimated(false) { () -> Void in
-//            println("")
-//            self.delegate?.friendSelected(self.friendsList[indexPath.row])
-//        }
-//    }
+
     
-    
-    @IBAction func onBack(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        
+        friendNameTextField.text = friendsList[indexPath.row].getName()
+        friendsListTableView.hidden = true
+        //hideFriendsListTable()
+        
+        self.delegate?.friendSelected(self.friendsList[indexPath.row])
     }
-
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func hideFriendsListTable() {
+        //friendsListTableView.frame.origin.y = friendNameTextField.frame.origin.y + friendNameTextField.frame.height
+        UIView.animateWithDuration(1.0, animations: { () -> Void in
+            self.friendsListTableView.frame.origin.y = self.friendsListTableView.frame.origin.y - self.friendsListTableView.frame.height
+        })
         
-        var confirmNewBetViewController = segue.destinationViewController as ConfirmNewBetViewController
-        
-        newBet.setOpponent(friendsList[(friendsListTableView.indexPathForSelectedRow()?.row)!])
-        confirmNewBetViewController.newBet = newBet
-        
-        //confirmNewBetViewController.delegate = self
     }
 
 
