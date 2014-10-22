@@ -28,7 +28,17 @@ class CustomCellNib: UIView {
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var subscribeButton: UIButton!
     @IBOutlet weak var subscriberCountLabel: UILabel!
-    
+    @IBOutlet weak var firstArrowImageView: UIImageView!
+    @IBOutlet weak var secondArrowImageView: UIImageView!
+
+    var winningColor = UIColor(red: 8/255.0, green: 158/255.0, blue: 0, alpha: 0.6)
+    var losingColor = UIColor(red: 1, green: 59/255.0, blue: 48/255.0, alpha: 0.6)
+
+    @IBOutlet weak var ownerMaskView: UIView!
+    @IBOutlet weak var opponentMaskView: UIView!
+
+    var arrowOriginalY: CGFloat!
+
     var bet: Bet = Bet() {
         willSet(currBet) {
             fillMainCard(currBet)
@@ -45,16 +55,25 @@ class CustomCellNib: UIView {
         // sets up bet emojis
         setEmojisIfNeeded(currBet)
 
+        // hide masks by default (they might have been un-hidden by the bet that previously used this cell)
+        // @TODO(samoli) this might not be necessary any longer since I added "hidden" to the storyboard
+        ownerMaskView.hidden = true
+        opponentMaskView.hidden = true
+
         ownerNameLabel.text = currBet.getOwner().getName()
         BetMoGetImage.sharedInstance.getUserImage(currBet.getOwner().getProfileImageUrl(), completion: { (userImage, error) -> () in
             if error == nil {
-                var image = userImage
-                
+                self.ownerImageView.image = userImage
+                // set mask if needed
                 if currBet.isClosedBet() {
-                    image = self.getFilteredImage(userImage!, isWinner: currBet.isOwnerWinner())
+                    if currBet.isOwnerWinner() {
+                        self.ownerMaskView.backgroundColor = self.winningColor
+                    } else {
+                        self.ownerMaskView.backgroundColor = self.losingColor
+                    }
+                    // unhide mask
+                    self.ownerMaskView.hidden = false
                 }
-
-                self.ownerImageView.image = image
             } else {
                 println(error)
             }
@@ -65,13 +84,17 @@ class CustomCellNib: UIView {
             opponentNameLabel.text = currOpponent.getName()
             BetMoGetImage.sharedInstance.getUserImage(currBet.getOppenent()?.getProfileImageUrl(), completion: { (userImage, error) -> () in
                 if error == nil {
-                    var image = userImage
-
+                    self.opponentImageView.image = userImage
+                    // set mask if needed
                     if currBet.isClosedBet() {
-                        image = self.getFilteredImage(userImage!, isWinner: currBet.isOpponentWinner())
+                        if currBet.isOpponentWinner() {
+                            self.opponentMaskView.backgroundColor = self.winningColor
+                        } else {
+                            self.opponentMaskView.backgroundColor = self.losingColor
+                        }
+                        // unhide mask
+                        self.opponentMaskView.hidden = false
                     }
-
-                    self.opponentImageView.image = image
                 } else {
                     println(error)
                 }
@@ -114,6 +137,7 @@ class CustomCellNib: UIView {
             actionButton.setTitle("Pick Winner", forState: UIControlState.Normal)
         } else if currBet.isClosedBet() && (currBet.isUserOwner() || currBet.isUserOpponent()) {
             //Closed bet - Select Winner button
+
             actionButton.setTitle("Pick Winner", forState: UIControlState.Normal)
             //actionButton.hidden = true
         } else {
@@ -191,11 +215,13 @@ class CustomCellNib: UIView {
         setupCardView(mainContentView)
         setupCardView(acceptContentView)
         setupCardView(winnerContentView)
+        // For the winner card we need to save the original Y location of the arrow (for animation)
+        arrowOriginalY = firstArrowImageView.frame.origin.y
         
         addSubview(acceptContentView)
         addSubview(mainContentView)
         addSubview(winnerContentView)
-        
+
         mainContentView.hidden = false
         acceptContentView.hidden = true
         winnerContentView.hidden = true
@@ -300,6 +326,9 @@ class CustomCellNib: UIView {
     func swapViewWithWinnerView() {
         mainContentView.hidden = true
         acceptContentView.hidden = true
+
+        // Animate the arrows to pick the winner before showing thes screen
+        animateArrows()
         winnerContentView.hidden = false
     }
     
@@ -339,28 +368,6 @@ class CustomCellNib: UIView {
             bet.lost()
         }
     }
-    
-    // Filter Helper
-    func getFilteredImage(image: UIImage, isWinner: Bool) -> UIImage {
-        var ciContext = BetMoGetImage.sharedInstance.getSharedCIContext()
-        // we create a CIImage, think of a CIImage as image data for processing, nothing is displayed or can be displayed at this point
-        let coreImage = CIImage(image: image)
-        // we pick the filter we want
-        let filter = CIFilter(name: "CIFalseColor")
-        // we pass our image as input
-        filter.setValue(coreImage, forKey: kCIInputImageKey)
-        if isWinner == true {
-            filter.setValue(CIColor(color: UIColor(red: 0, green: 1.0, blue: 0, alpha: 0.2)), forKey: "inputColor0")
-        } else {
-            filter.setValue(CIColor(color: UIColor(red: 1.0, green: 0, blue: 0, alpha: 0.3)), forKey: "inputColor0")
-        }
-        // we retrieve the processed image
-        let filteredImageData = filter.valueForKey(kCIOutputImageKey) as CIImage
-        // returns a Quartz image from the Core Image context
-        let filteredImageRef = ciContext.createCGImage(filteredImageData, fromRect: filteredImageData.extent())
-        // this is our final UIImage ready to be displayed
-        return UIImage(CGImage: filteredImageRef);
-    }
 
     func setEmojisIfNeeded(bet: Bet) {
         if let winner = bet.getWinner() {
@@ -379,5 +386,16 @@ class CustomCellNib: UIView {
                 opponentEmoji.hidden = false
             }
         }
+    }
+
+    func animateArrows() {
+        // The animation may have ended when the view disappeared but the state of the arrow might be the "animated" state -- reset arrow y positions back to their original
+        firstArrowImageView.frame.origin.y = arrowOriginalY
+        secondArrowImageView.frame.origin.y = arrowOriginalY
+
+        UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.Repeat | UIViewAnimationOptions.Autoreverse, animations: { () -> Void in
+            self.firstArrowImageView.frame.origin.y -= 10
+            self.secondArrowImageView.frame.origin.y -= 10
+        }, completion: nil)
     }
 }

@@ -80,6 +80,7 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
             } else if offsetY <= 0 {
                 // Zoom header image!
                 profileHeaderView.bannerImageView.transform = CGAffineTransformMakeScale(scale, scale)
+//                profileHeaderView.proflieImageView.layer.transform = CATransform3DRotate(profileHeaderView.proflieImageView.layer.transform, -1*offsetY, 1, 0, 0)
             }
         }
     }
