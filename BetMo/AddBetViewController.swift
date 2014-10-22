@@ -17,6 +17,7 @@ class AddBetViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var betAmountLabel: UILabel!
     @IBOutlet weak var betAmountSlider: UISlider!
     
+    @IBOutlet weak var pickOpponentView: UIView!
 
     @IBOutlet weak var descCharCountLabel: UILabel!
     
@@ -32,6 +33,8 @@ class AddBetViewController: UIViewController, UITextViewDelegate {
         
         betAmountView.hidden = true
         betAmountView.backgroundColor = UIColor.whiteColor()
+        pickOpponentView.hidden = true
+        pickOpponentView.backgroundColor = UIColor.whiteColor()
         
         self.betDescView.delegate = self
         self.betDescView.text = ""
@@ -60,6 +63,17 @@ class AddBetViewController: UIViewController, UITextViewDelegate {
             creationStep += 1
         } else if creationStep == 1 {
             
+            pickOpponentView.frame.origin.y = view.frame.height
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                self.pickOpponentView.frame.origin.y = self.betAmountView.frame.origin.y + self.betAmountView.frame.height + 10
+                }, completion: { (finished) -> Void in
+                    
+            })
+            
+            betAmountSlider.hidden = true
+            pickOpponentView.hidden = false
+            
+            creationStep += 1
         } else if creationStep == 2 {
             
         }
