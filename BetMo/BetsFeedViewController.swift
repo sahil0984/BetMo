@@ -23,7 +23,7 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
 
     var bets = [Bet]()
     var isDragging = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -69,18 +69,26 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
             var offsetY = scrollView.contentOffset.y
             var isBottomBounce = (offsetY >= (self.betsFeedTableView.contentSize.height - self.betsFeedTableView.bounds.size.height))
 
-            var scale = 1 + (-1 * offsetY/150)
             if offsetY > 0 && offsetY < 111 && isBottomBounce == false {
                 profileHeaderTopConstraint.constant = -1*scrollView.contentOffset.y
+                // Remove the blur
+                self.profileHeaderView.visualEffectView.alpha = 0
             } else if offsetY < 111 && profileHeaderTopConstraint.constant != 0 {
                 // TOP BOUNCE CASE
                 profileHeaderTopConstraint.constant = 0
+                // Remove the blur
+                self.profileHeaderView.visualEffectView.alpha = 0
             } else if offsetY > 110 && profileHeaderTopConstraint.constant != -110 {
                 profileHeaderTopConstraint.constant = -110
             } else if offsetY <= 0 {
                 // Zoom header image!
+                var scale = 1 + (-1 * offsetY/150)
                 profileHeaderView.bannerImageView.transform = CGAffineTransformMakeScale(scale, scale)
 //                profileHeaderView.proflieImageView.layer.transform = CATransform3DRotate(profileHeaderView.proflieImageView.layer.transform, -1*offsetY, 1, 0, 0)
+            }
+            // Increase the alpha for visual effect view
+            if offsetY > 110 && offsetY/150 < 1.1 {
+                self.profileHeaderView.visualEffectView.alpha = offsetY/180
             }
         }
     }

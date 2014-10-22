@@ -16,6 +16,9 @@ class ProfileHeaderView: UIView {
     @IBOutlet weak var winsLabel: UILabel!
     @IBOutlet weak var lossesLabel: UILabel!
 
+    var visualEffectView: UIVisualEffectView!
+    var visualEffectViewTopConstraint: NSLayoutConstraint!
+
     //View Init logic:
     //-------------------
     override init(frame: CGRect) {
@@ -53,6 +56,18 @@ class ProfileHeaderView: UIView {
         BetMoClient.sharedInstance.getTotalWinsForUser(currentUser, completion: { (winCount, error) -> () in
             self.winsLabel.text = "\(winCount!) Wins"
         })
+
+        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light)) as UIVisualEffectView
+        visualEffectView.frame = bannerImageView.bounds
+        visualEffectView.alpha = 0
+        bannerImageView.addSubview(visualEffectView)
+
+        visualEffectView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        visualEffectViewTopConstraint = NSLayoutConstraint(item: visualEffectView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: bannerImageView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
+        bannerImageView.addConstraint(visualEffectViewTopConstraint)
+        bannerImageView.addConstraint(NSLayoutConstraint(item: visualEffectView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: bannerImageView, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0))
+        bannerImageView.addConstraint(NSLayoutConstraint(item: visualEffectView, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: bannerImageView, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: 0))
+        bannerImageView.addConstraint(NSLayoutConstraint(item: visualEffectView, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: bannerImageView, attribute: NSLayoutAttribute.Trailing, multiplier: 1, constant: 0))
     }
 
     func setupHeaderView(cardView: UIView) {
