@@ -73,7 +73,7 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
         if creationStep == 0 { //Show amount stuff
             
             betAmountView.frame.origin.y = view.frame.height
-            UIView.animateWithDuration(1.0, animations: { () -> Void in
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
                 self.betAmountView.frame.origin.y = self.betDescView.frame.origin.y + self.betDescView.frame.height
             }, completion: { (finished) -> Void in
                 
@@ -91,7 +91,7 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
         } else if creationStep == 1 { //show pick friend stuff
             
             friendsListContainer.frame.origin.y = view.frame.height
-            UIView.animateWithDuration(1.0, animations: { () -> Void in
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
                 self.friendsListContainer.frame.origin.y = self.betAmountView.frame.origin.y + self.betAmountView.frame.height
                 }, completion: { (finished) -> Void in
                     
@@ -114,7 +114,10 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
             var newBet = Bet()
             newBet.setOwner(currentUser)
             newBet.setDescription(betDescView.text)
-            newBet.setAmount(betAmountLabel.text!)
+            
+            var amountLabel = betAmountLabel.text
+            var parsedAmount = amountLabel?.stringByReplacingOccurrencesOfString("$", withString: "")
+            newBet.setAmount(parsedAmount!)
             newBet.setIsAccepted(false)
             if let opponent = selectedOpponent {
                 newBet.setOpponent(opponent)

@@ -122,7 +122,11 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
         friendsListTableView.hidden = true
         //hideFriendsListTable()
         
-        self.delegate?.friendSelected(self.friendsList[indexPath.row])
+        if indexPath.row == 0 {
+            //dont set selected friend
+        } else {
+            self.delegate?.friendSelected(self.friendsList[indexPath.row])
+        }
     }
     
     func hideFriendsListTable() {
