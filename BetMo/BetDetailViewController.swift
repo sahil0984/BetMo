@@ -41,7 +41,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
         
         self.ownerUserNameLabel.text = currBet.getOwner().getName()
         
-        var urlRequest = NSURLRequest(URL: NSURL(string: (currBet.getOwner().getProfileImageUrl())!))
+        var urlRequest = NSURLRequest(URL: NSURL(string: (currBet.getOwner().getProfileImageUrl())!)!)
         NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
             if connectionError == nil && data != nil {
                 self.ownerUserImageView.image = UIImage(data: data!)
@@ -52,7 +52,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
         if (currBet.getOppenent()? != nil) {
             opponentUserNameLabel.text = currBet.getOppenent()?.getName()
             
-            urlRequest = NSURLRequest(URL: NSURL(string: (currBet.getOppenent()?.getProfileImageUrl())!))
+            urlRequest = NSURLRequest(URL: NSURL(string: (currBet.getOppenent()?.getProfileImageUrl())!)!)
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
                 if connectionError == nil && data != nil {
                     self.opponentUserImageView.image = UIImage(data: data!)
@@ -170,7 +170,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
             
             var currUser = PFUser.currentUser() as User
             self.opponentUserNameLabel.text = currUser.getName()
-            var urlRequest = NSURLRequest(URL: NSURL(string: (currUser.getProfileImageUrl())!))
+            var urlRequest = NSURLRequest(URL: NSURL(string: (currUser.getProfileImageUrl())!)!)
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
                 if connectionError == nil && data != nil {
                     self.opponentUserImageView.image = UIImage(data: data!)
