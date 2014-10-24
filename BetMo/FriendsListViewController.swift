@@ -10,6 +10,7 @@ import UIKit
 
 protocol FriendsListViewControllerDelegate {
     func friendSelected(selectedFriend : User) -> Void
+    func friendListEditChanged(state: Int) -> Void
 }
 
 class FriendsListViewController: UIViewController, UITextViewDelegate, UITableViewDataSource, UITableViewDelegate {
@@ -26,6 +27,8 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
 
     var newBet = Bet()
     
+    var firstTimeEdit = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,9 +36,12 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
         friendsListTableView.dataSource = self
         friendsListTableView.delegate = self
         friendsListTableView.rowHeight = UITableViewAutomaticDimension
+        friendsListTableView.tableFooterView = UIView(frame: CGRectZero)
         
         openBetFriend.setFirstName("Open Bet")
         openBetFriend.setLastName("")
+        
+        
         
         // Issue a Facebook Graph API request to get your user's friend list
         FBRequestConnection.startForMyFriendsWithCompletionHandler({ (connection, result, error: NSError!) -> Void in
@@ -71,6 +77,16 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
         println("Edit changed")
         friendsListTableView.hidden = false
         updateFriendsList()
+        
+        if firstTimeEdit == true {
+            delegate?.friendListEditChanged(0)
+            firstTimeEdit = false
+        } else {
+            
+        }
+        
+        
+        
     }
     
     
@@ -78,7 +94,7 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
         var friendsQuery = PFQuery(className: "_User")
         friendsQuery.whereKey("fbId", containedIn: fbAllFriendIds)
         
-        friendsQuery.whereKey("searchName", hasPrefix: friendNameTextField.text)
+        friendsQuery.whereKey("searchName", hasPrefix: friendNameTextField.text.lowercaseString)
         friendsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 var friends = objects as [User]
@@ -124,18 +140,28 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
         
         if indexPath.row == 0 {
             //dont set selected friend
+            var tmpUser = User()
+            self.delegate?.friendSelected(tmpUser)
         } else {
             self.delegate?.friendSelected(self.friendsList[indexPath.row])
         }
+        
+        
+        firstTimeEdit = true
     }
     
     func hideFriendsListTable() {
-        //friendsListTableView.frame.origin.y = friendNameTextField.frame.origin.y + friendNameTextField.frame.height
-        UIView.animateWithDuration(1.0, animations: { () -> Void in
+        
+        println("start: \(friendsListTableView.frame.origin.y)")
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.friendsListTableView.frame.origin.y = self.friendsListTableView.frame.origin.y - self.friendsListTableView.frame.height
-        })
+            println("start: \(self.friendsListTableView.frame.origin.y)")
+        }) { (finished) -> Void in
+            println("end: \(self.friendsListTableView.frame.origin.y)")
+            
+        }
         
     }
-
+    
 
 }

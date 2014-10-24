@@ -83,6 +83,7 @@ class BetMoGetImage {
         }
     }
     
+    
     func getSharedCIContext() -> CIContext {
         return self.ciContenxt
     }

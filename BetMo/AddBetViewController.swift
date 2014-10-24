@@ -28,6 +28,13 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
     
     @IBOutlet weak var descCharCountLabel: UILabel!
     
+    //constriants
+    @IBOutlet weak var createBetTopMargin: NSLayoutConstraint!
+    
+    
+    
+    
+    
     var creationStep = 0
     
     let betDefaultText = "Describe your bet..."
@@ -37,6 +44,10 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
     var selectedOpponent: User?
     
     var delegate: AddBetViewControllerDelegate?
+    
+    
+    //animation constants:
+    var createBetTopMarginAnimateByY: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,10 +60,13 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
         friendsListContainer.hidden = true
         friendsListContainer.backgroundColor = UIColor.whiteColor()
         
+        betAmountSlider.setThumbImage(UIImage(named: "money_slider"), forState: UIControlState.Normal)
+        
         self.betDescView.delegate = self
         self.betDescView.text = ""
         AddEmptyBetHint()
         betTextLength = 0
+        
         
         friendsListViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendsListViewController") as? FriendsListViewController
         friendsListViewController.delegate = self
@@ -64,28 +78,12 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
         // Dispose of any resources that can be recreated.
     }
     
-    func friendSelected(selectedFriend: User) {
-        self.selectedOpponent = selectedFriend
-    }
-    
     
     @IBAction func onDone(sender: AnyObject) {
         if creationStep == 0 { //Show amount stuff
             
-            betAmountView.frame.origin.y = view.frame.height
-            UIView.animateWithDuration(0.5, animations: { () -> Void in
-                self.betAmountView.frame.origin.y = self.betDescView.frame.origin.y + self.betDescView.frame.height
-            }, completion: { (finished) -> Void in
-                
-            })
-            
-            var textViewHeight = betDescView.sizeThatFits(betDescView.frame.size).height
-            println(textViewHeight)
-            betDescTextViewHeight.constant = textViewHeight
-            
-            
-            betDescView.editable = false
-            betAmountView.hidden = false
+            animateBetAmountIn()
+
             creationStep += 1
             
         } else if creationStep == 1 { //show pick friend stuff
@@ -93,9 +91,12 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
             friendsListContainer.frame.origin.y = view.frame.height
             UIView.animateWithDuration(0.5, animations: { () -> Void in
                 self.friendsListContainer.frame.origin.y = self.betAmountView.frame.origin.y + self.betAmountView.frame.height
+                //self.friendsListContainer.frame.origin.y = 0
                 }, completion: { (finished) -> Void in
                     
             })
+            
+            animateFriendListStartEdit()
             
             //Adding a new viewController to the parent
             self.addChildViewController(self.friendsListViewController) //viewWillAppear + rotate call
@@ -136,6 +137,9 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
         betAmountLabel.text = "$\(betAmount * 5)"
     }
     
+    @IBAction func onTouchAmountLabel(sender: UITapGestureRecognizer) {
+
+    }
     
     //Logic for managing hint text and char count:
     //------------------------------------------------
@@ -183,6 +187,87 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
         //newTweet.font = UIFont(name: newTweetFont.fontName, size: 14)
         //newTweet.toggleItalics(self)
         betDescView.textColor = UIColor.blackColor()
+    }
+    
+    func friendSelected(selectedFriend: User) {
+        self.selectedOpponent = selectedFriend
+        
+        animateFriendListEndEdit()
+    }
+    
+    
+    func friendListEditChanged(state: Int) {
+        animateFriendListStartEdit()
+    }
+    
+    //Animating various components of bet creation flow:
+    func animateBetAmountIn() {
+        
+        //Make TextView take occupy height that it needs to fit content
+        var textViewHeight = betDescView.sizeThatFits(betDescView.frame.size).height
+        betDescTextViewHeight.constant = textViewHeight
+        
+        //Set descriptionView to not editable
+        betDescView.editable = false
+        
+        //Animate AmountView in
+        betAmountView.frame.origin.y = view.frame.height
+        betAmountView.hidden = false
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.betAmountView.frame.origin.y = self.betDescView.frame.origin.y + self.betDescView.frame.height
+        }, completion: { (finished) -> Void in
+                
+        })
+    }
+    
+    //Animate select friend start edit
+    func animateFriendListStartEdit() {
+        
+        //betDescViewVisibleOriginY = betDescView.frame.origin.y
+        //betDescViewAnimateByY = betDescView.frame.origin.y + betDescView.frame.height
+        //betAmountViewVisibleOriginY = betAmountView.frame.origin.y
+        //betAmountViewAnimateByY = betAmountView.frame.origin.y + betAmountView.frame.height
+        
+        createBetTopMarginAnimateByY = 0 - self.betAmountView.frame.origin.y - 20
+
+        //Animate description and amount out of the view
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+
+            self.createBetTopMargin.constant = self.createBetTopMarginAnimateByY
+            self.view.layoutIfNeeded()
+
+        }, completion: { (finished) -> Void in
+            
+        })
+        
+        
+    }
+    
+    //Animate select friend end edit
+    func animateFriendListEndEdit() {
+        
+        //betDescViewVisibleOriginY = betDescView.frame.origin.y
+        //betDescViewAnimateByY = betDescView.frame.origin.y + betDescView.frame.height
+        //betAmountViewVisibleOriginY = betAmountView.frame.origin.y
+        //betAmountViewAnimateByY = betAmountView.frame.origin.y + betAmountView.frame.height
+        
+        createBetTopMarginAnimateByY = 20
+        
+        //Animate description and amount out of the view
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            
+            self.createBetTopMargin.constant = self.createBetTopMarginAnimateByY
+            self.view.layoutIfNeeded()
+            
+            }, completion: { (finished) -> Void in
+                
+        })
+        
+        
+    }
+    
+    @IBAction func onCancel(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     /*

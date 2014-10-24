@@ -12,7 +12,7 @@ protocol CreateAmountViewControllerDelegate {
     func addedAmountToBet(addedAmountToBet : Bet) -> Void
 }
 
-class CreateAmountViewController: UIViewController, FriendsListViewControllerDelegate {
+class CreateAmountViewController: UIViewController {
 
     @IBOutlet weak var betAmountTextField: UITextField!
     
@@ -60,7 +60,7 @@ class CreateAmountViewController: UIViewController, FriendsListViewControllerDel
         newBet.setAmount(betAmountTextField.text)
         friendsListViewController.newBet = newBet
         
-        friendsListViewController.delegate = self
+        //friendsListViewController.delegate = self
     }
 
 

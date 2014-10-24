@@ -12,7 +12,7 @@ protocol CreateBetViewControllerDelegate {
     func createdBet(betCreated : Bet) -> Void
 }
 
-class CreateBetViewController: UIViewController, FriendsListViewControllerDelegate, UITextViewDelegate {
+class CreateBetViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var currUserNameLabel: UILabel!
     @IBOutlet weak var currUserImageView: UIImageView!
@@ -153,7 +153,7 @@ class CreateBetViewController: UIViewController, FriendsListViewControllerDelega
         
         var friendsListViewController = segue.destinationViewController as FriendsListViewController
         
-        friendsListViewController.delegate = self
+        //friendsListViewController.delegate = self
     }
 
 
