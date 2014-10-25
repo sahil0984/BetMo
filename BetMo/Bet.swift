@@ -124,7 +124,7 @@ class Bet : PFObject, PFSubclassing {
                     //Send push notification to opponent
                     var push = PFPush()
                     push.setQuery(pushQuery)
-                    push.setMessage("\(currentUser.getName()) has challenged you to a bet.")
+                    push.setMessage("\(currentUser.getName()) has challenged you to a $\(self.getAmount()!) bet.\n\(self.getDescription()!)")
                     push.sendPushInBackground()
                 }
                 
@@ -158,7 +158,7 @@ class Bet : PFObject, PFSubclassing {
                 //Send push notification to opponent
                 var push = PFPush()
                 push.setQuery(pushQuery)
-                push.setMessage("\(currentUser.getName()) has accepted your bet.")
+                push.setMessage("\(currentUser.getName()) has accepted your bet.\n\(self.getDescription()!)")
                 push.sendPushInBackground()
                 
                 

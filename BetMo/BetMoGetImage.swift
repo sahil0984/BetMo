@@ -11,7 +11,7 @@ import Foundation
 class BetMoGetImage {
     
     var imageCache = NSMutableDictionary()
-    var ciContenxt = CIContext(options:nil)
+    var ciContenxt = CIContext(options: [kCIContextUseSoftwareRenderer : "YES"] )
     
     class var sharedInstance: BetMoGetImage {
         struct Static {
@@ -27,7 +27,7 @@ class BetMoGetImage {
         
         if userImage == nil {
             // Make a network call to get user image
-            var urlRequest = NSURLRequest(URL: NSURL(string: url!))
+            var urlRequest = NSURLRequest(URL: NSURL(string: url!)!)
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
                 if connectionError == nil && data != nil {
                     let image = UIImage(data: data!)
@@ -49,7 +49,7 @@ class BetMoGetImage {
         
         if userBannerImage == nil {
             // Make a network call to get user banner json response
-            var urlRequest = NSURLRequest(URL: NSURL(string: url!))
+            var urlRequest = NSURLRequest(URL: NSURL(string: url!)!)
             
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
                 if connectionError == nil && data != nil {
@@ -59,7 +59,7 @@ class BetMoGetImage {
                     if coverObject != nil {
                         var bannerRealUrl = coverObject!["source"] as NSString
                         
-                        var urlRequest = NSURLRequest(URL: NSURL(string: bannerRealUrl))
+                        var urlRequest = NSURLRequest(URL: NSURL(string: bannerRealUrl)!)
                         NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
                             if connectionError == nil && data != nil {
                                 let image = UIImage(data: data!)

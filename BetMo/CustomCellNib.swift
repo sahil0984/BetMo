@@ -138,11 +138,11 @@ class CustomCellNib: UIView {
         } else if currBet.isClosedBet() && (currBet.isUserOwner() || currBet.isUserOpponent()) {
             //Closed bet - Select Winner button
 
-            actionButton.setTitle("Pick Winner", forState: UIControlState.Normal)
+            actionButton.setTitle("Closed Bet", forState: UIControlState.Normal)
             //actionButton.hidden = true
         } else {
             //CurrUser is not a party to this bet
-            actionButton.setTitle("Closed Bet", forState: UIControlState.Normal)
+            actionButton.setTitle("Error", forState: UIControlState.Normal)
             actionButton.hidden = true
         }
         

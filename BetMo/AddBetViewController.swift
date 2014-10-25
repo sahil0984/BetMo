@@ -38,7 +38,7 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
     var creationStep = 0
     
     let betDefaultText = "Describe your bet..."
-    var betTextLength = 0
+    var betDescTextLength = 0
     
     var friendsListViewController: FriendsListViewController!
     var selectedOpponent: User?
@@ -65,7 +65,7 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
         self.betDescView.delegate = self
         self.betDescView.text = ""
         AddEmptyBetHint()
-        betTextLength = 0
+        betDescTextLength = 0
         
         
         friendsListViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendsListViewController") as? FriendsListViewController
@@ -82,9 +82,27 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
     @IBAction func onDone(sender: AnyObject) {
         if creationStep == 0 { //Show amount stuff
             
-            animateBetAmountIn()
-
-            creationStep += 1
+            if betDescTextLength > 140 || betDescTextLength == 0 {
+                
+                var descFontColor = descCharCountLabel.textColor
+                UIView.transitionWithView(descCharCountLabel, duration: 0.25, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
+                    self.descCharCountLabel.textColor = UIColor.greenColor()
+                }, completion: { (finished) -> Void in
+                    
+                    UIView.transitionWithView(self.descCharCountLabel, duration: 0.25, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
+                        self.descCharCountLabel.textColor = descFontColor
+                    }, completion: { (finished) -> Void in
+                        self.descCharCountLabel.textColor = descFontColor
+                    })
+                    self.descCharCountLabel.textColor = descFontColor
+                })
+                
+            } else {
+            
+                animateBetAmountIn()
+                
+                creationStep += 1
+            }
             
         } else if creationStep == 1 { //show pick friend stuff
             
@@ -158,10 +176,10 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
     
     func textViewDidChange(textView: UITextView) {
         var betText = betDescView.text as NSString
-        betTextLength = betText.length
+        betDescTextLength = betText.length
         
-        descCharCountLabel.text = "\(140 - betTextLength)"
-        if betTextLength > 140 {
+        descCharCountLabel.text = "\(140 - betDescTextLength)"
+        if betDescTextLength > 140 {
             descCharCountLabel.textColor = UIColor.redColor()
         } else {
             descCharCountLabel.textColor = UIColor.blackColor()
@@ -172,7 +190,7 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
         
         setBetFont()
         
-        if betTextLength == 0 {
+        if betDescTextLength == 0 {
             betDescView.text = ""
         }
         return true
@@ -239,6 +257,11 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
         }, completion: { (finished) -> Void in
             
         })
+        
+        
+        //CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size
+
+        
         
         
     }
