@@ -32,9 +32,6 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
     @IBOutlet weak var createBetTopMargin: NSLayoutConstraint!
     
     
-    
-    
-    
     var creationStep = 0
     
     let betDefaultText = "Describe your bet..."
@@ -42,6 +39,7 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
     
     var friendsListViewController: FriendsListViewController!
     var selectedOpponent: User?
+    var isFriendSelected: Bool = false
     
     var delegate: AddBetViewControllerDelegate?
     
@@ -129,24 +127,30 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
             creationStep += 1
         } else if creationStep == 2 { //create final bet
             
-            var currentUser = PFUser.currentUser() as User
-            var newBet = Bet()
-            newBet.setOwner(currentUser)
-            newBet.setDescription(betDescView.text)
-            
-            var amountLabel = betAmountLabel.text
-            var parsedAmount = amountLabel?.stringByReplacingOccurrencesOfString("$", withString: "")
-            newBet.setAmount(parsedAmount!)
-            newBet.setIsAccepted(false)
-            if let opponent = selectedOpponent {
-                newBet.setOpponent(opponent)
+            if isFriendSelected {
+                var currentUser = PFUser.currentUser() as User
+                var newBet = Bet()
+                newBet.setOwner(currentUser)
+                newBet.setDescription(betDescView.text)
+                
+                var amountLabel = betAmountLabel.text
+                var parsedAmount = amountLabel?.stringByReplacingOccurrencesOfString("$", withString: "")
+                newBet.setAmount(parsedAmount!)
+                newBet.setIsAccepted(false)
+//                if let opponent = selectedOpponent {
+//                    newBet.setOpponent(opponent)
+//                }
+                if selectedOpponent?.getFirstName() != "Open Bet" {
+                    newBet.setOpponent(selectedOpponent!)
+                }
+                
+                newBet.create()
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
+                
+                delegate?.createdBet(newBet)
             }
-            
-            newBet.create()
-            
-            self.dismissViewControllerAnimated(true, completion: nil)
-            
-            delegate?.createdBet(newBet)
+
         }
     }
     
@@ -161,11 +165,6 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
     
     //Logic for managing hint text and char count:
     //------------------------------------------------
-//    @IBAction func onTapOutside(sender: UITapGestureRecognizer) {
-//        view.endEditing(true)
-//        AddEmptyBetHint()
-//    }
-    
     func AddEmptyBetHint() {
         var betTextLength = betDescView.text as NSString
         if betTextLength.length == 0 {
@@ -211,11 +210,15 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
         self.selectedOpponent = selectedFriend
         
         animateFriendListEndEdit()
+        
+        isFriendSelected = true
     }
     
     
     func friendListEditChanged(state: Int) {
         animateFriendListStartEdit()
+        
+        isFriendSelected = false
     }
     
     //Animating various components of bet creation flow:

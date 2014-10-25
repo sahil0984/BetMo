@@ -138,13 +138,14 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
         friendsListTableView.hidden = true
         //hideFriendsListTable()
         
-        if indexPath.row == 0 {
-            //dont set selected friend
-            var tmpUser = User()
-            self.delegate?.friendSelected(tmpUser)
-        } else {
-            self.delegate?.friendSelected(self.friendsList[indexPath.row])
-        }
+//        if indexPath.row == 0 {
+//            //dont set selected friend
+//            //var tmpUser = User()
+//            //self.delegate?.friendSelected(nil)
+//        } else {
+//            self.delegate?.friendSelected(self.friendsList[indexPath.row])
+//        }
+        self.delegate?.friendSelected(self.friendsList[indexPath.row])
         
         
         firstTimeEdit = true
