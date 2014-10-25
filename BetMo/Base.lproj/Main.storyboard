@@ -790,10 +790,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1mU-0S-lfj">
-                                <rect key="frame" x="20" y="235" width="560" height="117"/>
+                                <rect key="frame" x="20" y="335" width="560" height="117"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$50" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQZ-TR-Hd0">
-                                        <rect key="frame" x="229" y="5" width="101" height="82"/>
+                                        <rect key="frame" x="229.5" y="5" width="100.5" height="82"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="60"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -835,16 +835,16 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Describe your bet..." translatesAutoresizingMaskIntoConstraints="NO" id="Cbc-5Y-iFq">
-                                <rect key="frame" x="20" y="80" width="560" height="150"/>
+                                <rect key="frame" x="20" y="80" width="560" height="250"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="S0d-Cd-luZ"/>
+                                    <constraint firstAttribute="height" constant="250" id="S0d-Cd-luZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GHJ-90-SFZ">
-                                <rect key="frame" x="10" y="352" width="580" height="248"/>
+                                <rect key="frame" x="10" y="452" width="580" height="148"/>
                                 <color key="backgroundColor" red="0.96851399260000004" green="1" blue="0.75609656739999997" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0sK-FJ-XE5">
@@ -889,7 +889,7 @@
                                             <action selector="onCancel:" destination="rzM-5v-Qej" eventType="touchUpInside" id="hvq-GL-2GV"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wFi-Km-zrP">
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wFi-Km-zrP">
                                         <rect key="frame" x="537" y="20.5" width="1" height="23.5"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -912,7 +912,6 @@
                                     <constraint firstItem="tt5-Ga-axM" firstAttribute="top" secondItem="0sK-FJ-XE5" secondAttribute="top" constant="20" id="eDA-b4-yqL"/>
                                     <constraint firstAttribute="height" constant="60" id="ogv-GS-rbm"/>
                                     <constraint firstAttribute="trailing" secondItem="6gK-fr-fNQ" secondAttribute="trailing" constant="10" id="ora-t9-dI9"/>
-                                    <constraint firstItem="04p-6j-1HD" firstAttribute="height" secondItem="wFi-Km-zrP" secondAttribute="height" id="wVd-KF-qtl"/>
                                     <constraint firstAttribute="trailing" secondItem="sa4-Ut-6To" secondAttribute="trailing" id="zt0-I6-P0t"/>
                                 </constraints>
                             </view>

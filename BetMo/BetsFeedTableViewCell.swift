@@ -14,7 +14,7 @@ class BetsFeedTableViewCell: UITableViewCell {
     
     var bet: Bet = Bet() {
         willSet(currBet) {
-            customBetCellView.bet = currBet            
+            customBetCellView.bet = currBet
         }
     }
     

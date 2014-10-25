@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CustomCellNibDelegate {
 
     @IBOutlet weak var profileHeaderView: ProfileHeaderView!
     @IBOutlet weak var profileHeaderHeightConstraint: NSLayoutConstraint!
@@ -101,12 +101,22 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         var cell = tableView.dequeueReusableCellWithIdentifier("betFeedCell") as BetsFeedTableViewCell
         
         cell.bet = bets[indexPath.row]
+        cell.customBetCellView.delegate = self
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
+    
+    
+    func betAccepted(acceptedBet: Bet) {
+        println("bet accpeted: \(acceptedBet.getObjectId())")
+    }
+    
+    func betRejected(rejectedBet: Bet) {
+        println("bet rejected: \(rejectedBet.getObjectId())")
     }
     
 

@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol CustomCellNibDelegate {
+    func betAccepted(acceptedBet : Bet) -> Void
+    func betRejected(rejectedBet : Bet) -> Void
+}
+
 class CustomCellNib: UIView {
     @IBOutlet var mainContentView: UIView!
     @IBOutlet var acceptContentView: UIView!
@@ -36,6 +41,8 @@ class CustomCellNib: UIView {
 
     @IBOutlet weak var ownerMaskView: UIView!
     @IBOutlet weak var opponentMaskView: UIView!
+    
+    var delegate: CustomCellNibDelegate?
 
     var arrowOriginalY: CGFloat!
 
@@ -335,12 +342,25 @@ class CustomCellNib: UIView {
     //Accept card button logic:
     //--------------------------
     @IBAction func onAcceptButton(sender: AnyObject) {
+        var currUser = PFUser.currentUser() as User
+        
+        //Create a tmp bet and assign it to bet just to call the property observer.
+        var tmpBet = bet
+        tmpBet.setIsAccepted(true)
+        tmpBet.setOpponent(currUser)
+        bet = tmpBet
+        
         bet.accept()
-        //somehow call property observer. maybe pass delegate to refresh this table cell??
+        
+        delegate?.betAccepted(bet)
+        
     }
     @IBAction func onRejectButton(sender: AnyObject) {
-        //swapViewWithMainView()
+        
         bet.reject()
+        
+        delegate?.betRejected(bet)
+        
     }
     @IBAction func onCancelButton(sender: AnyObject) {
         swapViewWithMainView()
