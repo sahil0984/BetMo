@@ -171,17 +171,7 @@ class Bet : PFObject, PFSubclassing {
 
     // For now remove the current user as the opponent when they reject the bet
     func reject() {
-        var currentUser = PFUser.currentUser() as User
-        self["opponent"] = nil
-        setIsAccepted(false)
-        self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
-            if isSaved {
-                println("Successfully rejected bet");
-            } else {
-                println("Failed to reject bet");
-                println("\(error!)")
-            }
-        }
+        cancel()
     }
 
     func cancel() {

@@ -72,12 +72,12 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
             if offsetY > 0 && offsetY < 111 && isBottomBounce == false {
                 profileHeaderTopConstraint.constant = -1*scrollView.contentOffset.y
                 // Remove the blur
-                self.profileHeaderView.visualEffectView.alpha = 0
+                self.profileHeaderView.visualEffectView.alpha = offsetY/300
             } else if offsetY < 111 && profileHeaderTopConstraint.constant != 0 {
                 // TOP BOUNCE CASE
                 profileHeaderTopConstraint.constant = 0
                 // Remove the blur
-                self.profileHeaderView.visualEffectView.alpha = 0
+                self.profileHeaderView.visualEffectView.alpha = offsetY/300
             } else if offsetY > 110 && profileHeaderTopConstraint.constant != -110 {
                 profileHeaderTopConstraint.constant = -110
             } else if offsetY <= 0 {

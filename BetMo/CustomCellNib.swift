@@ -286,11 +286,11 @@ class CustomCellNib: UIView {
     }
     
     func updateWatcherViews(isWatcher: Bool, watcherCount: Int) {
-        subscriberCountLabel.text = "(\(watcherCount))"
+        subscriberCountLabel.text = "\(watcherCount)"
         if isWatcher { //if already subscribed
-            subscribeButton.setImage(UIImage(named: "subscribeOn"), forState: UIControlState.Normal)
+            subscribeButton.setImage(UIImage(named: "television4"), forState: UIControlState.Normal)
         } else {
-            subscribeButton.setImage(UIImage(named: "subscribeOff"), forState: UIControlState.Normal)
+            subscribeButton.setImage(UIImage(named: "television4"), forState: UIControlState.Normal)
         }
     }
     
@@ -390,16 +390,20 @@ class CustomCellNib: UIView {
     }
 
     func setEmojisIfNeeded(bet: Bet) {
+        return;
         if let winner = bet.getWinner() {
             let owner = bet.getOwner()
             let opponent = bet.getOppenent()!
-
+            ownerEmoji.hidden = true
+            opponentEmoji.hidden = true
+    
             if winner.objectId == bet.getOwner().objectId {
                 ownerEmoji.image = UIImage(named: "cool-25")
                 opponentEmoji.image = UIImage(named: "sad-25")
                 ownerEmoji.hidden = false
                 opponentEmoji.hidden = false
-            } else {
+                println("show")
+            } else if winner.objectId == bet.getOppenent()?.objectId {
                 opponentEmoji.image = UIImage(named: "cool-25")
                 ownerEmoji.image = UIImage(named: "sad-25")
                 ownerEmoji.hidden = false
