@@ -87,8 +87,8 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
 //                profileHeaderView.proflieImageView.layer.transform = CATransform3DRotate(profileHeaderView.proflieImageView.layer.transform, -1*offsetY, 1, 0, 0)
             }
             // Increase the alpha for visual effect view
-            if offsetY > 110 && offsetY/150 < 1.1 {
-                self.profileHeaderView.visualEffectView.alpha = offsetY/180
+            if offsetY > 110 && offsetY/300 < 1.0 {
+                self.profileHeaderView.visualEffectView.alpha = offsetY/300
             }
         }
     }
