@@ -155,7 +155,7 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
     }
     
     @IBAction func onAmountSlider(sender: UISlider) {
-        var betAmount:Int = Int(100 * sender.value / 5)
+        var betAmount:Int = Int(1000 * sender.value / 5)
         betAmountLabel.text = "$\(betAmount * 5)"
     }
     
