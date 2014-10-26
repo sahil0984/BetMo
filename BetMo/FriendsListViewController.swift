@@ -133,6 +133,7 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        view.endEditing(true)
         
         friendNameTextField.text = friendsList[indexPath.row].getName()
         friendsListTableView.hidden = true
