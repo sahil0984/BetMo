@@ -474,17 +474,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sZ0-AB-920" userLabel="Card1" customClass="CustomCellNib" customModule="BetMo" customModuleProvider="target">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Uf-pK-sdn" userLabel="NoMoreBets" customClass="CustomCellNib" customModule="BetMo" customModuleProvider="target">
                                 <rect key="frame" x="20" y="250" width="560" height="100"/>
-                                <color key="backgroundColor" red="0.0" green="0.28212900600000002" blue="0.58298658290000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <gestureRecognizers/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="McD-Bg-CrG"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="qht-6K-yUy"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="OAJ-Qt-WB5"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="jdt-Cw-Prb"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="oMP-gC-DOt" appends="YES" id="6iy-ag-txl"/>
-                                </connections>
                             </view>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gIz-xc-Ac9" userLabel="Card2" customClass="CustomCellNib" customModule="BetMo" customModuleProvider="target">
                                 <rect key="frame" x="20" y="250" width="560" height="100"/>
@@ -498,9 +494,22 @@
                                     <outletCollection property="gestureRecognizers" destination="jCU-6T-NMD" appends="YES" id="IXK-EN-n2A"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sZ0-AB-920" userLabel="Card1" customClass="CustomCellNib" customModule="BetMo" customModuleProvider="target">
+                                <rect key="frame" x="20" y="250" width="560" height="100"/>
+                                <color key="backgroundColor" red="0.0" green="0.28212900600000002" blue="0.58298658290000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="McD-Bg-CrG"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="qht-6K-yUy"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="oMP-gC-DOt" appends="YES" id="6iy-ag-txl"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerY" secondItem="0Uf-pK-sdn" secondAttribute="centerY" id="2qj-PP-QfG"/>
                             <constraint firstItem="sZ0-AB-920" firstAttribute="leading" secondItem="uyt-FB-IQX" secondAttribute="leading" constant="50" id="Cwn-H9-w1O"/>
                             <constraint firstItem="gIz-xc-Ac9" firstAttribute="leading" secondItem="uyt-FB-IQX" secondAttribute="leading" constant="20" id="GqP-qr-oT4"/>
                             <constraint firstAttribute="centerY" secondItem="gIz-xc-Ac9" secondAttribute="centerY" id="IRo-eq-p6M"/>
@@ -508,9 +517,12 @@
                             <constraint firstAttribute="centerX" secondItem="sZ0-AB-920" secondAttribute="centerX" id="P3G-Sr-1GA"/>
                             <constraint firstItem="sZ0-AB-920" firstAttribute="top" secondItem="PcF-ln-YkB" secondAttribute="bottom" constant="50" id="PI6-mN-Mty"/>
                             <constraint firstAttribute="trailing" secondItem="gIz-xc-Ac9" secondAttribute="trailing" constant="20" id="Q7Y-in-hUU"/>
+                            <constraint firstItem="0Uf-pK-sdn" firstAttribute="leading" secondItem="uyt-FB-IQX" secondAttribute="leading" constant="20" id="Rhg-Br-Rzs"/>
                             <constraint firstItem="sZ0-AB-920" firstAttribute="leading" secondItem="uyt-FB-IQX" secondAttribute="leading" constant="20" id="XWC-jv-3lT"/>
                             <constraint firstItem="tOg-FX-2Zg" firstAttribute="top" secondItem="sZ0-AB-920" secondAttribute="bottom" constant="50" id="b2U-bR-n3q"/>
                             <constraint firstAttribute="trailing" secondItem="sZ0-AB-920" secondAttribute="trailing" constant="50" id="chn-hS-eOn"/>
+                            <constraint firstAttribute="centerX" secondItem="0Uf-pK-sdn" secondAttribute="centerX" id="dmL-O1-ObU"/>
+                            <constraint firstAttribute="trailing" secondItem="0Uf-pK-sdn" secondAttribute="trailing" constant="20" id="fHf-KF-ngj"/>
                             <constraint firstAttribute="centerX" secondItem="gIz-xc-Ac9" secondAttribute="centerX" id="rOz-gP-9ml"/>
                             <constraint firstAttribute="centerY" secondItem="sZ0-AB-920" secondAttribute="centerY" id="wRR-sL-iL5"/>
                         </constraints>
@@ -526,6 +538,7 @@
                     <connections>
                         <outlet property="cardViewOne" destination="sZ0-AB-920" id="VzI-Q5-UYp"/>
                         <outlet property="cardViewTwo" destination="gIz-xc-Ac9" id="iE8-EK-pKn"/>
+                        <outlet property="noMoreBetsView" destination="0Uf-pK-sdn" id="C9X-Wt-JD5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ttd-tP-5Zl" userLabel="First Responder" sceneMemberID="firstResponder"/>
