@@ -284,7 +284,7 @@ class CustomCellNib: UIView {
     @IBAction func onSubscribeButton(sender: AnyObject) {
         //Handle bet subscription
         
-        if bet.isClosedBet() == false {
+        if bet.isClosedBet() == false && bet.isUserOpponent() == false && bet.isUserOwner() == false  {
             if bet.isUserWatcher() {
                 updateWatcherViews(false, watcherCount: bet.getWatcherListCount()-1)
                 bet.unWatch()
@@ -381,8 +381,6 @@ class CustomCellNib: UIView {
     //Winner card button logic:
     //--------------------------
     @IBAction func onOwnerImageTap(sender: UITapGestureRecognizer) {
-//        winnerOwnerImageView.image = winnerOwnerImageView.image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-//        winnerOwnerImageView.tintColor = UIColor(red: 1.0, green: 0, blue: 0, alpha: 0.55)
         
         var currUser = PFUser.currentUser() as User
         if currUser.getFbId() == bet.getOwner().getFbId() {
