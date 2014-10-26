@@ -66,7 +66,6 @@ class DiscoverViewController: UIViewController {
             labelAlpha = 1 - endPositionX/superViewCenter
         }
 
-        println(labelAlpha)
         if panGestureRecognizer.state == .Began {
             // We don't care about this
         } else if panGestureRecognizer.state == .Changed {
