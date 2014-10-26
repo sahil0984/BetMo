@@ -172,5 +172,15 @@ class BetMoClient {
     func getAllRequestedBets() -> [Bet] {
         return self.requestedBets
     }
-    
+
+    func getAllDiscoverableBets(completion: (bets: [Bet]?, error: NSError?) -> ()) {
+        if self.openBets.count > 0 {
+            completion(bets: self.openBets, error: nil)
+        } else {
+            self.getAllBets({ (bets, error) -> () in
+                completion(bets: bets, error: error)
+            })
+        }
+        
+    }
 }

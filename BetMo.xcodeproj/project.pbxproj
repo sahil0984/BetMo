@@ -13,6 +13,7 @@
 		853F392719E90BDE00915A5B /* BetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853F392619E90BDE00915A5B /* BetCell.swift */; };
 		85BCEAEF19F4974E00A2866C /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85BCEAEE19F4974E00A2866C /* ProfileHeaderView.xib */; };
 		85BCEAF119F4979C00A2866C /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BCEAF019F4979C00A2866C /* ProfileHeaderView.swift */; };
+		85DA561219FC61DA0063E34B /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DA561119FC61DA0063E34B /* DiscoverViewController.swift */; };
 		85FF8D2A19EB4BC900396F53 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FF8D2919EB4BC900396F53 /* PaymentViewController.swift */; };
 		9F24867219F248E9006C51C8 /* BetsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F24867119F248E9006C51C8 /* BetsFeedViewController.swift */; };
 		9F24867619F25039006C51C8 /* BetsFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F24867519F25039006C51C8 /* BetsFeedTableViewCell.swift */; };
@@ -61,6 +62,7 @@
 		853F392619E90BDE00915A5B /* BetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetCell.swift; sourceTree = "<group>"; };
 		85BCEAEE19F4974E00A2866C /* ProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		85BCEAF019F4979C00A2866C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		85DA561119FC61DA0063E34B /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		85FF8D2919EB4BC900396F53 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		9F24867119F248E9006C51C8 /* BetsFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetsFeedViewController.swift; sourceTree = "<group>"; };
 		9F24867519F25039006C51C8 /* BetsFeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetsFeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				9FB9427F19E7D73300D72264 /* FriendsListViewController.swift */,
 				85FF8D2919EB4BC900396F53 /* PaymentViewController.swift */,
 				9F54C03119F64E6200AFA29F /* AddBetViewController.swift */,
+				85DA561119FC61DA0063E34B /* DiscoverViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				9F2FD28B19E688ED00400E46 /* User.swift in Sources */,
 				9FACFB5019E60C02007E865C /* LoginViewController.swift in Sources */,
 				9F24867D19F4F9AC006C51C8 /* CreateBetView.swift in Sources */,
+				85DA561219FC61DA0063E34B /* DiscoverViewController.swift in Sources */,
 				853F392719E90BDE00915A5B /* BetCell.swift in Sources */,
 				9FACFB4E19E60C02007E865C /* AppDelegate.swift in Sources */,
 				9FB9428019E7D73300D72264 /* FriendsListViewController.swift in Sources */,

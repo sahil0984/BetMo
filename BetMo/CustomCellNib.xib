@@ -12,6 +12,7 @@
                 <outlet property="betDescription" destination="c6k-0C-CNq" id="Hcw-9f-1ua"/>
                 <outlet property="firstArrowImageView" destination="s5l-vF-hAh" id="7W7-3K-oc4"/>
                 <outlet property="mainContentView" destination="GFN-jk-cJ9" id="W4w-qX-FL5"/>
+                <outlet property="noMoreBetsView" destination="QeW-XI-Kp5" id="UDY-CK-9N0"/>
                 <outlet property="opponentEmoji" destination="IxM-ll-Ros" id="Qcq-ek-dDd"/>
                 <outlet property="opponentImageView" destination="mqN-tO-rOq" id="UUR-Yj-9wl"/>
                 <outlet property="opponentMaskView" destination="V5M-Rm-8gK" id="XtU-Ci-B6R"/>
@@ -119,11 +120,27 @@
                     <rect key="frame" x="217" y="133" width="25" height="25"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99+" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Reb-k2-HKu">
-                    <rect key="frame" x="215" y="321" width="17" height="13"/>
+                    <rect key="frame" x="215" y="321" width="16.5" height="12.5"/>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="9"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QeW-XI-Kp5">
+                    <rect key="frame" x="0.0" y="0.0" width="252" height="350"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No more bets, check back later" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0I-Nq-R8a">
+                            <rect key="frame" x="18.5" y="165.5" width="215" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.83565127610000001" green="0.89006020119999996" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="k0I-Nq-R8a" secondAttribute="centerX" id="4OB-ke-8eV"/>
+                        <constraint firstAttribute="centerY" secondItem="k0I-Nq-R8a" secondAttribute="centerY" id="piJ-Ym-bE3"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.83565127610000001" green="0.89006020119999996" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -132,6 +149,7 @@
                 <constraint firstAttribute="trailing" secondItem="Ccc-uF-SKi" secondAttribute="trailing" constant="5" id="14C-q8-Yw8"/>
                 <constraint firstAttribute="trailing" secondItem="IxM-ll-Ros" secondAttribute="trailing" constant="10" id="1QK-qg-u9h"/>
                 <constraint firstItem="2fW-x2-csz" firstAttribute="height" secondItem="Ywn-E7-fdb" secondAttribute="height" id="1YH-he-hlR"/>
+                <constraint firstItem="QeW-XI-Kp5" firstAttribute="top" secondItem="GFN-jk-cJ9" secondAttribute="top" id="1fB-1y-LH7"/>
                 <constraint firstItem="mqN-tO-rOq" firstAttribute="width" secondItem="V5M-Rm-8gK" secondAttribute="width" id="3gN-xX-79e"/>
                 <constraint firstAttribute="trailing" secondItem="V5M-Rm-8gK" secondAttribute="trailing" id="6ye-Kw-i7V"/>
                 <constraint firstItem="V5M-Rm-8gK" firstAttribute="top" secondItem="GFN-jk-cJ9" secondAttribute="top" id="BgP-Qk-XGX"/>
@@ -140,6 +158,7 @@
                 <constraint firstItem="Ccc-uF-SKi" firstAttribute="top" secondItem="GFN-jk-cJ9" secondAttribute="top" constant="100" id="Daz-HY-IFx"/>
                 <constraint firstItem="iXb-gi-FWE" firstAttribute="top" secondItem="mqN-tO-rOq" secondAttribute="bottom" constant="10" id="Df5-Ic-VSl"/>
                 <constraint firstAttribute="trailing" secondItem="mqN-tO-rOq" secondAttribute="trailing" id="EnP-HU-IC5"/>
+                <constraint firstAttribute="trailing" secondItem="QeW-XI-Kp5" secondAttribute="trailing" id="GFB-i9-03U"/>
                 <constraint firstAttribute="trailing" secondItem="Reb-k2-HKu" secondAttribute="trailing" constant="20" id="Kfj-nm-mD8"/>
                 <constraint firstItem="Mc2-KE-nxN" firstAttribute="leading" secondItem="GFN-jk-cJ9" secondAttribute="leading" constant="10" id="LVs-ht-HCp"/>
                 <constraint firstItem="Mc2-KE-nxN" firstAttribute="top" secondItem="2fW-x2-csz" secondAttribute="bottom" constant="8" id="OPC-aD-02O"/>
@@ -160,6 +179,7 @@
                 <constraint firstItem="2fW-x2-csz" firstAttribute="centerY" secondItem="qjU-OI-9g1" secondAttribute="centerY" id="hdv-en-QaJ"/>
                 <constraint firstItem="Reb-k2-HKu" firstAttribute="centerY" secondItem="VTB-Pn-lno" secondAttribute="centerY" id="iPU-dC-suy"/>
                 <constraint firstItem="Reb-k2-HKu" firstAttribute="height" secondItem="VTB-Pn-lno" secondAttribute="height" id="jVM-26-OXZ"/>
+                <constraint firstItem="QeW-XI-Kp5" firstAttribute="leading" secondItem="GFN-jk-cJ9" secondAttribute="leading" id="kSP-tm-qoC"/>
                 <constraint firstAttribute="trailing" secondItem="VTB-Pn-lno" secondAttribute="trailing" constant="10" id="mbt-1e-5o5"/>
                 <constraint firstAttribute="centerX" secondItem="iXb-gi-FWE" secondAttribute="centerX" id="o8X-8l-UW1"/>
                 <constraint firstItem="2fW-x2-csz" firstAttribute="leading" secondItem="GFN-jk-cJ9" secondAttribute="leading" id="qQD-Dl-ACO"/>
@@ -169,6 +189,7 @@
                 <constraint firstItem="mqN-tO-rOq" firstAttribute="top" secondItem="GFN-jk-cJ9" secondAttribute="top" id="v5u-vh-Sov"/>
                 <constraint firstAttribute="bottom" secondItem="Reb-k2-HKu" secondAttribute="bottom" constant="16" id="wlG-MD-bmk"/>
                 <constraint firstItem="0jk-Xb-qVj" firstAttribute="leading" secondItem="GFN-jk-cJ9" secondAttribute="leading" constant="5" id="woO-ui-FLt"/>
+                <constraint firstAttribute="bottom" secondItem="QeW-XI-Kp5" secondAttribute="bottom" id="xum-gi-LnW"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

@@ -41,6 +41,7 @@ class CustomCellNib: UIView {
 
     @IBOutlet weak var ownerMaskView: UIView!
     @IBOutlet weak var opponentMaskView: UIView!
+    @IBOutlet weak var noMoreBetsView: UIView!
     
     var delegate: CustomCellNibDelegate?
 
@@ -58,6 +59,13 @@ class CustomCellNib: UIView {
         }
     }
     
+    var noContentView: Bool = false {
+        willSet(newValue) {
+            if newValue {
+                noMoreBetsView.hidden = false
+            }
+        }
+    }
     func fillMainCard(currBet: Bet) {
         // sets up bet emojis
         setEmojisIfNeeded(currBet)
