@@ -300,9 +300,9 @@ class CustomCellNib: UIView {
     func updateWatcherViews(isWatcher: Bool, watcherCount: Int) {
         subscriberCountLabel.text = "\(watcherCount)"
         if isWatcher { //if already subscribed
-            subscribeButton.setImage(UIImage(named: "television4"), forState: UIControlState.Normal)
+            subscribeButton.setImage(UIImage(named: "watchOn"), forState: UIControlState.Normal)
         } else {
-            subscribeButton.setImage(UIImage(named: "television4"), forState: UIControlState.Normal)
+            subscribeButton.setImage(UIImage(named: "watchOff"), forState: UIControlState.Normal)
         }
     }
     

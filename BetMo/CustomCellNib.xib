@@ -100,13 +100,13 @@
                         <action selector="onActionButton:" destination="-1" eventType="touchUpInside" id="6an-qt-6lP"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTB-Pn-lno">
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTB-Pn-lno">
                     <rect key="frame" x="210" y="308" width="32" height="32"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="D8X-e8-ZxT"/>
                         <constraint firstAttribute="width" constant="32" id="fZH-6q-ZSs"/>
                     </constraints>
-                    <state key="normal" image="television4">
+                    <state key="normal" image="watchOff">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -119,8 +119,8 @@
                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sad-25" translatesAutoresizingMaskIntoConstraints="NO" id="IxM-ll-Ros">
                     <rect key="frame" x="217" y="133" width="25" height="25"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99+" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Reb-k2-HKu">
-                    <rect key="frame" x="215" y="321" width="16.5" height="12.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Reb-k2-HKu">
+                    <rect key="frame" x="215" y="322.5" width="16.5" height="12.5"/>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="9"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -187,7 +187,7 @@
                 <constraint firstItem="Ywn-E7-fdb" firstAttribute="leading" secondItem="GFN-jk-cJ9" secondAttribute="leading" id="t1J-Hm-v42"/>
                 <constraint firstItem="VTB-Pn-lno" firstAttribute="centerY" secondItem="zcy-gZ-red" secondAttribute="centerY" id="taT-x3-9YE"/>
                 <constraint firstItem="mqN-tO-rOq" firstAttribute="top" secondItem="GFN-jk-cJ9" secondAttribute="top" id="v5u-vh-Sov"/>
-                <constraint firstAttribute="bottom" secondItem="Reb-k2-HKu" secondAttribute="bottom" constant="16" id="wlG-MD-bmk"/>
+                <constraint firstAttribute="bottom" secondItem="Reb-k2-HKu" secondAttribute="bottom" constant="15" id="wlG-MD-bmk"/>
                 <constraint firstItem="0jk-Xb-qVj" firstAttribute="leading" secondItem="GFN-jk-cJ9" secondAttribute="leading" constant="5" id="woO-ui-FLt"/>
                 <constraint firstAttribute="bottom" secondItem="QeW-XI-Kp5" secondAttribute="bottom" id="xum-gi-LnW"/>
             </constraints>
@@ -380,7 +380,7 @@
     <resources>
         <image name="cool-25" width="25" height="25"/>
         <image name="sad-25" width="25" height="25"/>
-        <image name="television4" width="32" height="31"/>
         <image name="up-50-green" width="50" height="50"/>
+        <image name="watchOff" width="64" height="64"/>
     </resources>
 </document>
