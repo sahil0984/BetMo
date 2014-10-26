@@ -228,6 +228,43 @@ class Bet : PFObject, PFSubclassing {
         self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
             if isSaved {
                 println("Successfully saved user to watcher list");
+                
+    
+                
+                var watchersList = self.getWatcherList()
+                
+                var watchersQuery = User.query()
+                watchersQuery.whereKey("objectId", containedIn: watchersList)
+                
+                //watchersQuery.findObjectsInBackgroundWithBlock{ (objects: [AnyObject]!, error: NSError!) -> Void in
+                //    if error == nil {
+                //       println("num of watchers \(objects.count)")
+                //    }
+                //}
+                
+                var pushQuery = PFInstallation.query()
+                pushQuery.whereKey("user", containedIn: watchersList)
+                pushQuery.whereKey("user", notEqualTo: currentUser)
+                var push = PFPush()
+                push.setQuery(pushQuery)
+                push.setMessage("\(currentUser.getName()) is watching a bet you are watching.\n\(self.getDescription()!)")
+                push.sendPushInBackground()
+                
+                
+                
+//                //Find owner
+//                var ownerQuery = User.query()
+//                ownerQuery.whereKey("fbId", equalTo: self.getOwner().getFbId())
+//                //Find devices associated with the owner
+//                var pushQuery = PFInstallation.query()
+//                pushQuery.whereKey("user", matchesQuery: ownerQuery)
+//                //Send push notification to opponent
+//                var push = PFPush()
+//                push.setQuery(pushQuery)
+//                push.setMessage("\(currentUser.getName()) has accepted your bet.\n\(self.getDescription()!)")
+//                push.sendPushInBackground()
+                
+                
             } else {
                 println("Failed to save user to watcher list");
                 println("\(error!)")

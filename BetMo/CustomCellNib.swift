@@ -142,7 +142,7 @@ class CustomCellNib: UIView {
         } else if currBet.isUndecidedBet() && (currBet.isUserOwner() || currBet.isUserOpponent()) {
             //Undecided bets - Select Winner button
             actionButton.setTitle("Pick Winner", forState: UIControlState.Normal)
-        } else if currBet.isClosedBet() && (currBet.isUserOwner() || currBet.isUserOpponent()) {
+        } else if currBet.isClosedBet() { //&& (currBet.isUserOwner() || currBet.isUserOpponent()) {
             //Closed bet - Select Winner button
 
             actionButton.setTitle("Closed Bet", forState: UIControlState.Normal)
@@ -275,13 +275,17 @@ class CustomCellNib: UIView {
     
     @IBAction func onSubscribeButton(sender: AnyObject) {
         //Handle bet subscription
-        if bet.isUserWatcher() {
-            updateWatcherViews(false, watcherCount: bet.getWatcherListCount()-1)
-            bet.unWatch()
-        } else {
-            updateWatcherViews(true, watcherCount: bet.getWatcherListCount()+1)
-            bet.watch()
+        
+        if bet.isClosedBet() == false {
+            if bet.isUserWatcher() {
+                updateWatcherViews(false, watcherCount: bet.getWatcherListCount()-1)
+                bet.unWatch()
+            } else {
+                updateWatcherViews(true, watcherCount: bet.getWatcherListCount()+1)
+                bet.watch()
+            }
         }
+
         
     }
     
