@@ -18,6 +18,7 @@ class DiscoverViewController: UIViewController {
     @IBOutlet weak var rejectedLabel: UILabel!
 
     var superViewCenter: CGFloat!
+    var currentRotation: CGFloat = 0
 
     var activeCardView: CustomCellNib!
     var bets: [Bet] = [Bet]()
@@ -32,7 +33,6 @@ class DiscoverViewController: UIViewController {
         BetMoClient.sharedInstance.getAllDiscoverableBets({ (bets, error) -> () in
             if error == nil {
                 self.bets = bets!
-                println(self.bets)
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
                 var bet = self.bets[0] as Bet
                 println(bet.getDescription())
@@ -73,6 +73,12 @@ class DiscoverViewController: UIViewController {
             cardView.center = CGPoint(x: endPositionX, y: cardView.center.y)
             panGestureRecognizer.setTranslation(CGPointZero, inView: self.view)
 
+            var rotation = CGFloat(Double( translation.x/20) * M_PI / 180)
+            // Rotate the card
+            cardView.transform = CGAffineTransformRotate(cardView.transform, rotation)
+            // Add to the current rotation value
+            currentRotation += rotation
+
             // Show rejection/acceptance label
             if currentCenterX < superViewCenter {
                 self.acceptedLabel.alpha = 0
@@ -91,6 +97,9 @@ class DiscoverViewController: UIViewController {
                     panGestureRecognizer.setTranslation(CGPointZero, inView: self.view)
                     }, completion: { (Bool) -> Void in
                         self.updateCards(cardView)
+                        // Undo rotation of the card
+                        cardView.transform = CGAffineTransformRotate(cardView.transform, (-1 * self.currentRotation))
+                        self.currentRotation = 0
                 })
             } else if velocityX > 0 && superViewCenter < (currentCenterX - 100) {
                 handleAcceptance()
@@ -101,6 +110,9 @@ class DiscoverViewController: UIViewController {
                     panGestureRecognizer.setTranslation(CGPointZero, inView: self.view)
                 }, completion: { (Bool) -> Void in
                     self.updateCards(cardView)
+                    // Undo rotation of the card
+                    cardView.transform = CGAffineTransformRotate(cardView.transform, (-1 * self.currentRotation))
+                    self.currentRotation = 0
                 })
             } else {
                 // The user didn't surpass our threshold of accepting or rejecting, move the card back into it's original position
@@ -110,6 +122,10 @@ class DiscoverViewController: UIViewController {
                     self.rejectedLabel.alpha = 0
                     cardView.center = CGPoint(x: self.superViewCenter, y: cardView.center.y)
                     panGestureRecognizer.setTranslation(CGPointZero, inView: self.view)
+
+                    // Undo rotation of the card
+                    cardView.transform = CGAffineTransformRotate(cardView.transform, (-1 * self.currentRotation))
+                    self.currentRotation = 0
                 })
             }
         }
