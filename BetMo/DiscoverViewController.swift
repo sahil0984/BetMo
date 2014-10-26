@@ -58,13 +58,30 @@ class DiscoverViewController: UIViewController {
         let velocityX = velocity.x
         let currentCenterX = cardView.center.x
         let endPositionX = currentCenterX + translation.x
-        
+
+        var labelAlpha: CGFloat = 0
+        if superViewCenter < currentCenterX {
+            labelAlpha = -1 * (1 - endPositionX/superViewCenter)
+        } else if superViewCenter > currentCenterX {
+            labelAlpha = 1 - endPositionX/superViewCenter
+        }
+
+        println(labelAlpha)
         if panGestureRecognizer.state == .Began {
             // We don't care about this
         } else if panGestureRecognizer.state == .Changed {
             // Update the position according to the pan
             cardView.center = CGPoint(x: endPositionX, y: cardView.center.y)
             panGestureRecognizer.setTranslation(CGPointZero, inView: self.view)
+
+            // Show rejection/acceptance label
+            if currentCenterX < superViewCenter {
+                self.acceptedLabel.alpha = 0
+                self.rejectedLabel.alpha = labelAlpha
+            } else if superViewCenter < currentCenterX {
+                self.rejectedLabel.alpha = 0
+                self.acceptedLabel.alpha = labelAlpha
+            }
         } else if panGestureRecognizer.state == .Ended {
             if velocityX < 0 && (currentCenterX + 100) < superViewCenter {
                 handleRejection()
@@ -89,6 +106,9 @@ class DiscoverViewController: UIViewController {
             } else {
                 // The user didn't surpass our threshold of accepting or rejecting, move the card back into it's original position
                 UIView.animateWithDuration(0.1, animations: { () -> Void in
+                    // Reset everything
+                    self.acceptedLabel.alpha = 0
+                    self.rejectedLabel.alpha = 0
                     cardView.center = CGPoint(x: self.superViewCenter, y: cardView.center.y)
                     panGestureRecognizer.setTranslation(CGPointZero, inView: self.view)
                 })
@@ -113,8 +133,6 @@ class DiscoverViewController: UIViewController {
     }
 
     func handleRejection() {
-        self.rejectedLabel.alpha = 0
-        self.rejectedLabel.hidden = false
         UIView.animateWithDuration(0.2, animations: { () -> Void in
             self.rejectedLabel.alpha = 1
             }, completion: { (Bool) -> Void in
@@ -125,8 +143,6 @@ class DiscoverViewController: UIViewController {
     }
 
     func handleAcceptance() {
-        self.acceptedLabel.alpha = 0
-        self.acceptedLabel.hidden = false
         UIView.animateWithDuration(0.2, animations: { () -> Void in
             self.acceptedLabel.alpha = 1
             }, completion: { (Bool) -> Void in
