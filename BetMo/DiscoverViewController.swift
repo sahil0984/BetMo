@@ -14,6 +14,9 @@ class DiscoverViewController: UIViewController {
     @IBOutlet weak var cardViewTwo: CustomCellNib!
     @IBOutlet weak var noMoreBetsView: CustomCellNib!
 
+    @IBOutlet weak var acceptedLabel: UILabel!
+    @IBOutlet weak var rejectedLabel: UILabel!
+
     var superViewCenter: CGFloat!
 
     var activeCardView: CustomCellNib!
@@ -63,8 +66,10 @@ class DiscoverViewController: UIViewController {
             cardView.center = CGPoint(x: endPositionX, y: cardView.center.y)
             panGestureRecognizer.setTranslation(CGPointZero, inView: self.view)
         } else if panGestureRecognizer.state == .Ended {
-            // If the user ended with a negative velocity and surpassed our position threshold, move the card out of view to the left
             if velocityX < 0 && (currentCenterX + 100) < superViewCenter {
+                handleRejection()
+
+                // If the user ended with a negative velocity and surpassed our position threshold, move the card out of view to the left
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
                     cardView.center = CGPoint(x: -500, y: cardView.center.y)
                     panGestureRecognizer.setTranslation(CGPointZero, inView: self.view)
@@ -72,6 +77,8 @@ class DiscoverViewController: UIViewController {
                         self.updateCards(cardView)
                 })
             } else if velocityX > 0 && superViewCenter < (currentCenterX - 100) {
+                handleAcceptance()
+
                 // If the user ended with a positive velocity and surpassed our position threshold, move the card out of view to the right
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
                     cardView.center = CGPoint(x: 500, y: cardView.center.y)
@@ -103,6 +110,30 @@ class DiscoverViewController: UIViewController {
             view.bringSubviewToFront(cardViewOne)
             cardViewTwo.center = CGPoint(x: self.superViewCenter, y: cardViewTwo.center.y)
         }
+    }
+
+    func handleRejection() {
+        self.rejectedLabel.alpha = 0
+        self.rejectedLabel.hidden = false
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            self.rejectedLabel.alpha = 1
+            }, completion: { (Bool) -> Void in
+                UIView.animateWithDuration(0.5, animations: { () -> Void in
+                    self.rejectedLabel.alpha = 0
+                })
+        })
+    }
+
+    func handleAcceptance() {
+        self.acceptedLabel.alpha = 0
+        self.acceptedLabel.hidden = false
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            self.acceptedLabel.alpha = 1
+            }, completion: { (Bool) -> Void in
+                UIView.animateWithDuration(0.5, animations: { () -> Void in
+                    self.acceptedLabel.alpha = 0
+                })
+        })
     }
 
     /*
