@@ -54,6 +54,9 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
         
         betAmountView.hidden = true
         betAmountView.backgroundColor = UIColor.whiteColor()
+        betAmountLabel.text = "$25"
+        betAmountSlider.value = (25 * 5 / 1000) / 5
+
         
         friendsListContainer.hidden = true
         friendsListContainer.backgroundColor = UIColor.whiteColor()
