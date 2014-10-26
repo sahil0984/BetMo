@@ -462,6 +462,86 @@
             </objects>
             <point key="canvasLocation" x="2491" y="1084"/>
         </scene>
+        <!--Discover View Controller-->
+        <scene sceneID="Kg6-qL-Hoq">
+            <objects>
+                <viewController storyboardIdentifier="DiscoverViewController" id="4ie-kk-mhb" customClass="DiscoverViewController" customModule="BetMo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PcF-ln-YkB"/>
+                        <viewControllerLayoutGuide type="bottom" id="tOg-FX-2Zg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uyt-FB-IQX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sZ0-AB-920" userLabel="Card1" customClass="CustomCellNib" customModule="BetMo" customModuleProvider="target">
+                                <rect key="frame" x="20" y="250" width="560" height="100"/>
+                                <color key="backgroundColor" red="0.0" green="0.28212900600000002" blue="0.58298658290000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="McD-Bg-CrG"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="qht-6K-yUy"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="oMP-gC-DOt" appends="YES" id="6iy-ag-txl"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gIz-xc-Ac9" userLabel="Card2" customClass="CustomCellNib" customModule="BetMo" customModuleProvider="target">
+                                <rect key="frame" x="20" y="250" width="560" height="100"/>
+                                <color key="backgroundColor" red="0.86616847829999999" green="0.86616847829999999" blue="0.86616847829999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="B3g-sq-Bqr"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Khc-Tv-NIW"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="jCU-6T-NMD" appends="YES" id="IXK-EN-n2A"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="sZ0-AB-920" firstAttribute="leading" secondItem="uyt-FB-IQX" secondAttribute="leading" constant="50" id="Cwn-H9-w1O"/>
+                            <constraint firstItem="gIz-xc-Ac9" firstAttribute="leading" secondItem="uyt-FB-IQX" secondAttribute="leading" constant="20" id="GqP-qr-oT4"/>
+                            <constraint firstAttribute="centerY" secondItem="gIz-xc-Ac9" secondAttribute="centerY" id="IRo-eq-p6M"/>
+                            <constraint firstAttribute="trailing" secondItem="sZ0-AB-920" secondAttribute="trailing" constant="20" id="LO5-IT-Wce"/>
+                            <constraint firstAttribute="centerX" secondItem="sZ0-AB-920" secondAttribute="centerX" id="P3G-Sr-1GA"/>
+                            <constraint firstItem="sZ0-AB-920" firstAttribute="top" secondItem="PcF-ln-YkB" secondAttribute="bottom" constant="50" id="PI6-mN-Mty"/>
+                            <constraint firstAttribute="trailing" secondItem="gIz-xc-Ac9" secondAttribute="trailing" constant="20" id="Q7Y-in-hUU"/>
+                            <constraint firstItem="sZ0-AB-920" firstAttribute="leading" secondItem="uyt-FB-IQX" secondAttribute="leading" constant="20" id="XWC-jv-3lT"/>
+                            <constraint firstItem="tOg-FX-2Zg" firstAttribute="top" secondItem="sZ0-AB-920" secondAttribute="bottom" constant="50" id="b2U-bR-n3q"/>
+                            <constraint firstAttribute="trailing" secondItem="sZ0-AB-920" secondAttribute="trailing" constant="50" id="chn-hS-eOn"/>
+                            <constraint firstAttribute="centerX" secondItem="gIz-xc-Ac9" secondAttribute="centerX" id="rOz-gP-9ml"/>
+                            <constraint firstAttribute="centerY" secondItem="sZ0-AB-920" secondAttribute="centerY" id="wRR-sL-iL5"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Cwn-H9-w1O"/>
+                                <exclude reference="PI6-mN-Mty"/>
+                                <exclude reference="chn-hS-eOn"/>
+                                <exclude reference="b2U-bR-n3q"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="cardViewOne" destination="sZ0-AB-920" id="VzI-Q5-UYp"/>
+                        <outlet property="cardViewTwo" destination="gIz-xc-Ac9" id="iE8-EK-pKn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ttd-tP-5Zl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="jCU-6T-NMD">
+                    <connections>
+                        <action selector="onPan:" destination="4ie-kk-mhb" id="Mmq-Dh-364"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="oMP-gC-DOt">
+                    <connections>
+                        <action selector="onPan:" destination="4ie-kk-mhb" id="W3k-2e-PzP"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1141" y="-510"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="D9o-Hx-ERg">
             <objects>
@@ -531,14 +611,14 @@
                                         <rect key="frame" x="120" y="0.0" width="120" height="50"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="discover" translatesAutoresizingMaskIntoConstraints="NO" id="KTL-KN-j7H">
-                                                <rect key="frame" x="48" y="9" width="25" height="25"/>
+                                                <rect key="frame" x="46" y="9" width="25" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="3s7-1q-ik5"/>
                                                     <constraint firstAttribute="width" constant="25" id="vO5-mT-L0d"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open Bets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhr-TS-7iv">
-                                                <rect key="frame" x="35" y="34" width="50" height="12"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhr-TS-7iv">
+                                                <rect key="frame" x="39" y="34" width="41" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -547,11 +627,14 @@
                                         <color key="backgroundColor" red="0.17926290759999999" green="0.17926290759999999" blue="0.17926290759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="centerX" secondItem="KTL-KN-j7H" secondAttribute="centerX" id="8bI-am-0ZV"/>
+                                            <constraint firstAttribute="centerX" secondItem="KTL-KN-j7H" secondAttribute="centerX" constant="1.5" id="8bI-am-0ZV"/>
                                             <constraint firstAttribute="centerX" secondItem="lhr-TS-7iv" secondAttribute="centerX" id="HiB-NB-qDz"/>
                                             <constraint firstAttribute="centerY" secondItem="KTL-KN-j7H" secondAttribute="centerY" constant="3" id="TJu-NJ-tsE"/>
                                             <constraint firstItem="lhr-TS-7iv" firstAttribute="top" secondItem="KTL-KN-j7H" secondAttribute="bottom" id="rMY-Sb-gPM"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="g06-a3-IHC" appends="YES" id="n3M-5B-y0p"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djU-Zb-NwE" userLabel="profile">
                                         <rect key="frame" x="480" y="0.0" width="120" height="50"/>
@@ -744,6 +827,7 @@
                         <barButtonItem key="rightBarButtonItem" image="new" id="jNq-rs-doz"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="discoverButtonContainerView" destination="afz-TE-aAF" id="uZw-mI-dGN"/>
                         <outlet property="homeButtonContainerView" destination="6Yj-zp-Dmc" id="zO8-We-bxI"/>
                         <outlet property="profileButtonContainerView" destination="djU-Zb-NwE" id="LHg-qW-PeG"/>
                         <outlet property="requestButtonContainerView" destination="tQp-Eo-UvR" id="J7d-Kh-2SG"/>
@@ -772,6 +856,11 @@
                 <tapGestureRecognizer id="axn-4m-w9Z">
                     <connections>
                         <action selector="onNewBet:" destination="8ma-hs-RMc" id="AZs-5g-PCJ"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="g06-a3-IHC">
+                    <connections>
+                        <action selector="onDiscoverTab:" destination="8ma-hs-RMc" id="Cei-vZ-fKC"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -889,7 +978,7 @@
                                             <action selector="onCancel:" destination="rzM-5v-Qej" eventType="touchUpInside" id="hvq-GL-2GV"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wFi-Km-zrP">
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wFi-Km-zrP">
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="1" id="1gz-yz-tWg"/>

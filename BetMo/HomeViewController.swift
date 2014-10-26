@@ -20,12 +20,15 @@ class HomeViewController: UIViewController, AddBetViewControllerDelegate {
     @IBOutlet weak var requestButtonContainerView: UIView!
     @IBOutlet weak var homeButtonContainerView: UIView!
     @IBOutlet weak var profileButtonContainerView: UIView!
+    @IBOutlet weak var discoverButtonContainerView: UIView!
 
     var tabSelectionColor = UIColor.blackColor()
     var tabDefaultColor: UIColor!
     var homeFeedContainer: BetsFeedViewController!
     var openBetsFeedContainer: BetsFeedViewController!
     var myBetsFeedContainer: BetsFeedViewController!
+    var discoverViewController: DiscoverViewController!
+
     var allViewControllers: [BetsFeedViewController] = [BetsFeedViewController]()
     var newBet: Bet?
 
@@ -66,6 +69,8 @@ class HomeViewController: UIViewController, AddBetViewControllerDelegate {
         myBetsFeedContainer = storyboard.instantiateViewControllerWithIdentifier("BetsFeedViewController") as BetsFeedViewController
         myBetsFeedContainer.feedViewType = profileTab
 
+        discoverViewController = storyboard.instantiateViewControllerWithIdentifier("DiscoverViewController") as DiscoverViewController
+
         // For easier access when using segmented control
         allViewControllers = [openBetsFeedContainer, homeFeedContainer, myBetsFeedContainer]
         activeViewController = homeFeedContainer
@@ -101,6 +106,14 @@ class HomeViewController: UIViewController, AddBetViewControllerDelegate {
         }
     }
 
+    @IBAction func onDiscoverTab(sender: UITapGestureRecognizer) {
+        if activeViewController != discoverViewController {
+            resetTabBarSelection()
+            activeViewController = discoverViewController
+            discoverButtonContainerView.backgroundColor = tabSelectionColor
+        }
+    }
+
     @IBAction func onProfileTab(sender: UITapGestureRecognizer) {
         if activeViewController != allViewControllers[2] {
             resetTabBarSelection()
@@ -113,6 +126,7 @@ class HomeViewController: UIViewController, AddBetViewControllerDelegate {
         profileButtonContainerView.backgroundColor = tabDefaultColor
         homeButtonContainerView.backgroundColor = tabDefaultColor
         requestButtonContainerView.backgroundColor = tabDefaultColor
+        discoverButtonContainerView.backgroundColor = tabDefaultColor
     }
 
     @IBAction func onLogout(sender: UIButton) {
