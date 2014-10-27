@@ -46,6 +46,9 @@
 		9FB9428019E7D73300D72264 /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9427F19E7D73300D72264 /* FriendsListViewController.swift */; };
 		9FB9428219E8FF3100D72264 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9428119E8FF3100D72264 /* FriendTableViewCell.swift */; };
 		9FD517D619E9FF970056EE54 /* BetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD517D519E9FF970056EE54 /* BetDetailViewController.swift */; };
+		9FD7933919FE1A5800975737 /* NewBetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD7933819FE1A5800975737 /* NewBetViewController.swift */; };
+		9FD7933B19FE1B5000975737 /* NewBetDescViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD7933A19FE1B5000975737 /* NewBetDescViewController.swift */; };
+		9FD7933D19FE1B7700975737 /* NewBetAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD7933C19FE1B7700975737 /* NewBetAmountViewController.swift */; };
 		9FFCCD5719EE5A5000AC999F /* CustomCellNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFCCD5619EE5A5000AC999F /* CustomCellNib.swift */; };
 		9FFCCD5919EE5A7600AC999F /* CustomCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FFCCD5819EE5A7600AC999F /* CustomCellNib.xib */; };
 		9FFCCD5B19EF47E400AC999F /* CellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFCCD5A19EF47E400AC999F /* CellAnimator.swift */; };
@@ -95,6 +98,9 @@
 		9FB9427F19E7D73300D72264 /* FriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
 		9FB9428119E8FF3100D72264 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		9FD517D519E9FF970056EE54 /* BetDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetDetailViewController.swift; sourceTree = "<group>"; };
+		9FD7933819FE1A5800975737 /* NewBetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewBetViewController.swift; sourceTree = "<group>"; };
+		9FD7933A19FE1B5000975737 /* NewBetDescViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewBetDescViewController.swift; sourceTree = "<group>"; };
+		9FD7933C19FE1B7700975737 /* NewBetAmountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewBetAmountViewController.swift; sourceTree = "<group>"; };
 		9FFCCD5619EE5A5000AC999F /* CustomCellNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellNib.swift; sourceTree = "<group>"; };
 		9FFCCD5819EE5A7600AC999F /* CustomCellNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellNib.xib; sourceTree = "<group>"; };
 		9FFCCD5A19EF47E400AC999F /* CellAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellAnimator.swift; sourceTree = "<group>"; };
@@ -261,6 +267,9 @@
 				85FF8D2919EB4BC900396F53 /* PaymentViewController.swift */,
 				9F54C03119F64E6200AFA29F /* AddBetViewController.swift */,
 				85DA561119FC61DA0063E34B /* DiscoverViewController.swift */,
+				9FD7933819FE1A5800975737 /* NewBetViewController.swift */,
+				9FD7933A19FE1B5000975737 /* NewBetDescViewController.swift */,
+				9FD7933C19FE1B7700975737 /* NewBetAmountViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -418,7 +427,10 @@
 				9F24867219F248E9006C51C8 /* BetsFeedViewController.swift in Sources */,
 				85BCEAF119F4979C00A2866C /* ProfileHeaderView.swift in Sources */,
 				9F54C03219F64E6200AFA29F /* AddBetViewController.swift in Sources */,
+				9FD7933919FE1A5800975737 /* NewBetViewController.swift in Sources */,
+				9FD7933D19FE1B7700975737 /* NewBetAmountViewController.swift in Sources */,
 				9FACFBA619E61CA1007E865C /* HomeViewController.swift in Sources */,
+				9FD7933B19FE1B5000975737 /* NewBetDescViewController.swift in Sources */,
 				9FB9428219E8FF3100D72264 /* FriendTableViewCell.swift in Sources */,
 				9FD517D619E9FF970056EE54 /* BetDetailViewController.swift in Sources */,
 				9F24867619F25039006C51C8 /* BetsFeedTableViewCell.swift in Sources */,

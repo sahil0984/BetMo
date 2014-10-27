@@ -1,0 +1,109 @@
+//
+//  NewBetDescViewController.swift
+//  BetMo
+//
+//  Created by Sahil Arora on 10/26/14.
+//  Copyright (c) 2014 codepath. All rights reserved.
+//
+
+import UIKit
+
+protocol NewBetDescViewControllerDelegate {
+    func newBetDescSubmitted(betDesc: String)
+}
+
+class NewBetDescViewController: UIViewController, UITextViewDelegate {
+
+    
+    @IBOutlet weak var betDescTextView: UITextView!
+    
+    @IBOutlet weak var nextButton: UIButton!
+    
+    var delegate: NewBetDescViewControllerDelegate?
+    
+    let betDefaultText = "Describe your bet..."
+    var betDescTextLength = 0
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        
+        betDescTextView.delegate = self
+        betDescTextView.text = ""
+        AddEmptyBetHint()
+        betDescTextLength = 0
+        
+        nextButton.layer.cornerRadius = 5
+        nextButton.hidden = true
+    }
+    
+    
+    
+    @IBAction func onNextButton(sender: AnyObject) {
+        delegate?.newBetDescSubmitted(betDescTextView.text)
+    }
+    
+    
+    func AddEmptyBetHint() {
+        var betTextLength = betDescTextView.text as NSString
+        if betTextLength.length == 0 {
+            betDescTextView.text = betDefaultText
+            setHintFont()
+        }
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        var betText = betDescTextView.text as NSString
+        betDescTextLength = betText.length
+        
+        if betDescTextLength == 0 {
+            nextButton.hidden = true
+        } else {
+            nextButton.hidden = false
+        }
+        
+//        descCharCountLabel.text = "\(140 - betDescTextLength)"
+//        if betDescTextLength > 140 {
+//            descCharCountLabel.textColor = UIColor.redColor()
+//        } else {
+//            descCharCountLabel.textColor = UIColor.blackColor()
+//        }
+    }
+    
+    
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        
+        setBetFont()
+        
+        if betDescTextLength == 0 {
+            betDescTextView.text = ""
+        }
+        return true
+    }
+    
+    func setHintFont() {
+        betDescTextView.textColor = UIColor.grayColor()
+    }
+    func setBetFont() {
+        betDescTextView.textColor = UIColor.blackColor()
+    }
+    
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
