@@ -132,6 +132,13 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
 
+    func winnerChosen(customCellNib: CustomCellNib, bet: Bet) {
+        var rowIndex = customCellNib.rowIndex
+        if self.bets.count > rowIndex {
+            // replace with new info
+            self.bets[rowIndex] = bet
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

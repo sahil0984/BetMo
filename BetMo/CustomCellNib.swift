@@ -12,6 +12,7 @@ protocol CustomCellNibDelegate {
     func betAccepted(acceptedBet : Bet) -> Void
     func betRejected(rejectedBet : Bet) -> Void
     func betCancelled(customCellNib: CustomCellNib, cancelledBet : Bet) -> Void
+    func winnerChosen(customCellNib: CustomCellNib, bet: Bet)
 }
 
 class CustomCellNib: UIView {
@@ -394,18 +395,38 @@ class CustomCellNib: UIView {
         
         var currUser = PFUser.currentUser() as User
         if currUser.getFbId() == bet.getOwner().getFbId() {
-            bet.won()
+            bet.wonWithCompletion({ (bet, error) -> () in
+                if error == nil {
+                    self.delegate?.winnerChosen(self, bet: bet!)
+                    self.bet = bet!
+                }
+            })
         } else if currUser.getFbId() == bet.getOppenent()?.getFbId() {
-            bet.lost()
+            bet.lostWithCompletion({ (bet, error) -> () in
+                if error == nil {
+                    self.delegate?.winnerChosen(self, bet: bet!)
+                    self.bet = bet!
+                }
+            })
         }
     }
     @IBAction func onOpponentImageTap(sender: UITapGestureRecognizer) {
         
         var currUser = PFUser.currentUser() as User
         if currUser.getFbId() == bet.getOppenent()?.getFbId() {
-            bet.won()
+            bet.wonWithCompletion({ (bet, error) -> () in
+                if error == nil {
+                    self.delegate?.winnerChosen(self, bet: bet!)
+                    self.bet = bet!
+                }
+            })
         } else if currUser.getFbId() == bet.getOwner().getFbId() {
-            bet.lost()
+            bet.lostWithCompletion({ (bet, error) -> () in
+                if error == nil {
+                    self.delegate?.winnerChosen(self, bet: bet!)
+                    self.bet = bet!
+                }
+            })
         }
     }
 
