@@ -753,16 +753,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Uf-pK-sdn" userLabel="NoMoreBets" customClass="CustomCellNib" customModule="BetMo" customModuleProvider="target">
-                                <rect key="frame" x="20" y="250" width="560" height="100"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Uf-pK-sdn" userLabel="NoMoreBets" customClass="CustomCellNib" customModule="BetMo" customModuleProvider="target">
+                                <rect key="frame" x="20" y="115" width="560" height="100.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="OAJ-Qt-WB5"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="jdt-Cw-Prb"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gIz-xc-Ac9" userLabel="Card2" customClass="CustomCellNib" customModule="BetMo" customModuleProvider="target">
-                                <rect key="frame" x="20" y="250" width="560" height="100"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gIz-xc-Ac9" userLabel="Card2" customClass="CustomCellNib" customModule="BetMo" customModuleProvider="target">
+                                <rect key="frame" x="20" y="115" width="560" height="100.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -773,8 +773,8 @@
                                     <outletCollection property="gestureRecognizers" destination="jCU-6T-NMD" appends="YES" id="IXK-EN-n2A"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sZ0-AB-920" userLabel="Card1" customClass="CustomCellNib" customModule="BetMo" customModuleProvider="target">
-                                <rect key="frame" x="20" y="250" width="560" height="100"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sZ0-AB-920" userLabel="Card1" customClass="CustomCellNib" customModule="BetMo" customModuleProvider="target">
+                                <rect key="frame" x="20" y="115" width="560" height="100.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -792,50 +792,141 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accepted" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F97-Jt-eSk">
-                                <rect key="frame" x="251.5" y="70" width="97.5" height="26.5"/>
+                                <rect key="frame" x="251" y="70" width="97.5" height="26.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="0.65204653532608692" blue="0.097709108575886272" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tXT-pr-CTD">
+                                <rect key="frame" x="208" y="241" width="183" height="95"/>
+                                <subviews>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="circle-95" translatesAutoresizingMaskIntoConstraints="NO" id="NDG-Tc-APd" userLabel="accept-circle">
+                                        <rect key="frame" x="88" y="0.0" width="95" height="95"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="95" id="9BZ-O8-fBd"/>
+                                            <constraint firstAttribute="width" constant="95" id="o17-DQ-BKK"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="0yg-BZ-AIp" appends="YES" id="ktK-tb-B3U"/>
+                                        </connections>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="action-48" translatesAutoresizingMaskIntoConstraints="NO" id="fBW-XW-Xcc" userLabel="accept">
+                                        <rect key="frame" x="112" y="24" width="48" height="48"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="NB1-O7-IsC"/>
+                                            <constraint firstAttribute="height" constant="48" id="fVz-JK-NQq"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="circle-95" translatesAutoresizingMaskIntoConstraints="NO" id="ISp-Pi-kZa" userLabel="reject-circle">
+                                        <rect key="frame" x="0.0" y="0.0" width="95" height="95"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="95" id="c69-HO-y0A"/>
+                                            <constraint firstAttribute="width" constant="95" id="sht-TD-ap7"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="r2Q-nE-mfE" appends="YES" id="o10-d6-e24"/>
+                                        </connections>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="X-50" translatesAutoresizingMaskIntoConstraints="NO" id="bFd-Gt-oFf" userLabel="reject">
+                                        <rect key="frame" x="23" y="23" width="50" height="50"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="Peg-4x-m3F"/>
+                                            <constraint firstAttribute="height" constant="50" id="dYE-gr-Qzr"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="ISp-Pi-kZa" secondAttribute="bottom" id="3if-8M-e7z"/>
+                                    <constraint firstAttribute="height" constant="95" id="4Lm-bh-nPJ"/>
+                                    <constraint firstItem="fBW-XW-Xcc" firstAttribute="top" secondItem="NDG-Tc-APd" secondAttribute="bottom" constant="-71" id="6m2-pQ-V3b"/>
+                                    <constraint firstAttribute="width" constant="183" id="8c4-hk-qQh"/>
+                                    <constraint firstAttribute="bottom" secondItem="NDG-Tc-APd" secondAttribute="bottom" id="GYw-Nk-TrN"/>
+                                    <constraint firstItem="NDG-Tc-APd" firstAttribute="top" secondItem="tXT-pr-CTD" secondAttribute="top" id="MpV-S1-bDn"/>
+                                    <constraint firstItem="NDG-Tc-APd" firstAttribute="leading" secondItem="ISp-Pi-kZa" secondAttribute="trailing" constant="-7" id="USv-YR-uJn"/>
+                                    <constraint firstItem="ISp-Pi-kZa" firstAttribute="leading" secondItem="tXT-pr-CTD" secondAttribute="leading" id="aP8-nH-cgg"/>
+                                    <constraint firstItem="ISp-Pi-kZa" firstAttribute="top" secondItem="tXT-pr-CTD" secondAttribute="top" id="eGf-OB-Eju"/>
+                                    <constraint firstItem="fBW-XW-Xcc" firstAttribute="leading" secondItem="NDG-Tc-APd" secondAttribute="trailing" constant="-71" id="gfd-He-Jd8"/>
+                                    <constraint firstItem="bFd-Gt-oFf" firstAttribute="leading" secondItem="ISp-Pi-kZa" secondAttribute="trailing" constant="-72" id="hvc-cH-zO1"/>
+                                    <constraint firstAttribute="trailing" secondItem="NDG-Tc-APd" secondAttribute="trailing" id="nXm-7O-7YU"/>
+                                    <constraint firstItem="bFd-Gt-oFf" firstAttribute="top" secondItem="ISp-Pi-kZa" secondAttribute="bottom" constant="-72" id="wcM-1Z-Jnm"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Available Bets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iq6-UW-l0N">
+                                <rect key="frame" x="246" y="45" width="108.5" height="20.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="0Uf-pK-sdn" secondAttribute="centerY" id="2qj-PP-QfG"/>
+                            <constraint firstItem="tOg-FX-2Zg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tXT-pr-CTD" secondAttribute="bottom" constant="50" id="86B-4F-ANF"/>
                             <constraint firstItem="sZ0-AB-920" firstAttribute="leading" secondItem="uyt-FB-IQX" secondAttribute="leading" constant="50" id="Cwn-H9-w1O"/>
                             <constraint firstItem="gIz-xc-Ac9" firstAttribute="leading" secondItem="uyt-FB-IQX" secondAttribute="leading" constant="20" id="GqP-qr-oT4"/>
+                            <constraint firstItem="sZ0-AB-920" firstAttribute="top" secondItem="F97-Jt-eSk" secondAttribute="bottom" constant="100" id="H9p-LA-Lo0"/>
                             <constraint firstAttribute="centerY" secondItem="gIz-xc-Ac9" secondAttribute="centerY" id="IRo-eq-p6M"/>
                             <constraint firstItem="F97-Jt-eSk" firstAttribute="top" secondItem="PcF-ln-YkB" secondAttribute="bottom" constant="50" id="JWc-Pc-rHO"/>
+                            <constraint firstItem="0Uf-pK-sdn" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Iq6-UW-l0N" secondAttribute="bottom" constant="25" id="KKS-lt-Vwr"/>
                             <constraint firstAttribute="trailing" secondItem="sZ0-AB-920" secondAttribute="trailing" constant="20" id="LO5-IT-Wce"/>
                             <constraint firstAttribute="centerX" secondItem="sZ0-AB-920" secondAttribute="centerX" id="P3G-Sr-1GA"/>
                             <constraint firstItem="sZ0-AB-920" firstAttribute="top" secondItem="PcF-ln-YkB" secondAttribute="bottom" constant="50" id="PI6-mN-Mty"/>
                             <constraint firstAttribute="trailing" secondItem="gIz-xc-Ac9" secondAttribute="trailing" constant="20" id="Q7Y-in-hUU"/>
+                            <constraint firstItem="gIz-xc-Ac9" firstAttribute="top" secondItem="F97-Jt-eSk" secondAttribute="bottom" constant="100" id="RW8-Ll-5yt"/>
                             <constraint firstItem="0Uf-pK-sdn" firstAttribute="leading" secondItem="uyt-FB-IQX" secondAttribute="leading" constant="20" id="Rhg-Br-Rzs"/>
+                            <constraint firstAttribute="centerX" secondItem="Iq6-UW-l0N" secondAttribute="centerX" id="U0K-0j-8Xh"/>
+                            <constraint firstAttribute="centerX" secondItem="tXT-pr-CTD" secondAttribute="centerX" id="VOw-IF-ets"/>
+                            <constraint firstItem="sZ0-AB-920" firstAttribute="top" secondItem="Iq6-UW-l0N" secondAttribute="bottom" constant="145.5" id="WND-sr-VPV"/>
+                            <constraint firstItem="Iq6-UW-l0N" firstAttribute="top" secondItem="PcF-ln-YkB" secondAttribute="bottom" constant="25" id="Wr0-MA-v0a"/>
                             <constraint firstItem="sZ0-AB-920" firstAttribute="leading" secondItem="uyt-FB-IQX" secondAttribute="leading" constant="20" id="XWC-jv-3lT"/>
                             <constraint firstAttribute="centerX" secondItem="nLO-M3-2bo" secondAttribute="centerX" id="YM5-5E-Llh"/>
                             <constraint firstItem="tOg-FX-2Zg" firstAttribute="top" secondItem="sZ0-AB-920" secondAttribute="bottom" constant="50" id="b2U-bR-n3q"/>
+                            <constraint firstItem="0Uf-pK-sdn" firstAttribute="top" secondItem="F97-Jt-eSk" secondAttribute="bottom" constant="100" id="chK-oG-HOt"/>
                             <constraint firstAttribute="trailing" secondItem="sZ0-AB-920" secondAttribute="trailing" constant="50" id="chn-hS-eOn"/>
                             <constraint firstAttribute="centerX" secondItem="0Uf-pK-sdn" secondAttribute="centerX" id="dmL-O1-ObU"/>
                             <constraint firstAttribute="trailing" secondItem="0Uf-pK-sdn" secondAttribute="trailing" constant="20" id="fHf-KF-ngj"/>
+                            <constraint firstItem="tXT-pr-CTD" firstAttribute="top" secondItem="sZ0-AB-920" secondAttribute="bottom" constant="25" id="fTM-Ym-T8X"/>
+                            <constraint firstAttribute="bottom" secondItem="tXT-pr-CTD" secondAttribute="bottom" constant="50" id="fwg-vL-jDE"/>
+                            <constraint firstItem="gIz-xc-Ac9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Iq6-UW-l0N" secondAttribute="bottom" constant="25" id="jAU-4j-1Fp"/>
+                            <constraint firstItem="NDG-Tc-APd" firstAttribute="top" secondItem="sZ0-AB-920" secondAttribute="bottom" constant="20" id="lK9-i7-vjb"/>
                             <constraint firstItem="nLO-M3-2bo" firstAttribute="top" secondItem="PcF-ln-YkB" secondAttribute="bottom" constant="50" id="oDo-A3-Yad"/>
                             <constraint firstAttribute="centerX" secondItem="gIz-xc-Ac9" secondAttribute="centerX" id="rOz-gP-9ml"/>
+                            <constraint firstItem="tXT-pr-CTD" firstAttribute="top" secondItem="gIz-xc-Ac9" secondAttribute="bottom" constant="25" id="s1b-se-g1i"/>
                             <constraint firstAttribute="centerX" secondItem="F97-Jt-eSk" secondAttribute="centerX" id="uHZ-Yk-IgO"/>
                             <constraint firstAttribute="centerY" secondItem="sZ0-AB-920" secondAttribute="centerY" id="wRR-sL-iL5"/>
+                            <constraint firstItem="sZ0-AB-920" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Iq6-UW-l0N" secondAttribute="bottom" constant="25" id="wa0-7b-eRT"/>
+                            <constraint firstItem="tXT-pr-CTD" firstAttribute="top" secondItem="0Uf-pK-sdn" secondAttribute="bottom" constant="25" id="yDT-Bl-ye9"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="2qj-PP-QfG"/>
+                                <exclude reference="chK-oG-HOt"/>
+                                <exclude reference="IRo-eq-p6M"/>
+                                <exclude reference="RW8-Ll-5yt"/>
                                 <exclude reference="Cwn-H9-w1O"/>
+                                <exclude reference="H9p-LA-Lo0"/>
                                 <exclude reference="PI6-mN-Mty"/>
+                                <exclude reference="WND-sr-VPV"/>
                                 <exclude reference="chn-hS-eOn"/>
+                                <exclude reference="wRR-sL-iL5"/>
+                                <exclude reference="fwg-vL-jDE"/>
+                                <exclude reference="lK9-i7-vjb"/>
                                 <exclude reference="b2U-bR-n3q"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="acceptedLabel" destination="F97-Jt-eSk" id="8Fu-q3-7gd"/>
+                        <outlet property="buttonsContainer" destination="tXT-pr-CTD" id="iF5-8R-oLd"/>
                         <outlet property="cardViewOne" destination="sZ0-AB-920" id="VzI-Q5-UYp"/>
                         <outlet property="cardViewTwo" destination="gIz-xc-Ac9" id="iE8-EK-pKn"/>
                         <outlet property="noMoreBetsView" destination="0Uf-pK-sdn" id="C9X-Wt-JD5"/>
                         <outlet property="rejectedLabel" destination="nLO-M3-2bo" id="3vG-AN-oZk"/>
+                        <outlet property="titleLabel" destination="Iq6-UW-l0N" id="GaD-7X-sV5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ttd-tP-5Zl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -849,6 +940,16 @@
                         <action selector="onPan:" destination="4ie-kk-mhb" id="W3k-2e-PzP"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer id="0yg-BZ-AIp">
+                    <connections>
+                        <action selector="handleTapAcceptance:" destination="4ie-kk-mhb" id="EK6-gP-PjW"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="r2Q-nE-mfE">
+                    <connections>
+                        <action selector="handleTapReject:" destination="4ie-kk-mhb" id="zXs-7v-aCI"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1141" y="-510"/>
         </scene>
@@ -1469,10 +1570,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="X-50" width="50" height="50"/>
         <image name="action-26" width="26" height="26"/>
+        <image name="action-48" width="48" height="48"/>
         <image name="arrows" width="169" height="46"/>
         <image name="back--icon" width="13" height="12"/>
         <image name="bell_service-25" width="25" height="25"/>
+        <image name="circle-95" width="94" height="94"/>
         <image name="discover" width="25" height="25"/>
         <image name="home-25" width="25" height="25"/>
         <image name="new" width="32" height="32"/>
