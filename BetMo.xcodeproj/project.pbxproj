@@ -49,6 +49,8 @@
 		9FD7933919FE1A5800975737 /* NewBetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD7933819FE1A5800975737 /* NewBetViewController.swift */; };
 		9FD7933B19FE1B5000975737 /* NewBetDescViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD7933A19FE1B5000975737 /* NewBetDescViewController.swift */; };
 		9FD7933D19FE1B7700975737 /* NewBetAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD7933C19FE1B7700975737 /* NewBetAmountViewController.swift */; };
+		9FD7933F19FE4D0600975737 /* NewBetOpponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD7933E19FE4D0600975737 /* NewBetOpponentViewController.swift */; };
+		9FD7934119FE539A00975737 /* FriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD7934019FE539A00975737 /* FriendCollectionViewCell.swift */; };
 		9FFCCD5719EE5A5000AC999F /* CustomCellNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFCCD5619EE5A5000AC999F /* CustomCellNib.swift */; };
 		9FFCCD5919EE5A7600AC999F /* CustomCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FFCCD5819EE5A7600AC999F /* CustomCellNib.xib */; };
 		9FFCCD5B19EF47E400AC999F /* CellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFCCD5A19EF47E400AC999F /* CellAnimator.swift */; };
@@ -101,6 +103,8 @@
 		9FD7933819FE1A5800975737 /* NewBetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewBetViewController.swift; sourceTree = "<group>"; };
 		9FD7933A19FE1B5000975737 /* NewBetDescViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewBetDescViewController.swift; sourceTree = "<group>"; };
 		9FD7933C19FE1B7700975737 /* NewBetAmountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewBetAmountViewController.swift; sourceTree = "<group>"; };
+		9FD7933E19FE4D0600975737 /* NewBetOpponentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewBetOpponentViewController.swift; sourceTree = "<group>"; };
+		9FD7934019FE539A00975737 /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
 		9FFCCD5619EE5A5000AC999F /* CustomCellNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellNib.swift; sourceTree = "<group>"; };
 		9FFCCD5819EE5A7600AC999F /* CustomCellNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellNib.xib; sourceTree = "<group>"; };
 		9FFCCD5A19EF47E400AC999F /* CellAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellAnimator.swift; sourceTree = "<group>"; };
@@ -269,6 +273,7 @@
 				9FD7933819FE1A5800975737 /* NewBetViewController.swift */,
 				9FD7933A19FE1B5000975737 /* NewBetDescViewController.swift */,
 				9FD7933C19FE1B7700975737 /* NewBetAmountViewController.swift */,
+				9FD7933E19FE4D0600975737 /* NewBetOpponentViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 			children = (
 				9FB9428119E8FF3100D72264 /* FriendTableViewCell.swift */,
 				9F24867519F25039006C51C8 /* BetsFeedTableViewCell.swift */,
+				9FD7934019FE539A00975737 /* FriendCollectionViewCell.swift */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -425,6 +431,8 @@
 				9F24867819F31EBA006C51C8 /* BetMoGetImage.swift in Sources */,
 				9F54C00219F5F13D00AFA29F /* ConfirmNewBetViewController.swift in Sources */,
 				9F24867219F248E9006C51C8 /* BetsFeedViewController.swift in Sources */,
+				9FD7933F19FE4D0600975737 /* NewBetOpponentViewController.swift in Sources */,
+				9FD7934119FE539A00975737 /* FriendCollectionViewCell.swift in Sources */,
 				85BCEAF119F4979C00A2866C /* ProfileHeaderView.swift in Sources */,
 				9F54C03219F64E6200AFA29F /* AddBetViewController.swift in Sources */,
 				9FD7933919FE1A5800975737 /* NewBetViewController.swift in Sources */,

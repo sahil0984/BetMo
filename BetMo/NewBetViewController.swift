@@ -15,7 +15,7 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
     
     var newBetDescViewController: NewBetDescViewController!
     var newBetAmountViewController: NewBetAmountViewController!
-    var newBetOpponentViewController: FriendsListViewController!
+    var newBetOpponentViewController: NewBetOpponentViewController!
     
     var newBet: Bet = Bet()
     
@@ -52,7 +52,7 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
         
         newBetAmountViewController = storyboard?.instantiateViewControllerWithIdentifier("NewBetAmountViewController") as? NewBetAmountViewController
         
-        newBetOpponentViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendsListViewController") as? FriendsListViewController
+        newBetOpponentViewController = storyboard?.instantiateViewControllerWithIdentifier("NewBetOpponentViewController") as? NewBetOpponentViewController
         
         
         newBetDescViewController.delegate = self
@@ -72,7 +72,7 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
         } else if activeViewController == newBetAmountViewController {
             activeViewController = newBetDescViewController
         } else if activeViewController == newBetOpponentViewController {
-            activeViewController == newBetAmountViewController
+            activeViewController = newBetAmountViewController
         }
     }
     

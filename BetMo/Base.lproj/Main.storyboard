@@ -668,10 +668,10 @@
             </objects>
             <point key="canvasLocation" x="3495" y="184"/>
         </scene>
-        <!--View Controller-->
+        <!--New Bet Opponent View Controller-->
         <scene sceneID="IAW-Ni-HCC">
             <objects>
-                <viewController id="iIw-1u-ABY" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewBetOpponentViewController" id="iIw-1u-ABY" customClass="NewBetOpponentViewController" customModule="BetMo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3EZ-3i-xxf"/>
                         <viewControllerLayoutGuide type="bottom" id="MmR-Sq-RKN"/>
@@ -683,27 +683,29 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hAm-n7-1Cm">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8Km-UQ-eXG">
-                                    <size key="itemSize" width="296" height="248"/>
+                                    <size key="itemSize" width="120" height="120"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cds-it-3Nd">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FriendCell" id="cds-it-3Nd" customClass="FriendCollectionViewCell" customModule="BetMo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="296" height="248"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8DU-my-ikI">
-                                                    <rect key="frame" x="0.0" y="0.0" width="296" height="248"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8DU-my-ikI">
+                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sahil A" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C66-4h-v05">
-                                                    <rect key="frame" x="10" y="222" width="53.5" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sahil A" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C66-4h-v05">
+                                                    <rect key="frame" x="10" y="94" width="53.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <size key="shadowOffset" width="2" height="1"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -716,6 +718,10 @@
                                             <constraint firstItem="8DU-my-ikI" firstAttribute="leading" secondItem="cds-it-3Nd" secondAttribute="leading" id="l0D-kr-BVk"/>
                                             <constraint firstItem="8DU-my-ikI" firstAttribute="top" secondItem="cds-it-3Nd" secondAttribute="top" id="ucm-8U-J3z"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="friendImageView" destination="8DU-my-ikI" id="xDW-pk-27z"/>
+                                            <outlet property="friendNameLabel" destination="C66-4h-v05" id="6dC-w6-Ue2"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -741,10 +747,14 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="friendListCollectionView" destination="hAm-n7-1Cm" id="Xyn-oP-I8X"/>
+                        <outlet property="friendSearchBar" destination="fxc-db-1ws" id="gbz-BG-b7H"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VYl-qp-0ak" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4174" y="184"/>
+            <point key="canvasLocation" x="4326" y="184"/>
         </scene>
         <!--Discover View Controller-->
         <scene sceneID="Kg6-qL-Hoq">
