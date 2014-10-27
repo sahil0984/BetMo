@@ -100,13 +100,14 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("betFeedCell") as BetsFeedTableViewCell
         
+        if feedViewType == requestTab || feedViewType == profileTab {
+            cell.customBetCellView.isRequest = true
+        }
+
         cell.bet = bets[indexPath.row]
         cell.customBetCellView.rowIndex = indexPath.row
         cell.customBetCellView.delegate = self
-        if feedViewType == requestTab {
-            cell.customBetCellView.isRequest = true
-        }
-        
+
         return cell
     }
     
@@ -131,6 +132,13 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
 
+    func winnerChosen(customCellNib: CustomCellNib, bet: Bet) {
+        var rowIndex = customCellNib.rowIndex
+        if self.bets.count > rowIndex {
+            // replace with new info
+            self.bets[rowIndex] = bet
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

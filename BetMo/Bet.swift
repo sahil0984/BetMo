@@ -228,6 +228,44 @@ class Bet : PFObject, PFSubclassing {
         }
     }
 
+    func lostWithCompletion(completion: (bet: Bet?, error: NSError?) -> ()) {
+        var currentUser = PFUser.currentUser() as User
+        if currentUser.getFbId() == self.getOwner().getFbId() {
+            self["winner"] = self.getOppenent()!
+        } else {
+            self["winner"] = self.getOwner()
+        }
+        
+        self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
+            if isSaved {
+                println("Successfully saved that I lost");
+                completion(bet: (self as Bet), error: nil)
+
+                self.pushWinnerToWatchers()
+                
+                //Find owner
+                var ownerQuery = User.query()
+                if self.getOwner().objectId == currentUser.objectId {
+                    ownerQuery.whereKey("fbId", equalTo: self.getOppenent()?.getFbId())
+                } else {
+                    ownerQuery.whereKey("fbId", equalTo: self.getOwner().getFbId())
+                }
+                //Find devices associated with the owner
+                var pushQuery = PFInstallation.query()
+                pushQuery.whereKey("user", matchesQuery: ownerQuery)
+                //Send push notification to opponent
+                var push = PFPush()
+                push.setQuery(pushQuery)
+                push.setMessage("You have won a $\(self.getAmount()!) bet against \(currentUser.getName()).\n\(self.getDescription()!)")
+                push.sendPushInBackground()
+                
+            } else {
+                completion(bet: nil, error: error)
+                println("Failed to save that I lost");
+                println("\(error!)")
+            }
+        }
+    }
     func won() {
         var currentUser = PFUser.currentUser() as User
         self["winner"] = currentUser
@@ -259,7 +297,41 @@ class Bet : PFObject, PFSubclassing {
             }
         }
     }
-    
+
+    func wonWithCompletion(completion: (bet: Bet?, error: NSError?) -> ()) {
+        var currentUser = PFUser.currentUser() as User
+        self["winner"] = currentUser
+        self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
+            if isSaved {
+                println("Successfully saved that I won");
+                completion(bet: (self as Bet), error: nil)
+
+                self.pushWinnerToWatchers()
+                
+                //Find owner
+                var ownerQuery = User.query()
+                if self.getOwner().objectId == currentUser.objectId {
+                    ownerQuery.whereKey("fbId", equalTo: self.getOppenent()?.getFbId())
+                } else {
+                    ownerQuery.whereKey("fbId", equalTo: self.getOwner().getFbId())
+                }
+                //Find devices associated with the owner
+                var pushQuery = PFInstallation.query()
+                pushQuery.whereKey("user", matchesQuery: ownerQuery)
+                //Send push notification to opponent
+                var push = PFPush()
+                push.setQuery(pushQuery)
+                push.setMessage("You have lost a $\(self.getAmount()!) bet against \(currentUser.getName()).\n\(self.getDescription()!)")
+                push.sendPushInBackground()
+                
+            } else {
+                completion(bet: nil, error: error)
+                println("Failed to save that I won");
+                println("\(error!)")
+            }
+        }
+    }
+
     func watch() {
         var currentUser = PFUser.currentUser() as User
         self.addObject(currentUser, forKey: "watcherList")

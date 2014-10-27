@@ -12,6 +12,7 @@ protocol CustomCellNibDelegate {
     func betAccepted(acceptedBet : Bet) -> Void
     func betRejected(rejectedBet : Bet) -> Void
     func betCancelled(customCellNib: CustomCellNib, cancelledBet : Bet) -> Void
+    func winnerChosen(customCellNib: CustomCellNib, bet: Bet)
 }
 
 class CustomCellNib: UIView {
@@ -44,6 +45,7 @@ class CustomCellNib: UIView {
 
     var delegate: CustomCellNibDelegate?
 
+    @IBOutlet weak var descriptionBottomConstraint: NSLayoutConstraint!
     var arrowOriginalY: CGFloat!
     var rowIndex: Int!
 
@@ -80,6 +82,7 @@ class CustomCellNib: UIView {
         ownerMaskView.hidden = true
         opponentMaskView.hidden = true
 
+        descriptionBottomConstraint.constant = 20
         ownerNameLabel.text = currBet.getOwner().getName()
         BetMoGetImage.sharedInstance.getUserImage(currBet.getOwner().getProfileImageUrl(), completion: { (userImage, error) -> () in
             if error == nil {
@@ -156,10 +159,10 @@ class CustomCellNib: UIView {
             //Undecided bets - Select Winner button
             actionButton.setTitle("Pick Winner", forState: UIControlState.Normal)
             self.actionButtonBottomConstraint.constant = 10
-        } else if currBet.isClosedBet() { //&& (currBet.isUserOwner() || currBet.isUserOpponent()) {
+        } else if currBet.isClosedBet() {
             //Closed bet - Select Winner button
-
 //            actionButton.setTitle("Closed Bet", forState: UIControlState.Normal)
+            descriptionBottomConstraint.constant = 0
             actionButton.hidden = true
         } else {
             //CurrUser is not a party to this bet
@@ -392,18 +395,38 @@ class CustomCellNib: UIView {
         
         var currUser = PFUser.currentUser() as User
         if currUser.getFbId() == bet.getOwner().getFbId() {
-            bet.won()
+            bet.wonWithCompletion({ (bet, error) -> () in
+                if error == nil {
+                    self.delegate?.winnerChosen(self, bet: bet!)
+                    self.bet = bet!
+                }
+            })
         } else if currUser.getFbId() == bet.getOppenent()?.getFbId() {
-            bet.lost()
+            bet.lostWithCompletion({ (bet, error) -> () in
+                if error == nil {
+                    self.delegate?.winnerChosen(self, bet: bet!)
+                    self.bet = bet!
+                }
+            })
         }
     }
     @IBAction func onOpponentImageTap(sender: UITapGestureRecognizer) {
         
         var currUser = PFUser.currentUser() as User
         if currUser.getFbId() == bet.getOppenent()?.getFbId() {
-            bet.won()
+            bet.wonWithCompletion({ (bet, error) -> () in
+                if error == nil {
+                    self.delegate?.winnerChosen(self, bet: bet!)
+                    self.bet = bet!
+                }
+            })
         } else if currUser.getFbId() == bet.getOwner().getFbId() {
-            bet.lost()
+            bet.lostWithCompletion({ (bet, error) -> () in
+                if error == nil {
+                    self.delegate?.winnerChosen(self, bet: bet!)
+                    self.bet = bet!
+                }
+            })
         }
     }
 
