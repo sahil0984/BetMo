@@ -12,6 +12,10 @@ class NewBetAmountViewController: UIViewController {
 
     @IBOutlet var panGestureRecognizer: UIPanGestureRecognizer!
     
+    @IBOutlet weak var betAmountLabel: UILabel!
+    
+    var betAmount = 25
+    
     var initialPanPosition: CGPoint?
     
     override func viewDidLoad() {
@@ -25,16 +29,45 @@ class NewBetAmountViewController: UIViewController {
     
     
     @IBAction func onPanGesture(sender: UIPanGestureRecognizer) {
-        var panVelocity = sender.velocityInView(view)
-        //var panDirection = sender.
+        var point = panGestureRecognizer.locationInView(view)
+        var velocity = panGestureRecognizer.velocityInView(view)
+        var absVelocityX = abs(velocity.x)
+        var dir: Int
+        
+        if velocity.x < 0 {
+            dir = -1
+        } else {
+            dir = 1
+        }
         
         if sender.state == UIGestureRecognizerState.Began {
-            initialPanPosition = sender.locationInView(view)
+            initialPanPosition = point
         } else if sender.state == UIGestureRecognizerState.Changed {
+            var tmpBetAmount = betAmount
+            if absVelocityX < 10 {
+                tmpBetAmount += 1 * dir
+            } else if absVelocityX < 20 {
+                tmpBetAmount += 5 * dir
+            } else if absVelocityX < 40 {
+                tmpBetAmount += 10 * dir
+            } else if absVelocityX < 80 {
+                tmpBetAmount += 50 * dir
+            }
+            
+            if tmpBetAmount > 0 {
+                betAmount = tmpBetAmount
+            }
             
         } else if sender.state == UIGestureRecognizerState.Ended {
             
         }
+        
+        //println("At position: \(point)")
+        println("At velocity: \(absVelocityX)")
+        
+        //println("new amount: \(betAmount)")
+        betAmountLabel.text = "$\(betAmount)"
+
     }
     
     

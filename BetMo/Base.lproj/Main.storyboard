@@ -365,23 +365,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uWW-XL-UdM">
-                                <rect key="frame" x="0.0" y="20" width="600" height="60"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCd-4L-zsh">
-                                        <rect key="frame" x="0.0" y="59" width="600" height="1"/>
+                                        <rect key="frame" x="0.0" y="49" width="600" height="1"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="gc2-e9-zQl"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Bet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OjG-J2-Okl">
-                                        <rect key="frame" x="267" y="20" width="66.5" height="23.5"/>
+                                        <rect key="frame" x="267" y="13.5" width="66.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ear-9I-APW">
-                                        <rect key="frame" x="0.0" y="0.0" width="35" height="59"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="35" height="49"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="6cn-qC-KYI"/>
                                         </constraints>
@@ -397,19 +397,19 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.066666666666666666" green="0.27058823529411763" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="4RI-Pg-7gp"/>
+                                    <constraint firstAttribute="height" constant="50" id="4RI-Pg-7gp"/>
                                     <constraint firstAttribute="trailing" secondItem="CCd-4L-zsh" secondAttribute="trailing" id="9Kw-G0-Nb0"/>
                                     <constraint firstAttribute="centerX" secondItem="OjG-J2-Okl" secondAttribute="centerX" id="LDN-sb-vzz"/>
                                     <constraint firstItem="Ear-9I-APW" firstAttribute="leading" secondItem="uWW-XL-UdM" secondAttribute="leading" id="WGf-4x-QsJ"/>
                                     <constraint firstItem="CCd-4L-zsh" firstAttribute="leading" secondItem="uWW-XL-UdM" secondAttribute="leading" id="YwV-cf-heF"/>
                                     <constraint firstItem="Ear-9I-APW" firstAttribute="top" secondItem="uWW-XL-UdM" secondAttribute="top" id="buz-PT-eQw"/>
                                     <constraint firstAttribute="bottom" secondItem="CCd-4L-zsh" secondAttribute="bottom" id="nZs-pc-iaB"/>
-                                    <constraint firstItem="OjG-J2-Okl" firstAttribute="top" secondItem="uWW-XL-UdM" secondAttribute="top" constant="20" id="r8y-Qz-rCJ"/>
+                                    <constraint firstAttribute="centerY" secondItem="OjG-J2-Okl" secondAttribute="centerY" id="qPh-RR-uiG"/>
                                     <constraint firstItem="CCd-4L-zsh" firstAttribute="top" secondItem="Ear-9I-APW" secondAttribute="bottom" id="vF6-bl-m4Q"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="loj-ww-P3Y">
-                                <rect key="frame" x="0.0" y="80" width="600" height="520"/>
+                                <rect key="frame" x="0.0" y="70" width="600" height="530"/>
                                 <color key="backgroundColor" red="0.83083680390000003" green="0.86954213209999998" blue="0.87365141369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
@@ -451,16 +451,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Describe your bet..." translatesAutoresizingMaskIntoConstraints="NO" id="by6-8G-ntf">
-                                <rect key="frame" x="20" y="40" width="560" height="485"/>
+                                <rect key="frame" x="20" y="40" width="560" height="495"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Sj-Nc-zOS">
-                                <rect key="frame" x="5" y="535" width="590" height="60"/>
+                                <rect key="frame" x="5" y="545" width="590" height="50"/>
                                 <color key="backgroundColor" red="0.058823529411764705" green="0.20000000000000001" blue="0.46274509803921571" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Oe0-OO-dka"/>
+                                    <constraint firstAttribute="height" constant="50" id="Oe0-OO-dka"/>
                                 </constraints>
                                 <state key="normal" title="Next">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -624,10 +624,10 @@
                                 <rect key="frame" x="215" y="209" width="169" height="46"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZk-Pl-oEj">
-                                <rect key="frame" x="5" y="535" width="590" height="60"/>
+                                <rect key="frame" x="5" y="545" width="590" height="50"/>
                                 <color key="backgroundColor" red="0.058823529409999999" green="0.20000000000000001" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="UeQ-Xr-Eso"/>
+                                    <constraint firstAttribute="height" constant="50" id="UeQ-Xr-Eso"/>
                                 </constraints>
                                 <state key="normal" title="Next">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -651,6 +651,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="betAmountLabel" destination="nWC-eg-yHB" id="diJ-eg-IPC"/>
                         <outlet property="panGestureRecognizer" destination="F64-PY-AHj" id="G9A-Oz-Dhi"/>
                     </connections>
                 </viewController>
