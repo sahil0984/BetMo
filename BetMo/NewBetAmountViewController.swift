@@ -12,6 +12,8 @@ class NewBetAmountViewController: UIViewController {
 
     @IBOutlet var panGestureRecognizer: UIPanGestureRecognizer!
     
+    var initialPanPosition: CGPoint?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,8 +25,11 @@ class NewBetAmountViewController: UIViewController {
     
     
     @IBAction func onPanGesture(sender: UIPanGestureRecognizer) {
+        var panVelocity = sender.velocityInView(view)
+        //var panDirection = sender.
+        
         if sender.state == UIGestureRecognizerState.Began {
-            
+            initialPanPosition = sender.locationInView(view)
         } else if sender.state == UIGestureRecognizerState.Changed {
             
         } else if sender.state == UIGestureRecognizerState.Ended {
