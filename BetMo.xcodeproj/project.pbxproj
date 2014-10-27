@@ -13,6 +13,9 @@
 		853F392719E90BDE00915A5B /* BetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853F392619E90BDE00915A5B /* BetCell.swift */; };
 		85BCEAEF19F4974E00A2866C /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85BCEAEE19F4974E00A2866C /* ProfileHeaderView.xib */; };
 		85BCEAF119F4979C00A2866C /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BCEAF019F4979C00A2866C /* ProfileHeaderView.swift */; };
+		85D9DEA819FDF52500CE7E22 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85D9DEA519FDF52500CE7E22 /* OpenSans-Semibold.ttf */; };
+		85D9DEA919FDF52500CE7E22 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85D9DEA619FDF52500CE7E22 /* OpenSans-Regular.ttf */; };
+		85D9DEAA19FDF52500CE7E22 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85D9DEA719FDF52500CE7E22 /* OpenSans-Light.ttf */; };
 		85DA561219FC61DA0063E34B /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DA561119FC61DA0063E34B /* DiscoverViewController.swift */; };
 		85FF8D2A19EB4BC900396F53 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FF8D2919EB4BC900396F53 /* PaymentViewController.swift */; };
 		9F24867219F248E9006C51C8 /* BetsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F24867119F248E9006C51C8 /* BetsFeedViewController.swift */; };
@@ -62,6 +65,9 @@
 		853F392619E90BDE00915A5B /* BetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetCell.swift; sourceTree = "<group>"; };
 		85BCEAEE19F4974E00A2866C /* ProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		85BCEAF019F4979C00A2866C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		85D9DEA519FDF52500CE7E22 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		85D9DEA619FDF52500CE7E22 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		85D9DEA719FDF52500CE7E22 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		85DA561119FC61DA0063E34B /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		85FF8D2919EB4BC900396F53 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		9F24867119F248E9006C51C8 /* BetsFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetsFeedViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +157,16 @@
 			name = API;
 			sourceTree = "<group>";
 		};
+		85D9DE9E19FDF4D000CE7E22 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				85D9DEA519FDF52500CE7E22 /* OpenSans-Semibold.ttf */,
+				85D9DEA619FDF52500CE7E22 /* OpenSans-Regular.ttf */,
+				85D9DEA719FDF52500CE7E22 /* OpenSans-Light.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		9F24867919F44AB7006C51C8 /* NibCustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +200,7 @@
 		9FACFB4A19E60C02007E865C /* BetMo */ = {
 			isa = PBXGroup;
 			children = (
+				85D9DE9E19FDF4D000CE7E22 /* Fonts */,
 				9FFCCD5A19EF47E400AC999F /* CellAnimator.swift */,
 				8516DF3119E9D88700D1E3AB /* API */,
 				9FACFBA919E61DC4007E865C /* TableViewCells */,
@@ -328,7 +345,7 @@
 				TargetAttributes = {
 					9FACFB4719E60C02007E865C = {
 						CreatedOnToolsVersion = 6.0.1;
-						DevelopmentTeam = KUVH8VE7V6;
+						DevelopmentTeam = VSE69H6J2N;
 					};
 				};
 			};
@@ -360,6 +377,9 @@
 				9FACFB5819E60C02007E865C /* LaunchScreen.xib in Resources */,
 				9FFCCD5919EE5A7600AC999F /* CustomCellNib.xib in Resources */,
 				85BCEAEF19F4974E00A2866C /* ProfileHeaderView.xib in Resources */,
+				85D9DEA819FDF52500CE7E22 /* OpenSans-Semibold.ttf in Resources */,
+				85D9DEAA19FDF52500CE7E22 /* OpenSans-Light.ttf in Resources */,
+				85D9DEA919FDF52500CE7E22 /* OpenSans-Regular.ttf in Resources */,
 				9FACFB5519E60C02007E865C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,7 +562,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Sahil Arora (DAPPG8TTKS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/SahilArora/Documents/iOS/parse-library-1.4.1",
@@ -569,7 +590,7 @@
 					SystemConfiguration,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b58775d6-aa83-4def-be20-0f028c32b682";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BetMo/BetMo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -581,8 +602,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Sahil Arora (DAPPG8TTKS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sahil Arora (DAPPG8TTKS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/SahilArora/Documents/iOS/parse-library-1.4.1",
@@ -609,7 +630,7 @@
 					SystemConfiguration,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b58775d6-aa83-4def-be20-0f028c32b682";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BetMo/BetMo-Bridging-Header.h";
 			};
 			name = Release;

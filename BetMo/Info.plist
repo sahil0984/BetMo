@@ -51,5 +51,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>OpenSans-Semibold.ttf</string>
+		<string>OpenSans-Light.ttf</string>
+	</array>
 </dict>
 </plist>
