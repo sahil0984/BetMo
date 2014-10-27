@@ -392,12 +392,13 @@ class CustomCellNib: UIView {
     //Winner card button logic:
     //--------------------------
     @IBAction func onOwnerImageTap(sender: UITapGestureRecognizer) {
-        
+        MBProgressHUD.showHUDAddedTo(self.mainContentView, animated: true)
         var currUser = PFUser.currentUser() as User
         if currUser.getFbId() == bet.getOwner().getFbId() {
             bet.wonWithCompletion({ (bet, error) -> () in
                 if error == nil {
                     self.delegate?.winnerChosen(self, bet: bet!)
+                    MBProgressHUD.hideHUDForView(self.mainContentView, animated: true)
                     self.bet = bet!
                 }
             })
@@ -405,18 +406,20 @@ class CustomCellNib: UIView {
             bet.lostWithCompletion({ (bet, error) -> () in
                 if error == nil {
                     self.delegate?.winnerChosen(self, bet: bet!)
+                    MBProgressHUD.hideHUDForView(self.mainContentView, animated: true)
                     self.bet = bet!
                 }
             })
         }
     }
     @IBAction func onOpponentImageTap(sender: UITapGestureRecognizer) {
-        
+        MBProgressHUD.showHUDAddedTo(self.mainContentView, animated: true)
         var currUser = PFUser.currentUser() as User
         if currUser.getFbId() == bet.getOppenent()?.getFbId() {
             bet.wonWithCompletion({ (bet, error) -> () in
                 if error == nil {
                     self.delegate?.winnerChosen(self, bet: bet!)
+                    MBProgressHUD.hideHUDForView(self.mainContentView, animated: true)
                     self.bet = bet!
                 }
             })
@@ -424,6 +427,7 @@ class CustomCellNib: UIView {
             bet.lostWithCompletion({ (bet, error) -> () in
                 if error == nil {
                     self.delegate?.winnerChosen(self, bet: bet!)
+                    MBProgressHUD.hideHUDForView(self.mainContentView, animated: true)
                     self.bet = bet!
                 }
             })
