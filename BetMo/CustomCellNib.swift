@@ -11,6 +11,7 @@ import UIKit
 protocol CustomCellNibDelegate {
     func betAccepted(acceptedBet : Bet) -> Void
     func betRejected(rejectedBet : Bet) -> Void
+    func betCancelled(customCellNib: CustomCellNib, cancelledBet : Bet) -> Void
 }
 
 class CustomCellNib: UIView {
@@ -44,7 +45,17 @@ class CustomCellNib: UIView {
     var delegate: CustomCellNibDelegate?
 
     var arrowOriginalY: CGFloat!
+    var rowIndex: Int!
 
+    var isRequest: Bool = false {
+        willSet(value) {
+            if value {
+                actionButton.hidden = false
+                self.actionButtonBottomConstraint.constant = 10
+            }
+        }
+    }
+    
     var bet: Bet = Bet() {
         willSet(currBet) {
             fillMainCard(currBet)
@@ -64,7 +75,6 @@ class CustomCellNib: UIView {
         }
     }
     func fillMainCard(currBet: Bet) {
-        self.actionButtonBottomConstraint.constant = -32
         // hide masks by default (they might have been un-hidden by the bet that previously used this cell)
         // @TODO(samoli) this might not be necessary any longer since I added "hidden" to the storyboard
         ownerMaskView.hidden = true
@@ -110,7 +120,7 @@ class CustomCellNib: UIView {
                 }
             })
         } else {
-            opponentNameLabel.text = "This could be you."
+            opponentNameLabel.text = "No Opponent"
             self.opponentImageView.image = UIImage(named: "empty_user")
         }
         
@@ -129,9 +139,7 @@ class CustomCellNib: UIView {
         //Pending accept bets - Accept button
         //Undecided bets - Select Winner button
         //Closed bets - No button
-        
-        actionButton.hidden = false
-        
+
         var currUser = PFUser.currentUser() as User
         var betOwner = currBet.getOwner()
         var betOpponent = currBet.getOppenent()
@@ -142,6 +150,8 @@ class CustomCellNib: UIView {
         } else if currBet.isPendingAcceptBet() && currBet.isUserOpponent() {
             //Pending accept bets - Accept button
             actionButton.setTitle("Accept Bet", forState: UIControlState.Normal)
+        } else if (currBet.isPendingAcceptBet() || betOpponent == nil) && currBet.isUserOwner() {
+            actionButton.setTitle("Cancel Bet", forState: UIControlState.Normal)
         } else if currBet.isUndecidedBet() && (currBet.isUserOwner() || currBet.isUserOpponent()) {
             //Undecided bets - Select Winner button
             actionButton.setTitle("Pick Winner", forState: UIControlState.Normal)
@@ -267,6 +277,11 @@ class CustomCellNib: UIView {
             //Undecided bets - Select Winner button
             println("Pick winner pressed")
             swapViewWithWinnerView()
+        } else if actionButton.titleLabel?.text == "Cancel Bet" {
+            //Undecided bets - Select Winner button
+            println("Cancel bet pressed")
+            delegate?.betCancelled(self, cancelledBet: currBet)
+            currBet.cancel()
         } else {
             //Either this is a closed bet or currUser is not a party to this bet
             println("Cant press this button")

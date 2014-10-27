@@ -101,7 +101,11 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         var cell = tableView.dequeueReusableCellWithIdentifier("betFeedCell") as BetsFeedTableViewCell
         
         cell.bet = bets[indexPath.row]
+        cell.customBetCellView.rowIndex = indexPath.row
         cell.customBetCellView.delegate = self
+        if feedViewType == requestTab {
+            cell.customBetCellView.isRequest = true
+        }
         
         return cell
     }
@@ -119,6 +123,13 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         println("bet rejected: \(rejectedBet.getObjectId())")
     }
     
+    func betCancelled(customCellNib: CustomCellNib, cancelledBet: Bet) {
+        var rowIndex = customCellNib.rowIndex
+        if self.bets.count > rowIndex && self.bets[rowIndex] == cancelledBet {
+            self.bets.removeAtIndex(rowIndex)
+            self.betsFeedTableView.reloadData()
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

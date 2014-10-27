@@ -33,7 +33,7 @@ class BetMoClient {
                     self.requestedBets.append(bet)
                 }
                 // Request from Current User (if there is no opponent or if the opponent hasn't yet accepted)
-                if owner.getFbId() == currentUser.getFbId() && (opponent == nil || (opponent != nil && bet.getIsAccepted() == false)){
+                if owner.getFbId() == currentUser.getFbId() && (opponent == nil || (opponent != nil && bet.getIsAccepted() == false)) {
                     self.requestedBets.append(bet)
                 }
 
@@ -46,7 +46,7 @@ class BetMoClient {
                     self.openBets.append(bet)
                 }
 
-                if opponent != nil && bet.getIsAccepted() == true {
+                if winner != nil {
                     self.feedBets.append(bet)
                 }
 
