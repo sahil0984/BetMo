@@ -655,6 +655,7 @@
                     </view>
                     <connections>
                         <outlet property="betAmountLabel" destination="nWC-eg-yHB" id="diJ-eg-IPC"/>
+                        <outlet property="nextButton" destination="TZk-Pl-oEj" id="dKi-5e-KpF"/>
                         <outlet property="panGestureRecognizer" destination="F64-PY-AHj" id="G9A-Oz-Dhi"/>
                     </connections>
                 </viewController>

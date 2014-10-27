@@ -9,11 +9,12 @@
 import UIKit
 
 protocol NewBetAmountViewControllerDelegate {
-    func newBetAmountSubmitted(betAmount: Int)
+    func newBetAmountSubmitted(betAmount: String)
 }
 
 class NewBetAmountViewController: UIViewController {
 
+    @IBOutlet weak var nextButton: UIButton!
     @IBOutlet var panGestureRecognizer: UIPanGestureRecognizer!
     
     @IBOutlet weak var betAmountLabel: UILabel!
@@ -28,12 +29,14 @@ class NewBetAmountViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        nextButton.layer.cornerRadius = 5
     }
     
     
     
     @IBAction func onNextButton(sender: AnyObject) {
-        delegate?.newBetAmountSubmitted(betAmount)
+        delegate?.newBetAmountSubmitted("\(betAmount)")
     }
     
     

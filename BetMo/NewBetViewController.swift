@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate {
+class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, NewBetAmountViewControllerDelegate {
 
     
     @IBOutlet weak var contentView: UIView!
@@ -56,6 +56,7 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate {
         
         
         newBetDescViewController.delegate = self
+        newBetAmountViewController.delegate = self
         
         
         activeViewController = newBetDescViewController
@@ -79,6 +80,11 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate {
     func newBetDescSubmitted(betDesc: String) {
         newBet.setDescription(betDesc)
         activeViewController = newBetAmountViewController
+    }
+    
+    func newBetAmountSubmitted(betAmount: String) {
+        newBet.setAmount(betAmount)
+        activeViewController = newBetOpponentViewController
     }
     
     
