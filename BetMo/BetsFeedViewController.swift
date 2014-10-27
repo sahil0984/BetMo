@@ -100,13 +100,14 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("betFeedCell") as BetsFeedTableViewCell
         
+        if feedViewType == requestTab || feedViewType == profileTab {
+            cell.customBetCellView.isRequest = true
+        }
+
         cell.bet = bets[indexPath.row]
         cell.customBetCellView.rowIndex = indexPath.row
         cell.customBetCellView.delegate = self
-        if feedViewType == requestTab {
-            cell.customBetCellView.isRequest = true
-        }
-        
+
         return cell
     }
     

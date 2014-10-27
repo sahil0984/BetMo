@@ -44,6 +44,7 @@ class CustomCellNib: UIView {
 
     var delegate: CustomCellNibDelegate?
 
+    @IBOutlet weak var descriptionBottomConstraint: NSLayoutConstraint!
     var arrowOriginalY: CGFloat!
     var rowIndex: Int!
 
@@ -80,6 +81,7 @@ class CustomCellNib: UIView {
         ownerMaskView.hidden = true
         opponentMaskView.hidden = true
 
+        descriptionBottomConstraint.constant = 20
         ownerNameLabel.text = currBet.getOwner().getName()
         BetMoGetImage.sharedInstance.getUserImage(currBet.getOwner().getProfileImageUrl(), completion: { (userImage, error) -> () in
             if error == nil {
@@ -156,10 +158,10 @@ class CustomCellNib: UIView {
             //Undecided bets - Select Winner button
             actionButton.setTitle("Pick Winner", forState: UIControlState.Normal)
             self.actionButtonBottomConstraint.constant = 10
-        } else if currBet.isClosedBet() { //&& (currBet.isUserOwner() || currBet.isUserOpponent()) {
+        } else if currBet.isClosedBet() {
             //Closed bet - Select Winner button
-
 //            actionButton.setTitle("Closed Bet", forState: UIControlState.Normal)
+            descriptionBottomConstraint.constant = 0
             actionButton.hidden = true
         } else {
             //CurrUser is not a party to this bet

@@ -11,6 +11,7 @@
                 <outlet property="actionButtonBottomConstraint" destination="gq1-gC-vdT" id="Kjm-z3-Qh1"/>
                 <outlet property="betAmount" destination="iXb-gi-FWE" id="xGi-8B-QzP"/>
                 <outlet property="betDescription" destination="c6k-0C-CNq" id="Hcw-9f-1ua"/>
+                <outlet property="descriptionBottomConstraint" destination="ZmI-Nj-aVm" id="Jse-qx-Ojh"/>
                 <outlet property="firstArrowImageView" destination="s5l-vF-hAh" id="7W7-3K-oc4"/>
                 <outlet property="mainContentView" destination="GFN-jk-cJ9" id="W4w-qX-FL5"/>
                 <outlet property="noMoreBetsView" destination="QeW-XI-Kp5" id="UDY-CK-9N0"/>
@@ -65,7 +66,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the bet description." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6k-0C-CNq">
-                    <rect key="frame" x="20" y="225" width="126" height="105"/>
+                    <rect key="frame" x="20" y="225" width="212" height="105"/>
                     <fontDescription key="fontDescription" name="BanglaSangamMN" family="Bangla Sangam MN" pointSize="17"/>
                     <color key="textColor" red="0.23806895380434778" green="0.23806895380434778" blue="0.23806895380434778" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -174,7 +175,7 @@
                 <constraint firstItem="VTB-Pn-lno" firstAttribute="leading" secondItem="Reb-k2-HKu" secondAttribute="trailing" constant="5" id="dIS-gI-m5S"/>
                 <constraint firstItem="c6k-0C-CNq" firstAttribute="top" secondItem="iXb-gi-FWE" secondAttribute="bottom" constant="10" id="eJi-9e-f3V"/>
                 <constraint firstItem="2fW-x2-csz" firstAttribute="width" secondItem="Ywn-E7-fdb" secondAttribute="width" id="f46-uW-hWn"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="c6k-0C-CNq" secondAttribute="trailing" constant="20" id="gJf-2V-fSm"/>
+                <constraint firstAttribute="trailing" secondItem="c6k-0C-CNq" secondAttribute="trailing" constant="20" id="gJf-2V-fSm"/>
                 <constraint firstAttribute="bottom" secondItem="zcy-gZ-red" secondAttribute="bottom" constant="-32" id="gq1-gC-vdT"/>
                 <constraint firstItem="2fW-x2-csz" firstAttribute="centerY" secondItem="qjU-OI-9g1" secondAttribute="centerY" id="hdv-en-QaJ"/>
                 <constraint firstItem="Reb-k2-HKu" firstAttribute="centerY" secondItem="VTB-Pn-lno" secondAttribute="centerY" id="iPU-dC-suy"/>
