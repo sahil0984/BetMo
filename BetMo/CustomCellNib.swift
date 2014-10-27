@@ -162,7 +162,9 @@ class CustomCellNib: UIView {
         } else if currBet.isClosedBet() {
             //Closed bet - Select Winner button
 //            actionButton.setTitle("Closed Bet", forState: UIControlState.Normal)
-            descriptionBottomConstraint.constant = 0
+            if isRequest {
+                descriptionBottomConstraint.constant = 0
+            }
             actionButton.hidden = true
         } else {
             //CurrUser is not a party to this bet
