@@ -195,7 +195,6 @@
 			isa = PBXGroup;
 			children = (
 				85D9DE9E19FDF4D000CE7E22 /* Fonts */,
-				9FFCCD5A19EF47E400AC999F /* CellAnimator.swift */,
 				8516DF3119E9D88700D1E3AB /* API */,
 				9FACFBA919E61DC4007E865C /* TableViewCells */,
 				9FACFBA819E61DBC007E865C /* Models */,
@@ -295,6 +294,10 @@
 		9FFCCD5C19EF622D00AC999F /* Unused files */ = {
 			isa = PBXGroup;
 			children = (
+				9FFCCD5A19EF47E400AC999F /* CellAnimator.swift */,
+				9F2FD28E19E76C5F00400E46 /* CreateBetViewController.swift */,
+				9F24868019F4FFE0006C51C8 /* CreateDescriptionViewController.swift */,
+				9F24868219F500E1006C51C8 /* CreateAmountViewController.swift */,
 				9F54C00119F5F13D00AFA29F /* ConfirmNewBetViewController.swift */,
 				853F392419E901A500915A5B /* FeedViewController.swift */,
 				853F392619E90BDE00915A5B /* BetCell.swift */,

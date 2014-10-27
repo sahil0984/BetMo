@@ -26,13 +26,16 @@ class DiscoverViewController: UIViewController {
     var activeCardView: CustomCellNib!
     var bets: [Bet] = [Bet]()
 
+    // How much the last card is rotated to show "stacked" cards
+    let lastCardRotationDegress = 3
+
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.font = UIFont(name: "OpenSans-Light", size: 20)
         superViewCenter = self.view.center.x
         noMoreBetsView.noContentView = true
 
-        var lastCardRotation = -1 * CGFloat(Double(2) * M_PI / 180)
+        var lastCardRotation = -1 * CGFloat(Double(lastCardRotationDegress) * M_PI / 180)
         noMoreBetsView.transform = CGAffineTransformRotate(noMoreBetsView.transform, lastCardRotation)
 
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
@@ -217,7 +220,7 @@ class DiscoverViewController: UIViewController {
     func handleLastBetCase() {
         if bets.count == 1 {
             // Remove rotation of last card
-            var lastCardRotation = CGFloat(Double(2) * M_PI / 180)
+            var lastCardRotation = CGFloat(Double(lastCardRotationDegress) * M_PI / 180)
             noMoreBetsView.transform = CGAffineTransformRotate(noMoreBetsView.transform, lastCardRotation)
 
             // We have accepted/rejected the very last bet, hide action buttons
