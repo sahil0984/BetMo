@@ -18,9 +18,6 @@ class CustomCellNib: UIView {
     @IBOutlet var acceptContentView: UIView!
     @IBOutlet var winnerContentView: UIView!
     
-    @IBOutlet weak var ownerEmoji: UIImageView!
-    @IBOutlet weak var opponentEmoji: UIImageView!
-    
     @IBOutlet weak var ownerNameLabel: UILabel!
     @IBOutlet weak var opponentNameLabel: UILabel!
     
@@ -31,18 +28,19 @@ class CustomCellNib: UIView {
     @IBOutlet weak var betDescription: UILabel!
     
     @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var actionButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var subscribeButton: UIButton!
     @IBOutlet weak var subscriberCountLabel: UILabel!
     @IBOutlet weak var firstArrowImageView: UIImageView!
     @IBOutlet weak var secondArrowImageView: UIImageView!
 
-    var winningColor = UIColor(red: 8/255.0, green: 158/255.0, blue: 0, alpha: 0.6)
-    var losingColor = UIColor(red: 1, green: 59/255.0, blue: 48/255.0, alpha: 0.6)
+    var winningColor = UIColor(red: 93/255.0, green: 202/255.0, blue: 145/255.0, alpha: 0.5)
+    var losingColor = UIColor(red: 1, green: 116/255.0, blue: 116/255.0, alpha: 0.5)
 
     @IBOutlet weak var ownerMaskView: UIView!
     @IBOutlet weak var opponentMaskView: UIView!
     @IBOutlet weak var noMoreBetsView: UIView!
-    
+
     var delegate: CustomCellNibDelegate?
 
     var arrowOriginalY: CGFloat!
@@ -51,7 +49,6 @@ class CustomCellNib: UIView {
         willSet(currBet) {
             fillMainCard(currBet)
             fillWinnerCard(currBet)
-            
             swapViewWithMainView()
         }
         didSet {
@@ -67,9 +64,7 @@ class CustomCellNib: UIView {
         }
     }
     func fillMainCard(currBet: Bet) {
-        // sets up bet emojis
-        setEmojisIfNeeded(currBet)
-
+        self.actionButtonBottomConstraint.constant = -32
         // hide masks by default (they might have been un-hidden by the bet that previously used this cell)
         // @TODO(samoli) this might not be necessary any longer since I added "hidden" to the storyboard
         ownerMaskView.hidden = true
@@ -150,11 +145,12 @@ class CustomCellNib: UIView {
         } else if currBet.isUndecidedBet() && (currBet.isUserOwner() || currBet.isUserOpponent()) {
             //Undecided bets - Select Winner button
             actionButton.setTitle("Pick Winner", forState: UIControlState.Normal)
+            self.actionButtonBottomConstraint.constant = 10
         } else if currBet.isClosedBet() { //&& (currBet.isUserOwner() || currBet.isUserOpponent()) {
             //Closed bet - Select Winner button
 
-            actionButton.setTitle("Closed Bet", forState: UIControlState.Normal)
-            //actionButton.hidden = true
+//            actionButton.setTitle("Closed Bet", forState: UIControlState.Normal)
+            actionButton.hidden = true
         } else {
             //CurrUser is not a party to this bet
             actionButton.setTitle("Error", forState: UIControlState.Normal)
@@ -163,13 +159,6 @@ class CustomCellNib: UIView {
         
         //Show subscribe button
         updateWatcherViews(currBet.isUserWatcher(), watcherCount: currBet.getWatcherListCount())
-        
-//        subscriberCountLabel.text = "(\(currBet.getWatcherListCount()))"
-//        if currBet.isUserWatcher() { //if already subscribed
-//            subscribeButton.setImage(UIImage(named: "subscribeOn"), forState: UIControlState.Normal)
-//        } else {
-//            subscribeButton.setImage(UIImage(named: "subscribeOff"), forState: UIControlState.Normal)
-//        }
     }
     
     
@@ -246,15 +235,19 @@ class CustomCellNib: UIView {
         cardView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
         cardView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
         cardView.center = CGPointMake(frame.width/2, frame.height/2)
-        // Had to comment out rounded corners so that shadow works
-        cardView.layer.cornerRadius = 20
+        cardView.layer.cornerRadius = 15
         cardView.layer.masksToBounds = true
 
         layer.shadowColor = UIColor.blackColor().CGColor
-        layer.shadowOffset = CGSize(width: 1, height: 1)
-        layer.shadowOpacity = 0.4
-        layer.shadowRadius = 2
-        layer.cornerRadius = 20
+        layer.shadowOffset = CGSize(width: 0, height: 1.2)
+        layer.shadowOpacity = 0.6
+        layer.shadowRadius = 1
+        layer.cornerRadius = 15
+
+        ownerNameLabel.font = UIFont(name: "OpenSans-Semibold", size: 13)
+        opponentNameLabel.font = UIFont(name: "OpenSans-Semibold", size: 13)
+        betAmount.font = UIFont(name: "OpenSans-Light", size: 52)
+        betDescription.font = UIFont(name: "OpenSans-Regular", size: 16)
     }
     
     
@@ -399,28 +392,27 @@ class CustomCellNib: UIView {
         }
     }
 
-    func setEmojisIfNeeded(bet: Bet) {
-        return;
-        if let winner = bet.getWinner() {
-            let owner = bet.getOwner()
-            let opponent = bet.getOppenent()!
-            ownerEmoji.hidden = true
-            opponentEmoji.hidden = true
-    
-            if winner.objectId == bet.getOwner().objectId {
-                ownerEmoji.image = UIImage(named: "cool-25")
-                opponentEmoji.image = UIImage(named: "sad-25")
-                ownerEmoji.hidden = false
-                opponentEmoji.hidden = false
-                println("show")
-            } else if winner.objectId == bet.getOppenent()?.objectId {
-                opponentEmoji.image = UIImage(named: "cool-25")
-                ownerEmoji.image = UIImage(named: "sad-25")
-                ownerEmoji.hidden = false
-                opponentEmoji.hidden = false
-            }
-        }
-    }
+//    func setEmojisIfNeeded(bet: Bet) {
+//        if let winner = bet.getWinner() {
+//            let owner = bet.getOwner()
+//            let opponent = bet.getOppenent()!
+//            ownerEmoji.hidden = true
+//            opponentEmoji.hidden = true
+//    
+//            if winner.objectId == bet.getOwner().objectId {
+//                ownerEmoji.image = UIImage(named: "cool-25")
+//                opponentEmoji.image = UIImage(named: "sad-25")
+//                ownerEmoji.hidden = false
+//                opponentEmoji.hidden = false
+//                println("show")
+//            } else if winner.objectId == bet.getOppenent()?.objectId {
+//                opponentEmoji.image = UIImage(named: "cool-25")
+//                ownerEmoji.image = UIImage(named: "sad-25")
+//                ownerEmoji.hidden = false
+//                opponentEmoji.hidden = false
+//            }
+//        }
+//    }
 
     func animateArrows() {
         // The animation may have ended when the view disappeared but the state of the arrow might be the "animated" state -- reset arrow y positions back to their original
