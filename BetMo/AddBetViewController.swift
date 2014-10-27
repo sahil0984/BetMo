@@ -31,6 +31,8 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
     //constriants
     @IBOutlet weak var createBetTopMargin: NSLayoutConstraint!
     
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     var creationStep = 0
     
@@ -68,6 +70,8 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
         AddEmptyBetHint()
         betDescTextLength = 0
         
+        cancelButton.titleLabel?.text = "Cancel"
+        doneButton.titleLabel?.text = "Next"
         
         friendsListViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendsListViewController") as? FriendsListViewController
         friendsListViewController.delegate = self
@@ -155,6 +159,23 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
             }
 
         }
+    }
+    
+    @IBAction func onCancel(sender: AnyObject) {
+        if creationStep == 0 {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        } else if creationStep == 1 {
+            //animateBetAmountOut
+            cancelButton.titleLabel?.text = "Cancel"
+            doneButton.titleLabel?.text = "Next"
+            creationStep -= 1
+        } else if creationStep == 2 {
+            //animateFriendsListOut
+            cancelButton.titleLabel?.text = "Back"
+            doneButton.titleLabel?.text = "Next"
+            creationStep -= 1
+        }
+        
     }
     
     @IBAction func onAmountSlider(sender: UISlider) {
@@ -247,11 +268,6 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
     //Animate select friend start edit
     func animateFriendListStartEdit() {
         
-        //betDescViewVisibleOriginY = betDescView.frame.origin.y
-        //betDescViewAnimateByY = betDescView.frame.origin.y + betDescView.frame.height
-        //betAmountViewVisibleOriginY = betAmountView.frame.origin.y
-        //betAmountViewAnimateByY = betAmountView.frame.origin.y + betAmountView.frame.height
-        
         createBetTopMarginAnimateByY = 0 - self.betAmountView.frame.origin.y - 20
 
         //Animate description and amount out of the view
@@ -264,22 +280,13 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
             
         })
         
-        
         //CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size
-
-        
-        
         
     }
     
     //Animate select friend end edit
     func animateFriendListEndEdit() {
-        
-        //betDescViewVisibleOriginY = betDescView.frame.origin.y
-        //betDescViewAnimateByY = betDescView.frame.origin.y + betDescView.frame.height
-        //betAmountViewVisibleOriginY = betAmountView.frame.origin.y
-        //betAmountViewAnimateByY = betAmountView.frame.origin.y + betAmountView.frame.height
-        
+
         createBetTopMarginAnimateByY = 20
         
         //Animate description and amount out of the view
@@ -292,12 +299,9 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
                 
         })
         
-        
     }
     
-    @IBAction func onCancel(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
+
     
     /*
     // MARK: - Navigation
