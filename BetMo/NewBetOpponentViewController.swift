@@ -25,6 +25,7 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
         // Do any additional setup after loading the view.
         friendListCollectionView.dataSource = self
         friendListCollectionView.delegate = self
+        friendListCollectionView.backgroundColor = UIColor.whiteColor()
         
         friendSearchBar.delegate = self
         
