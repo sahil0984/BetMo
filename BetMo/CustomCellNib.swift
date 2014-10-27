@@ -159,13 +159,6 @@ class CustomCellNib: UIView {
         
         //Show subscribe button
         updateWatcherViews(currBet.isUserWatcher(), watcherCount: currBet.getWatcherListCount())
-        
-//        subscriberCountLabel.text = "(\(currBet.getWatcherListCount()))"
-//        if currBet.isUserWatcher() { //if already subscribed
-//            subscribeButton.setImage(UIImage(named: "subscribeOn"), forState: UIControlState.Normal)
-//        } else {
-//            subscribeButton.setImage(UIImage(named: "subscribeOff"), forState: UIControlState.Normal)
-//        }
     }
     
     

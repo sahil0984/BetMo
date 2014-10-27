@@ -35,8 +35,27 @@
             <rect key="frame" x="0.0" y="0.0" width="252" height="350"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QeW-XI-Kp5">
+                    <rect key="frame" x="0.0" y="0.0" width="252" height="350"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No more bets, check back later" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0I-Nq-R8a">
+                            <rect key="frame" x="18" y="166" width="215" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.77471127717391308" green="0.77471127717391308" blue="0.77471127717391308" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="k0I-Nq-R8a" secondAttribute="centerX" id="4OB-ke-8eV"/>
+                        <constraint firstAttribute="centerY" secondItem="k0I-Nq-R8a" secondAttribute="centerY" id="piJ-Ym-bE3"/>
+                    </constraints>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXb-gi-FWE">
                     <rect key="frame" x="79" y="155" width="93.5" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="5om-Lk-Cgl"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="42"/>
                     <color key="textColor" red="0.0" green="0.28212900600000002" blue="0.58298658290000005" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -62,7 +81,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the bet description." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6k-0C-CNq">
-                    <rect key="frame" x="20" y="215" width="212" height="46"/>
+                    <rect key="frame" x="20" y="215" width="126" height="115"/>
                     <fontDescription key="fontDescription" name="BanglaSangamMN" family="Bangla Sangam MN" pointSize="17"/>
                     <color key="textColor" red="0.23806895380434778" green="0.23806895380434778" blue="0.23806895380434778" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -75,11 +94,20 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcy-gZ-red">
-                    <rect key="frame" x="101" y="281" width="50" height="101"/>
+                    <rect key="frame" x="101" y="350" width="50" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="15p-2w-JNq"/>
+                        <constraint firstAttribute="height" constant="32" id="ohH-kr-12b"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <state key="normal" title="Button">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="15p-2w-JNq"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="onActionButton:" destination="-1" eventType="touchUpInside" id="6an-qt-6lP"/>
                     </connections>
@@ -97,42 +125,26 @@
                         <action selector="onSubscribeButton:" destination="-1" eventType="touchUpInside" id="6cL-ZC-4iK"/>
                     </connections>
                 </button>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="99+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Reb-k2-HKu">
-                    <rect key="frame" x="215" y="320" width="16" height="15"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Reb-k2-HKu">
+                    <rect key="frame" x="215" y="322" width="16.5" height="12.5"/>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="9"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Opponent Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ccc-uF-SKi">
-                    <rect key="frame" x="138" y="130" width="100.5" height="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ccc-uF-SKi">
+                    <rect key="frame" x="141" y="130" width="95.5" height="15"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                     <color key="textColor" red="0.4755859375" green="0.4755859375" blue="0.4755859375" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <size key="shadowOffset" width="-1" height="-1"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Owners Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jk-Xb-qVj">
-                    <rect key="frame" x="13" y="130" width="100.5" height="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Owners Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jk-Xb-qVj">
+                    <rect key="frame" x="21" y="130" width="83.5" height="15"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                     <color key="textColor" red="0.50687839673913038" green="0.50687839673913038" blue="0.50687839673913038" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <size key="shadowOffset" width="-1" height="-1"/>
                 </label>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QeW-XI-Kp5">
-                    <rect key="frame" x="0.0" y="0.0" width="252" height="350"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No more bets, check back later" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0I-Nq-R8a">
-                            <rect key="frame" x="18" y="165" width="215" height="18"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" red="0.77471127717391308" green="0.77471127717391308" blue="0.77471127717391308" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="centerX" secondItem="k0I-Nq-R8a" secondAttribute="centerX" id="4OB-ke-8eV"/>
-                        <constraint firstAttribute="centerY" secondItem="k0I-Nq-R8a" secondAttribute="centerY" id="piJ-Ym-bE3"/>
-                    </constraints>
-                </view>
             </subviews>
             <constraints>
                 <constraint firstItem="Reb-k2-HKu" firstAttribute="width" secondItem="VTB-Pn-lno" secondAttribute="width" id="01r-hn-3Ae"/>
@@ -162,7 +174,7 @@
                 <constraint firstItem="VTB-Pn-lno" firstAttribute="leading" secondItem="Reb-k2-HKu" secondAttribute="trailing" constant="5" id="dIS-gI-m5S"/>
                 <constraint firstItem="c6k-0C-CNq" firstAttribute="top" secondItem="iXb-gi-FWE" secondAttribute="bottom" constant="10" id="eJi-9e-f3V"/>
                 <constraint firstItem="2fW-x2-csz" firstAttribute="width" secondItem="Ywn-E7-fdb" secondAttribute="width" id="f46-uW-hWn"/>
-                <constraint firstAttribute="trailing" secondItem="c6k-0C-CNq" secondAttribute="trailing" constant="20" id="gJf-2V-fSm"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="c6k-0C-CNq" secondAttribute="trailing" constant="20" id="gJf-2V-fSm"/>
                 <constraint firstAttribute="bottom" secondItem="zcy-gZ-red" secondAttribute="bottom" constant="-32" id="gq1-gC-vdT"/>
                 <constraint firstItem="2fW-x2-csz" firstAttribute="centerY" secondItem="qjU-OI-9g1" secondAttribute="centerY" id="hdv-en-QaJ"/>
                 <constraint firstItem="Reb-k2-HKu" firstAttribute="centerY" secondItem="VTB-Pn-lno" secondAttribute="centerY" id="iPU-dC-suy"/>
