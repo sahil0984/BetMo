@@ -3,17 +3,16 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "left-25.png"
+      "filename" : "finger.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "left-50.png"
+      "filename" : "finger@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "left-100.png"
+      "scale" : "3x"
     }
   ],
   "info" : {
