@@ -36,7 +36,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXb-gi-FWE">
-                    <rect key="frame" x="79" y="155" width="93.5" height="50"/>
+                    <rect key="frame" x="79" y="165" width="93.5" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="5om-Lk-Cgl"/>
                     </constraints>
@@ -65,7 +65,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the bet description." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6k-0C-CNq">
-                    <rect key="frame" x="20" y="215" width="126" height="115"/>
+                    <rect key="frame" x="20" y="225" width="126" height="105"/>
                     <fontDescription key="fontDescription" name="BanglaSangamMN" family="Bangla Sangam MN" pointSize="17"/>
                     <color key="textColor" red="0.23806895380434778" green="0.23806895380434778" blue="0.23806895380434778" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -139,7 +139,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.77471127717391308" green="0.77471127717391308" blue="0.77471127717391308" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="centerX" secondItem="k0I-Nq-R8a" secondAttribute="centerX" id="4OB-ke-8eV"/>
                         <constraint firstAttribute="centerY" secondItem="k0I-Nq-R8a" secondAttribute="centerY" id="piJ-Ym-bE3"/>
@@ -157,7 +157,7 @@
                 <constraint firstItem="V5M-Rm-8gK" firstAttribute="top" secondItem="GFN-jk-cJ9" secondAttribute="top" id="BgP-Qk-XGX"/>
                 <constraint firstItem="mqN-tO-rOq" firstAttribute="height" secondItem="V5M-Rm-8gK" secondAttribute="height" id="Chv-mB-9Op"/>
                 <constraint firstItem="Ccc-uF-SKi" firstAttribute="centerX" secondItem="mqN-tO-rOq" secondAttribute="centerX" id="Cqo-iw-IyG"/>
-                <constraint firstItem="iXb-gi-FWE" firstAttribute="top" secondItem="mqN-tO-rOq" secondAttribute="bottom" constant="30" id="Df5-Ic-VSl"/>
+                <constraint firstItem="iXb-gi-FWE" firstAttribute="top" secondItem="mqN-tO-rOq" secondAttribute="bottom" constant="40" id="Df5-Ic-VSl"/>
                 <constraint firstAttribute="trailing" secondItem="mqN-tO-rOq" secondAttribute="trailing" id="EnP-HU-IC5"/>
                 <constraint firstAttribute="trailing" secondItem="QeW-XI-Kp5" secondAttribute="trailing" id="GFB-i9-03U"/>
                 <constraint firstItem="0jk-Xb-qVj" firstAttribute="leading" secondItem="GFN-jk-cJ9" secondAttribute="leading" constant="5" id="Jje-cG-XKP"/>

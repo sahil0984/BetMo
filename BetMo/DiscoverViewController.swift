@@ -16,6 +16,9 @@ class DiscoverViewController: UIViewController {
 
     @IBOutlet weak var acceptedLabel: UILabel!
     @IBOutlet weak var rejectedLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+
+    @IBOutlet weak var buttonsContainer: UIView!
 
     var superViewCenter: CGFloat!
     var currentRotation: CGFloat = 0
@@ -25,8 +28,12 @@ class DiscoverViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.font = UIFont(name: "OpenSans-Light", size: 20)
         superViewCenter = self.view.center.x
         noMoreBetsView.noContentView = true
+
+        var lastCardRotation = -1 * CGFloat(Double(2) * M_PI / 180)
+        noMoreBetsView.transform = CGAffineTransformRotate(noMoreBetsView.transform, lastCardRotation)
 
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         // Do any additional setup after loading the view.
@@ -35,9 +42,9 @@ class DiscoverViewController: UIViewController {
                 self.bets = bets!
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
                 var bet = self.bets[0] as Bet
-                println(bet.getDescription())
                 self.cardViewOne.bet = self.bets[0]
                 self.cardViewTwo.bet = self.bets[1]
+                self.activeCardView = self.cardViewOne
             }
         })
     }
@@ -133,14 +140,22 @@ class DiscoverViewController: UIViewController {
 
     func updateCards(removedCard: CustomCellNib) {
         bets.removeAtIndex(0)
+
         if bets.count < 2 {
+            if cardViewOne == removedCard {
+                activeCardView = cardViewTwo
+            } else {
+                activeCardView = cardViewOne
+            }
             removedCard.removeFromSuperview()
         } else if cardViewOne == removedCard {
+            activeCardView = cardViewTwo
             cardViewOne.bet = bets[1]
             view.bringSubviewToFront(cardViewTwo)
             cardViewOne.center = CGPoint(x: self.superViewCenter, y: cardViewOne.center.y)
             self.view.layoutIfNeeded()
         } else {
+            activeCardView = cardViewOne
             cardViewTwo.bet = bets[1]
             view.bringSubviewToFront(cardViewOne)
             cardViewTwo.center = CGPoint(x: self.superViewCenter, y: cardViewTwo.center.y)
@@ -148,6 +163,8 @@ class DiscoverViewController: UIViewController {
     }
 
     func handleRejection() {
+        handleLastBetCase()
+
         UIView.animateWithDuration(0.2, animations: { () -> Void in
             self.rejectedLabel.alpha = 1
             }, completion: { (Bool) -> Void in
@@ -158,6 +175,8 @@ class DiscoverViewController: UIViewController {
     }
 
     func handleAcceptance() {
+        handleLastBetCase()
+
         UIView.animateWithDuration(0.2, animations: { () -> Void in
             self.acceptedLabel.alpha = 1
             }, completion: { (Bool) -> Void in
@@ -167,6 +186,44 @@ class DiscoverViewController: UIViewController {
         })
     }
 
+    @IBAction func handleTapReject(sender: UITapGestureRecognizer) {
+        handleRejection()
+        self.currentRotation = -1 * CGFloat(Double(5) * M_PI / 180)
+        self.activeCardView.transform = CGAffineTransformRotate(self.activeCardView.transform, self.currentRotation)
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.activeCardView.center.x -= 500
+            }, completion: { (Bool) -> Void in
+                // Undo rotation of the card
+                self.activeCardView.transform = CGAffineTransformRotate(self.activeCardView.transform, (-1 * self.currentRotation))
+                self.currentRotation = 0
+                self.updateCards(self.activeCardView)
+        })
+    }
+    
+    @IBAction func handleTapAcceptance(sender: UITapGestureRecognizer) {
+        handleAcceptance()
+        self.currentRotation = CGFloat(Double(5) * M_PI / 180)
+        self.activeCardView.transform = CGAffineTransformRotate(self.activeCardView.transform, self.currentRotation)
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.activeCardView.center.x += 500
+            }, completion: { (Bool) -> Void in
+                // Undo rotation of the card
+                self.activeCardView.transform = CGAffineTransformRotate(self.activeCardView.transform, (-1 * self.currentRotation))
+                self.currentRotation = 0
+                self.updateCards(self.activeCardView)
+        })
+    }
+
+    func handleLastBetCase() {
+        if bets.count == 1 {
+            // Remove rotation of last card
+            var lastCardRotation = CGFloat(Double(2) * M_PI / 180)
+            noMoreBetsView.transform = CGAffineTransformRotate(noMoreBetsView.transform, lastCardRotation)
+
+            // We have accepted/rejected the very last bet, hide action buttons
+            buttonsContainer.hidden = true
+        }
+    }
     /*
     // MARK: - Navigation
 
