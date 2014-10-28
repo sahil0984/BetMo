@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, NewBetViewControllerDelegate {
     
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var viewContainerTopConstraint: NSLayoutConstraint!
@@ -132,10 +132,11 @@ class HomeViewController: UIViewController {
     @IBAction func onLogout(sender: UIButton) {
         NSNotificationCenter.defaultCenter().postNotificationName("userDidLogoutNotification", object: nil)
     }
-
-    func createdBet(betCreated: Bet) {
-        self.newBet = betCreated
-        BetMoClient.sharedInstance.allBets.insert(betCreated, atIndex: 0)
+    
+    
+    func newBetCreated(newBet: Bet) {
+        self.newBet = newBet
+        BetMoClient.sharedInstance.allBets.insert(newBet, atIndex: 0)
     }
     
     //TODO: Need to figure out a better place to do this in order to slim down this controller
@@ -176,9 +177,9 @@ class HomeViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        var addBetViewController = segue.destinationViewController as NewBetViewController
+        var newBetViewController = segue.destinationViewController as NewBetViewController
         
-        //addBetViewController.delegate = self
+        newBetViewController.delegate = self
     }
 
 }

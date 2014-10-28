@@ -8,7 +8,11 @@
 
 import UIKit
 
-class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, NewBetAmountViewControllerDelegate {
+protocol NewBetViewControllerDelegate {
+    func newBetCreated(newBet: Bet)
+}
+
+class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, NewBetAmountViewControllerDelegate, NewBetOpponentViewControllerDelegate, NewBetConfirmViewControllerDelegate {
 
     
     @IBOutlet weak var contentView: UIView!
@@ -16,9 +20,11 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
     var newBetDescViewController: NewBetDescViewController!
     var newBetAmountViewController: NewBetAmountViewController!
     var newBetOpponentViewController: NewBetOpponentViewController!
+    var newBetConfirmViewController: NewBetConfirmViewController!
     
     var newBet: Bet = Bet()
     
+    var delegate: NewBetViewControllerDelegate?
     
     // Containers handler
     var activeViewController: UIViewController? {
@@ -54,10 +60,12 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
         
         newBetOpponentViewController = storyboard?.instantiateViewControllerWithIdentifier("NewBetOpponentViewController") as? NewBetOpponentViewController
         
+        newBetConfirmViewController = storyboard?.instantiateViewControllerWithIdentifier("NewBetConfirmViewController") as? NewBetConfirmViewController
         
         newBetDescViewController.delegate = self
         newBetAmountViewController.delegate = self
-        
+        newBetOpponentViewController.delegate = self
+        newBetConfirmViewController.delegate = self
         
         activeViewController = newBetDescViewController
 
@@ -73,6 +81,8 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
             activeViewController = newBetDescViewController
         } else if activeViewController == newBetOpponentViewController {
             activeViewController = newBetAmountViewController
+        } else if activeViewController == newBetConfirmViewController {
+            activeViewController = newBetOpponentViewController
         }
     }
     
@@ -87,7 +97,22 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
         activeViewController = newBetOpponentViewController
     }
     
+    func newOpponentSubmitted(betOpponent: User) {
+        if betOpponent.getName() != "Open Bet" {
+            newBet.setOpponent(betOpponent)
+        }
+        newBetConfirmViewController.newBet = self.newBet
+        activeViewController = newBetConfirmViewController
+    }
     
+    func newBetConfirmed(newBet: Bet) {
+        delegate?.newBetCreated(newBet)
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func newBetCancelled(newBet: Bet) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
