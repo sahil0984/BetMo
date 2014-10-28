@@ -253,10 +253,17 @@ class CustomCellNib: UIView {
         cardView.layer.cornerRadius = 15
         cardView.layer.masksToBounds = true
 
+        // Set 1 px border
+        layer.borderColor = UIColor(red: 182/255.0, green: 182/255.0, blue: 182/255.0, alpha: 1).CGColor
+        layer.borderWidth = 1.0
+
+        // Shadow stuff
         layer.shadowColor = UIColor.blackColor().CGColor
-        layer.shadowOffset = CGSize(width: 0, height: 1.2)
-        layer.shadowOpacity = 0.6
-        layer.shadowRadius = 1
+        layer.shadowOffset = CGSize(width: 0, height: 1)
+        // Opacity of the shadow
+        layer.shadowOpacity = 0.2
+        // higer this value the blurrier the shadoow
+        layer.shadowRadius = 1.5
         layer.cornerRadius = 15
 
         ownerNameLabel.font = UIFont(name: "OpenSans-Semibold", size: 13)
