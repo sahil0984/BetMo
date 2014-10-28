@@ -18,29 +18,38 @@ class NewBetAmountViewController: UIViewController {
     @IBOutlet var panGestureRecognizer: UIPanGestureRecognizer!
     
     @IBOutlet weak var betAmountLabel: UILabel!
-    
+    @IBOutlet weak var finger: UIImageView!
+    @IBOutlet weak var arrowsImage: UIImageView!
+
     var delegate: NewBetAmountViewControllerDelegate?
     
     var betAmount = 25
-    
+    var originalFingerX: CGFloat!
     var initialPanPosition: CGPoint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        arrowsImage.hidden = false
+        finger.hidden = false
         // Do any additional setup after loading the view.
-        
         nextButton.layer.cornerRadius = 5
     }
     
     
-    
+    override func viewDidAppear(animated: Bool) {
+        originalFingerX = finger.frame.origin.x
+        animateFinger()
+    }
+
     @IBAction func onNextButton(sender: AnyObject) {
         delegate?.newBetAmountSubmitted("\(betAmount)")
     }
     
     
     @IBAction func onPanGesture(sender: UIPanGestureRecognizer) {
+        arrowsImage.hidden = true
+        finger.hidden = true
+
         var point = panGestureRecognizer.locationInView(view)
         var velocity = panGestureRecognizer.velocityInView(view)
         var absVelocityX = abs(velocity.x)
@@ -87,7 +96,19 @@ class NewBetAmountViewController: UIViewController {
     }
     
     
-    
+    func animateFinger() {
+        UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.Autoreverse, animations: { () -> Void in
+            self.finger.frame.origin.x += 75
+            }) { (Bool) -> Void in
+                self.finger.frame.origin.x = self.originalFingerX
+                UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.Autoreverse, animations: { () -> Void in
+                    self.finger.frame.origin.x -= 75
+                    }, completion: { (Bool) -> Void in
+                        self.finger.frame.origin.x = self.originalFingerX
+                        self.animateFinger()
+                })
+        }
+    }
     
 
     override func didReceiveMemoryWarning() {

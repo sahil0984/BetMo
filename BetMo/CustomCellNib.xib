@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomCellNib" customModule="BetMo" customModuleProvider="target">
             <connections>
                 <outlet property="acceptContentView" destination="YEy-zk-lnF" id="3vd-ZW-NfU"/>
+                <outlet property="acceptedStampLabel" destination="ph5-ge-Hcd" id="nH1-xb-Gdh"/>
                 <outlet property="actionButton" destination="zcy-gZ-red" id="D4s-jF-rks"/>
                 <outlet property="actionButtonBottomConstraint" destination="gq1-gC-vdT" id="Kjm-z3-Qh1"/>
                 <outlet property="betAmount" destination="iXb-gi-FWE" id="xGi-8B-QzP"/>
@@ -21,6 +22,7 @@
                 <outlet property="ownerImageView" destination="2fW-x2-csz" id="29B-Kc-IQr"/>
                 <outlet property="ownerMaskView" destination="Ywn-E7-fdb" id="vsi-it-gWx"/>
                 <outlet property="ownerNameLabel" destination="0jk-Xb-qVj" id="Ohc-q0-SIT"/>
+                <outlet property="rejectedStampLabel" destination="xGQ-xo-BJe" id="kIo-yD-upa"/>
                 <outlet property="secondArrowImageView" destination="j85-Ub-6Am" id="zih-3V-sF9"/>
                 <outlet property="subscribeButton" destination="VTB-Pn-lno" id="OSE-3J-5kd"/>
                 <outlet property="subscriberCountLabel" destination="Reb-k2-HKu" id="Zji-OD-LDt"/>
@@ -146,6 +148,18 @@
                         <constraint firstAttribute="centerY" secondItem="k0I-Nq-R8a" secondAttribute="centerY" id="piJ-Ym-bE3"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[ ACCEPTED ]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ph5-ge-Hcd">
+                    <rect key="frame" x="61" y="163" width="130.5" height="25.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                    <color key="textColor" red="0.3333333432674408" green="0.729411780834198" blue="0.21568629145622253" alpha="1" colorSpace="deviceRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[ REJECTED ]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGQ-xo-BJe" userLabel="[ REJECTED ]">
+                    <rect key="frame" x="62.5" y="162.5" width="126" height="25.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                    <color key="textColor" red="0.82352948188781738" green="0.15294118225574493" blue="0.086274512112140656" alpha="1" colorSpace="deviceRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <constraints>
                 <constraint firstItem="Reb-k2-HKu" firstAttribute="width" secondItem="VTB-Pn-lno" secondAttribute="width" id="01r-hn-3Ae"/>
@@ -166,7 +180,9 @@
                 <constraint firstAttribute="trailing" secondItem="Reb-k2-HKu" secondAttribute="trailing" constant="20" id="Kfj-nm-mD8"/>
                 <constraint firstItem="mqN-tO-rOq" firstAttribute="width" secondItem="2fW-x2-csz" secondAttribute="width" id="Vt5-xM-uRa"/>
                 <constraint firstItem="mqN-tO-rOq" firstAttribute="centerY" secondItem="qjU-OI-9g1" secondAttribute="centerY" id="Wn5-8W-vPg"/>
+                <constraint firstAttribute="centerY" secondItem="xGQ-xo-BJe" secondAttribute="centerY" constant="-0.25" id="YuR-rY-EnK"/>
                 <constraint firstAttribute="centerX" secondItem="zcy-gZ-red" secondAttribute="centerX" id="ZZT-Uy-IwL"/>
+                <constraint firstAttribute="centerX" secondItem="xGQ-xo-BJe" secondAttribute="centerX" constant="0.75" id="Zbk-aO-kEC"/>
                 <constraint firstItem="c6k-0C-CNq" firstAttribute="leading" secondItem="GFN-jk-cJ9" secondAttribute="leading" constant="20" id="Zen-we-RD5"/>
                 <constraint firstItem="zcy-gZ-red" firstAttribute="top" secondItem="c6k-0C-CNq" secondAttribute="bottom" constant="20" id="ZmI-Nj-aVm"/>
                 <constraint firstItem="mqN-tO-rOq" firstAttribute="leading" secondItem="2fW-x2-csz" secondAttribute="trailing" id="cUU-g5-LT2"/>
@@ -178,6 +194,7 @@
                 <constraint firstAttribute="trailing" secondItem="c6k-0C-CNq" secondAttribute="trailing" constant="20" id="gJf-2V-fSm"/>
                 <constraint firstAttribute="bottom" secondItem="zcy-gZ-red" secondAttribute="bottom" constant="-32" id="gq1-gC-vdT"/>
                 <constraint firstItem="2fW-x2-csz" firstAttribute="centerY" secondItem="qjU-OI-9g1" secondAttribute="centerY" id="hdv-en-QaJ"/>
+                <constraint firstAttribute="centerY" secondItem="ph5-ge-Hcd" secondAttribute="centerY" constant="-0.5" id="iF9-LS-PTh"/>
                 <constraint firstItem="Reb-k2-HKu" firstAttribute="centerY" secondItem="VTB-Pn-lno" secondAttribute="centerY" id="iPU-dC-suy"/>
                 <constraint firstItem="Reb-k2-HKu" firstAttribute="height" secondItem="VTB-Pn-lno" secondAttribute="height" id="jVM-26-OXZ"/>
                 <constraint firstItem="QeW-XI-Kp5" firstAttribute="leading" secondItem="GFN-jk-cJ9" secondAttribute="leading" id="kSP-tm-qoC"/>
@@ -185,6 +202,7 @@
                 <constraint firstAttribute="centerX" secondItem="iXb-gi-FWE" secondAttribute="centerX" id="o8X-8l-UW1"/>
                 <constraint firstItem="Ywn-E7-fdb" firstAttribute="centerX" secondItem="0jk-Xb-qVj" secondAttribute="centerX" id="oRB-2w-NAk"/>
                 <constraint firstItem="2fW-x2-csz" firstAttribute="leading" secondItem="GFN-jk-cJ9" secondAttribute="leading" id="qQD-Dl-ACO"/>
+                <constraint firstAttribute="centerX" secondItem="ph5-ge-Hcd" secondAttribute="centerX" id="sB6-ii-mPF"/>
                 <constraint firstAttribute="bottom" secondItem="VTB-Pn-lno" secondAttribute="bottom" constant="10" id="sfb-mE-JIk"/>
                 <constraint firstItem="Ywn-E7-fdb" firstAttribute="leading" secondItem="GFN-jk-cJ9" secondAttribute="leading" id="t1J-Hm-v42"/>
                 <constraint firstItem="VTB-Pn-lno" firstAttribute="centerY" secondItem="zcy-gZ-red" secondAttribute="centerY" id="taT-x3-9YE"/>

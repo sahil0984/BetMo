@@ -37,7 +37,6 @@ class DiscoverViewController: UIViewController {
 
         var lastCardRotation = -1 * CGFloat(Double(lastCardRotationDegress) * M_PI / 180)
         noMoreBetsView.transform = CGAffineTransformRotate(noMoreBetsView.transform, lastCardRotation)
-
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         // Do any additional setup after loading the view.
         BetMoClient.sharedInstance.getAllDiscoverableBets({ (bets, error) -> () in
@@ -89,13 +88,22 @@ class DiscoverViewController: UIViewController {
             // Add to the current rotation value
             currentRotation += rotation
 
+            var scale = (1-labelAlpha) * 2
+            if scale < 1 {
+                scale = 1
+            }
+            var stamp = -1 * CGFloat(Double(10) * M_PI / 180)
             // Show rejection/acceptance label
             if currentCenterX < superViewCenter {
-                self.acceptedLabel.alpha = 0
-                self.rejectedLabel.alpha = labelAlpha
+                cardView.rejectedStampLabel.alpha = labelAlpha
+                cardView.rejectedStampLabel.transform = CGAffineTransformMakeScale(scale, scale)
+                cardView.rejectedStampLabel.transform = CGAffineTransformRotate(cardView.rejectedStampLabel.transform, stamp)
+                cardView.acceptedStampLabel.alpha = 0
             } else if superViewCenter < currentCenterX {
-                self.rejectedLabel.alpha = 0
-                self.acceptedLabel.alpha = labelAlpha
+                cardView.acceptedStampLabel.transform = CGAffineTransformMakeScale(scale, scale)
+                cardView.acceptedStampLabel.transform = CGAffineTransformRotate(cardView.acceptedStampLabel.transform, stamp)
+                cardView.rejectedStampLabel.alpha = 0
+                cardView.acceptedStampLabel.alpha = labelAlpha
             }
         } else if panGestureRecognizer.state == .Ended {
             if velocityX < 0 && (currentCenterX + 100) < superViewCenter {
@@ -128,8 +136,8 @@ class DiscoverViewController: UIViewController {
                 // The user didn't surpass our threshold of accepting or rejecting, move the card back into it's original position
                 UIView.animateWithDuration(0.1, animations: { () -> Void in
                     // Reset everything
-                    self.acceptedLabel.alpha = 0
-                    self.rejectedLabel.alpha = 0
+                    cardView.rejectedStampLabel.alpha = 0
+                    cardView.acceptedStampLabel.alpha = 0
                     cardView.center = CGPoint(x: self.superViewCenter, y: cardView.center.y)
                     panGestureRecognizer.setTranslation(CGPointZero, inView: self.view)
 
@@ -169,11 +177,10 @@ class DiscoverViewController: UIViewController {
         handleLastBetCase()
 
         UIView.animateWithDuration(0.2, animations: { () -> Void in
-            self.rejectedLabel.alpha = 1
+            self.activeCardView.rejectedStampLabel.alpha = 1
+            self.activeCardView.rejectedStampLabel.transform = CGAffineTransformMakeScale(0.33, 0.33)
             }, completion: { (Bool) -> Void in
-                UIView.animateWithDuration(0.5, animations: { () -> Void in
-                    self.rejectedLabel.alpha = 0
-                })
+                self.activeCardView.rejectedStampLabel.alpha = 0
         })
     }
 
@@ -181,10 +188,11 @@ class DiscoverViewController: UIViewController {
         handleLastBetCase()
 
         UIView.animateWithDuration(0.2, animations: { () -> Void in
-            self.acceptedLabel.alpha = 1
+            self.activeCardView.acceptedStampLabel.alpha = 1
+            self.activeCardView.acceptedStampLabel.transform = CGAffineTransformMakeScale(0.33, 0.33)
             }, completion: { (Bool) -> Void in
                 UIView.animateWithDuration(0.5, animations: { () -> Void in
-                    self.acceptedLabel.alpha = 0
+                    self.activeCardView.acceptedStampLabel.alpha = 0
                 })
         })
     }
@@ -193,7 +201,7 @@ class DiscoverViewController: UIViewController {
         handleRejection()
         self.currentRotation = -1 * CGFloat(Double(5) * M_PI / 180)
         self.activeCardView.transform = CGAffineTransformRotate(self.activeCardView.transform, self.currentRotation)
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.activeCardView.center.x -= 500
             }, completion: { (Bool) -> Void in
                 // Undo rotation of the card
@@ -207,7 +215,7 @@ class DiscoverViewController: UIViewController {
         handleAcceptance()
         self.currentRotation = CGFloat(Double(5) * M_PI / 180)
         self.activeCardView.transform = CGAffineTransformRotate(self.activeCardView.transform, self.currentRotation)
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.activeCardView.center.x += 500
             }, completion: { (Bool) -> Void in
                 // Undo rotation of the card
