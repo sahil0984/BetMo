@@ -37,8 +37,7 @@ class DiscoverViewController: UIViewController {
 
         var lastCardRotation = -1 * CGFloat(Double(lastCardRotationDegress) * M_PI / 180)
         noMoreBetsView.transform = CGAffineTransformRotate(noMoreBetsView.transform, lastCardRotation)
-
-//        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         // Do any additional setup after loading the view.
         BetMoClient.sharedInstance.getAllDiscoverableBets({ (bets, error) -> () in
             if error == nil {
