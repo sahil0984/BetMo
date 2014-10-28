@@ -14,11 +14,15 @@ class FriendCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var friendImageView: UIImageView!
     @IBOutlet weak var friendNameLabel: UILabel!
     
+    @IBOutlet weak var cellSelectOverlayView: UIView!
+    
+    
     var friend: User? {
         willSet {
             
         }
         didSet {
+            cellSelectOverlayView.hidden = true
             friendNameLabel.text = friend?.getName()
             BetMoGetImage.sharedInstance.getUserImage(friend?.getProfileImageUrl(), completion: { (userImage, error) -> () in
                 if error == nil {

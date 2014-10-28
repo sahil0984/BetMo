@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol NewBetOpponentViewControllerDelegate {
+    func newOpponentSubmitted(betOpponent: User)
+}
+
 class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var friendSearchBar: UISearchBar!
     @IBOutlet weak var friendListCollectionView: UICollectionView!
     
+    var delegate: NewBetOpponentViewControllerDelegate?
     
     var friendsList: [User] = []
     var fbAllFriendIds: [String] = []
@@ -101,6 +106,7 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("FriendCell", forIndexPath: indexPath) as FriendCollectionViewCell
         
         if indexPath.row == 0 {
+            cell.cellSelectOverlayView.hidden = true
             cell.friendNameLabel.text = "Open Bet"
             cell.friendImageView.image = UIImage(named: "empty_user")
         } else {
@@ -111,7 +117,19 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
     }
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-
+        collectionView.deselectItemAtIndexPath(indexPath, animated: false)
+        
+        var thisCell = collectionView.cellForItemAtIndexPath(indexPath) as FriendCollectionViewCell
+        
+        thisCell.cellSelectOverlayView.hidden = false
+        UIView.animateWithDuration(0.75, animations: { () -> Void in
+            thisCell.cellSelectOverlayView.alpha = 0
+        }) { (finished) -> Void in
+            thisCell.cellSelectOverlayView.hidden = true
+            thisCell.cellSelectOverlayView.alpha = 0.4
+            
+            self.delegate?.newOpponentSubmitted(self.friendsList[indexPath.row])
+        }
     }
 
 
