@@ -31,6 +31,7 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
         friendListCollectionView.dataSource = self
         friendListCollectionView.delegate = self
         friendListCollectionView.backgroundColor = UIColor.whiteColor()
+        //friendListCollectionView.
         
         friendSearchBar.delegate = self
         
@@ -122,17 +123,17 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
         var thisCell = collectionView.cellForItemAtIndexPath(indexPath) as FriendCollectionViewCell
         
         thisCell.cellSelectOverlayView.hidden = false
-        UIView.animateWithDuration(0.75, animations: { () -> Void in
+        UIView.animateWithDuration(1.5, animations: { () -> Void in
             thisCell.cellSelectOverlayView.alpha = 0
         }) { (finished) -> Void in
             thisCell.cellSelectOverlayView.hidden = true
-            thisCell.cellSelectOverlayView.alpha = 0.4
+            thisCell.cellSelectOverlayView.alpha = 0.7
             
             self.delegate?.newOpponentSubmitted(self.friendsList[indexPath.row])
         }
     }
 
-
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

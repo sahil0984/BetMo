@@ -511,7 +511,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.066666666666666666" green="0.27058823529411763" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.015686274509803921" green="0.20392156862745098" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4RI-Pg-7gp"/>
                                     <constraint firstAttribute="trailing" secondItem="CCd-4L-zsh" secondAttribute="trailing" id="9Kw-G0-Nb0"/>
@@ -569,6 +569,9 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Describe your bet..." translatesAutoresizingMaskIntoConstraints="NO" id="by6-8G-ntf">
                                 <rect key="frame" x="20" y="40" width="560" height="495"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="Cef-qx-kcR"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -586,21 +589,31 @@
                                     <action selector="onNextButton:" destination="2QW-iH-uq6" eventType="touchUpInside" id="Tnv-1O-Oes"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="zai-e5-xeQ">
+                                <rect key="frame" x="555" y="545" width="40" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="KeC-TY-OGi"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="bjf-i3-Ih6" firstAttribute="top" secondItem="5Sj-Nc-zOS" secondAttribute="bottom" constant="5" id="Q1U-jt-5x1"/>
                             <constraint firstItem="by6-8G-ntf" firstAttribute="leading" secondItem="jc6-aH-GZI" secondAttribute="leading" constant="20" id="Qt9-oq-oV5"/>
+                            <constraint firstItem="5Sj-Nc-zOS" firstAttribute="bottom" secondItem="zai-e5-xeQ" secondAttribute="bottom" id="TL7-J4-X0g"/>
                             <constraint firstItem="5Sj-Nc-zOS" firstAttribute="top" secondItem="by6-8G-ntf" secondAttribute="bottom" constant="10" id="V8B-4j-2Ht"/>
                             <constraint firstAttribute="trailing" secondItem="5Sj-Nc-zOS" secondAttribute="trailing" constant="5" id="Yfy-Wj-6Zc"/>
                             <constraint firstAttribute="trailing" secondItem="by6-8G-ntf" secondAttribute="trailing" constant="20" id="ZRj-yQ-82D"/>
                             <constraint firstItem="by6-8G-ntf" firstAttribute="top" secondItem="b6X-o6-Qlq" secondAttribute="bottom" constant="20" id="cy5-BY-lrV"/>
+                            <constraint firstItem="5Sj-Nc-zOS" firstAttribute="trailing" secondItem="zai-e5-xeQ" secondAttribute="trailing" id="dnn-QW-f9f"/>
+                            <constraint firstItem="5Sj-Nc-zOS" firstAttribute="top" secondItem="zai-e5-xeQ" secondAttribute="top" id="kg0-pg-kH0"/>
                             <constraint firstItem="5Sj-Nc-zOS" firstAttribute="leading" secondItem="jc6-aH-GZI" secondAttribute="leading" constant="5" id="ocA-qR-cgX"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="betDescTextView" destination="by6-8G-ntf" id="UGP-DZ-NLy"/>
                         <outlet property="nextButton" destination="5Sj-Nc-zOS" id="whW-RC-xtz"/>
+                        <outlet property="nextButtonBotConstraint" destination="Q1U-jt-5x1" id="8m6-jf-dTp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zpP-eK-BcQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -741,7 +754,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZk-Pl-oEj">
                                 <rect key="frame" x="5" y="545" width="590" height="50"/>
-                                <color key="backgroundColor" red="0.058823529409999999" green="0.20000000000000001" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.054901960784313725" green="0.13725490196078433" blue="0.3843137254901961" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="UeQ-Xr-Eso"/>
                                 </constraints>
@@ -753,14 +766,23 @@
                                     <action selector="onNextButton:" destination="5Bn-Nc-BqB" eventType="touchUpInside" id="8ju-M2-tg5"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="asd-9k-xfQ">
+                                <rect key="frame" x="555" y="545" width="40" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="ULu-df-QBJ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="TZk-Pl-oEj" firstAttribute="leading" secondItem="gS9-Nk-PGZ" secondAttribute="leading" constant="5" id="EHM-3A-VeZ"/>
+                            <constraint firstItem="TZk-Pl-oEj" firstAttribute="top" secondItem="asd-9k-xfQ" secondAttribute="top" id="Gwv-lv-xMV"/>
                             <constraint firstItem="ZG3-Z7-zla" firstAttribute="top" secondItem="TZk-Pl-oEj" secondAttribute="bottom" constant="5" id="HQe-Ei-oX6"/>
                             <constraint firstItem="1ey-fJ-8Qs" firstAttribute="top" secondItem="nWC-eg-yHB" secondAttribute="bottom" constant="50" id="POb-Cu-Bqj"/>
                             <constraint firstAttribute="trailing" secondItem="TZk-Pl-oEj" secondAttribute="trailing" constant="5" id="PQb-2X-pao"/>
+                            <constraint firstItem="TZk-Pl-oEj" firstAttribute="bottom" secondItem="asd-9k-xfQ" secondAttribute="bottom" id="jtR-NQ-Off"/>
+                            <constraint firstItem="TZk-Pl-oEj" firstAttribute="trailing" secondItem="asd-9k-xfQ" secondAttribute="trailing" id="koh-U0-ixR"/>
                             <constraint firstItem="nWC-eg-yHB" firstAttribute="top" secondItem="alI-6G-0tA" secondAttribute="bottom" constant="50" id="svG-ml-EIr"/>
                             <constraint firstAttribute="centerX" secondItem="1ey-fJ-8Qs" secondAttribute="centerX" id="t1Z-cy-S3d"/>
                             <constraint firstAttribute="centerX" secondItem="nWC-eg-yHB" secondAttribute="centerX" id="x2y-iG-JkB"/>
@@ -827,14 +849,14 @@
                                                     <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <size key="shadowOffset" width="2" height="1"/>
                                                 </label>
-                                                <view alpha="0.39999999999999963" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rb-rw-CIM">
+                                                <view alpha="0.69999999999999973" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rb-rw-CIM">
                                                     <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="action-26" translatesAutoresizingMaskIntoConstraints="NO" id="BZ1-FZ-qhf">
                                                             <rect key="frame" x="47.5" y="46.5" width="26" height="26"/>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.054901960784313725" green="0.13725490196078433" blue="0.3843137254901961" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.047058823529411764" green="0.090196078431372548" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="centerX" secondItem="BZ1-FZ-qhf" secondAttribute="centerX" id="0eu-OC-vvL"/>
                                                         <constraint firstAttribute="centerY" secondItem="BZ1-FZ-qhf" secondAttribute="centerY" id="TR7-Bx-7zF"/>
@@ -1728,6 +1750,7 @@
         <image name="X-50" width="50" height="50"/>
         <image name="action-26" width="26" height="26"/>
         <image name="action-48" width="48" height="48"/>
+        <image name="arrow" width="8" height="14"/>
         <image name="arrows" width="169" height="46"/>
         <image name="back--icon" width="13" height="12"/>
         <image name="bell_service-25" width="25" height="25"/>

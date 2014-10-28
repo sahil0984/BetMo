@@ -18,6 +18,7 @@ class NewBetDescViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var betDescTextView: UITextView!
     
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextButtonBotConstraint: NSLayoutConstraint!
     
     var delegate: NewBetDescViewControllerDelegate?
     
@@ -36,8 +37,27 @@ class NewBetDescViewController: UIViewController, UITextViewDelegate {
         
         nextButton.layer.cornerRadius = 5
         nextButton.hidden = true
+        
+        betDescTextView.becomeFirstResponder()
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
+    func keyboardWillShow(notification: NSNotification!) {
+        var userInfo = notification.userInfo!
+        
+        // Get the keyboard height and width from the notification
+        // Size varies depending on OS, language, orientation
+        var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue().size
+        
+        nextButtonBotConstraint.constant = kbSize.height + 5
+    }
+    
+    func keyboardWillHide(notification: NSNotification!) {
+        nextButtonBotConstraint.constant = 5
+    }
     
     
     @IBAction func onNextButton(sender: AnyObject) {
