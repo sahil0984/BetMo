@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -753,14 +753,23 @@
                                     <action selector="onNextButton:" destination="5Bn-Nc-BqB" eventType="touchUpInside" id="8ju-M2-tg5"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="finger" translatesAutoresizingMaskIntoConstraints="NO" id="KNd-wB-NJ4">
+                                <rect key="frame" x="287" y="229" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="FGD-4W-owc"/>
+                                    <constraint firstAttribute="height" constant="50" id="rhc-zD-jvw"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="TZk-Pl-oEj" firstAttribute="leading" secondItem="gS9-Nk-PGZ" secondAttribute="leading" constant="5" id="EHM-3A-VeZ"/>
+                            <constraint firstAttribute="centerX" secondItem="KNd-wB-NJ4" secondAttribute="centerX" constant="-12" id="Fyc-Vd-OV7"/>
                             <constraint firstItem="ZG3-Z7-zla" firstAttribute="top" secondItem="TZk-Pl-oEj" secondAttribute="bottom" constant="5" id="HQe-Ei-oX6"/>
                             <constraint firstItem="1ey-fJ-8Qs" firstAttribute="top" secondItem="nWC-eg-yHB" secondAttribute="bottom" constant="50" id="POb-Cu-Bqj"/>
                             <constraint firstAttribute="trailing" secondItem="TZk-Pl-oEj" secondAttribute="trailing" constant="5" id="PQb-2X-pao"/>
+                            <constraint firstItem="KNd-wB-NJ4" firstAttribute="top" secondItem="nWC-eg-yHB" secondAttribute="bottom" constant="70" id="PzA-bn-Dty"/>
                             <constraint firstItem="nWC-eg-yHB" firstAttribute="top" secondItem="alI-6G-0tA" secondAttribute="bottom" constant="50" id="svG-ml-EIr"/>
                             <constraint firstAttribute="centerX" secondItem="1ey-fJ-8Qs" secondAttribute="centerX" id="t1Z-cy-S3d"/>
                             <constraint firstAttribute="centerX" secondItem="nWC-eg-yHB" secondAttribute="centerX" id="x2y-iG-JkB"/>
@@ -770,7 +779,9 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="arrowsImage" destination="1ey-fJ-8Qs" id="XZ9-iS-1C2"/>
                         <outlet property="betAmountLabel" destination="nWC-eg-yHB" id="diJ-eg-IPC"/>
+                        <outlet property="finger" destination="KNd-wB-NJ4" id="TNv-Xc-d6a"/>
                         <outlet property="nextButton" destination="TZk-Pl-oEj" id="dKi-5e-KpF"/>
                         <outlet property="panGestureRecognizer" destination="F64-PY-AHj" id="G9A-Oz-Dhi"/>
                     </connections>
@@ -1733,6 +1744,7 @@
         <image name="bell_service-25" width="25" height="25"/>
         <image name="circle-95" width="94" height="94"/>
         <image name="discover" width="25" height="25"/>
+        <image name="finger" width="50" height="52"/>
         <image name="home-25" width="25" height="25"/>
         <image name="new" width="32" height="32"/>
         <image name="user_male3-25" width="25" height="25"/>
