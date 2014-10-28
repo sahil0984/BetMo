@@ -20,6 +20,9 @@ class CustomCellNib: UIView {
     @IBOutlet var acceptContentView: UIView!
     @IBOutlet var winnerContentView: UIView!
     
+    @IBOutlet weak var acceptedStampLabel: UILabel!
+    @IBOutlet weak var rejectedStampLabel: UILabel!
+
     @IBOutlet weak var ownerNameLabel: UILabel!
     @IBOutlet weak var opponentNameLabel: UILabel!
     
@@ -48,6 +51,7 @@ class CustomCellNib: UIView {
     @IBOutlet weak var descriptionBottomConstraint: NSLayoutConstraint!
     var arrowOriginalY: CGFloat!
     var rowIndex: Int!
+    var stampRotation: CGFloat!
 
     var isRequest: Bool = false {
         willSet(value) {
@@ -77,6 +81,7 @@ class CustomCellNib: UIView {
         }
     }
     func fillMainCard(currBet: Bet) {
+        setupStamps()
         // hide masks by default (they might have been un-hidden by the bet that previously used this cell)
         // @TODO(samoli) this might not be necessary any longer since I added "hidden" to the storyboard
         ownerMaskView.hidden = true
@@ -244,6 +249,7 @@ class CustomCellNib: UIView {
         mainContentView.hidden = false
         acceptContentView.hidden = true
         winnerContentView.hidden = true
+        setupStamps()
     }
     
     func setupCardView(cardView: UIView) {
@@ -474,5 +480,15 @@ class CustomCellNib: UIView {
             self.firstArrowImageView.frame.origin.y -= 10
             self.secondArrowImageView.frame.origin.y -= 10
         }, completion: nil)
+    }
+    
+    func setupStamps() {
+        acceptedStampLabel.font = UIFont(name: "OpenSans-Semibold", size: 40)
+        rejectedStampLabel.font = UIFont(name: "OpenSans-Semibold", size: 40)
+        stampRotation = CGFloat(Double(10) * M_PI / 180)
+        acceptedStampLabel.transform = CGAffineTransformMakeRotation(-1*stampRotation)
+        acceptedStampLabel.transform = CGAffineTransformScale(acceptedStampLabel.transform, 2, 2)
+        rejectedStampLabel.transform = CGAffineTransformMakeRotation(-1*stampRotation)
+        rejectedStampLabel.transform = CGAffineTransformScale(rejectedStampLabel.transform, 2, 2)
     }
 }
