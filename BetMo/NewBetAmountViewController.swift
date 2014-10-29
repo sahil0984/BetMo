@@ -102,19 +102,24 @@ class NewBetAmountViewController: UIViewController {
     
     
     func animateFinger() {
-        UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.Autoreverse, animations: { () -> Void in
+        UIView.animateWithDuration(1, delay: 0, options: nil, animations: { () -> Void in
             self.finger.frame.origin.x += 75
             }) { (Bool) -> Void in
-                self.finger.frame.origin.x = self.originalFingerX
-                UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.Autoreverse, animations: { () -> Void in
-                    self.finger.frame.origin.x -= 75
+                UIView.animateWithDuration(1, delay: 0, options: nil, animations: { () -> Void in
+                    self.finger.frame.origin.x = self.originalFingerX
                     }, completion: { (Bool) -> Void in
-                        self.finger.frame.origin.x = self.originalFingerX
-                        self.animateFinger()
+                        UIView.animateWithDuration(1, delay: 0, options: nil, animations: { () -> Void in
+                                self.finger.frame.origin.x -= 75
+                            }, completion: { (Bool) -> Void in
+                                UIView.animateWithDuration(1, delay: 0, options: nil, animations: { () -> Void in
+                                    self.finger.frame.origin.x = self.originalFingerX
+                                    }, completion: { (Bool) -> Void in
+                                        self.animateFinger()
+                                })
+                        })
                 })
         }
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
