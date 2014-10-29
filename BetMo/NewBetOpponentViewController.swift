@@ -113,6 +113,7 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
         } else {
             cell.friend = friendsList[indexPath.row]
         }
+        cell.screenWidth = view.frame.width
         
         return cell
     }

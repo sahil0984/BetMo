@@ -547,7 +547,9 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="Ear-9I-APW" id="9aN-om-OVY"/>
                         <outlet property="contentView" destination="loj-ww-P3Y" id="P61-mi-dHw"/>
+                        <outlet property="navTitleLabel" destination="OjG-J2-Okl" id="3nc-vb-u5l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lpG-Pw-I7H" userLabel="First Responder" sceneMemberID="firstResponder"/>

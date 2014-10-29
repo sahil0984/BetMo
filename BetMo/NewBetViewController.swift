@@ -16,6 +16,8 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
 
     
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var navTitleLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
     
     var newBetDescViewController: NewBetDescViewController!
     var newBetAmountViewController: NewBetAmountViewController!
@@ -67,6 +69,7 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
         newBetOpponentViewController.delegate = self
         newBetConfirmViewController.delegate = self
         
+        backButton.setImage(UIImage(named: "cancel--icon"), forState: UIControlState.Normal)
         activeViewController = newBetDescViewController
 
     }
@@ -78,10 +81,16 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
         if activeViewController == newBetDescViewController {
              self.dismissViewControllerAnimated(true, completion: nil)
         } else if activeViewController == newBetAmountViewController {
+            backButton.setImage(UIImage(named: "cancel--icon"), forState: UIControlState.Normal)
+            navTitleLabel.text = "New bet"
             activeViewController = newBetDescViewController
         } else if activeViewController == newBetOpponentViewController {
+            backButton.setImage(UIImage(named: "back--icon"), forState: UIControlState.Normal)
+            navTitleLabel.text = "Bet amount"
             activeViewController = newBetAmountViewController
         } else if activeViewController == newBetConfirmViewController {
+            backButton.setImage(UIImage(named: "back--icon"), forState: UIControlState.Normal)
+            navTitleLabel.text = "Select opponent"
             activeViewController = newBetOpponentViewController
         }
     }
@@ -89,19 +98,26 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
     
     func newBetDescSubmitted(betDesc: String) {
         newBet.setDescription(betDesc)
+        backButton.setImage(UIImage(named: "back--icon"), forState: UIControlState.Normal)
+        navTitleLabel.text = "Bet amount"
         activeViewController = newBetAmountViewController
     }
     
     func newBetAmountSubmitted(betAmount: String) {
         newBet.setAmount(betAmount)
+        backButton.setImage(UIImage(named: "back--icon"), forState: UIControlState.Normal)
+        navTitleLabel.text = "Select opponent"
         activeViewController = newBetOpponentViewController
     }
     
     func newOpponentSubmitted(betOpponent: User) {
-        if betOpponent.getName() != "Open Bet" {
+        if betOpponent.getFirstName() != "Open Bet" {
             newBet.setOpponent(betOpponent)
         }
         newBetConfirmViewController.newBet = self.newBet
+        
+        backButton.setImage(UIImage(named: "back--icon"), forState: UIControlState.Normal)
+        navTitleLabel.text = "Confirm bet"
         activeViewController = newBetConfirmViewController
     }
     
