@@ -99,7 +99,7 @@ class CustomCellNib: UIView {
         hideAllButtons()
         // hide masks by default (they might have been un-hidden by the bet that previously used this cell)
         // @TODO(samoli) this might not be necessary any longer since I added "hidden" to the storyboard
-
+        setupStamps()
         ownerStampImage.hidden = true
         opponentStampImage.hidden = true
 
