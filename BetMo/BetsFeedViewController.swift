@@ -15,6 +15,8 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var profileHeaderTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var betsFeedTableView: UITableView!
 
+    var refreshControl: UIRefreshControl!
+
     let feedTab = "feed"
     let requestTab = "requests"
     let profileTab = "profile"
@@ -51,6 +53,7 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             })
         }
+        addRefreshControl()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -150,6 +153,32 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
+    func addRefreshControl() {
+        refreshControl = UIRefreshControl()
+        // Add target for refresh
+        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        
+        // Add the refresh control to the table view
+        betsFeedTableView.insertSubview(self.refreshControl, atIndex: 0)
+    }
+
+    func refresh(sender: AnyObject) {
+        BetMoClient.sharedInstance.getAllBets({ (bets, error) -> () in
+            if error != nil {
+                println("Error while getting all bets")
+            } else {
+                if self.feedViewType == self.profileTab {
+                    self.bets = BetMoClient.sharedInstance.profileBets
+                } else if self.feedViewType == self.requestTab {
+                    self.bets = BetMoClient.sharedInstance.getAllRequestedBets()
+                } else if self.feedViewType == self.feedTab {
+                    self.bets = BetMoClient.sharedInstance.feedBets
+                }
+                self.betsFeedTableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        })
+    }
 
     /*
     // MARK: - Navigation
