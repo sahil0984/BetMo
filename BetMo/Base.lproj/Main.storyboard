@@ -364,17 +364,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SgE-24-2qJ" customClass="CustomCellNib" customModule="BetMo" customModuleProvider="target">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SgE-24-2qJ" customClass="CustomCellNib" customModule="BetMo" customModuleProvider="target">
                                 <rect key="frame" x="20" y="90" width="560" height="200"/>
                                 <color key="backgroundColor" red="0.83491847829999999" green="0.83491847829999999" blue="0.83491847829999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="LXZ-Ox-tDO"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XkA-1s-6j5">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XkA-1s-6j5">
                                 <rect key="frame" x="209" y="320" width="183" height="95"/>
                                 <subviews>
-                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="circle-95" translatesAutoresizingMaskIntoConstraints="NO" id="VhP-So-ffj" userLabel="accept-circle">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle-95" translatesAutoresizingMaskIntoConstraints="NO" id="VhP-So-ffj" userLabel="accept-circle">
                                         <rect key="frame" x="88" y="0.0" width="95" height="95"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -385,7 +385,7 @@
                                             <outletCollection property="gestureRecognizers" destination="7sv-HC-6rt" appends="YES" id="uxx-hG-eiC"/>
                                         </connections>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="action-48" translatesAutoresizingMaskIntoConstraints="NO" id="val-4B-FQD" userLabel="accept">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="action-48" translatesAutoresizingMaskIntoConstraints="NO" id="val-4B-FQD" userLabel="accept">
                                         <rect key="frame" x="112" y="24" width="48" height="48"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -393,7 +393,7 @@
                                             <constraint firstAttribute="width" constant="48" id="cTn-JQ-J9d"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="circle-95" translatesAutoresizingMaskIntoConstraints="NO" id="0Jn-DW-hUc" userLabel="reject-circle">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle-95" translatesAutoresizingMaskIntoConstraints="NO" id="0Jn-DW-hUc" userLabel="reject-circle">
                                         <rect key="frame" x="0.0" y="0.0" width="95" height="95"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -404,7 +404,7 @@
                                             <outletCollection property="gestureRecognizers" destination="2g8-IN-Q7G" appends="YES" id="v8U-98-YiB"/>
                                         </connections>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="X-50" translatesAutoresizingMaskIntoConstraints="NO" id="5Ia-kM-sdS" userLabel="reject">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="X-50" translatesAutoresizingMaskIntoConstraints="NO" id="5Ia-kM-sdS" userLabel="reject">
                                         <rect key="frame" x="22" y="23" width="50" height="50"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -445,6 +445,7 @@
                         <constraints>
                             <constraint firstItem="XkA-1s-6j5" firstAttribute="top" secondItem="SgE-24-2qJ" secondAttribute="bottom" constant="30" id="B0J-Nv-c0n"/>
                             <constraint firstItem="SgE-24-2qJ" firstAttribute="top" secondItem="zC0-2c-Nf6" secondAttribute="bottom" constant="70" id="CEr-rk-IGI"/>
+                            <constraint firstItem="W9b-WE-53G" firstAttribute="top" secondItem="XkA-1s-6j5" secondAttribute="bottom" constant="30" id="aXz-4f-WrU"/>
                             <constraint firstAttribute="trailing" secondItem="SgE-24-2qJ" secondAttribute="trailing" constant="20" id="dEU-8L-twf"/>
                             <constraint firstAttribute="centerX" secondItem="XkA-1s-6j5" secondAttribute="centerX" id="exs-el-WM0"/>
                             <constraint firstItem="SgE-24-2qJ" firstAttribute="leading" secondItem="dIc-um-7VX" secondAttribute="leading" constant="20" id="kz9-4E-7vj"/>
