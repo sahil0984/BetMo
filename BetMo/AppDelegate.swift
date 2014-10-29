@@ -47,6 +47,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
+        
+        var remoteNotif = launchOptions.
+        
+        
+        
+        NSDictionary *remoteNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        
+        if(remoteNotif)
+        {
+            //Handle remote notification
+        }
+        
+        
+        
+        
+        
         //Add a notification center to monitor logout action
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: "userDidLogoutNotification", object: nil)
 
