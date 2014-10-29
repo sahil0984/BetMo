@@ -157,7 +157,9 @@ class DiscoverViewController: UIViewController {
         var bet = bets[0] as Bet
         // Add to the profile bets
         bet.acceptWithCompletion { (bet, error) -> () in
-            BetMoClient.sharedInstance.profileBets.insert(bet!, atIndex: 0)
+            if error == nil {
+                BetMoClient.sharedInstance.profileBets.insert(bet!, atIndex: 0)
+            }
         }
     
         bets.removeAtIndex(0)
