@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="isi-WN-Qhk">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
+        <!--Launch View Controller-->
+        <scene sceneID="U2f-oq-QcX">
+            <objects>
+                <viewController id="isi-WN-Qhk" customClass="LaunchViewController" customModule="BetMo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rsD-VM-MbM"/>
+                        <viewControllerLayoutGuide type="bottom" id="0aE-1A-NO3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qcB-sG-gMJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="punch" translatesAutoresizingMaskIntoConstraints="NO" id="Vzp-gZ-mae">
+                                <rect key="frame" x="262" y="264" width="76" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="fhY-7W-3uv"/>
+                                    <constraint firstAttribute="width" constant="76" id="olj-F9-6AK"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boom" translatesAutoresizingMaskIntoConstraints="NO" id="vLE-MJ-C9G">
+                                <rect key="frame" x="294" y="238" width="68" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="D3T-FP-Z2L"/>
+                                    <constraint firstAttribute="width" constant="68" id="m1v-wy-wJx"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="betmo_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Z2n-0h-Ort">
+                                <rect key="frame" x="195.5" y="344" width="209" height="113"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Vzp-gZ-mae" firstAttribute="top" secondItem="vLE-MJ-C9G" secondAttribute="bottom" constant="-46" id="Gh6-wF-8Fi"/>
+                            <constraint firstAttribute="centerX" secondItem="Vzp-gZ-mae" secondAttribute="centerX" id="Ivo-fR-9tK"/>
+                            <constraint firstAttribute="centerX" secondItem="Z2n-0h-Ort" secondAttribute="centerX" id="Jj1-jr-q3A"/>
+                            <constraint firstItem="vLE-MJ-C9G" firstAttribute="leading" secondItem="Vzp-gZ-mae" secondAttribute="trailing" constant="-44" id="gdm-9u-IEw"/>
+                            <constraint firstItem="Z2n-0h-Ort" firstAttribute="top" secondItem="vLE-MJ-C9G" secondAttribute="bottom" constant="34" id="sX3-e5-F31"/>
+                            <constraint firstAttribute="centerY" secondItem="Vzp-gZ-mae" secondAttribute="centerY" id="tlf-g7-RpH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="betmoLogo" destination="Z2n-0h-Ort" id="tmf-aO-cgW"/>
+                        <outlet property="boomImage" destination="vLE-MJ-C9G" id="ehz-n0-Nie"/>
+                        <outlet property="punchImage" destination="Vzp-gZ-mae" id="asZ-2j-7Ai"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gVP-EE-fbx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-325" y="161"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -1784,12 +1834,15 @@
         <image name="arrows" width="169" height="46"/>
         <image name="back--icon" width="13" height="12"/>
         <image name="bell_service-25" width="25" height="25"/>
+        <image name="betmo_logo" width="209" height="113"/>
+        <image name="boom" width="68" height="72"/>
         <image name="circle-95" width="94" height="94"/>
         <image name="discover" width="25" height="25"/>
         <image name="finger" width="50" height="52"/>
         <image name="home-25" width="25" height="25"/>
         <image name="loginBackground" width="930" height="518"/>
         <image name="new" width="32" height="32"/>
+        <image name="punch" width="76" height="72"/>
         <image name="user_male3-25" width="25" height="25"/>
     </resources>
 </document>

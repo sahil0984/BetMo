@@ -46,8 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerForRemoteNotificationTypes( userNotficationTypes )
         }
         
-        
-        
 //        var remoteNotif = launchOptions!["UIApplicationLaunchOptionsRemoteNotificationKey"] as? NSDictionary
 //        if remoteNotif != nil {
 //            println("remoteNotif: \(remoteNotif)")
@@ -70,8 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //If user is cached and linked to Facebook
         if PFUser.currentUser() != nil && PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()) {
-            var vc = storyboard.instantiateViewControllerWithIdentifier("HomeViewController") as UIViewController
-            window?.rootViewController = vc
+//            var vc = storyboard.instantiateViewControllerWithIdentifier("HomeViewController") as UIViewController
+//            window?.rootViewController = vc
         }
         
         return true
