@@ -34,6 +34,7 @@ class NewBetConfirmViewController: UIViewController {
         newBet.setOwner(currentUser)
         newBet.setIsAccepted(false)
         
+        confirmBetContentView.isDiscoverView = true
         confirmBetContentView.bet = newBet
     }
 
