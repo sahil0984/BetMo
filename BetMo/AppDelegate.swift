@@ -48,17 +48,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        //var remoteNotif = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]
-        
-        //var options = launchOptions
-        
-        
-//        NSDictionary *remoteNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-//        
-//        if(remoteNotif)
-//        {
-//            //Handle remote notification
+//        var remoteNotif = launchOptions!["UIApplicationLaunchOptionsRemoteNotificationKey"] as? NSDictionary
+//        if remoteNotif != nil {
+//            println("remoteNotif: \(remoteNotif)")
 //        }
+//        
+//        
+////        NSDictionary *remoteNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+////        
+////        if(remoteNotif)
+////        {
+////            //Handle remote notification
+////        }
         
         
         

@@ -25,11 +25,20 @@
                                     <action selector="onLoginButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="uMO-Vi-itM"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginBackground" translatesAutoresizingMaskIntoConstraints="NO" id="LdP-Gf-8VF">
+                                <rect key="frame" x="138" y="198" width="325" height="192"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="192" id="m1I-fP-BuQ"/>
+                                    <constraint firstAttribute="width" constant="325" id="tHf-F9-A5B"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="J7G-5s-oaI" secondAttribute="centerX" id="Sqi-wA-UrO"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="J7G-5s-oaI" secondAttribute="bottom" constant="100" id="rnD-bX-yU8"/>
+                            <constraint firstAttribute="centerX" secondItem="LdP-Gf-8VF" secondAttribute="centerX" id="sa5-g5-bcw"/>
+                            <constraint firstItem="J7G-5s-oaI" firstAttribute="top" secondItem="LdP-Gf-8VF" secondAttribute="bottom" constant="80" id="wUc-Q9-VMu"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1779,6 +1788,7 @@
         <image name="discover" width="25" height="25"/>
         <image name="finger" width="50" height="52"/>
         <image name="home-25" width="25" height="25"/>
+        <image name="loginBackground" width="930" height="518"/>
         <image name="new" width="32" height="32"/>
         <image name="user_male3-25" width="25" height="25"/>
     </resources>
