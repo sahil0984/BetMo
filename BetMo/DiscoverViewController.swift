@@ -47,10 +47,31 @@ class DiscoverViewController: UIViewController {
             if error == nil {
                 self.bets = bets!
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
-                var bet = self.bets[0] as Bet
-                self.cardViewOne.bet = self.bets[0]
-                self.cardViewTwo.bet = self.bets[1]
-                self.activeCardView = self.cardViewOne
+                var bet: Bet!
+                if self.bets.count == 0 {
+                    self.cardViewOne.removeFromSuperview()
+                    self.cardViewTwo.removeFromSuperview()
+                    self.activeCardView = self.noMoreBetsView
+                    var lastCardRotation = CGFloat(Double(self.lastCardRotationDegress) * M_PI / 180)
+                    self.noMoreBetsView.transform = CGAffineTransformRotate(self.noMoreBetsView.transform, lastCardRotation)
+                    
+                    // We have accepted/rejected the very last bet, hide action buttons
+                    self.buttonsContainer.hidden = true
+                } else if self.bets.count == 1 {
+                    bet = self.bets[0] as Bet
+                    self.cardViewOne.bet = self.bets[0]
+                    self.cardViewTwo.removeFromSuperview()
+                    self.activeCardView = self.cardViewOne
+                } else {
+                    if self.bets.count > 0 {
+                        bet = self.bets[0] as Bet
+                        self.cardViewOne.bet = self.bets[0]
+                        self.activeCardView = self.cardViewOne
+                    }
+                    if self.bets.count >= 2 {
+                        self.cardViewTwo.bet = self.bets[1]
+                    }
+                }
             }
         })
     }
@@ -161,7 +182,7 @@ class DiscoverViewController: UIViewController {
                 BetMoClient.sharedInstance.profileBets.insert(bet!, atIndex: 0)
             }
         }
-    
+
         bets.removeAtIndex(0)
         BetMoClient.sharedInstance.openBets.removeAtIndex(0)
         

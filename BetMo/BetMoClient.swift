@@ -178,7 +178,7 @@ class BetMoClient {
             completion(bets: self.openBets, error: nil)
         } else {
             self.getAllBets({ (bets, error) -> () in
-                completion(bets: bets, error: error)
+                completion(bets: self.openBets, error: error)
             })
         }
         
