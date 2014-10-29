@@ -39,11 +39,11 @@ class CustomCellNib: UIView {
     @IBOutlet weak var firstArrowImageView: UIImageView!
     @IBOutlet weak var secondArrowImageView: UIImageView!
 
-    var winningColor = UIColor(red: 93/255.0, green: 202/255.0, blue: 145/255.0, alpha: 0.5)
-    var losingColor = UIColor(red: 1, green: 116/255.0, blue: 116/255.0, alpha: 0.5)
+    @IBOutlet weak var ownerStampImage: UIImageView!
+    @IBOutlet weak var opponentStampImage: UIImageView!
+    var winnerImage = UIImage(named: "WINNER_STAMP")
+    var loserImage = UIImage(named: "LOSER_STAMP")
 
-    @IBOutlet weak var ownerMaskView: UIView!
-    @IBOutlet weak var opponentMaskView: UIView!
     @IBOutlet weak var noMoreBetsView: UIView!
 
     var delegate: CustomCellNibDelegate?
@@ -84,8 +84,13 @@ class CustomCellNib: UIView {
         setupStamps()
         // hide masks by default (they might have been un-hidden by the bet that previously used this cell)
         // @TODO(samoli) this might not be necessary any longer since I added "hidden" to the storyboard
-        ownerMaskView.hidden = true
-        opponentMaskView.hidden = true
+
+        var rotation = -1 * CGFloat(Double(20) * M_PI / 180)
+        ownerStampImage.transform = CGAffineTransformMakeRotation(rotation)
+        opponentStampImage.transform = CGAffineTransformMakeRotation(rotation)
+
+        ownerStampImage.hidden = true
+        opponentStampImage.hidden = true
 
         descriptionBottomConstraint.constant = 20
         ownerNameLabel.text = currBet.getOwner().getName()
@@ -95,12 +100,12 @@ class CustomCellNib: UIView {
                 // set mask if needed
                 if currBet.isClosedBet() {
                     if currBet.isOwnerWinner() {
-                        self.ownerMaskView.backgroundColor = self.winningColor
+                        self.ownerStampImage.image = self.winnerImage
                     } else {
-                        self.ownerMaskView.backgroundColor = self.losingColor
+                        self.ownerStampImage.image = self.loserImage
                     }
                     // unhide mask
-                    self.ownerMaskView.hidden = false
+                    self.ownerStampImage.hidden = false
                 }
             } else {
                 println(error)
@@ -116,12 +121,12 @@ class CustomCellNib: UIView {
                     // set mask if needed
                     if currBet.isClosedBet() {
                         if currBet.isOpponentWinner() {
-                            self.opponentMaskView.backgroundColor = self.winningColor
+                            self.opponentStampImage.image = self.winnerImage
                         } else {
-                            self.opponentMaskView.backgroundColor = self.losingColor
+                            self.opponentStampImage.image = self.loserImage
                         }
                         // unhide mask
-                        self.opponentMaskView.hidden = false
+                        self.opponentStampImage.hidden = false
                     }
                 } else {
                     println(error)
@@ -481,7 +486,7 @@ class CustomCellNib: UIView {
             self.secondArrowImageView.frame.origin.y -= 10
         }, completion: nil)
     }
-    
+
     func setupStamps() {
         acceptedStampLabel.font = UIFont(name: "OpenSans-Semibold", size: 40)
         rejectedStampLabel.font = UIFont(name: "OpenSans-Semibold", size: 40)
