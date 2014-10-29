@@ -25,6 +25,7 @@ class CustomCellNib: UIView {
 
     @IBOutlet weak var ownerNameLabel: UILabel!
     @IBOutlet weak var opponentNameLabel: UILabel!
+    @IBOutlet weak var noMoreBetsLabel: UILabel!
     
     @IBOutlet weak var ownerImageView: UIImageView!
     @IBOutlet weak var opponentImageView: UIImageView!
@@ -303,6 +304,8 @@ class CustomCellNib: UIView {
         opponentNameLabel.font = UIFont(name: "OpenSans-Semibold", size: 13)
         betAmount.font = UIFont(name: "OpenSans-Light", size: 52)
         betDescription.font = UIFont(name: "OpenSans-Regular", size: 16)
+        noMoreBetsLabel.font = UIFont(name: "OpenSans-Semibold", size: 20)
+        noMoreBetsLabel.textColor = UIColor.darkGrayColor()
     }
     
 
