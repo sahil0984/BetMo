@@ -16,23 +16,6 @@ class FriendCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var cellSelectOverlayView: UIView!
     
-    var screenWidth: CGFloat? {
-        willSet {
-
-        }
-        didSet {
-            //friendImageView.bounds.width = screenWidth/3
-            //friendImageView.bounds.height = screenWidth/3
-            //self.frame.width = screenWidth/3
-            //self.frame.height = screenWidth/3
-
-            //self.frame = CGRectMake(0, 0, screenWidth!/3, screenWidth!/3);
-            self.frame.size.height = screenWidth!/3
-            self.frame.size.width = screenWidth!/3
-
-        }
-    }
-    
     var friend: User? {
         willSet {
             

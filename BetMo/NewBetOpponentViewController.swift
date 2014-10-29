@@ -12,7 +12,7 @@ protocol NewBetOpponentViewControllerDelegate {
     func newOpponentSubmitted(betOpponent: User)
 }
 
-class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
+class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var friendSearchBar: UISearchBar!
     @IBOutlet weak var friendListCollectionView: UICollectionView!
@@ -23,6 +23,8 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
     var fbAllFriendIds: [String] = []
     
     var openBetFriend = User()
+    
+    var lastSelectedCellIndexPath: NSIndexPath!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,7 +115,6 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
         } else {
             cell.friend = friendsList[indexPath.row]
         }
-        cell.screenWidth = view.frame.width
         
         return cell
     }
@@ -121,19 +122,46 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.deselectItemAtIndexPath(indexPath, animated: false)
         
+        if lastSelectedCellIndexPath != nil {
+            var lastSelectedCell = collectionView.cellForItemAtIndexPath(lastSelectedCellIndexPath) as FriendCollectionViewCell
+            lastSelectedCell.cellSelectOverlayView.hidden = true
+        }
+        
         var thisCell = collectionView.cellForItemAtIndexPath(indexPath) as FriendCollectionViewCell
         
         thisCell.cellSelectOverlayView.hidden = false
-        UIView.animateWithDuration(1.5, animations: { () -> Void in
+        UIView.animateWithDuration(0.7, animations: { () -> Void in
             thisCell.cellSelectOverlayView.alpha = 0
         }) { (finished) -> Void in
-            thisCell.cellSelectOverlayView.hidden = true
+            //thisCell.cellSelectOverlayView.hidden = true
             thisCell.cellSelectOverlayView.alpha = 0.7
             
             self.delegate?.newOpponentSubmitted(self.friendsList[indexPath.row])
         }
+        
+        lastSelectedCellIndexPath = indexPath
     }
 
+    
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        var mElementSize = CGSizeMake(view.frame.width/3, view.frame.width/3)
+        
+        return mElementSize
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(0, 0, 0, 0)
+    }
     
 
     override func didReceiveMemoryWarning() {

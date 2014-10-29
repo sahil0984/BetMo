@@ -111,10 +111,15 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
     }
     
     func newOpponentSubmitted(betOpponent: User) {
+        
+        var tmpBet = Bet()
+        tmpBet.setAmount(newBet.getAmount()!)
+        tmpBet.setDescription(newBet.getDescription()!)
+        
         if betOpponent.getFirstName() != "Open Bet" {
-            newBet.setOpponent(betOpponent)
+            tmpBet.setOpponent(betOpponent)
         }
-        newBetConfirmViewController.newBet = self.newBet
+        newBetConfirmViewController.newBet = tmpBet
         
         backButton.setImage(UIImage(named: "back--icon"), forState: UIControlState.Normal)
         navTitleLabel.text = "Confirm bet"
