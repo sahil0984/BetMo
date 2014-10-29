@@ -120,8 +120,14 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         println("bet accpeted: \(acceptedBet.getObjectId())")
     }
     
-    func betRejected(rejectedBet: Bet) {
+    func betRejected(customCellNib: CustomCellNib, rejectedBet: Bet) {
         println("bet rejected: \(rejectedBet.getObjectId())")
+        
+        var rowIndex = customCellNib.rowIndex
+        if self.bets.count > rowIndex && self.bets[rowIndex] == rejectedBet {
+            self.bets.removeAtIndex(rowIndex)
+            self.betsFeedTableView.reloadData()
+        }
     }
     
     func betCancelled(customCellNib: CustomCellNib, cancelledBet: Bet) {
