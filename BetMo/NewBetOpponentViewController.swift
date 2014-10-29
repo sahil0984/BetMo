@@ -135,7 +135,6 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
         UIView.animateWithDuration(0.7, animations: { () -> Void in
             thisCell.cellSelectOverlayView.alpha = 0
         }) { (finished) -> Void in
-            //thisCell.cellSelectOverlayView.hidden = true
             thisCell.cellSelectOverlayView.alpha = 0.6
             
             self.delegate?.newOpponentSubmitted(self.friendsList[indexPath.row])
