@@ -276,7 +276,7 @@ class CustomCellNib: UIView {
         acceptContentView.hidden = true
         winnerContentView.hidden = true
         setupStamps()
-        setupButtons()
+//        setupButtons()
     }
     
     func setupCardView(cardView: UIView) {
