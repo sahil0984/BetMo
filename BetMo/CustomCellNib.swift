@@ -569,8 +569,10 @@ class CustomCellNib: UIView {
     }
 
     func showCancel() {
-        descriptionBottomConstraint.constant = 70
-        cancelBetContainer.hidden = false
+        if !isDiscoverView {
+            descriptionBottomConstraint.constant = 70
+            cancelBetContainer.hidden = false
+        }
     }
 
     func setupButtons() {
