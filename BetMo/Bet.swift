@@ -135,6 +135,41 @@ class Bet : PFObject, PFSubclassing {
         }
     }
     
+    func acceptWithCompletion(completion: (bet: Bet?, error: NSError?) -> ()) {
+        var currentUser = PFUser.currentUser() as User
+        setOpponent(currentUser)
+        setIsAccepted(true)
+        self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
+            if isSaved {
+                println("Successfully accepted bet");
+                completion(bet: (self as Bet), error: nil)
+                //Create a channel for push notifications in current installation
+                var currentInstallation = PFInstallation.currentInstallation()
+                currentInstallation.addUniqueObject("ch_\(self.getObjectId())", forKey: "channels")
+                currentInstallation.saveInBackground()
+                
+                
+                //Find owner
+                var ownerQuery = User.query()
+                ownerQuery.whereKey("fbId", equalTo: self.getOwner().getFbId())
+                //Find devices associated with the owner
+                var pushQuery = PFInstallation.query()
+                pushQuery.whereKey("user", matchesQuery: ownerQuery)
+                //Send push notification to opponent
+                var push = PFPush()
+                push.setQuery(pushQuery)
+                push.setMessage("\(currentUser.getName()) has accepted your bet.\n\(self.getDescription()!)")
+                push.sendPushInBackground()
+                
+                
+            } else {
+                println("Failed to accept bet");
+                completion(bet: nil, error: error)
+                println("\(error!)")
+            }
+        }
+    }
+
     func accept() {
         var currentUser = PFUser.currentUser() as User
         setOpponent(currentUser)
