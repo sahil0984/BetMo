@@ -33,8 +33,8 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
         friendListCollectionView.dataSource = self
         friendListCollectionView.delegate = self
         friendListCollectionView.backgroundColor = UIColor.whiteColor()
-        //friendListCollectionView.
         
+        friendSearchBar.barTintColor = UIColor.whiteColor()
         friendSearchBar.delegate = self
         
         openBetFriend.setFirstName("Open Bet")
@@ -116,6 +116,8 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
             cell.friend = friendsList[indexPath.row]
         }
         
+        cell.friendNameLabel.font = UIFont(name: "OpenSans-Semibold", size: 13)
+
         return cell
     }
 
@@ -134,7 +136,7 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
             thisCell.cellSelectOverlayView.alpha = 0
         }) { (finished) -> Void in
             //thisCell.cellSelectOverlayView.hidden = true
-            thisCell.cellSelectOverlayView.alpha = 0.7
+            thisCell.cellSelectOverlayView.alpha = 0.6
             
             self.delegate?.newOpponentSubmitted(self.friendsList[indexPath.row])
         }

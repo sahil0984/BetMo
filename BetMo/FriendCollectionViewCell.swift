@@ -21,6 +21,7 @@ class FriendCollectionViewCell: UICollectionViewCell {
             
         }
         didSet {
+            
             cellSelectOverlayView.hidden = true
             friendNameLabel.text = friend?.getName()
             BetMoGetImage.sharedInstance.getUserImage(friend?.getProfileImageUrl(), completion: { (userImage, error) -> () in
