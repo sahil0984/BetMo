@@ -10,7 +10,7 @@ import UIKit
 
 protocol CustomCellNibDelegate {
     func betAccepted(acceptedBet : Bet) -> Void
-    func betRejected(rejectedBet : Bet) -> Void
+    func betRejected(customCellNib: CustomCellNib, rejectedBet : Bet) -> Void
     func betCancelled(customCellNib: CustomCellNib, cancelledBet : Bet) -> Void
     func winnerChosen(customCellNib: CustomCellNib, bet: Bet)
 }
@@ -44,20 +44,34 @@ class CustomCellNib: UIView {
     var winnerImage = UIImage(named: "WINNER_STAMP")
     var loserImage = UIImage(named: "LOSER_STAMP")
 
+    @IBOutlet weak var chooseWinnerLabel: UILabel!
+    @IBOutlet weak var chooseWinnerButton: UIView!
     @IBOutlet weak var noMoreBetsView: UIView!
+    @IBOutlet weak var acceptContainer: UIView!
+    @IBOutlet weak var declineButton: UIView!
+    @IBOutlet weak var acceptButton: UIView!
 
+    @IBOutlet weak var declineLabel: UILabel!
+    @IBOutlet weak var acceptLabel: UILabel!
+
+    @IBOutlet weak var cancelBetContainer: UIView!
+    @IBOutlet weak var cancelLabel: UILabel!
     var delegate: CustomCellNibDelegate?
+    var cancelAlert = UIAlertView()
 
     @IBOutlet weak var descriptionBottomConstraint: NSLayoutConstraint!
+
     var arrowOriginalY: CGFloat!
     var rowIndex: Int!
     var stampRotation: CGFloat!
 
+    var isDiscoverView: Bool = false
+
     var isRequest: Bool = false {
         willSet(value) {
             if value {
-                actionButton.hidden = false
-                self.actionButtonBottomConstraint.constant = 10
+//                actionButton.hidden = false
+//                self.actionButtonBottomConstraint.constant = 10
             }
         }
     }
@@ -82,6 +96,7 @@ class CustomCellNib: UIView {
     }
     func fillMainCard(currBet: Bet) {
         setupStamps()
+        hideAllButtons()
         // hide masks by default (they might have been un-hidden by the bet that previously used this cell)
         // @TODO(samoli) this might not be necessary any longer since I added "hidden" to the storyboard
 
@@ -93,6 +108,7 @@ class CustomCellNib: UIView {
         opponentStampImage.hidden = true
 
         descriptionBottomConstraint.constant = 20
+
         ownerNameLabel.text = currBet.getOwner().getName()
         BetMoGetImage.sharedInstance.getUserImage(currBet.getOwner().getProfileImageUrl(), completion: { (userImage, error) -> () in
             if error == nil {
@@ -159,27 +175,32 @@ class CustomCellNib: UIView {
         
         if currBet.isOpenBet() && !currBet.isUserOwner() {
             //Open bets - Accept button
-            actionButton.setTitle("Accept Bet", forState: UIControlState.Normal)
+//            actionButton.setTitle("Accept Bet", forState: UIControlState.Normal)
+            showAcceptDecline()
         } else if currBet.isPendingAcceptBet() && currBet.isUserOpponent() {
             //Pending accept bets - Accept button
-            actionButton.setTitle("Accept Bet", forState: UIControlState.Normal)
+//            actionButton.setTitle("Accept Bet", forState: UIControlState.Normal)
+            showAcceptDecline()
         } else if (currBet.isPendingAcceptBet() || betOpponent == nil) && currBet.isUserOwner() {
-            actionButton.setTitle("Cancel Bet", forState: UIControlState.Normal)
+//            actionButton.setTitle("Cancel Bet", forState: UIControlState.Normal)
+            showCancel()
         } else if currBet.isUndecidedBet() && (currBet.isUserOwner() || currBet.isUserOpponent()) {
             //Undecided bets - Select Winner button
-            actionButton.setTitle("Pick Winner", forState: UIControlState.Normal)
-            self.actionButtonBottomConstraint.constant = 10
+            showChooseWinner()
+//            actionButton.hidden = true
+//            actionButton.setTitle("Pick Winner", forState: UIControlState.Normal)
+//            self.actionButtonBottomConstraint.constant = 10
         } else if currBet.isClosedBet() {
             //Closed bet - Select Winner button
 //            actionButton.setTitle("Closed Bet", forState: UIControlState.Normal)
             if isRequest {
-                descriptionBottomConstraint.constant = 0
+//                descriptionBottomConstraint.constant = 0
             }
-            actionButton.hidden = true
+//            actionButton.hidden = true
         } else {
             //CurrUser is not a party to this bet
-            actionButton.setTitle("Error", forState: UIControlState.Normal)
-            actionButton.hidden = true
+//            actionButton.setTitle("Error", forState: UIControlState.Normal)
+//            actionButton.hidden = true
         }
         
         //Show subscribe button
@@ -283,6 +304,16 @@ class CustomCellNib: UIView {
         betDescription.font = UIFont(name: "OpenSans-Regular", size: 16)
     }
     
+
+
+    @IBAction func onChooseWinnerTap(sender: UITapGestureRecognizer) {
+        var currBet = bet
+        var currUser = PFUser.currentUser() as User
+        var betOwner = currBet.getOwner()
+        var betOpponent = currBet.getOppenent()
+        swapViewWithWinnerView()
+    }
+
     
     //Action Button pressed:
     //-------------------------
@@ -312,6 +343,8 @@ class CustomCellNib: UIView {
         }
     }
     
+
+
     @IBAction func onSubscribeButton(sender: AnyObject) {
         //Handle bet subscription
         
@@ -384,6 +417,50 @@ class CustomCellNib: UIView {
     
     //Accept card button logic:
     //--------------------------
+    
+    @IBAction func onCancel(sender: UITapGestureRecognizer) {
+        cancelAlert.delegate = self
+        cancelAlert.message = "Do you want to cancel this bet request?"
+
+        cancelAlert.addButtonWithTitle("No")
+        cancelAlert.addButtonWithTitle("Yes")
+        
+        cancelAlert.title = "Pending Request"
+        
+        cancelAlert.show()
+    }
+
+    func alertView(alertView: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
+        if buttonIndex == 1 {
+            // cancel bet
+            delegate?.betCancelled(self, cancelledBet: bet)
+            bet.cancel()
+        } else {
+            // no action
+        }
+    }
+
+    @IBAction func acceptTap(sender: UITapGestureRecognizer) {
+        var currUser = PFUser.currentUser() as User
+        
+        //Create a tmp bet and assign it to bet just to call the property observer.
+        var tmpBet = bet
+        tmpBet.setIsAccepted(true)
+        tmpBet.setOpponent(currUser)
+        bet = tmpBet
+        
+        bet.accept()
+        
+        delegate?.betAccepted(bet)
+    }
+    
+    @IBAction func declineTap(sender: UITapGestureRecognizer) {
+        bet.reject()
+        
+        delegate?.betRejected(self, rejectedBet: bet)
+    }
+    
+    
     @IBAction func onAcceptButton(sender: AnyObject) {
         var currUser = PFUser.currentUser() as User
         
@@ -402,8 +479,7 @@ class CustomCellNib: UIView {
         
         bet.reject()
         
-        delegate?.betRejected(bet)
-        
+        delegate?.betRejected(self, rejectedBet: bet)
     }
     @IBAction func onCancelButton(sender: AnyObject) {
         swapViewWithMainView()
@@ -454,28 +530,6 @@ class CustomCellNib: UIView {
         }
     }
 
-//    func setEmojisIfNeeded(bet: Bet) {
-//        if let winner = bet.getWinner() {
-//            let owner = bet.getOwner()
-//            let opponent = bet.getOppenent()!
-//            ownerEmoji.hidden = true
-//            opponentEmoji.hidden = true
-//    
-//            if winner.objectId == bet.getOwner().objectId {
-//                ownerEmoji.image = UIImage(named: "cool-25")
-//                opponentEmoji.image = UIImage(named: "sad-25")
-//                ownerEmoji.hidden = false
-//                opponentEmoji.hidden = false
-//                println("show")
-//            } else if winner.objectId == bet.getOppenent()?.objectId {
-//                opponentEmoji.image = UIImage(named: "cool-25")
-//                ownerEmoji.image = UIImage(named: "sad-25")
-//                ownerEmoji.hidden = false
-//                opponentEmoji.hidden = false
-//            }
-//        }
-//    }
-
     func animateArrows() {
         // The animation may have ended when the view disappeared but the state of the arrow might be the "animated" state -- reset arrow y positions back to their original
         firstArrowImageView.frame.origin.y = arrowOriginalY
@@ -495,5 +549,51 @@ class CustomCellNib: UIView {
         acceptedStampLabel.transform = CGAffineTransformScale(acceptedStampLabel.transform, 2, 2)
         rejectedStampLabel.transform = CGAffineTransformMakeRotation(-1*stampRotation)
         rejectedStampLabel.transform = CGAffineTransformScale(rejectedStampLabel.transform, 2, 2)
+    }
+
+    func showChooseWinner() {
+        if !isDiscoverView {
+            descriptionBottomConstraint.constant = 70
+            chooseWinnerButton.hidden = false
+        }
+    }
+
+    func showAcceptDecline() {
+        if !isDiscoverView {
+            descriptionBottomConstraint.constant = 70
+            acceptContainer.hidden = false
+        }
+    }
+
+    func showCancel() {
+        descriptionBottomConstraint.constant = 70
+        cancelBetContainer.hidden = false
+    }
+
+    func hideAllButtons() {
+        chooseWinnerButton.hidden = true
+        acceptContainer.hidden = true
+        cancelBetContainer.hidden = true
+
+        var blueColor = UIColor(red: 21/255.0, green: 91/255.0, blue: 151/255.0, alpha: 1)
+        var grayColor = UIColor(red: 208/255.0, green: 208/255.0, blue: 208/255.0, alpha: 1)
+        var buttonFont = UIFont(name: "OpenSans-Semibold", size: 14)
+        
+        cancelBetContainer.backgroundColor = grayColor
+        cancelBetContainer.layer.cornerRadius = 5
+        cancelLabel.font = buttonFont
+        cancelLabel.textColor = UIColor.darkGrayColor()
+
+        acceptButton.backgroundColor = blueColor
+        acceptButton.layer.cornerRadius = 5
+        acceptLabel.font = buttonFont
+        declineButton.backgroundColor = grayColor
+        declineButton.layer.cornerRadius = 5
+        declineLabel.font = buttonFont
+        declineLabel.textColor = UIColor.darkGrayColor()
+        
+        chooseWinnerButton.backgroundColor = blueColor
+        chooseWinnerButton.layer.cornerRadius = 5
+        chooseWinnerLabel.font = buttonFont
     }
 }

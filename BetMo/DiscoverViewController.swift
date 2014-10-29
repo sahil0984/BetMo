@@ -35,6 +35,10 @@ class DiscoverViewController: UIViewController {
         superViewCenter = self.view.center.x
         noMoreBetsView.noContentView = true
 
+        // set defaults for cardviews
+        cardViewOne.isDiscoverView = true
+        cardViewTwo.isDiscoverView = true
+
         var lastCardRotation = -1 * CGFloat(Double(lastCardRotationDegress) * M_PI / 180)
         noMoreBetsView.transform = CGAffineTransformRotate(noMoreBetsView.transform, lastCardRotation)
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
