@@ -25,6 +25,7 @@ class CustomCellNib: UIView {
 
     @IBOutlet weak var ownerNameLabel: UILabel!
     @IBOutlet weak var opponentNameLabel: UILabel!
+    @IBOutlet weak var noMoreBetsLabel: UILabel!
     
     @IBOutlet weak var ownerImageView: UIImageView!
     @IBOutlet weak var opponentImageView: UIImageView!
@@ -95,15 +96,10 @@ class CustomCellNib: UIView {
         }
     }
     func fillMainCard(currBet: Bet) {
-        setupStamps()
         hideAllButtons()
         // hide masks by default (they might have been un-hidden by the bet that previously used this cell)
         // @TODO(samoli) this might not be necessary any longer since I added "hidden" to the storyboard
-
-        var rotation = -1 * CGFloat(Double(20) * M_PI / 180)
-        ownerStampImage.transform = CGAffineTransformMakeRotation(rotation)
-        opponentStampImage.transform = CGAffineTransformMakeRotation(rotation)
-
+        setupStamps()
         ownerStampImage.hidden = true
         opponentStampImage.hidden = true
 
@@ -277,6 +273,10 @@ class CustomCellNib: UIView {
         winnerContentView.hidden = true
         setupStamps()
         setupButtons()
+
+        var rotation = -1 * CGFloat(Double(20) * M_PI / 180)
+        ownerStampImage.transform = CGAffineTransformMakeRotation(rotation)
+        opponentStampImage.transform = CGAffineTransformMakeRotation(rotation)
     }
     
     func setupCardView(cardView: UIView) {
@@ -303,6 +303,8 @@ class CustomCellNib: UIView {
         opponentNameLabel.font = UIFont(name: "OpenSans-Semibold", size: 13)
         betAmount.font = UIFont(name: "OpenSans-Light", size: 52)
         betDescription.font = UIFont(name: "OpenSans-Regular", size: 16)
+        noMoreBetsLabel.font = UIFont(name: "OpenSans-Semibold", size: 20)
+        noMoreBetsLabel.textColor = UIColor.darkGrayColor()
     }
     
 

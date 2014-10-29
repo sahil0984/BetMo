@@ -22,6 +22,7 @@
                 <outlet property="descriptionBottomConstraint" destination="ykb-1n-bdy" id="Kc7-Ce-ec8"/>
                 <outlet property="firstArrowImageView" destination="s5l-vF-hAh" id="7W7-3K-oc4"/>
                 <outlet property="mainContentView" destination="GFN-jk-cJ9" id="W4w-qX-FL5"/>
+                <outlet property="noMoreBetsLabel" destination="k0I-Nq-R8a" id="aBK-Uh-Osn"/>
                 <outlet property="noMoreBetsView" destination="QeW-XI-Kp5" id="UDY-CK-9N0"/>
                 <outlet property="opponentImageView" destination="mqN-tO-rOq" id="UUR-Yj-9wl"/>
                 <outlet property="opponentNameLabel" destination="Ccc-uF-SKi" id="iYl-OK-gyN"/>
@@ -45,22 +46,6 @@
             <rect key="frame" x="0.0" y="0.0" width="252" height="350"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QeW-XI-Kp5">
-                    <rect key="frame" x="0.0" y="0.0" width="252" height="350"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No more bets, check back later" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0I-Nq-R8a">
-                            <rect key="frame" x="18" y="166" width="215" height="18"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="centerX" secondItem="k0I-Nq-R8a" secondAttribute="centerX" id="4OB-ke-8eV"/>
-                        <constraint firstAttribute="centerY" secondItem="k0I-Nq-R8a" secondAttribute="centerY" id="piJ-Ym-bE3"/>
-                    </constraints>
-                </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v23-hR-U83" userLabel="Choose Winner Button">
                     <rect key="frame" x="10" y="300" width="232" height="40"/>
                     <subviews>
@@ -156,7 +141,7 @@
                     <rect key="frame" x="10" y="300" width="232" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request Pending..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvU-QR-V3U" userLabel="Cancel">
-                            <rect key="frame" x="43" y="10" width="147" height="20.5"/>
+                            <rect key="frame" x="43" y="10" width="146.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -282,6 +267,22 @@
                         </mask>
                     </variation>
                 </imageView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QeW-XI-Kp5">
+                    <rect key="frame" x="0.0" y="0.0" width="252" height="350"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No more available bets" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0I-Nq-R8a">
+                            <rect key="frame" x="47" y="166" width="157.5" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="k0I-Nq-R8a" secondAttribute="centerX" id="4OB-ke-8eV"/>
+                        <constraint firstAttribute="centerY" secondItem="k0I-Nq-R8a" secondAttribute="centerY" id="piJ-Ym-bE3"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstItem="Reb-k2-HKu" firstAttribute="width" secondItem="VTB-Pn-lno" secondAttribute="width" id="01r-hn-3Ae"/>
