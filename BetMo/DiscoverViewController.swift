@@ -175,14 +175,6 @@ class DiscoverViewController: UIViewController {
     }
 
     func updateCards(removedCard: CustomCellNib) {
-        var bet = bets[0] as Bet
-        // Add to the profile bets
-        bet.acceptWithCompletion { (bet, error) -> () in
-            if error == nil {
-                BetMoClient.sharedInstance.profileBets.insert(bet!, atIndex: 0)
-            }
-        }
-
         bets.removeAtIndex(0)
         BetMoClient.sharedInstance.openBets.removeAtIndex(0)
         
@@ -220,6 +212,13 @@ class DiscoverViewController: UIViewController {
 
     func handleAcceptance() {
         handleLastBetCase()
+        var bet = bets[0] as Bet
+        // Add to the profile bets
+        bet.acceptWithCompletion { (bet, error) -> () in
+            if error == nil {
+                BetMoClient.sharedInstance.profileBets.insert(bet!, atIndex: 0)
+            }
+        }
 
         UIView.animateWithDuration(0.2, animations: { () -> Void in
             self.activeCardView.acceptedStampLabel.alpha = 1
