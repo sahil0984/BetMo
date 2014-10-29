@@ -32,6 +32,15 @@ class NewBetAmountViewController: UIViewController {
         arrowsImage.hidden = false
         finger.hidden = false
         // Do any additional setup after loading the view.
+
+        //        ownerNameLabel.font = UIFont(name: "OpenSans-Semibold", size: 13)
+        //        opponentNameLabel.font = UIFont(name: "OpenSans-Semibold", size: 13)
+        //        betAmount.font = UIFont(name: "OpenSans-Light", size: 52)
+        //        betDescription.font = UIFont(name: "OpenSans-Regular", size: 16)
+
+        betAmountLabel.font = UIFont(name: "OpenSans-Light", size: 70)
+        nextButton.titleLabel!.font = UIFont(name: "OpenSans-Regular", size: 15)
+        
         nextButton.layer.cornerRadius = 5
     }
     
@@ -80,6 +89,8 @@ class NewBetAmountViewController: UIViewController {
                 
                 if tmpBetAmount >= 0 {
                     betAmount = tmpBetAmount
+                } else {
+                    betAmount = 0
                 }
             }
         

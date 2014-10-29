@@ -54,6 +54,9 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
 
         // Do any additional setup after loading the view.
         
+        navTitleLabel.font = UIFont(name: "OpenSans-Regular", size: 15)
+
+        
         var currentUser = PFUser.currentUser() as User
         
         newBetDescViewController = storyboard?.instantiateViewControllerWithIdentifier("NewBetDescViewController") as? NewBetDescViewController

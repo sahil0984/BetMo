@@ -30,6 +30,9 @@ class NewBetDescViewController: UIViewController, UITextViewDelegate {
 
         // Do any additional setup after loading the view.
         
+        betDescTextView.font = UIFont(name: "OpenSans-Semibold", size: 20)
+        nextButton.titleLabel!.font = UIFont(name: "OpenSans-Regular", size: 15)
+        
         betDescTextView.delegate = self
         betDescTextView.text = ""
         AddEmptyBetHint()
@@ -39,7 +42,6 @@ class NewBetDescViewController: UIViewController, UITextViewDelegate {
         nextButton.hidden = true
         
         betDescTextView.becomeFirstResponder()
-        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
