@@ -96,14 +96,9 @@ class CustomCellNib: UIView {
         }
     }
     func fillMainCard(currBet: Bet) {
-        setupStamps()
         hideAllButtons()
         // hide masks by default (they might have been un-hidden by the bet that previously used this cell)
         // @TODO(samoli) this might not be necessary any longer since I added "hidden" to the storyboard
-
-        var rotation = -1 * CGFloat(Double(20) * M_PI / 180)
-        ownerStampImage.transform = CGAffineTransformMakeRotation(rotation)
-        opponentStampImage.transform = CGAffineTransformMakeRotation(rotation)
 
         ownerStampImage.hidden = true
         opponentStampImage.hidden = true
@@ -278,6 +273,10 @@ class CustomCellNib: UIView {
         winnerContentView.hidden = true
         setupStamps()
         setupButtons()
+
+        var rotation = -1 * CGFloat(Double(20) * M_PI / 180)
+        ownerStampImage.transform = CGAffineTransformMakeRotation(rotation)
+        opponentStampImage.transform = CGAffineTransformMakeRotation(rotation)
     }
     
     func setupCardView(cardView: UIView) {
