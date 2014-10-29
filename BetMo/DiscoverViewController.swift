@@ -154,8 +154,15 @@ class DiscoverViewController: UIViewController {
     }
 
     func updateCards(removedCard: CustomCellNib) {
+        var bet = bets[0] as Bet
+        // Add to the profile bets
+        bet.acceptWithCompletion { (bet, error) -> () in
+            BetMoClient.sharedInstance.profileBets.insert(bet!, atIndex: 0)
+        }
+    
         bets.removeAtIndex(0)
-
+        BetMoClient.sharedInstance.openBets.removeAtIndex(0)
+        
         if bets.count < 2 {
             if cardViewOne == removedCard {
                 activeCardView = cardViewTwo
