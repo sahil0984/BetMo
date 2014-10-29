@@ -276,6 +276,7 @@ class CustomCellNib: UIView {
         acceptContentView.hidden = true
         winnerContentView.hidden = true
         setupStamps()
+        setupButtons()
     }
     
     func setupCardView(cardView: UIView) {
@@ -570,11 +571,7 @@ class CustomCellNib: UIView {
         cancelBetContainer.hidden = false
     }
 
-    func hideAllButtons() {
-        chooseWinnerButton.hidden = true
-        acceptContainer.hidden = true
-        cancelBetContainer.hidden = true
-
+    func setupButtons() {
         var blueColor = UIColor(red: 21/255.0, green: 91/255.0, blue: 151/255.0, alpha: 1)
         var grayColor = UIColor(red: 208/255.0, green: 208/255.0, blue: 208/255.0, alpha: 1)
         var buttonFont = UIFont(name: "OpenSans-Semibold", size: 14)
@@ -583,7 +580,7 @@ class CustomCellNib: UIView {
         cancelBetContainer.layer.cornerRadius = 5
         cancelLabel.font = buttonFont
         cancelLabel.textColor = UIColor.darkGrayColor()
-
+        
         acceptButton.backgroundColor = blueColor
         acceptButton.layer.cornerRadius = 5
         acceptLabel.font = buttonFont
@@ -595,5 +592,11 @@ class CustomCellNib: UIView {
         chooseWinnerButton.backgroundColor = blueColor
         chooseWinnerButton.layer.cornerRadius = 5
         chooseWinnerLabel.font = buttonFont
+    }
+
+    func hideAllButtons() {
+        chooseWinnerButton.hidden = true
+        acceptContainer.hidden = true
+        cancelBetContainer.hidden = true
     }
 }
