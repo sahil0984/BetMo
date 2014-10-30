@@ -71,14 +71,16 @@ class NewBetAmountViewController: UIViewController {
             
             if absVelocityX > 1 {
                 
-                if absVelocityX < 50 {
-                    tmpBetAmount += 1 * dir
-                } else if absVelocityX < 120 {
-                    tmpBetAmount += 5 * dir
-                } else if absVelocityX < 300 {
-                    tmpBetAmount += 10 * dir
-                } else if absVelocityX < 600 {
-                    tmpBetAmount += 50 * dir
+                if absVelocityX > 20 {
+                    if absVelocityX < 100 {
+                        tmpBetAmount += 1 * dir
+                    } else if absVelocityX < 200 {
+                        tmpBetAmount += 5 * dir
+                    } else if absVelocityX < 300 {
+                        tmpBetAmount += 10 * dir
+                    } else if absVelocityX < 600 {
+                        tmpBetAmount += 50 * dir
+                    }
                 }
                 
                 if tmpBetAmount >= 0 {
