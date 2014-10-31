@@ -93,7 +93,7 @@ class BetMoClient {
     var feedBets: [Bet] = [Bet]()
     var profileBets: [Bet] = [Bet]()
     
-    func getAllBets(completion: (bets: [Bet]?, error: NSError?) -> ()) {
+    func getAllBetsV2(completion: (bets: [Bet]?, error: NSError?) -> ()) {
         var betsQuery = PFQuery(className: "Bet")
         betsQuery.includeKey("owner")
         betsQuery.includeKey("opponent")
@@ -109,6 +109,43 @@ class BetMoClient {
             }
         }
     }
+    
+    
+    func getAllBets(completion: (bets: [Bet]?, error: NSError?) -> ()) {
+        BetMoClient.sharedInstance.getAllBetMoFriends({(friendsList, error) -> () in
+            if error == nil {
+                
+                var friendOwnerQuery = PFQuery(className: "Bet")
+                friendOwnerQuery.whereKey("owner", containedIn: friendsList)
+
+                var friendOpponentQuery = PFQuery(className: "Bet")
+                friendOpponentQuery.whereKey("opponent", containedIn: friendsList)
+                
+                var betsQuery = PFQuery.orQueryWithSubqueries([friendOwnerQuery, friendOpponentQuery])
+                
+                betsQuery.includeKey("owner")
+                betsQuery.includeKey("opponent")
+                betsQuery.includeKey("winner")
+                betsQuery.orderByDescending("updatedAt")
+                betsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+                    if error == nil {
+                        self.allBets = objects as [Bet]
+                        
+                        println("found \(self.allBets.count) bets")
+                        
+                        completion(bets: self.allBets, error: nil)
+                    } else {
+                        completion(bets: nil, error: error)
+                    }
+                }
+                
+            } else {
+                println(error)
+            }
+        })
+        
+    }
+    
     
     func getTotalWinsForUser(user: User, completion: (winCount: Int?, error: NSError?) -> ()) {
         
@@ -182,5 +219,56 @@ class BetMoClient {
             })
         }
         
+    }
+    
+    
+    
+    //function to get all the friends in your facebook network using BetMo
+    
+    func getAllBetMoFriends(completion: (friendsList: [User]?, error: NSError?) -> ()) {
+        // Issue a Facebook Graph API request to get your user's friend list
+        FBRequestConnection.startForMyFriendsWithCompletionHandler({ (connection, result, error: NSError!) -> Void in
+            if error == nil {
+                // result will contain an array with your user's friends in the "data" key
+                var friendObjects = result["data"] as [NSDictionary]
+                
+                var allFbFriendIds: [String] = []
+                
+                // Create a list of friends' Facebook IDs
+                for friendObject in friendObjects {
+                    allFbFriendIds.append(friendObject["id"] as NSString)
+
+                }
+                
+                // Issue a Parse query to filter the list by users using BetMo
+                var friendsQuery = PFQuery(className: "_User")
+                friendsQuery.whereKey("fbId", containedIn: allFbFriendIds)
+                //friendsQuery.whereKey("searchName", hasPrefix: friendSearchBar.text.lowercaseString)
+                friendsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+                    if error == nil {
+                        var friends = objects as [User]
+                        var friendsList: [User]!
+                        if friends.count == 0 {
+                            //println("Not Found: \(self.friendSearchBar.text)")
+                            friendsList = []
+                        } else {
+                            //println("Found: \(self.friendSearchBar.text)")
+                            friendsList = friends
+                        }
+                        completion(friendsList: friendsList, error: nil)
+                        println("obtained friends list")
+                    } else {
+                        println("Error finding")
+                        completion(friendsList: nil, error: error)
+                    }
+                }
+                
+                println("\(friendObjects.count)")
+            } else {
+                println("Error requesting friends list form facebook")
+                println("\(error)")
+                completion(friendsList: nil, error: error)
+            }
+        })
     }
 }

@@ -19,7 +19,9 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
     
     var delegate: NewBetOpponentViewControllerDelegate?
     
+    var allFriendsList: [User] = []
     var friendsList: [User] = []
+    
     var fbAllFriendIds: [String] = []
     
     var openBetFriend = User()
@@ -40,61 +42,64 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
         openBetFriend.setFirstName("Open Bet")
         openBetFriend.setLastName("")
         
-        // Issue a Facebook Graph API request to get your user's friend list
-        FBRequestConnection.startForMyFriendsWithCompletionHandler({ (connection, result, error: NSError!) -> Void in
+//        // Issue a Facebook Graph API request to get your user's friend list
+//        FBRequestConnection.startForMyFriendsWithCompletionHandler({ (connection, result, error: NSError!) -> Void in
+//            if error == nil {
+//                //println(result)
+//                // result will contain an array with your user's friends in the "data" key
+//                var friendObjects = result["data"] as [NSDictionary]
+//                
+//                // Create a list of friends' Facebook IDs
+//                for friendObject in friendObjects {
+//                    self.fbAllFriendIds.append(friendObject["id"] as NSString)
+//                    //var tt = friendObject["id"] as NSString
+//                    //println("fid = \(tt)")
+//                }
+//                
+//                self.updateFriendsList()
+//                
+//                println("\(friendObjects.count)")
+//            } else {
+//                println("Error requesting friends list form facebook")
+//                println("\(error)")
+//            }
+//        })
+        
+        
+        BetMoClient.sharedInstance.getAllBetMoFriends({(friendsList, error) -> () in
             if error == nil {
-                //println(result)
-                // result will contain an array with your user's friends in the "data" key
-                var friendObjects = result["data"] as [NSDictionary]
-                
-                // Create a list of friends' Facebook IDs
-                for friendObject in friendObjects {
-                    self.fbAllFriendIds.append(friendObject["id"] as NSString)
-                    //var tt = friendObject["id"] as NSString
-                    //println("fid = \(tt)")
-                }
-                
+                self.allFriendsList = friendsList!
                 self.updateFriendsList()
-                
-                println("\(friendObjects.count)")
             } else {
-                println("Error requesting friends list form facebook")
-                println("\(error)")
+                println(error)
             }
         })
+        
     }
-    
-    
     
     func updateFriendsList() {
-        var friendsQuery = PFQuery(className: "_User")
-        friendsQuery.whereKey("fbId", containedIn: fbAllFriendIds)
+        var searchString = friendSearchBar.text.lowercaseString
         
-        friendsQuery.whereKey("searchName", hasPrefix: friendSearchBar.text.lowercaseString)
-        friendsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                var friends = objects as [User]
-                if friends.count == 0 {
-                    println("Not Found: \(self.friendSearchBar.text)")
-                    self.friendsList = []
-                } else {
-                    println("Found: \(self.friendSearchBar.text)")
-                    self.friendsList = friends
+        if searchString == "" {
+            self.friendsList = allFriendsList
+        } else {
+            self.friendsList = []
+            //regex searchString with seachName column of allFriendsList
+            for friend in allFriendsList {
+                var searchName = friend.getSearchName()
+                if let match = searchName!.rangeOfString(searchString, options: .RegularExpressionSearch) {
+                    self.friendsList.append(friend)
                 }
-                self.friendsList.insert(self.openBetFriend, atIndex: 0)
-                self.friendListCollectionView.reloadData()
-            } else {
-                println("Error finding")
             }
         }
+        self.friendsList.insert(self.openBetFriend, atIndex: 0)
+        self.friendListCollectionView.reloadData()
     }
-    
     
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        println("Edit changed")
+        //println("Edit changed")
         updateFriendsList()
-
     }
     
     
