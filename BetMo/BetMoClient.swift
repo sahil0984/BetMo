@@ -256,7 +256,7 @@ class BetMoClient {
                             friendsList = friends
                         }
                         completion(friendsList: friendsList, error: nil)
-                        println("obtained friends list")
+                        //println("obtained friends list")
                     } else {
                         println("Error finding")
                         completion(friendsList: nil, error: error)

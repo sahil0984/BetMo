@@ -74,7 +74,8 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
         
         backButton.setImage(UIImage(named: "cancel--icon"), forState: UIControlState.Normal)
         activeViewController = newBetDescViewController
-
+        
+        newBetOpponentViewController.preLoadFriends = true
     }
     
     

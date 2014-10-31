@@ -22,11 +22,25 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
     var allFriendsList: [User] = []
     var friendsList: [User] = []
     
-    var fbAllFriendIds: [String] = []
-    
     var openBetFriend = User()
     
     var lastSelectedCellIndexPath: NSIndexPath!
+    
+    var isFriendListLoaded = false
+    var preLoadFriends: Bool = false {
+        didSet {
+            BetMoClient.sharedInstance.getAllBetMoFriends({(friendsList, error) -> () in
+                if error == nil {
+                    self.allFriendsList = friendsList!
+                    //self.updateFriendsList()
+                    println("Friends list preloaded")
+                    self.isFriendListLoaded = true
+                } else {
+                    println(error)
+                }
+            })
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,38 +56,21 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
         openBetFriend.setFirstName("Open Bet")
         openBetFriend.setLastName("")
         
-//        // Issue a Facebook Graph API request to get your user's friend list
-//        FBRequestConnection.startForMyFriendsWithCompletionHandler({ (connection, result, error: NSError!) -> Void in
-//            if error == nil {
-//                //println(result)
-//                // result will contain an array with your user's friends in the "data" key
-//                var friendObjects = result["data"] as [NSDictionary]
-//                
-//                // Create a list of friends' Facebook IDs
-//                for friendObject in friendObjects {
-//                    self.fbAllFriendIds.append(friendObject["id"] as NSString)
-//                    //var tt = friendObject["id"] as NSString
-//                    //println("fid = \(tt)")
-//                }
-//                
-//                self.updateFriendsList()
-//                
-//                println("\(friendObjects.count)")
-//            } else {
-//                println("Error requesting friends list form facebook")
-//                println("\(error)")
-//            }
-//        })
         
-        
-        BetMoClient.sharedInstance.getAllBetMoFriends({(friendsList, error) -> () in
-            if error == nil {
-                self.allFriendsList = friendsList!
-                self.updateFriendsList()
-            } else {
-                println(error)
-            }
-        })
+        if isFriendListLoaded {
+            updateFriendsList()
+        } else {
+            BetMoClient.sharedInstance.getAllBetMoFriends({(friendsList, error) -> () in
+                if error == nil {
+                    self.allFriendsList = friendsList!
+                    self.updateFriendsList()
+                    println("Friends list preloaded")
+                    self.isFriendListLoaded = true
+                } else {
+                    println(error)
+                }
+            })
+        }
         
     }
     
