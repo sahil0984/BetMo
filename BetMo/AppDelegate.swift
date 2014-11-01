@@ -46,21 +46,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerForRemoteNotificationTypes( userNotficationTypes )
         }
         
-//        var remoteNotif = launchOptions!["UIApplicationLaunchOptionsRemoteNotificationKey"] as? NSDictionary
-//        if remoteNotif != nil {
-//            println("remoteNotif: \(remoteNotif)")
-//        }
-//        
-//        
-////        NSDictionary *remoteNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-////        
-////        if(remoteNotif)
-////        {
-////            //Handle remote notification
-////        }
         
         
-        
+
+        //Logic for handling incoming notifications
+        if launchOptions != nil {
+            // Extract the notification data
+            var notificationPayload = launchOptions!["UIApplicationLaunchOptionsRemoteNotificationKey"] as? NSDictionary
+            // Extract notification type
+            var notifyType = notificationPayload!["notifyType"] as? String
+            println("Received \(notifyType) notification")
+
+            //Fetch the new bet and push the view controller accordingly.
+            BetMoClient.sharedInstance.getAllBets { (bets, error) -> () in
+                //var vc = self.storyboard.instantiateViewControllerWithIdentifier("HomeViewController") as HomeViewController
+                //vc.activeViewController = vc.discoverViewController
+            }
+        }
         
         
         //Add a notification center to monitor logout action
@@ -99,6 +101,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: NSDictionary) {
         
         PFPush.handlePush(userInfo)
+        
+        //Logic for handling incoming notifications
+        var notifyType = userInfo["notifyType"] as String
+        println("Received \(notifyType) notification")
+
+        //Fetch the new bet and push the view controller accordingly.
+        BetMoClient.sharedInstance.getAllBets { (bets, error) -> () in
+            //var vc = self.storyboard.instantiateViewControllerWithIdentifier("HomeViewController") as HomeViewController
+            //vc.activeViewController = vc.openBetsFeedContainer
+        }
     }
     
     func applicationWillResignActive(application: UIApplication) {
@@ -119,6 +131,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 
         FBAppCall.handleDidBecomeActiveWithSession(PFFacebookUtils.session())
+
+        
+        //Clear the notification badge
+        var currentInstallation = PFInstallation.currentInstallation()
+        
+        if currentInstallation.badge != 0 {
+            currentInstallation.badge = 0
+            currentInstallation.saveEventually()
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {

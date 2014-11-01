@@ -122,9 +122,14 @@ class Bet : PFObject, PFSubclassing {
                     var pushQuery = PFInstallation.query()
                     pushQuery.whereKey("user", matchesQuery: opponentQuery)
                     //Send push notification to opponent
+                    
+                    var data: NSDictionary = [  "alert": "\(currentUser.getName()) has challenged you to a $\(self.getAmount()!) bet.\n\(self.getDescription()!)",
+                                                "badge": "Increment",
+                                                "notifyType": "create" ]
+                    
                     var push = PFPush()
                     push.setQuery(pushQuery)
-                    push.setMessage("\(currentUser.getName()) has challenged you to a $\(self.getAmount()!) bet.\n\(self.getDescription()!)")
+                    push.setData(data)
                     push.sendPushInBackground()
                 }
                 
@@ -156,9 +161,14 @@ class Bet : PFObject, PFSubclassing {
                 var pushQuery = PFInstallation.query()
                 pushQuery.whereKey("user", matchesQuery: ownerQuery)
                 //Send push notification to opponent
+                
+                var data: NSDictionary = [  "alert": "\(currentUser.getName()) has accepted your bet.\n\(self.getDescription()!)",
+                                            "badge": "Increment",
+                                            "notifyType": "accept" ]
+                
                 var push = PFPush()
                 push.setQuery(pushQuery)
-                push.setMessage("\(currentUser.getName()) has accepted your bet.\n\(self.getDescription()!)")
+                push.setData(data)
                 push.sendPushInBackground()
                 
                 
@@ -191,9 +201,14 @@ class Bet : PFObject, PFSubclassing {
                 var pushQuery = PFInstallation.query()
                 pushQuery.whereKey("user", matchesQuery: ownerQuery)
                 //Send push notification to opponent
+                
+                var data: NSDictionary = [  "alert": "\(currentUser.getName()) has accepted your bet.\n\(self.getDescription()!)",
+                                            "badge": "Increment",
+                                            "notifyType": "accept" ]
+                
                 var push = PFPush()
                 push.setQuery(pushQuery)
-                push.setMessage("\(currentUser.getName()) has accepted your bet.\n\(self.getDescription()!)")
+                push.setData(data)
                 push.sendPushInBackground()
                 
                 
@@ -251,9 +266,14 @@ class Bet : PFObject, PFSubclassing {
                 var pushQuery = PFInstallation.query()
                 pushQuery.whereKey("user", matchesQuery: ownerQuery)
                 //Send push notification to opponent
+                
+                var data: NSDictionary = [  "alert": "You have won a $\(self.getAmount()!) bet against \(currentUser.getName()).\n\(self.getDescription()!)",
+                                            "badge": "Increment",
+                                            "notifyType": "winner" ]
+                
                 var push = PFPush()
                 push.setQuery(pushQuery)
-                push.setMessage("You have won a $\(self.getAmount()!) bet against \(currentUser.getName()).\n\(self.getDescription()!)")
+                push.setData(data)
                 push.sendPushInBackground()
                 
             } else {
@@ -289,9 +309,14 @@ class Bet : PFObject, PFSubclassing {
                 var pushQuery = PFInstallation.query()
                 pushQuery.whereKey("user", matchesQuery: ownerQuery)
                 //Send push notification to opponent
+                
+                var data: NSDictionary = [  "alert": "You have won a $\(self.getAmount()!) bet against \(currentUser.getName()).\n\(self.getDescription()!)",
+                                            "badge": "Increment",
+                                            "notifyType": "winner" ]
+                
                 var push = PFPush()
                 push.setQuery(pushQuery)
-                push.setMessage("You have won a $\(self.getAmount()!) bet against \(currentUser.getName()).\n\(self.getDescription()!)")
+                push.setData(data)
                 push.sendPushInBackground()
                 
             } else {
@@ -321,9 +346,14 @@ class Bet : PFObject, PFSubclassing {
                 var pushQuery = PFInstallation.query()
                 pushQuery.whereKey("user", matchesQuery: ownerQuery)
                 //Send push notification to opponent
+                
+                var data: NSDictionary = [  "alert": "You have lost a $\(self.getAmount()!) bet against \(currentUser.getName()).\n\(self.getDescription()!)",
+                                            "badge": "Increment",
+                                            "notifyType": "loser" ]
+                
                 var push = PFPush()
                 push.setQuery(pushQuery)
-                push.setMessage("You have lost a $\(self.getAmount()!) bet against \(currentUser.getName()).\n\(self.getDescription()!)")
+                push.setData(data)
                 push.sendPushInBackground()
                 
             } else {
@@ -354,9 +384,14 @@ class Bet : PFObject, PFSubclassing {
                 var pushQuery = PFInstallation.query()
                 pushQuery.whereKey("user", matchesQuery: ownerQuery)
                 //Send push notification to opponent
+                
+                var data: NSDictionary = [  "alert": "You have lost a $\(self.getAmount()!) bet against \(currentUser.getName()).\n\(self.getDescription()!)",
+                                            "badge": "Increment",
+                                            "notifyType": "loser" ]
+                
                 var push = PFPush()
                 push.setQuery(pushQuery)
-                push.setMessage("You have lost a $\(self.getAmount()!) bet against \(currentUser.getName()).\n\(self.getDescription()!)")
+                push.setData(data)
                 push.sendPushInBackground()
                 
             } else {
@@ -375,9 +410,14 @@ class Bet : PFObject, PFSubclassing {
                 println("Successfully saved user to watcher list");
 
                 //Send push notification to owner and opponent
+                
+                var data: NSDictionary = [  "alert": "\(currentUser.getName()) is watching your bet.\n\(self.getDescription()!)",
+                                            "badge": "Increment",
+                                            "notifyType": "watch" ]
+                
                 var push = PFPush()
                 push.setChannel("ch_\(self.getObjectId())")
-                push.setMessage("\(currentUser.getName()) is watching your bet.\n\(self.getDescription()!)")
+                push.setData(data)
                 push.sendPushInBackground()
                 
                 
@@ -500,8 +540,8 @@ class Bet : PFObject, PFSubclassing {
         var pushQuery = PFInstallation.query()
         pushQuery.whereKey("user", containedIn: watchersList)
         pushQuery.whereKey("user", notEqualTo: currentUser)
-        var push = PFPush()
-        push.setQuery(pushQuery)
+        
+
         var winnerUser = User()
         var loserUser = User()
         if self.getOppenent()?.objectId == self.getWinner()?.objectId {
@@ -511,7 +551,14 @@ class Bet : PFObject, PFSubclassing {
             winnerUser = self.getOppenent()!
             loserUser = self.getOwner()
         }
-        push.setMessage("\(winnerUser.getName()) has won the bet against \(loserUser.getName()).\n\(self.getDescription()!)")
+        
+        var data: NSDictionary = [  "alert": "\(winnerUser.getName()) has won the bet against \(loserUser.getName()).\n\(self.getDescription()!)",
+                                    "badge": "Increment",
+                                    "notifyType": "winner" ]
+        
+        var push = PFPush()
+        push.setQuery(pushQuery)
+        push.setData(data)
         push.sendPushInBackground()
     }
 }
