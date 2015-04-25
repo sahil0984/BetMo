@@ -33,6 +33,7 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         betsFeedTableView.dataSource = self
         betsFeedTableView.delegate = self
         betsFeedTableView.rowHeight = UITableViewAutomaticDimension
+        betsFeedTableView.estimatedRowHeight = 200
         profileHeaderTopConstraint.constant = -192
         if feedViewType == profileTab {
             profileHeaderTopConstraint.constant = 0
