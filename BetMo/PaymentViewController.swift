@@ -28,7 +28,7 @@ class PaymentViewController: UIViewController {
             var winner = bet.getWinner()
             var opponent = bet.getOppenent()
             var owner = bet.getOwner()
-            var currentUser = PFUser.currentUser() as User
+            var currentUser = PFUser.currentUser() as! User
             var requestTo = ""
             if currentUser.getFbId() == winner?.getFbId() {
                 if currentUser.getFbId() == owner.getFbId() {

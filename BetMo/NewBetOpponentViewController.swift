@@ -29,9 +29,9 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
     var isFriendListLoaded = false
     var preLoadFriends: Bool = false {
         didSet {
-            BetMoClient.sharedInstance.getAllBetMoFriends({(friendsList, error) -> () in
+            BetMoClient.sharedInstance.getAllBetMoFriends({(betMoFriendsList, error) -> () in
                 if error == nil {
-                    self.allFriendsList = friendsList!
+                    self.allFriendsList = betMoFriendsList!
                     //self.updateFriendsList()
                     println("Friends list preloaded")
                     self.isFriendListLoaded = true
@@ -108,7 +108,7 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         //var cell = collectionView.dequeueReusableCellWithIdentifier("FriendCell") as FriendTableViewCell
         
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("FriendCell", forIndexPath: indexPath) as FriendCollectionViewCell
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("FriendCell", forIndexPath: indexPath) as! FriendCollectionViewCell
         
         if indexPath.row == 0 {
             cell.cellSelectOverlayView.hidden = true
@@ -127,11 +127,11 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
         collectionView.deselectItemAtIndexPath(indexPath, animated: false)
         
         if lastSelectedCellIndexPath != nil {
-            var lastSelectedCell = collectionView.cellForItemAtIndexPath(lastSelectedCellIndexPath) as FriendCollectionViewCell
+            var lastSelectedCell = collectionView.cellForItemAtIndexPath(lastSelectedCellIndexPath) as! FriendCollectionViewCell
             lastSelectedCell.cellSelectOverlayView.hidden = true
         }
         
-        var thisCell = collectionView.cellForItemAtIndexPath(indexPath) as FriendCollectionViewCell
+        var thisCell = collectionView.cellForItemAtIndexPath(indexPath) as! FriendCollectionViewCell
         
         thisCell.cellSelectOverlayView.hidden = false
         UIView.animateWithDuration(0.7, animations: { () -> Void in

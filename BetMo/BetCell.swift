@@ -21,7 +21,7 @@ class BetCell: UITableViewCell {
             var ownerName = owner.getName()
             var winner = betInfo.getWinner()
             var opponent = betInfo.getOppenent()
-            var currentUser = PFUser.currentUser() as User
+            var currentUser = PFUser.currentUser() as! User
             var profileImageUrl = owner.getProfileImageUrl()!
             var opponentName = ""
             if  opponent != nil {
@@ -99,38 +99,38 @@ class BetCell: UITableViewCell {
             let boldAttribute = [ NSFontAttributeName: boldFont ] as NSDictionary
 
             // Apply it to the owner name if it appears in the headline
-            var attributedString = NSMutableAttributedString(string: betHeadline)
-            var rangeOfOwnerName = betHeadline.rangeOfString(ownerName as NSString)
-
-            if rangeOfOwnerName.location != NSNotFound {
-                attributedString.setAttributes(boldAttribute, range: rangeOfOwnerName)
-            }
-
-            // Apply it to the opponent name if it appears in the headline
-            if opponent != nil {
-                var rangeOfOpponentName = betHeadline.rangeOfString(opponentName as NSString)
-                if rangeOfOpponentName.location != NSNotFound {
-                    attributedString.setAttributes(boldAttribute, range: rangeOfOpponentName)
-                }
-            }
-
-            // Apply it to the winner name if it appears in the headline
-            if winner != nil {
-                var rangeOfWinnerName = betHeadline.rangeOfString(winnerName as NSString)
-                if rangeOfWinnerName.location != NSNotFound {
-                    attributedString.setAttributes(boldAttribute, range: rangeOfWinnerName)
-                }
-            }
-
-            // Apply it to the $Amount
-            var rangeOfAmount = betHeadline.rangeOfString(amount as NSString)
-            if rangeOfAmount.location != NSNotFound {
-                attributedString.setAttributes(boldAttribute, range: rangeOfAmount)
-            }
-
-            headlineLabel.attributedText = attributedString
-            descriptionLabel.text = betInfo.getDescription()
-            timestampLabel.text = betInfo.getCreatedAt()
+//            var attributedString = NSMutableAttributedString(string: betHeadline)
+//            var rangeOfOwnerName = betHeadline.rangeOfString(ownerName as NSString as String)
+//
+//            if rangeOfOwnerName.location != NSNotFound {
+//                attributedString.setAttributes(boldAttribute, range: rangeOfOwnerName)
+//            }
+//
+//            // Apply it to the opponent name if it appears in the headline
+//            if opponent != nil {
+//                var rangeOfOpponentName = betHeadline.rangeOfString(opponentName as NSString as String)
+//                if rangeOfOpponentName.location != NSNotFound {
+//                    attributedString.setAttributes(boldAttribute, range: rangeOfOpponentName)
+//                }
+//            }
+//
+//            // Apply it to the winner name if it appears in the headline
+//            if winner != nil {
+//                var rangeOfWinnerName = betHeadline.rangeOfString(winnerName as NSString as String)
+//                if rangeOfWinnerName.location != NSNotFound {
+//                    attributedString.setAttributes(boldAttribute, range: rangeOfWinnerName)
+//                }
+//            }
+//
+//            // Apply it to the $Amount
+//            var rangeOfAmount = betHeadline.rangeOfString(amount as NSString as String)
+//            if rangeOfAmount.location != NSNotFound {
+//                attributedString.setAttributes(boldAttribute, range: rangeOfAmount)
+//            }
+//
+//            headlineLabel.attributedText = attributedString
+//            descriptionLabel.text = betInfo.getDescription()
+//            timestampLabel.text = betInfo.getCreatedAt()
 
             var urlRequest = NSURLRequest(URL: NSURL(string: profileImageUrl)!)
             self.profileImageView.alpha = 0

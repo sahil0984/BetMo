@@ -82,7 +82,7 @@ class DiscoverViewController: UIViewController {
     }
     
     @IBAction func onPan(panGestureRecognizer: UIPanGestureRecognizer) {
-        let cardView = panGestureRecognizer.view! as CustomCellNib
+        let cardView = panGestureRecognizer.view! as! CustomCellNib
 
         let point = panGestureRecognizer.locationInView(view)
         let velocity = panGestureRecognizer.velocityInView(view)

@@ -10,9 +10,11 @@ import Foundation
 
 class User : PFUser, PFSubclassing {
     
-    override class func load() {
-        superclass()?.load()
-        self.registerSubclass()
+    override class func initialize() {
+        var onceToken : dispatch_once_t = 0;
+        dispatch_once(&onceToken) {
+            self.registerSubclass()
+        }
     }
     
     override init() {
@@ -23,7 +25,7 @@ class User : PFUser, PFSubclassing {
     // Getters and Setters for all User properties
 
     func getFirstName() -> String {
-        return self["firstName"] as String
+        return self["firstName"] as! String
     }
     
     func setFirstName(firstName: String) {
@@ -31,7 +33,7 @@ class User : PFUser, PFSubclassing {
     }
 
     func getLastName() -> String {
-        return self["lastName"] as String
+        return self["lastName"] as! String
     }
     
     func setLastName(lastName: String) {
@@ -42,11 +44,11 @@ class User : PFUser, PFSubclassing {
         return (getFirstName() + " " + getLastName())
     }
     
-    func getEmail() -> String? {
+    func getUserEmail() -> String? {
         return self["email"] as? String
     }
 
-    func setEmail(email: String) {
+    func setUserEmail(email: String) {
         self["email"] = email
     }
 

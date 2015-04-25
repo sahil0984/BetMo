@@ -30,7 +30,7 @@ class NewBetConfirmViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        var currentUser = PFUser.currentUser() as User
+        var currentUser = PFUser.currentUser() as! User
         newBet.setOwner(currentUser)
         newBet.setIsAccepted(false)
         

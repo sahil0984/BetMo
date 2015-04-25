@@ -53,11 +53,11 @@ class BetMoGetImage {
             
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
                 if connectionError == nil && data != nil {
-                    var object = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as NSDictionary
+                    var object = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as! NSDictionary
                     var coverObject = object["cover"] as? NSDictionary
                     
                     if coverObject != nil {
-                        var bannerRealUrl = coverObject!["source"] as NSString
+                        var bannerRealUrl = coverObject!["source"] as! String
                         
                         var urlRequest = NSURLRequest(URL: NSURL(string: bannerRealUrl)!)
                         NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in

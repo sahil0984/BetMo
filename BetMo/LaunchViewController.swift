@@ -47,9 +47,9 @@ class LaunchViewController: UIViewController {
                             var storyboard = UIStoryboard(name: "Main", bundle: nil)
                             var vc: UIViewController!
                             if PFUser.currentUser() != nil && PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()) {
-                                vc = storyboard.instantiateViewControllerWithIdentifier("HomeViewController") as UIViewController
+                                vc = storyboard.instantiateViewControllerWithIdentifier("HomeViewController") as! UIViewController
                             } else {
-                                vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as UIViewController
+                                vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
                             }
                             self.showViewController(vc, sender: self)
                         })

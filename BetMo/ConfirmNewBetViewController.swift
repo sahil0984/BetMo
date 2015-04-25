@@ -15,7 +15,7 @@ class ConfirmNewBetViewController: UIViewController {
     @IBOutlet weak var betAmountLabel: UILabel!
     @IBOutlet weak var betDescriptionLabel: UILabel!
     
-    var newBet = Bet()
+    var newBet = Bet(className: "Bet")
     
     override func viewDidLoad() {
         super.viewDidLoad()

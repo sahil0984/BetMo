@@ -61,15 +61,15 @@ class HomeViewController: UIViewController, NewBetViewControllerDelegate {
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
 
         // Create all view controllers
-        homeFeedContainer = storyboard.instantiateViewControllerWithIdentifier("BetsFeedViewController") as BetsFeedViewController
+        homeFeedContainer = storyboard.instantiateViewControllerWithIdentifier("BetsFeedViewController") as! BetsFeedViewController
 
-        openBetsFeedContainer = storyboard.instantiateViewControllerWithIdentifier("BetsFeedViewController") as BetsFeedViewController
+        openBetsFeedContainer = storyboard.instantiateViewControllerWithIdentifier("BetsFeedViewController") as! BetsFeedViewController
         openBetsFeedContainer.feedViewType = requestTab
 
-        myBetsFeedContainer = storyboard.instantiateViewControllerWithIdentifier("BetsFeedViewController") as BetsFeedViewController
+        myBetsFeedContainer = storyboard.instantiateViewControllerWithIdentifier("BetsFeedViewController") as! BetsFeedViewController
         myBetsFeedContainer.feedViewType = profileTab
 
-        discoverViewController = storyboard.instantiateViewControllerWithIdentifier("DiscoverViewController") as DiscoverViewController
+        discoverViewController = storyboard.instantiateViewControllerWithIdentifier("DiscoverViewController") as! DiscoverViewController
 
         // For easier access when using segmented control
         allViewControllers = [openBetsFeedContainer, homeFeedContainer, myBetsFeedContainer]
@@ -145,13 +145,13 @@ class HomeViewController: UIViewController, NewBetViewControllerDelegate {
         request.startWithCompletionHandler { (connection, result, error: NSError?) -> Void in
             if error == nil {
                 println(result)
-                var userData = result as NSDictionary
-                var fbId = userData["id"] as String
-                var currUser = PFUser.currentUser() as User
-                currUser.setFbId(userData["id"] as String)
-                currUser.setFirstName(userData["first_name"] as String)
-                currUser.setLastName(userData["last_name"] as String)
-                currUser.setEmail(userData["email"] as String)
+                var userData = result as! NSDictionary
+                var fbId = userData["id"] as! String
+                var currUser = PFUser.currentUser() as! User
+                currUser.setFbId(userData["id"] as! String)
+                currUser.setFirstName(userData["first_name"] as! String)
+                currUser.setLastName(userData["last_name"] as! String)
+                currUser.setUserEmail(userData["email"] as! String)
                 currUser.setProfileImageUrl("https://graph.facebook.com/\(fbId)/picture?type=large&return_ssl_resources=1" as String)
                 
                 var searchName = currUser.getName().lowercaseString
@@ -177,7 +177,7 @@ class HomeViewController: UIViewController, NewBetViewControllerDelegate {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        var newBetViewController = segue.destinationViewController as NewBetViewController
+        var newBetViewController = segue.destinationViewController as! NewBetViewController
         
         newBetViewController.delegate = self
     }

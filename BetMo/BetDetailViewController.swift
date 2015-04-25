@@ -30,7 +30,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
 
     @IBOutlet weak var pendingAcceptLabel: UILabel!
     
-    var currBet: Bet = Bet()
+    var currBet: Bet = Bet(className: "Bet")
     
     var delegate: BetDetailViewControllerDelegate?
     
@@ -49,7 +49,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
         }
         
         
-        if (currBet.getOppenent()? != nil) {
+        if (currBet.getOppenent() != nil) {
             opponentUserNameLabel.text = currBet.getOppenent()?.getName()
             
             urlRequest = NSURLRequest(URL: NSURL(string: (currBet.getOppenent()?.getProfileImageUrl())!)!)
@@ -66,14 +66,14 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
         betDescriptionLabel.text = currBet.getDescription()
         betAmountLabel.text = "$\(currBet.getAmount()!)"
         
-        var currentUser = PFUser.currentUser() as User
+        var currentUser = PFUser.currentUser() as! User
         
         
         //acceptButton
         //betDecisionSegmentControl
         //pendingAcceptLabel
         
-        if currBet.getOwner().getFbId() == currentUser.getFbId() || (currBet.getOppenent()? != nil && currBet.getOppenent()?.getFbId() != currentUser.getFbId()) || currBet.getIsAccepted() {
+        if currBet.getOwner().getFbId() == currentUser.getFbId() || (currBet.getOppenent() != nil && currBet.getOppenent()?.getFbId() != currentUser.getFbId()) || currBet.getIsAccepted() {
             //acceptButton.setTitle("", forState: UIControlState.Normal)
             acceptButton.hidden = true
         }
@@ -91,7 +91,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
             self.pendingAcceptLabel.hidden = false
         }
 
-        if let winner = currBet.getWinner()? {
+        if let winner = currBet.getWinner() {
             if winner.getFbId() == currBet.getOwner().getFbId() {
                 setSegControlOwnerWinner()
             } else {
@@ -114,7 +114,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
     
     
     @IBAction func onWinnerSelect(sender: AnyObject) {
-        var currUser = PFUser.currentUser() as User
+        var currUser = PFUser.currentUser() as! User
         
         if betDecisionSegmentControl.selectedSegmentIndex == 0 {
             setSegControlOwnerWinner()
@@ -154,9 +154,9 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
     
     
     @IBAction func onAcceptButton(sender: AnyObject) {
-        var currUser = PFUser.currentUser() as User
+        var currUser = PFUser.currentUser() as! User
         
-        if currBet.getOwner().getFbId() != currUser.getFbId() && (currBet.getOppenent()? == nil || currBet.getOppenent()?.getFbId() == currUser.getFbId()) && !currBet.getIsAccepted() {
+        if currBet.getOwner().getFbId() != currUser.getFbId() && (currBet.getOppenent() == nil || currBet.getOppenent()?.getFbId() == currUser.getFbId()) && !currBet.getIsAccepted() {
            UIAlertView(title: "Accept Bet", message: "Do you want to accept this bet?", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Yes").show()
         }
     }
@@ -168,7 +168,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
             acceptButton.hidden = true
             self.pendingAcceptLabel.hidden = true
             
-            var currUser = PFUser.currentUser() as User
+            var currUser = PFUser.currentUser() as! User
             self.opponentUserNameLabel.text = currUser.getName()
             var urlRequest = NSURLRequest(URL: NSURL(string: (currUser.getProfileImageUrl())!)!)
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
@@ -188,8 +188,8 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        var paymentNavigationController = segue.destinationViewController as UINavigationController
-        var paymentViewController = paymentNavigationController.viewControllers[0] as PaymentViewController
+        var paymentNavigationController = segue.destinationViewController as! UINavigationController
+        var paymentViewController = paymentNavigationController.viewControllers[0] as! PaymentViewController
         paymentViewController.bet = currBet
     }
 }

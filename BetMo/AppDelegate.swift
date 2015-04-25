@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
+        User.registerSubclass()
+        Bet.registerSubclass()
+        
         //Initialize Parse and Facebook
         Parse.setApplicationId(parseAppId, clientKey: parseClientKey)
         PFFacebookUtils.initializeFacebook()
@@ -85,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFUser.logOut()
 
         //Go to initial login view controller
-        var vc = storyboard.instantiateInitialViewController() as UIViewController
+        var vc = storyboard.instantiateInitialViewController() as! UIViewController
         window?.rootViewController = vc
     }
     
@@ -98,12 +101,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         currentInstallation.saveInBackground()
     }
 
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: NSDictionary) {
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         
         PFPush.handlePush(userInfo)
         
         //Logic for handling incoming notifications
-        var notifyType = userInfo["notifyType"] as String
+        var notifyType = userInfo["notifyType"] as! String
         println("Received \(notifyType) notification")
 
         //Fetch the new bet and push the view controller accordingly.
@@ -152,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //openURL call for Facebook
     func application(application: UIApplication,
         openURL url: NSURL,
-        sourceApplication: String,
+        sourceApplication: String?,
         annotation: AnyObject?) -> Bool {
             return FBAppCall.handleOpenURL(url, sourceApplication:sourceApplication,
                 withSession:PFFacebookUtils.session())

@@ -74,7 +74,7 @@ class CellAnimator {
     }
     
     class func animateCellFlip(cell:UITableViewCell) {
-        let view = cell.contentView as BetCell
+        let view = cell.contentView as! BetCell
         
         UIView.animateWithDuration(2.0, delay: 0.0, options: UIViewAnimationOptions.TransitionFlipFromBottom, animations: { () -> Void in
             //Nothing

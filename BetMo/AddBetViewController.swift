@@ -135,7 +135,7 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
         } else if creationStep == 2 { //create final bet
             
             if isFriendSelected {
-                var currentUser = PFUser.currentUser() as User
+                var currentUser = PFUser.currentUser() as! User
                 var newBet = Bet()
                 newBet.setOwner(currentUser)
                 newBet.setDescription(betDescView.text)

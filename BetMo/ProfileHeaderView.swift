@@ -38,7 +38,7 @@ class ProfileHeaderView: UIView {
         addSubview(headerView)
         
         proflieImageView.layer.cornerRadius = 32
-        var currentUser = PFUser.currentUser() as User
+        let currentUser = PFUser.currentUser() as! User
         var bannerUrl = currentUser.getBannerImageUrl()
         BetMoGetImage.sharedInstance.getUserImage(currentUser.getProfileImageUrl(), completion: { (userImage, error) -> () in
             if error == nil {

@@ -21,7 +21,7 @@ class BetMoClient {
             self.resetAllCachedBets()
             
             for bet in bets {
-                let currentUser = PFUser.currentUser() as User
+                let currentUser = PFUser.currentUser() as! User
                 let owner = bet.getOwner()
                 let winner = bet.getWinner()
                 let opponent = bet.getOppenent()
@@ -101,7 +101,7 @@ class BetMoClient {
         betsQuery.orderByDescending("updatedAt")
         betsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
-                self.allBets = objects as [Bet]
+                self.allBets = objects as! [Bet]
 
                 completion(bets: self.allBets, error: nil)
             } else {
@@ -129,7 +129,7 @@ class BetMoClient {
                 betsQuery.orderByDescending("updatedAt")
                 betsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
-                        self.allBets = objects as [Bet]
+                        self.allBets = objects as! [Bet]
                         
                         println("found \(self.allBets.count) bets")
                         
@@ -161,7 +161,7 @@ class BetMoClient {
         
         mainQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
-                var winningBets = objects as [Bet]
+                var winningBets = objects as! [Bet]
                 completion(winCount: winningBets.count, error: nil)
             } else {
                 println(error)
@@ -185,7 +185,7 @@ class BetMoClient {
         
         mainQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
-                var losingBets = objects as [Bet]
+                var losingBets = objects as! [Bet]
                 completion(lossCount: losingBets.count, error: nil)
             } else {
                 println(error)
@@ -223,22 +223,48 @@ class BetMoClient {
     
     
     
+    
+//    [FBRequestConnection startWithGraphPath:@"/me/friends"
+//    parameters:nil
+//    HTTPMethod:@"GET"
+//    completionHandler:^(
+//    FBRequestConnection *connection,
+//    id result,
+//    NSError *error
+//    ) {
+//    /* handle the result */
+//    }];
+    
+    
+    
+    
+    
     //function to get all the friends in your facebook network using BetMo
     
-    func getAllBetMoFriends(completion: (friendsList: [User]?, error: NSError?) -> ()) {
+    //func getAllBetMoFriends(completion: (betMoFriendsList: [User]?, inviteFriendsList: [User]?, error: NSError?) -> ()) {
+    func getAllBetMoFriends(completion: (betMoFriendsList: [User]?, error: NSError?) -> ()) {
         // Issue a Facebook Graph API request to get your user's friend list
-        FBRequestConnection.startForMyFriendsWithCompletionHandler({ (connection, result, error: NSError!) -> Void in
+        
+//        FBRequestConnection.startWithGraphPath("/me/invitable_friends", parameters: nil, HTTPMethod: "GET") { (connection, result, error: NSError!) -> Void in
+            //Add code
+        //}
+        
+        
+        FBRequestConnection.startForMyFriendsWithCompletionHandler{ (connection, result, error: NSError!) -> Void in
             if error == nil {
                 // result will contain an array with your user's friends in the "data" key
-                var friendObjects = result["data"] as [NSDictionary]
+                var friendObjects = result["data"] as! [NSDictionary]
                 
                 var allFbFriendIds: [String] = []
+                var allFbFriends: [User] = []
                 
                 // Create a list of friends' Facebook IDs
                 for friendObject in friendObjects {
-                    allFbFriendIds.append(friendObject["id"] as NSString)
-
+                    allFbFriendIds.append(friendObject["id"] as! String)
+                    //allFbFriends.append(friendObject as User)
                 }
+                
+                println("All FB Friends: \(friendObjects)")
                 
                 // Issue a Parse query to filter the list by users using BetMo
                 var friendsQuery = PFQuery(className: "_User")
@@ -246,7 +272,7 @@ class BetMoClient {
                 //friendsQuery.whereKey("searchName", hasPrefix: friendSearchBar.text.lowercaseString)
                 friendsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
-                        var friends = objects as [User]
+                        var friends = objects as! [User]
                         var friendsList: [User]!
                         if friends.count == 0 {
                             //println("Not Found: \(self.friendSearchBar.text)")
@@ -255,11 +281,11 @@ class BetMoClient {
                             //println("Found: \(self.friendSearchBar.text)")
                             friendsList = friends
                         }
-                        completion(friendsList: friendsList, error: nil)
+                        completion(betMoFriendsList: friendsList, error: nil)
                         //println("obtained friends list")
                     } else {
                         println("Error finding")
-                        completion(friendsList: nil, error: error)
+                        completion(betMoFriendsList: nil, error: error)
                     }
                 }
                 
@@ -267,8 +293,8 @@ class BetMoClient {
             } else {
                 println("Error requesting friends list form facebook")
                 println("\(error)")
-                completion(friendsList: nil, error: error)
+                completion(betMoFriendsList: nil, error: error)
             }
-        })
+        }
     }
 }

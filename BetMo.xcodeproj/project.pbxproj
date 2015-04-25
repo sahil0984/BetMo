@@ -56,6 +56,8 @@
 		9FFCCD5719EE5A5000AC999F /* CustomCellNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFCCD5619EE5A5000AC999F /* CustomCellNib.swift */; };
 		9FFCCD5919EE5A7600AC999F /* CustomCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FFCCD5819EE5A7600AC999F /* CustomCellNib.xib */; };
 		9FFCCD5B19EF47E400AC999F /* CellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFCCD5A19EF47E400AC999F /* CellAnimator.swift */; };
+		9FFD91411AE777AF0068BFAD /* CardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFD91401AE777AF0068BFAD /* CardHeaderView.swift */; };
+		9FFD91431AE777FA0068BFAD /* CardHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FFD91421AE777FA0068BFAD /* CardHeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +114,8 @@
 		9FFCCD5619EE5A5000AC999F /* CustomCellNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellNib.swift; sourceTree = "<group>"; };
 		9FFCCD5819EE5A7600AC999F /* CustomCellNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellNib.xib; sourceTree = "<group>"; };
 		9FFCCD5A19EF47E400AC999F /* CellAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellAnimator.swift; sourceTree = "<group>"; };
+		9FFD91401AE777AF0068BFAD /* CardHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHeaderView.swift; sourceTree = "<group>"; };
+		9FFD91421AE777FA0068BFAD /* CardHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardHeaderView.xib; sourceTree = "<group>"; };
 		A5C4FD64DC654F579867EC79 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEDF2E993FFE90088ED7B540 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F5EF4C0E7EEA4517A67A1AF3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 			children = (
 				9FFCCD5819EE5A7600AC999F /* CustomCellNib.xib */,
 				9FFCCD5619EE5A5000AC999F /* CustomCellNib.swift */,
+				9FFD91401AE777AF0068BFAD /* CardHeaderView.swift */,
+				9FFD91421AE777FA0068BFAD /* CardHeaderView.xib */,
 				85BCEAEE19F4974E00A2866C /* ProfileHeaderView.xib */,
 				85BCEAF019F4979C00A2866C /* ProfileHeaderView.swift */,
 			);
@@ -381,6 +387,7 @@
 				85BCEAEF19F4974E00A2866C /* ProfileHeaderView.xib in Resources */,
 				85D9DEA819FDF52500CE7E22 /* OpenSans-Semibold.ttf in Resources */,
 				85D9DEAA19FDF52500CE7E22 /* OpenSans-Light.ttf in Resources */,
+				9FFD91431AE777FA0068BFAD /* CardHeaderView.xib in Resources */,
 				85D9DEA919FDF52500CE7E22 /* OpenSans-Regular.ttf in Resources */,
 				9FACFB5519E60C02007E865C /* Images.xcassets in Resources */,
 			);
@@ -428,6 +435,7 @@
 			files = (
 				9F2FD28D19E6984200400E46 /* Bet.swift in Sources */,
 				85FF8D2A19EB4BC900396F53 /* PaymentViewController.swift in Sources */,
+				9FFD91411AE777AF0068BFAD /* CardHeaderView.swift in Sources */,
 				9F2FD28B19E688ED00400E46 /* User.swift in Sources */,
 				9FACFB5019E60C02007E865C /* LoginViewController.swift in Sources */,
 				85DA561219FC61DA0063E34B /* DiscoverViewController.swift in Sources */,

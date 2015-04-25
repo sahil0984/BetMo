@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
         
             var permissions: [String] = ["email", "user_friends"]
             
-            PFFacebookUtils.logInWithPermissions(permissions, {
+            PFFacebookUtils.logInWithPermissions(permissions, block: {
                 (user: PFUser!, error: NSError!) -> Void in
                 if user == nil {
                     NSLog("Uh oh. The user cancelled the Facebook login.")

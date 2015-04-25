@@ -52,7 +52,7 @@ class NewBetDescViewController: UIViewController, UITextViewDelegate {
         
         // Get the keyboard height and width from the notification
         // Size varies depending on OS, language, orientation
-        var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue().size
+        var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
         
         nextButtonBotConstraint.constant = kbSize.height + 5
     }

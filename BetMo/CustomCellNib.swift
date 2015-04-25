@@ -77,7 +77,7 @@ class CustomCellNib: UIView {
         }
     }
     
-    var bet: Bet = Bet() {
+    var bet: Bet = Bet(className: "Bet") {
         willSet(currBet) {
             fillMainCard(currBet)
             fillWinnerCard(currBet)
@@ -165,7 +165,7 @@ class CustomCellNib: UIView {
         //Undecided bets - Select Winner button
         //Closed bets - No button
 
-        var currUser = PFUser.currentUser() as User
+        var currUser = PFUser.currentUser() as! User
         var betOwner = currBet.getOwner()
         var betOpponent = currBet.getOppenent()
         
@@ -311,7 +311,7 @@ class CustomCellNib: UIView {
 
     @IBAction func onChooseWinnerTap(sender: UITapGestureRecognizer) {
         var currBet = bet
-        var currUser = PFUser.currentUser() as User
+        var currUser = PFUser.currentUser() as! User
         var betOwner = currBet.getOwner()
         var betOpponent = currBet.getOppenent()
         swapViewWithWinnerView()
@@ -322,7 +322,7 @@ class CustomCellNib: UIView {
     //-------------------------
     @IBAction func onActionButton(sender: AnyObject) {
         var currBet = bet
-        var currUser = PFUser.currentUser() as User
+        var currUser = PFUser.currentUser() as! User
         var betOwner = currBet.getOwner()
         var betOpponent = currBet.getOppenent()
         
@@ -444,7 +444,7 @@ class CustomCellNib: UIView {
     }
 
     @IBAction func acceptTap(sender: UITapGestureRecognizer) {
-        var currUser = PFUser.currentUser() as User
+        var currUser = PFUser.currentUser() as! User
         
         //Create a tmp bet and assign it to bet just to call the property observer.
         var tmpBet = bet
@@ -465,7 +465,7 @@ class CustomCellNib: UIView {
     
     
     @IBAction func onAcceptButton(sender: AnyObject) {
-        var currUser = PFUser.currentUser() as User
+        var currUser = PFUser.currentUser() as! User
         
         //Create a tmp bet and assign it to bet just to call the property observer.
         var tmpBet = bet
@@ -492,7 +492,7 @@ class CustomCellNib: UIView {
     //--------------------------
     @IBAction func onOwnerImageTap(sender: UITapGestureRecognizer) {
         MBProgressHUD.showHUDAddedTo(self.mainContentView, animated: true)
-        var currUser = PFUser.currentUser() as User
+        var currUser = PFUser.currentUser() as! User
         if currUser.getFbId() == bet.getOwner().getFbId() {
             bet.wonWithCompletion({ (bet, error) -> () in
                 if error == nil {
@@ -513,7 +513,7 @@ class CustomCellNib: UIView {
     }
     @IBAction func onOpponentImageTap(sender: UITapGestureRecognizer) {
         MBProgressHUD.showHUDAddedTo(self.mainContentView, animated: true)
-        var currUser = PFUser.currentUser() as User
+        var currUser = PFUser.currentUser() as! User
         if currUser.getFbId() == bet.getOppenent()?.getFbId() {
             bet.wonWithCompletion({ (bet, error) -> () in
                 if error == nil {

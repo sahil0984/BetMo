@@ -48,11 +48,11 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
             if error == nil {
                 //println(result)
                 // result will contain an array with your user's friends in the "data" key
-                var friendObjects = result["data"] as [NSDictionary]
+                var friendObjects = result["data"] as! [NSDictionary]
                 
                 // Create a list of friends' Facebook IDs
                 for friendObject in friendObjects {
-                    self.fbAllFriendIds.append(friendObject["id"] as NSString)
+                    self.fbAllFriendIds.append(friendObject["id"] as! String)
                     //var tt = friendObject["id"] as NSString
                     //println("fid = \(tt)")
                 }
@@ -97,7 +97,7 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
         friendsQuery.whereKey("searchName", hasPrefix: friendNameTextField.text.lowercaseString)
         friendsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
-                var friends = objects as [User]
+                var friends = objects as! [User]
                 if friends.count == 0 {
                     println("Not Found: \(self.friendNameTextField.text)")
                     self.friendsList = []
@@ -118,7 +118,7 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
         return friendsList.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("friendCell") as FriendTableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("friendCell") as! FriendTableViewCell
         
         if indexPath.row == 0 {
             cell.nameLabel.text = "Open Bet"

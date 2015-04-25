@@ -101,7 +101,7 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("betFeedCell") as BetsFeedTableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("betFeedCell") as! BetsFeedTableViewCell
         
         if feedViewType == requestTab || feedViewType == profileTab {
             cell.customBetCellView.isRequest = true

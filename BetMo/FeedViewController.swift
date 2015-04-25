@@ -15,7 +15,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let profileTab = "profile"
 
     var bets: [Bet] = [Bet]()
-    var selectedBet: Bet = Bet()
+    var selectedBet: Bet = Bet(className: "Bet")
     // Default is the feeds tab
     var feedViewType: String = "feed"
 
@@ -77,7 +77,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = betsTableView.dequeueReusableCellWithIdentifier("BetCell") as BetCell
+        var cell = betsTableView.dequeueReusableCellWithIdentifier("BetCell") as! BetCell
         cell.bet = bets[indexPath.row] as Bet
         
         CellAnimator.animateCellAppear(cell)
@@ -91,7 +91,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         var bet = bets[indexPath.row] as Bet
-        var currentUser = PFUser.currentUser() as User
+        var currentUser = PFUser.currentUser() as! User
         var owner = bet.getOwner() as User
         var opponent = bet.getOppenent()
         var winner = bet.getWinner()
@@ -193,7 +193,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "betDetail" {
-            var betDetailViewController = segue.destinationViewController as BetDetailViewController
+            var betDetailViewController = segue.destinationViewController as! BetDetailViewController
             
             if (sender as? String) != "More" {
                 var selectedRow = self.betsTableView.indexPathForSelectedRow()?.row

@@ -16,7 +16,7 @@ class Bet : PFObject, PFSubclassing {
     }
     
     func getOwner() -> User {
-        return self["owner"] as User
+        return self["owner"] as! User
     }
     
     func setOwner(owner: User) {
@@ -40,7 +40,7 @@ class Bet : PFObject, PFSubclassing {
     }
 
     func getIsAccepted() -> Bool {
-        return self["isAccepted"] as Bool
+        return self["isAccepted"] as! Bool
     }
 
     func setIsAccepted(isAccepted: Bool) {
@@ -101,7 +101,7 @@ class Bet : PFObject, PFSubclassing {
     }
     
     func create() {
-        var currentUser = PFUser.currentUser() as User
+        var currentUser = PFUser.currentUser() as! User
         self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
             if isSaved {
                 println("Successfully created bet");
@@ -129,7 +129,7 @@ class Bet : PFObject, PFSubclassing {
                     
                     var push = PFPush()
                     push.setQuery(pushQuery)
-                    push.setData(data)
+                    push.setData(data as [NSObject : AnyObject])
                     push.sendPushInBackground()
                 }
                 
@@ -141,7 +141,7 @@ class Bet : PFObject, PFSubclassing {
     }
     
     func acceptWithCompletion(completion: (bet: Bet?, error: NSError?) -> ()) {
-        var currentUser = PFUser.currentUser() as User
+        var currentUser = PFUser.currentUser() as! User
         setOpponent(currentUser)
         setIsAccepted(true)
         self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
@@ -168,7 +168,7 @@ class Bet : PFObject, PFSubclassing {
                 
                 var push = PFPush()
                 push.setQuery(pushQuery)
-                push.setData(data)
+                push.setData(data as [NSObject : AnyObject])
                 push.sendPushInBackground()
                 
                 
@@ -181,7 +181,7 @@ class Bet : PFObject, PFSubclassing {
     }
 
     func accept() {
-        var currentUser = PFUser.currentUser() as User
+        var currentUser = PFUser.currentUser() as! User
         setOpponent(currentUser)
         setIsAccepted(true)
         self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
@@ -208,7 +208,7 @@ class Bet : PFObject, PFSubclassing {
                 
                 var push = PFPush()
                 push.setQuery(pushQuery)
-                push.setData(data)
+                push.setData(data as [NSObject : AnyObject])
                 push.sendPushInBackground()
                 
                 
@@ -242,7 +242,7 @@ class Bet : PFObject, PFSubclassing {
     }
     
     func lost() {
-        var currentUser = PFUser.currentUser() as User
+        var currentUser = PFUser.currentUser() as! User
         if currentUser.getFbId() == self.getOwner().getFbId() {
             self["winner"] = self.getOppenent()!
         } else {
@@ -273,7 +273,7 @@ class Bet : PFObject, PFSubclassing {
                 
                 var push = PFPush()
                 push.setQuery(pushQuery)
-                push.setData(data)
+                push.setData(data as [NSObject : AnyObject])
                 push.sendPushInBackground()
                 
             } else {
@@ -284,7 +284,7 @@ class Bet : PFObject, PFSubclassing {
     }
 
     func lostWithCompletion(completion: (bet: Bet?, error: NSError?) -> ()) {
-        var currentUser = PFUser.currentUser() as User
+        var currentUser = PFUser.currentUser() as! User
         if currentUser.getFbId() == self.getOwner().getFbId() {
             self["winner"] = self.getOppenent()!
         } else {
@@ -316,7 +316,7 @@ class Bet : PFObject, PFSubclassing {
                 
                 var push = PFPush()
                 push.setQuery(pushQuery)
-                push.setData(data)
+                push.setData(data as [NSObject : AnyObject])
                 push.sendPushInBackground()
                 
             } else {
@@ -327,7 +327,7 @@ class Bet : PFObject, PFSubclassing {
         }
     }
     func won() {
-        var currentUser = PFUser.currentUser() as User
+        var currentUser = PFUser.currentUser() as! User
         self["winner"] = currentUser
         self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
             if isSaved {
@@ -353,7 +353,7 @@ class Bet : PFObject, PFSubclassing {
                 
                 var push = PFPush()
                 push.setQuery(pushQuery)
-                push.setData(data)
+                push.setData(data as [NSObject : AnyObject])
                 push.sendPushInBackground()
                 
             } else {
@@ -364,7 +364,7 @@ class Bet : PFObject, PFSubclassing {
     }
 
     func wonWithCompletion(completion: (bet: Bet?, error: NSError?) -> ()) {
-        var currentUser = PFUser.currentUser() as User
+        var currentUser = PFUser.currentUser() as! User
         self["winner"] = currentUser
         self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
             if isSaved {
@@ -391,7 +391,7 @@ class Bet : PFObject, PFSubclassing {
                 
                 var push = PFPush()
                 push.setQuery(pushQuery)
-                push.setData(data)
+                push.setData(data as [NSObject : AnyObject])
                 push.sendPushInBackground()
                 
             } else {
@@ -403,7 +403,7 @@ class Bet : PFObject, PFSubclassing {
     }
 
     func watch() {
-        var currentUser = PFUser.currentUser() as User
+        var currentUser = PFUser.currentUser() as! User
         self.addObject(currentUser, forKey: "watcherList")
         self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
             if isSaved {
@@ -417,7 +417,7 @@ class Bet : PFObject, PFSubclassing {
                 
                 var push = PFPush()
                 push.setChannel("ch_\(self.getObjectId())")
-                push.setData(data)
+                push.setData(data as [NSObject : AnyObject])
                 push.sendPushInBackground()
                 
                 
@@ -429,7 +429,7 @@ class Bet : PFObject, PFSubclassing {
     }
     
     func unWatch() {
-        var currentUser = PFUser.currentUser() as User
+        var currentUser = PFUser.currentUser() as! User
         self.removeObject(currentUser, forKey: "watcherList")
         self.saveInBackgroundWithBlock { (isSaved: Bool, error: NSError?) -> Void in
             if isSaved {
@@ -441,15 +441,20 @@ class Bet : PFObject, PFSubclassing {
         }
     }
 
-    override class func load() {
-        superclass()?.load()
-        self.registerSubclass()
+    override class func initialize() {
+        var onceToken : dispatch_once_t = 0;
+        dispatch_once(&onceToken) {
+            self.registerSubclass()
+        }
     }
     
     class func parseClassName() -> String! {
         return "Bet"
     }
     
+//    static func parseClassName() -> String! {
+//        return "Bet"
+//    }
     
     //Handy functions to check the type of the bet:
     //There are 4 types of bets:
@@ -464,25 +469,25 @@ class Bet : PFObject, PFSubclassing {
     }
     
     func isPendingAcceptBet() -> Bool {
-        var isPendingAccept = (self.getIsAccepted() == false)
-                            & (self.getOppenent() != nil)
+        var isPendingAccept =  (self.getIsAccepted() == false)
+                            && (self.getOppenent() != nil)
         return isPendingAccept
     }
     
     func isUndecidedBet() -> Bool {
-        var isUndecided = (self.isOpenBet() == false)
-                        & (self.isPendingAcceptBet() == false)
-                        & (self.getWinner() == nil)
-                        & (self.getIsAccepted() == true)
+        var isUndecided =  (self.isOpenBet() == false)
+                        && (self.isPendingAcceptBet() == false)
+                        && (self.getWinner() == nil)
+                        && (self.getIsAccepted() == true)
         
         return isUndecided
     }
     
     func isClosedBet() -> Bool {
-        var isClosed = (self.isOpenBet() == false)
-                     & (self.isPendingAcceptBet() == false)
-                     & (self.isUndecidedBet() == false)
-                     & (self.getWinner() != nil)
+        var isClosed =  (self.isOpenBet() == false)
+                     && (self.isPendingAcceptBet() == false)
+                     && (self.isUndecidedBet() == false)
+                     && (self.getWinner() != nil)
         
         return isClosed
     }
@@ -492,19 +497,19 @@ class Bet : PFObject, PFSubclassing {
     //2. Current user is Bet Opponent
     //3. Current user subscribed to bet
     func isUserOwner() -> Bool {
-        var currUser = PFUser.currentUser() as User
+        var currUser = PFUser.currentUser() as! User
         var isOwner = currUser.getFbId() == self.getOwner().getFbId()
         
         return isOwner
     }
     func isUserOpponent() -> Bool {
-        var currUser = PFUser.currentUser() as User
+        var currUser = PFUser.currentUser() as! User
         var isOpponent = currUser.getFbId() == self.getOppenent()?.getFbId()
         
         return isOpponent
     }
     func isUserWatcher() -> Bool {
-        var currUser = PFUser.currentUser() as User
+        var currUser = PFUser.currentUser() as! User
         
         if let watcherList = getWatcherList() {
             for watcher in watcherList {
@@ -534,7 +539,7 @@ class Bet : PFObject, PFSubclassing {
     //------------------------------------
     //Push bet decision to watchers
     func pushWinnerToWatchers() {
-        var currentUser = PFUser.currentUser() as User
+        var currentUser = PFUser.currentUser() as! User
         
         var watchersList = self.getWatcherList()
         var pushQuery = PFInstallation.query()
@@ -558,7 +563,7 @@ class Bet : PFObject, PFSubclassing {
         
         var push = PFPush()
         push.setQuery(pushQuery)
-        push.setData(data)
+        push.setData(data as [NSObject : AnyObject])
         push.sendPushInBackground()
     }
 }
