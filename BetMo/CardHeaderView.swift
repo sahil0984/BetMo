@@ -40,8 +40,33 @@ class CardHeaderView: UIView {
     func setup() {
         view = loadViewFromNib()
         
-        view.frame = bounds
-        view.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+        
+        view.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+        view.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        view.center = CGPointMake(frame.width/2, frame.height/2)
+        view.layer.cornerRadius = 15
+        view.layer.masksToBounds = true
+        
+        // Set 1 px border
+        layer.borderColor = UIColor(red: 182/255.0, green: 182/255.0, blue: 182/255.0, alpha: 1).CGColor
+        layer.borderWidth = 1.0
+        
+        // Shadow stuff
+        layer.shadowColor = UIColor.blackColor().CGColor
+        layer.shadowOffset = CGSize(width: 0, height: 1)
+        // Opacity of the shadow
+        layer.shadowOpacity = 0.2
+        // higer this value the blurrier the shadoow
+        layer.shadowRadius = 1.5
+        layer.cornerRadius = 15
+        layer.shouldRasterize = true
+        
+        ownerNameLabel.font = UIFont(name: "OpenSans-Semibold", size: 13)
+        opponentNameLabel.font = UIFont(name: "OpenSans-Semibold", size: 13)
+        
+        
+        //view.frame = bounds
+        //view.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
         
         addSubview(view)
         
