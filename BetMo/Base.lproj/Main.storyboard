@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="isi-WN-Qhk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="isi-WN-Qhk">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
         <!--Launch View Controller-->
@@ -569,13 +569,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$25" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWC-eg-yHB">
-                                <rect key="frame" x="246" y="70" width="108.5" height="89"/>
-                                <gestureRecognizers/>
-                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="65"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrows" translatesAutoresizingMaskIntoConstraints="NO" id="1ey-fJ-8Qs">
                                 <rect key="frame" x="215" y="209" width="169" height="46"/>
                             </imageView>
@@ -607,6 +600,11 @@
                                     <constraint firstAttribute="width" constant="40" id="fvj-qG-b1E"/>
                                 </constraints>
                             </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="25" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p4R-Mo-1dU">
+                                <rect key="frame" x="0.0" y="70" width="600" height="89"/>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="65"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -614,23 +612,25 @@
                             <constraint firstItem="TZk-Pl-oEj" firstAttribute="leading" secondItem="gS9-Nk-PGZ" secondAttribute="leading" constant="5" id="EHM-3A-VeZ"/>
                             <constraint firstAttribute="centerX" secondItem="KNd-wB-NJ4" secondAttribute="centerX" constant="-12" id="Fyc-Vd-OV7"/>
                             <constraint firstItem="ZG3-Z7-zla" firstAttribute="top" secondItem="TZk-Pl-oEj" secondAttribute="bottom" constant="5" id="HQe-Ei-oX6"/>
-                            <constraint firstItem="1ey-fJ-8Qs" firstAttribute="top" secondItem="nWC-eg-yHB" secondAttribute="bottom" constant="50" id="POb-Cu-Bqj"/>
                             <constraint firstAttribute="trailing" secondItem="TZk-Pl-oEj" secondAttribute="trailing" constant="5" id="PQb-2X-pao"/>
-                            <constraint firstItem="KNd-wB-NJ4" firstAttribute="top" secondItem="nWC-eg-yHB" secondAttribute="bottom" constant="70" id="PzA-bn-Dty"/>
+                            <constraint firstItem="KNd-wB-NJ4" firstAttribute="top" secondItem="p4R-Mo-1dU" secondAttribute="bottom" constant="70" id="UWp-Jy-w2y"/>
                             <constraint firstItem="TZk-Pl-oEj" firstAttribute="bottom" secondItem="Qka-Q1-Bqj" secondAttribute="bottom" id="WmL-Ud-R8C"/>
+                            <constraint firstItem="p4R-Mo-1dU" firstAttribute="top" secondItem="alI-6G-0tA" secondAttribute="bottom" constant="50" id="ZeD-N8-6fm"/>
+                            <constraint firstItem="p4R-Mo-1dU" firstAttribute="leading" secondItem="gS9-Nk-PGZ" secondAttribute="leading" id="eed-qd-WwY"/>
                             <constraint firstItem="TZk-Pl-oEj" firstAttribute="top" secondItem="Qka-Q1-Bqj" secondAttribute="top" id="g0x-jy-dz3"/>
-                            <constraint firstItem="nWC-eg-yHB" firstAttribute="top" secondItem="alI-6G-0tA" secondAttribute="bottom" constant="50" id="svG-ml-EIr"/>
                             <constraint firstAttribute="centerX" secondItem="1ey-fJ-8Qs" secondAttribute="centerX" id="t1Z-cy-S3d"/>
                             <constraint firstItem="TZk-Pl-oEj" firstAttribute="trailing" secondItem="Qka-Q1-Bqj" secondAttribute="trailing" id="vP2-Ni-7oF"/>
-                            <constraint firstAttribute="centerX" secondItem="nWC-eg-yHB" secondAttribute="centerX" id="x2y-iG-JkB"/>
+                            <constraint firstItem="1ey-fJ-8Qs" firstAttribute="top" secondItem="p4R-Mo-1dU" secondAttribute="bottom" constant="50" id="y3r-Os-gZz"/>
+                            <constraint firstAttribute="trailing" secondItem="p4R-Mo-1dU" secondAttribute="trailing" id="zJ5-zA-9te"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="F64-PY-AHj" appends="YES" id="LlA-ks-Y0A"/>
+                            <outletCollection property="gestureRecognizers" destination="x8r-1C-2DY" appends="YES" id="TU5-4z-CNd"/>
                         </connections>
                     </view>
                     <connections>
                         <outlet property="arrowsImage" destination="1ey-fJ-8Qs" id="XZ9-iS-1C2"/>
-                        <outlet property="betAmountLabel" destination="nWC-eg-yHB" id="diJ-eg-IPC"/>
+                        <outlet property="betTextField" destination="p4R-Mo-1dU" id="5DK-e1-1sF"/>
                         <outlet property="finger" destination="KNd-wB-NJ4" id="TNv-Xc-d6a"/>
                         <outlet property="nextButton" destination="TZk-Pl-oEj" id="dKi-5e-KpF"/>
                         <outlet property="panGestureRecognizer" destination="F64-PY-AHj" id="G9A-Oz-Dhi"/>
@@ -642,6 +642,11 @@
                         <action selector="onPanGesture:" destination="5Bn-Nc-BqB" id="oBy-5v-ADf"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer id="x8r-1C-2DY">
+                    <connections>
+                        <action selector="onTapGesture:" destination="5Bn-Nc-BqB" id="0Go-Q7-rZv"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3495" y="184"/>
         </scene>
