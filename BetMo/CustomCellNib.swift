@@ -298,6 +298,7 @@ class CustomCellNib: UIView {
         // higer this value the blurrier the shadoow
         layer.shadowRadius = 1.5
         layer.cornerRadius = 15
+        layer.shouldRasterize = true
 
         ownerNameLabel.font = UIFont(name: "OpenSans-Semibold", size: 13)
         opponentNameLabel.font = UIFont(name: "OpenSans-Semibold", size: 13)
