@@ -50,6 +50,14 @@ class BetMoClient {
                 ////////// Discover Tab //////////
 
                 // Open Bets -- bets that don't have an opponent and the owner isn't the current User
+                
+                var lastOpenBetActionAt = currentUser.getLastOpenBetActionAt()
+                var betCreatedDate = bet.createdAt
+                //var compareResult = lastOpenBetActionAt!.compare(betCreatedDate)
+                println("lastOpenBetActionAt: \(lastOpenBetActionAt)")
+                println("betCreatedDate: \(betCreatedDate)")
+
+                
                 if owner.getFbId() != currentUser.getFbId() && opponent == nil {
                     self.openBets.append(bet)
                 }
@@ -205,7 +213,16 @@ class BetMoClient {
         }
         
     }
-
+    
+    func updateMyLastOpenBetActionAt() {
+        var currUser = PFUser.currentUser() as! User
+        let currDate = NSDate()
+        currUser.setLastOpenBetActionAt(currDate)
+        currUser.saveInBackground()
+    }
+    
+    
+    
     //function to get all the friends in your facebook network using BetMo
     
     //func getAllBetMoFriends(completion: (betMoFriendsList: [User]?, inviteFriendsList: [User]?, error: NSError?) -> ()) {

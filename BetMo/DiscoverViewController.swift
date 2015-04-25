@@ -208,6 +208,8 @@ class DiscoverViewController: UIViewController {
             }, completion: { (Bool) -> Void in
                 self.activeCardView.rejectedStampLabel.alpha = 0
         })
+        
+        BetMoClient.sharedInstance.updateMyLastOpenBetActionAt()
     }
 
     func handleAcceptance() {
@@ -217,6 +219,8 @@ class DiscoverViewController: UIViewController {
         bet.acceptWithCompletion { (bet, error) -> () in
             if error == nil {
                 BetMoClient.sharedInstance.profileBets.insert(bet!, atIndex: 0)
+                
+                BetMoClient.sharedInstance.updateMyLastOpenBetActionAt()
             }
         }
 
