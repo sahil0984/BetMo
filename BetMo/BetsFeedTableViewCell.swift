@@ -10,7 +10,7 @@ import UIKit
 
 class BetsFeedTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var customBetCellView: CardHeaderView!
+    @IBOutlet weak var customBetCellView: CustomCellNib!
     
     var bet: Bet = Bet(className: "Bet") {
         willSet(currBet) {

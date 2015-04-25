@@ -81,8 +81,12 @@ class User : PFUser, PFSubclassing {
         self["searchName"] = searchName
     }
     
-    //func getLastOpenBetActionAt(lastOpenBetActionAt: ) {
-    //
-    //}
+    func getLastOpenBetActionAt() -> NSDate? {
+        return self["lastOpenBetActionAt"] as? NSDate
+    }
+    
+    func setLastOpenBetActionAt(lastOpenBetActionAt: NSDate) {
+        self["lastOpenBetActionAt"] = lastOpenBetActionAt
+    }
     
 }

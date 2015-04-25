@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate { //SA, CustomCellNibDelegate {
+class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CustomCellNibDelegate {
 
     @IBOutlet weak var profileHeaderView: ProfileHeaderView!
     @IBOutlet weak var profileHeaderHeightConstraint: NSLayoutConstraint!
@@ -105,12 +105,12 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         var cell = tableView.dequeueReusableCellWithIdentifier("betFeedCell") as! BetsFeedTableViewCell
         
         if feedViewType == requestTab || feedViewType == profileTab {
-            //SAcell.customBetCellView.isRequest = true
+            cell.customBetCellView.isRequest = true
         }
 
         cell.bet = bets[indexPath.row]
-        //SAcell.customBetCellView.rowIndex = indexPath.row
-        //SAcell.customBetCellView.delegate = self
+        cell.customBetCellView.rowIndex = indexPath.row
+        cell.customBetCellView.delegate = self
 
         return cell
     }
