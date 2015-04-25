@@ -298,7 +298,10 @@ class CustomCellNib: UIView {
         // higer this value the blurrier the shadoow
         layer.shadowRadius = 1.5
         layer.cornerRadius = 15
+
+        // Fixes choppy scrolling
         layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.mainScreen().scale
 
         ownerNameLabel.font = UIFont(name: "OpenSans-Semibold", size: 13)
         opponentNameLabel.font = UIFont(name: "OpenSans-Semibold", size: 13)
