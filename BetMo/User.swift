@@ -81,4 +81,8 @@ class User : PFUser, PFSubclassing {
         self["searchName"] = searchName
     }
     
+    //func getLastOpenBetActionAt(lastOpenBetActionAt: ) {
+    //
+    //}
+    
 }
