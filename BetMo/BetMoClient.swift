@@ -41,17 +41,21 @@ class BetMoClient {
 
                 ////////// Feed Tab //////////
 
-                // Open Bets -- bets that don't have an opponent and the owner isn't the current User
-                if owner.getFbId() != currentUser.getFbId() && opponent == nil {
-                    self.openBets.append(bet)
-                }
-
                 if winner != nil {
                     self.feedBets.append(bet)
                 }
 
                 ////////// END Feed Tab //////////
-                
+
+                ////////// Discover Tab //////////
+
+                // Open Bets -- bets that don't have an opponent and the owner isn't the current User
+                if owner.getFbId() != currentUser.getFbId() && opponent == nil {
+                    self.openBets.append(bet)
+                }
+
+                ////////// End Discover Tab //////////
+
                 ////////// Profile Tab //////////
 
                 // Bet must be accepted to show up in my profile
@@ -87,30 +91,12 @@ class BetMoClient {
     var betsWithNoWinner: [Bet] = [Bet]()
     var betsNotAccepted: [Bet] = [Bet]()
     var betsCompleted: [Bet] = [Bet]()
-    
+
     // New stuff
     var requestedBets: [Bet] = [Bet]()
     var feedBets: [Bet] = [Bet]()
     var profileBets: [Bet] = [Bet]()
-    
-    func getAllBetsV2(completion: (bets: [Bet]?, error: NSError?) -> ()) {
-        var betsQuery = PFQuery(className: "Bet")
-        betsQuery.includeKey("owner")
-        betsQuery.includeKey("opponent")
-        betsQuery.includeKey("winner")
-        betsQuery.orderByDescending("updatedAt")
-        betsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                self.allBets = objects as! [Bet]
 
-                completion(bets: self.allBets, error: nil)
-            } else {
-                completion(bets: nil, error: error)
-            }
-        }
-    }
-    
-    
     func getAllBets(completion: (bets: [Bet]?, error: NSError?) -> ()) {
         BetMoClient.sharedInstance.getAllBetMoFriends({(friendsList, error) -> () in
             if error == nil {
@@ -145,8 +131,7 @@ class BetMoClient {
         })
         
     }
-    
-    
+
     func getTotalWinsForUser(user: User, completion: (winCount: Int?, error: NSError?) -> ()) {
         
         var ownerBetsQuery = PFQuery(className: "Bet")
@@ -169,7 +154,7 @@ class BetMoClient {
             }
         }
     }
-    
+
     func getTotalLossesForUser(user: User, completion: (lossCount: Int?, error: NSError?) -> ()) {
         
         var ownerBetsQuery = PFQuery(className: "Bet")
@@ -194,7 +179,7 @@ class BetMoClient {
         }
         
     }
-    
+
     func resetAllCachedBets() {
         // reset values
         self.openBets = [Bet]()
@@ -205,7 +190,7 @@ class BetMoClient {
         self.feedBets = [Bet]()
         self.profileBets = [Bet]()
     }
-    
+
     func getAllRequestedBets() -> [Bet] {
         return self.requestedBets
     }
@@ -220,25 +205,7 @@ class BetMoClient {
         }
         
     }
-    
-    
-    
-    
-//    [FBRequestConnection startWithGraphPath:@"/me/friends"
-//    parameters:nil
-//    HTTPMethod:@"GET"
-//    completionHandler:^(
-//    FBRequestConnection *connection,
-//    id result,
-//    NSError *error
-//    ) {
-//    /* handle the result */
-//    }];
-    
-    
-    
-    
-    
+
     //function to get all the friends in your facebook network using BetMo
     
     //func getAllBetMoFriends(completion: (betMoFriendsList: [User]?, inviteFriendsList: [User]?, error: NSError?) -> ()) {
