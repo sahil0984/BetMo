@@ -16,10 +16,10 @@ class NewBetAmountViewController: UIViewController {
 
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet var panGestureRecognizer: UIPanGestureRecognizer!
-    
-    @IBOutlet weak var betAmountLabel: UILabel!
+
     @IBOutlet weak var finger: UIImageView!
     @IBOutlet weak var arrowsImage: UIImageView!
+    @IBOutlet weak var betTextField: UITextField!
 
     var delegate: NewBetAmountViewControllerDelegate?
     
@@ -32,7 +32,7 @@ class NewBetAmountViewController: UIViewController {
         arrowsImage.hidden = false
         finger.hidden = false
 
-        betAmountLabel.font = UIFont(name: "OpenSans-Light", size: 70)
+        betTextField.font = UIFont(name: "OpenSans-Light", size: 70)
         nextButton.titleLabel!.font = UIFont(name: "OpenSans-Regular", size: 15)
         
         nextButton.layer.cornerRadius = 5
@@ -45,9 +45,22 @@ class NewBetAmountViewController: UIViewController {
     }
 
     @IBAction func onNextButton(sender: AnyObject) {
-        delegate?.newBetAmountSubmitted("\(betAmount)")
+        delegate?.newBetAmountSubmitted("\(betTextField.text)")
     }
     
+    @IBAction func onTapGesture(sender: AnyObject) {
+        arrowsImage.hidden = true
+        finger.hidden = true
+
+        if (betTextField.isFirstResponder()) {
+            if betTextField.text == "" {
+                betTextField.text = "0"
+            }
+            betTextField.endEditing(true)
+        } else {
+            betTextField.becomeFirstResponder()
+        }
+    }
     
     @IBAction func onPanGesture(sender: UIPanGestureRecognizer) {
         arrowsImage.hidden = true
@@ -98,7 +111,7 @@ class NewBetAmountViewController: UIViewController {
         //println("At velocity: \(absVelocityX)")
         
         //println("new amount: \(betAmount)")
-        betAmountLabel.text = "$\(betAmount)"
+        betTextField.text = "\(betAmount)"
 
     }
     
