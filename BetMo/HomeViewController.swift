@@ -162,7 +162,7 @@ class HomeViewController: UIViewController, NewBetViewControllerDelegate {
                     var today = NSDate()
                     var gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
                     var offsetComponents = NSDateComponents()
-                    offsetComponents.year = 10
+                    offsetComponents.year = 20
                     var tenYearsLater = gregorian?.dateByAddingComponents(offsetComponents, toDate: today, options: nil)
                 
                     println("ten years later date: \(tenYearsLater)")
