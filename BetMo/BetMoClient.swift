@@ -51,15 +51,21 @@ class BetMoClient {
 
                 // Open Bets -- bets that don't have an opponent and the owner isn't the current User
                 
-                var lastOpenBetActionAt = currentUser.getLastOpenBetActionAt()
-                var betCreatedDate = bet.createdAt
-                //var compareResult = lastOpenBetActionAt!.compare(betCreatedDate)
-                println("lastOpenBetActionAt: \(lastOpenBetActionAt)")
-                println("betCreatedDate: \(betCreatedDate)")
-
-                
                 if owner.getFbId() != currentUser.getFbId() && opponent == nil {
-                    self.openBets.append(bet)
+                    
+                    var lastOpenBetAt = currentUser.getLastOpenBetAt() as NSDate?
+                    var betCreatedDate = bet.createdAt as NSDate
+                    var compareResult = lastOpenBetAt!.compare(betCreatedDate) as NSComparisonResult
+                    //println("lastOpenBetActionAt: \(lastOpenBetAt)")
+                    //println("betCreatedDate: \(betCreatedDate)")
+                    
+                    if compareResult == NSComparisonResult.OrderedDescending {
+                        //println("last open bet is older than this bet creation")
+                        self.openBets.append(bet)
+                    } else {
+                        //println("last open bet is newer than this bet creation")
+                    }
+                    
                 }
 
                 ////////// End Discover Tab //////////
@@ -214,10 +220,9 @@ class BetMoClient {
         
     }
     
-    func updateMyLastOpenBetActionAt() {
+    func updateMyLastOpenBetActionAt(bet: Bet) {
         var currUser = PFUser.currentUser() as! User
-        let currDate = NSDate()
-        currUser.setLastOpenBetActionAt(currDate)
+        currUser.setLastOpenBetAt(bet.createdAt)
         currUser.saveInBackground()
     }
     
