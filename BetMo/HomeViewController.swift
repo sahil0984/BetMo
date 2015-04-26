@@ -156,8 +156,23 @@ class HomeViewController: UIViewController, NewBetViewControllerDelegate {
                 
                 var searchName = currUser.getName().lowercaseString
                 currUser.setSearchName(searchName)
+                
+                if currUser.getLastOpenBetAt() === nil {
+                    
+                    var today = NSDate()
+                    var gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+                    var offsetComponents = NSDateComponents()
+                    offsetComponents.year = 10
+                    var tenYearsLater = gregorian?.dateByAddingComponents(offsetComponents, toDate: today, options: nil)
+                
+                    println("ten years later date: \(tenYearsLater)")
+                    currUser.setLastOpenBetAt(tenYearsLater!)
+                }
+                
+                
                 currUser.saveInBackground()
-  
+                
+
             } else {
                 println("Facebook request error: \(error)")
             }
