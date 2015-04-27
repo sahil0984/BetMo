@@ -69,6 +69,7 @@ class NewBetAmountViewController: UIViewController {
         var point = panGestureRecognizer.locationInView(view)
         var velocity = panGestureRecognizer.velocityInView(view)
         var absVelocityX = abs(velocity.x)
+        var absVelocityY = abs(velocity.y)
         var dir: Int
         
         if velocity.x < 0 {
@@ -82,9 +83,11 @@ class NewBetAmountViewController: UIViewController {
         } else if sender.state == UIGestureRecognizerState.Changed {
             var tmpBetAmount = betAmount
             
-            if absVelocityX > 1 {
+            if absVelocityX > 1 && absVelocityY < 5 {
                 
-                if absVelocityX > 20 {
+                var distX = abs((initialPanPosition?.x)! - point.x)
+                
+                if absVelocityX > 20 && distX > 10 {
                     if absVelocityX < 100 {
                         tmpBetAmount += 1 * dir
                     } else if absVelocityX < 200 {
