@@ -22,8 +22,6 @@ class NewBetAmountViewController: UIViewController {
     @IBOutlet weak var betTextField: UITextField!
 
     var delegate: NewBetAmountViewControllerDelegate?
-    
-    var betAmount = 25
     var originalFingerX: CGFloat!
     var initialPanPosition: CGPoint?
     
@@ -37,8 +35,7 @@ class NewBetAmountViewController: UIViewController {
         
         nextButton.layer.cornerRadius = 5
     }
-    
-    
+
     override func viewDidAppear(animated: Bool) {
         originalFingerX = finger.frame.origin.x
         animateFinger()
@@ -80,8 +77,7 @@ class NewBetAmountViewController: UIViewController {
         if sender.state == UIGestureRecognizerState.Began {
             initialPanPosition = point
         } else if sender.state == UIGestureRecognizerState.Changed {
-            var tmpBetAmount = betAmount
-            
+            var tmpBetAmount = betTextField.text.toInt()!
             if absVelocityX > 1 {
                 
                 if absVelocityX > 20 {
@@ -95,24 +91,14 @@ class NewBetAmountViewController: UIViewController {
                         tmpBetAmount += 50 * dir
                     }
                 }
-                
-                if tmpBetAmount >= 0 {
-                    betAmount = tmpBetAmount
-                } else {
-                    betAmount = 0
+                if tmpBetAmount < 0 {
+                    tmpBetAmount = 0
                 }
+
+                betTextField.text = "\(tmpBetAmount)"
             }
         
-        } else if sender.state == UIGestureRecognizerState.Ended {
-            
         }
-        
-        //println("At position: \(point)")
-        //println("At velocity: \(absVelocityX)")
-        
-        //println("new amount: \(betAmount)")
-        betTextField.text = "\(betAmount)"
-
     }
     
     
