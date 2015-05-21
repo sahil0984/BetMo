@@ -26,6 +26,7 @@ class NewBetAmountViewController: UIViewController, UITextFieldDelegate {
     var originalFingerX: CGFloat!
     var initialPanPosition: CGPoint?
     
+    var betAmount: Float = 25.0
     var amt = [Int]()
     
     override func viewDidLoad() {
@@ -42,17 +43,17 @@ class NewBetAmountViewController: UIViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
         
-        //Pre calculate piece-wise intervals for a polynomial function
-        var C3 = 1000
-        var C2 = 1
-        var C1 = 1
-        var C0 = 0
-        var y = 0
-        for var x=0; x<1000; x=x+20 {
-            var normX = x/1000
-            y = (C3 * normX^3) + (C2 * normX^2) + (C1 * normX^1) + (C0 * normX^0)
-            amt.append(y)
-        }
+//        //Pre calculate piece-wise intervals for a polynomial function
+//        var C3 = 1000
+//        var C2 = 1
+//        var C1 = 1
+//        var C0 = 0
+//        var y = 0
+//        for var x=0; x<1000; x=x+20 {
+//            var normX = x/1000
+//            y = (C3 * normX^3) + (C2 * normX^2) + (C1 * normX^1) + (C0 * normX^0)
+//            amt.append(y)
+//        }
         
     }
 
@@ -99,54 +100,63 @@ class NewBetAmountViewController: UIViewController, UITextFieldDelegate {
 
         var point = panGestureRecognizer.locationInView(view)
         var velocity = panGestureRecognizer.velocityInView(view)
+        var dist = panGestureRecognizer.translationInView(view)
         var absVelocityX = abs(velocity.x)
         var absVelocityY = abs(velocity.y)
-        var dir: Int
+        var absDistX = abs(dist.x)
+        var absDistY = abs(dist.y)
+        var dir: Float
         
         if velocity.x < 0 {
-            dir = -1
+            dir = -1.0
         } else {
-            dir = 1
+            dir = 1.0
         }
         
         if sender.state == UIGestureRecognizerState.Began {
             initialPanPosition = point
         } else if sender.state == UIGestureRecognizerState.Changed {
             
-            var tmpBetAmount = betTextField.text.toInt()!
+            //var tmpBetAmount = betTextField.text.toInt()!
 
             if absVelocityX > 20 && absVelocityY < 20 {
                 
-                //var distX = abs((initialPanPosition?.x)! - point.x)
+                println("absVelocityX = \(absVelocityX)")
+
                 
-//                if absVelocityX > 20 {
-//                    if absVelocityX < 200 {
-//                        tmpBetAmount += 1 * dir
-//                    } else if absVelocityX < 500 {
-//                        tmpBetAmount += 5 * dir
-//                    } else if absVelocityX < 800 {
-//                        tmpBetAmount += 10 * dir
-//                    } else if absVelocityX < 1000 {
-//                        tmpBetAmount += 50 * dir
-//                    }
+                if absVelocityX > 20 {
+                    if absVelocityX < 100 {
+                        betAmount += 0.05 * dir
+                    } else if absVelocityX < 150 {
+                        betAmount += 0.5 * dir
+                    } else if absVelocityX < 300 {
+                        betAmount += 1.0 * dir
+                    } else if absVelocityX < 500 {
+                        betAmount += 5.0 * dir
+                    } else if absVelocityX < 800 {
+                        betAmount += 10.0 * dir
+                    }
+                }
+                
+//                var indx =  Int(round(absVelocityX/20))
+//                
+//                println("absDistX = \(absDistX)")
+//                println("absVelocityX = \(absVelocityX)")
+//                
+//                if absVelocityX < 100 {
+//                    betAmount += 0.05 * dir
+//                } else if Int(absVelocityX) > amt.last {
+//                    betAmount += Float(amt.last!) * dir
+//                } else {
+//                    betAmount += Float(amt[indx]) * dir
 //                }
                 
-                var indx =  Int(round(absVelocityX/20))
-                
-                if absVelocityX < 100 {
-                    tmpBetAmount += 1 * dir
-                } else if Int(absVelocityX) > amt.last {
-                    tmpBetAmount += amt.last! * dir
-                } else {
-                    tmpBetAmount += amt[indx] * dir
-                }
-                
             
-                if tmpBetAmount < 0 {
-                    tmpBetAmount = 0
+                if betAmount < 0 {
+                    betAmount = 0
                 }
 
-                betTextField.text = "\(tmpBetAmount)"
+                betTextField.text = "\(Int(round(betAmount)))"
             }
         
         }
