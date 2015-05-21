@@ -60,10 +60,8 @@ class BetMoClient {
                     //println("betCreatedDate: \(betCreatedDate)")
                     
                     if compareResult == NSComparisonResult.OrderedDescending {
-                        //println("last open bet is older than this bet creation")
+                        //println("last open bet action is older than this bet creation")
                         self.openBets.append(bet)
-                    } else {
-                        //println("last open bet is newer than this bet creation")
                     }
                     
                 }
@@ -220,7 +218,7 @@ class BetMoClient {
         
     }
     
-    func updateMyLastOpenBetActionAt(bet: Bet) {
+    func updateMyLastOpenBetAt(bet: Bet) {
         var currUser = PFUser.currentUser() as! User
         currUser.setLastOpenBetAt(bet.createdAt)
         currUser.saveInBackground()

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="isi-WN-Qhk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="isi-WN-Qhk">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--Launch View Controller-->
@@ -572,21 +572,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrows" translatesAutoresizingMaskIntoConstraints="NO" id="1ey-fJ-8Qs">
                                 <rect key="frame" x="215" y="209" width="169" height="46"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZk-Pl-oEj">
-                                <rect key="frame" x="5" y="545" width="590" height="50"/>
-                                <color key="backgroundColor" red="0.054901960784313725" green="0.13725490196078433" blue="0.3843137254901961" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="UeQ-Xr-Eso"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Next">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onNextButton:" destination="5Bn-Nc-BqB" eventType="touchUpInside" id="8ju-M2-tg5"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="finger" translatesAutoresizingMaskIntoConstraints="NO" id="KNd-wB-NJ4">
                                 <rect key="frame" x="287" y="229" width="50" height="50"/>
                                 <constraints>
@@ -605,6 +590,21 @@
                                 <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="65"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZk-Pl-oEj">
+                                <rect key="frame" x="5" y="545" width="590" height="50"/>
+                                <color key="backgroundColor" red="0.054901960784313725" green="0.13725490196078433" blue="0.3843137254901961" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="UeQ-Xr-Eso"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onNextButton:" destination="5Bn-Nc-BqB" eventType="touchUpInside" id="8ju-M2-tg5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -633,6 +633,7 @@
                         <outlet property="betTextField" destination="p4R-Mo-1dU" id="5DK-e1-1sF"/>
                         <outlet property="finger" destination="KNd-wB-NJ4" id="TNv-Xc-d6a"/>
                         <outlet property="nextButton" destination="TZk-Pl-oEj" id="dKi-5e-KpF"/>
+                        <outlet property="nextButtonBotConstraint" destination="HQe-Ei-oX6" id="ZZq-fJ-W3Q"/>
                         <outlet property="panGestureRecognizer" destination="F64-PY-AHj" id="G9A-Oz-Dhi"/>
                     </connections>
                 </viewController>

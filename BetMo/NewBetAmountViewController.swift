@@ -12,9 +12,10 @@ protocol NewBetAmountViewControllerDelegate {
     func newBetAmountSubmitted(betAmount: String)
 }
 
-class NewBetAmountViewController: UIViewController {
+class NewBetAmountViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextButtonBotConstraint: NSLayoutConstraint!
     @IBOutlet var panGestureRecognizer: UIPanGestureRecognizer!
 
     @IBOutlet weak var finger: UIImageView!
@@ -30,15 +31,33 @@ class NewBetAmountViewController: UIViewController {
         arrowsImage.hidden = false
         finger.hidden = false
 
+        betTextField.delegate = self
         betTextField.font = UIFont(name: "OpenSans-Light", size: 70)
         nextButton.titleLabel!.font = UIFont(name: "OpenSans-Regular", size: 15)
         
         nextButton.layer.cornerRadius = 5
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
 
     override func viewDidAppear(animated: Bool) {
         originalFingerX = finger.frame.origin.x
         animateFinger()
+    }
+    
+    func keyboardWillShow(notification: NSNotification!) {
+        var userInfo = notification.userInfo!
+        
+        // Get the keyboard height and width from the notification
+        // Size varies depending on OS, language, orientation
+        var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
+        
+        nextButtonBotConstraint.constant = kbSize.height + 5
+    }
+    
+    func keyboardWillHide(notification: NSNotification!) {
+        nextButtonBotConstraint.constant = 5
     }
 
     @IBAction func onNextButton(sender: AnyObject) {
@@ -81,18 +100,18 @@ class NewBetAmountViewController: UIViewController {
             
             var tmpBetAmount = betTextField.text.toInt()!
 
-            if absVelocityX > 1 && absVelocityY < 5 {
+            if absVelocityX > 1 && absVelocityY < 20 {
                 
-                var distX = abs((initialPanPosition?.x)! - point.x)
+                //var distX = abs((initialPanPosition?.x)! - point.x)
                 
-                if absVelocityX > 20 && distX > 10 {
-                    if absVelocityX < 100 {
+                if absVelocityX > 20 {
+                    if absVelocityX < 200 {
                         tmpBetAmount += 1 * dir
-                    } else if absVelocityX < 200 {
+                    } else if absVelocityX < 500 {
                         tmpBetAmount += 5 * dir
-                    } else if absVelocityX < 300 {
+                    } else if absVelocityX < 800 {
                         tmpBetAmount += 10 * dir
-                    } else if absVelocityX < 600 {
+                    } else if absVelocityX < 1000 {
                         tmpBetAmount += 50 * dir
                     }
                 }
@@ -126,6 +145,21 @@ class NewBetAmountViewController: UIViewController {
                 })
         }
     }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        var result = true
+        
+        if textField == betTextField {
+            if count(string) > 0 {
+                let disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789").invertedSet
+                let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+                result = replacementStringIsLegal
+            }
+        }
+        
+        return result
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

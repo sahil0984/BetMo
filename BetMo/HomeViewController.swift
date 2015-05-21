@@ -165,7 +165,7 @@ class HomeViewController: UIViewController, NewBetViewControllerDelegate {
                     offsetComponents.year = 20
                     var tenYearsLater = gregorian?.dateByAddingComponents(offsetComponents, toDate: today, options: nil)
                 
-                    println("ten years later date: \(tenYearsLater)")
+                    println("twenty years later date: \(tenYearsLater)")
                     currUser.setLastOpenBetAt(tenYearsLater!)
                 }
                 

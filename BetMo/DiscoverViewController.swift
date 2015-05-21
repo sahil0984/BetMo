@@ -210,7 +210,7 @@ class DiscoverViewController: UIViewController {
         })
         
         var bet = bets[0] as Bet
-        BetMoClient.sharedInstance.updateMyLastOpenBetActionAt(bet)
+        BetMoClient.sharedInstance.updateMyLastOpenBetAt(bet)
     }
 
     func handleAcceptance() {
@@ -221,7 +221,7 @@ class DiscoverViewController: UIViewController {
             if error == nil {
                 BetMoClient.sharedInstance.profileBets.insert(bet!, atIndex: 0)
                 
-                BetMoClient.sharedInstance.updateMyLastOpenBetActionAt(bet!)
+                BetMoClient.sharedInstance.updateMyLastOpenBetAt(bet!)
             }
         }
 

@@ -23,6 +23,22 @@ class Bet : PFObject, PFSubclassing {
         self["owner"] = owner
     }
     
+    func getOppenent() -> User? {
+        return self["opponent"] as? User
+    }
+    
+    func setOpponent(opponent: User) {
+        self["opponent"] = opponent
+    }
+    
+    func getWinner() -> User? {
+        return self["winner"] as? User
+    }
+    
+    func setWinner(winner: User) {
+        self["winner"] = winner
+    }
+    
     func getDescription() -> String? {
         return self["description"] as? String
     }
@@ -47,21 +63,6 @@ class Bet : PFObject, PFSubclassing {
         self["isAccepted"] = isAccepted
     }
 
-    func getWinner() -> User? {
-        return self["winner"] as? User
-    }
-
-    func setWinner(winner: User) {
-        self["winner"] = winner
-    }
-
-    func getOppenent() -> User? {
-        return self["opponent"] as? User
-    }
-    
-    func setOpponent(opponent: User) {
-        self["opponent"] = opponent
-    }
     
     func getWatcherList() -> [User]? {
         return self["watcherList"] as? [User]
