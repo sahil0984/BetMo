@@ -349,6 +349,7 @@
 		9FACFB4019E60C02007E865C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = codepath;
 				TargetAttributes = {
