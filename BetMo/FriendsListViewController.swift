@@ -44,11 +44,37 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
         
         
         // Issue a Facebook Graph API request to get your user's friend list
-        FBRequestConnection.startForMyFriendsWithCompletionHandler({ (connection, result, error: NSError!) -> Void in
-            if error == nil {
+//        FBRequestConnection.startForMyFriendsWithCompletionHandler({ (connection, result, error: NSError!) -> Void in
+//            if error == nil {
+//                //println(result)
+//                // result will contain an array with your user's friends in the "data" key
+//                let friendObjects = result["data"] as! [NSDictionary]
+//                
+//                // Create a list of friends' Facebook IDs
+//                for friendObject in friendObjects {
+//                    self.fbAllFriendIds.append(friendObject["id"] as! String)
+//                    //var tt = friendObject["id"] as NSString
+//                    //println("fid = \(tt)")
+//                }
+//                
+//                self.updateFriendsList()
+//                
+//                print("\(friendObjects.count)")
+//            } else {
+//                print("Error requesting friends list form facebook")
+//                print("\(error)")
+//            }
+//        })
+        
+        
+        FBSDKGraphRequest(graphPath: "me/friends", parameters: nil).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
+            if let error = error {
+                print("Error requesting friends list form facebook")
+                print("\(error)")
+            } else {
                 //println(result)
                 // result will contain an array with your user's friends in the "data" key
-                var friendObjects = result["data"] as! [NSDictionary]
+                let friendObjects = result["data"] as! [NSDictionary]
                 
                 // Create a list of friends' Facebook IDs
                 for friendObject in friendObjects {
@@ -59,12 +85,9 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
                 
                 self.updateFriendsList()
                 
-                println("\(friendObjects.count)")
-            } else {
-                println("Error requesting friends list form facebook")
-                println("\(error)")
+                print("\(friendObjects.count)")
             }
-        })
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,7 +97,7 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
     
     
     @IBAction func onEditingChanged(sender: AnyObject) {
-        println("Edit changed")
+        print("Edit changed")
         friendsListTableView.hidden = false
         updateFriendsList()
         
@@ -91,26 +114,28 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
     
     
     func updateFriendsList() {
-        var friendsQuery = PFQuery(className: "_User")
+        let friendsQuery = PFQuery(className: "_User")
         friendsQuery.whereKey("fbId", containedIn: fbAllFriendIds)
         
-        friendsQuery.whereKey("searchName", hasPrefix: friendNameTextField.text.lowercaseString)
-        friendsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                var friends = objects as! [User]
+        friendsQuery.whereKey("searchName", hasPrefix: friendNameTextField.text!.lowercaseString)
+        friendsQuery.findObjectsInBackgroundWithBlock {
+        (objects: [PFObject]?, error: NSError?) -> Void in
+            if let error = error {
+                print("Error finding")
+            } else {
+                let friends = objects as! [User]
                 if friends.count == 0 {
-                    println("Not Found: \(self.friendNameTextField.text)")
+                    print("Not Found: \(self.friendNameTextField.text)")
                     self.friendsList = []
                 } else {
-                    println("Found: \(self.friendNameTextField.text)")
+                    print("Found: \(self.friendNameTextField.text)")
                     self.friendsList = friends
                 }
                 self.friendsList.insert(self.openBetFriend, atIndex: 0)
-                self.friendsListTableView.reloadData()
-            } else {
-                println("Error finding")
-            }
+                self.friendsListTableView.reloadData()            }
         }
+        
+        
     }
     
     
@@ -118,7 +143,7 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
         return friendsList.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("friendCell") as! FriendTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("friendCell") as! FriendTableViewCell
         
         if indexPath.row == 0 {
             cell.nameLabel.text = "Open Bet"
@@ -154,12 +179,12 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
     
     func hideFriendsListTable() {
         
-        println("start: \(friendsListTableView.frame.origin.y)")
+        print("start: \(friendsListTableView.frame.origin.y)")
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.friendsListTableView.frame.origin.y = self.friendsListTableView.frame.origin.y - self.friendsListTableView.frame.height
-            println("start: \(self.friendsListTableView.frame.origin.y)")
+            print("start: \(self.friendsListTableView.frame.origin.y)")
         }) { (finished) -> Void in
-            println("end: \(self.friendsListTableView.frame.origin.y)")
+            print("end: \(self.friendsListTableView.frame.origin.y)")
             
         }
         

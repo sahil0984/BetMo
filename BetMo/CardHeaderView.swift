@@ -28,7 +28,7 @@ class CardHeaderView: UIView {
         setup()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         //Set properties here
 
         super.init(coder: aDecoder)
@@ -42,7 +42,7 @@ class CardHeaderView: UIView {
         
         
         view.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
-        view.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         view.center = CGPointMake(frame.width/2, frame.height/2)
         view.layer.masksToBounds = true
         
@@ -76,14 +76,14 @@ class CardHeaderView: UIView {
     }
     
     func fillView(currBet: Bet) {
-        var ownerR = currBet.getOwner()
+        let ownerR = currBet.getOwner()
         var ownerRnameE = ownerR.getName()
         ownerNameLabel.text = currBet.getOwner().getName()
         BetMoGetImage.sharedInstance.getUserImage(currBet.getOwner().getProfileImageUrl(), completion: { (userImage, error) -> () in
             if error == nil {
                 self.ownerImageView.image = userImage
             } else {
-                println(error)
+                print(error)
             }
         })
         
@@ -94,7 +94,7 @@ class CardHeaderView: UIView {
                 if error == nil {
                     self.opponentImageView.image = userImage
                 } else {
-                    println(error)
+                    print(error)
                 }
             })
         } else {

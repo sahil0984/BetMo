@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ParseFacebookUtilsV4
 
 class LaunchViewController: UIViewController {
 
@@ -44,12 +45,12 @@ class LaunchViewController: UIViewController {
                         UIView.animateWithDuration(2, animations: { () -> Void in
                             //nothing
                         }, completion: { (Bool) -> Void in
-                            var storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
                             var vc: UIViewController!
-                            if PFUser.currentUser() != nil && PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()) {
-                                vc = storyboard.instantiateViewControllerWithIdentifier("HomeViewController") as! UIViewController
+                            if PFUser.currentUser() != nil && PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()!) {
+                                vc = storyboard.instantiateViewControllerWithIdentifier("HomeViewController") 
                             } else {
-                                vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
+                                vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") 
                             }
                             self.showViewController(vc, sender: self)
                         })

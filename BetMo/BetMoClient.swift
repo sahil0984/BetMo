@@ -53,9 +53,9 @@ class BetMoClient {
                 
                 if owner.getFbId() != currentUser.getFbId() && opponent == nil {
                     
-                    var lastOpenBetAt = currentUser.getLastOpenBetAt() as NSDate?
-                    var betCreatedDate = bet.createdAt as NSDate
-                    var compareResult = lastOpenBetAt!.compare(betCreatedDate) as NSComparisonResult
+                    let lastOpenBetAt = currentUser.getLastOpenBetAt() as NSDate?
+                    let betCreatedDate = bet.createdAt as NSDate!
+                    let compareResult = lastOpenBetAt!.compare(betCreatedDate) as NSComparisonResult
                     //println("lastOpenBetActionAt: \(lastOpenBetAt)")
                     //println("betCreatedDate: \(betCreatedDate)")
                     
@@ -113,32 +113,33 @@ class BetMoClient {
         BetMoClient.sharedInstance.getAllBetMoFriends({(friendsList, error) -> () in
             if error == nil {
                 
-                var friendOwnerQuery = PFQuery(className: "Bet")
-                friendOwnerQuery.whereKey("owner", containedIn: friendsList)
+                let friendOwnerQuery = PFQuery(className: "Bet")
+                friendOwnerQuery.whereKey("owner", containedIn: friendsList!)
 
-                var friendOpponentQuery = PFQuery(className: "Bet")
-                friendOpponentQuery.whereKey("opponent", containedIn: friendsList)
+                let friendOpponentQuery = PFQuery(className: "Bet")
+                friendOpponentQuery.whereKey("opponent", containedIn: friendsList!)
                 
-                var betsQuery = PFQuery.orQueryWithSubqueries([friendOwnerQuery, friendOpponentQuery])
+                let betsQuery = PFQuery.orQueryWithSubqueries([friendOwnerQuery, friendOpponentQuery])
                 
                 betsQuery.includeKey("owner")
                 betsQuery.includeKey("opponent")
                 betsQuery.includeKey("winner")
                 betsQuery.orderByDescending("updatedAt")
-                betsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-                    if error == nil {
+                betsQuery.findObjectsInBackgroundWithBlock {
+                    (objects: [PFObject]?, error: NSError?) -> Void in
+                    if let error = error {
+                        completion(bets: nil, error: error)
+                    } else {
                         self.allBets = objects as! [Bet]
                         
-                        println("found \(self.allBets.count) bets")
+                        print("found \(self.allBets.count) bets")
                         
                         completion(bets: self.allBets, error: nil)
-                    } else {
-                        completion(bets: nil, error: error)
                     }
                 }
                 
             } else {
-                println(error)
+                print(error)
             }
         })
         
@@ -146,47 +147,49 @@ class BetMoClient {
 
     func getTotalWinsForUser(user: User, completion: (winCount: Int?, error: NSError?) -> ()) {
         
-        var ownerBetsQuery = PFQuery(className: "Bet")
+        let ownerBetsQuery = PFQuery(className: "Bet")
         ownerBetsQuery.whereKey("owner", equalTo: user)
         
-        var opponentBetsQuery = PFQuery(className: "Bet")
+        let opponentBetsQuery = PFQuery(className: "Bet")
         opponentBetsQuery.whereKey("opponent", equalTo: user)
         
-        var mainQuery = PFQuery.orQueryWithSubqueries([ownerBetsQuery, opponentBetsQuery])
+        let mainQuery = PFQuery.orQueryWithSubqueries([ownerBetsQuery, opponentBetsQuery])
         
         mainQuery.whereKey("winner", equalTo: user)
         
-        mainQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                var winningBets = objects as! [Bet]
-                completion(winCount: winningBets.count, error: nil)
-            } else {
-                println(error)
+        mainQuery.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if let error = error {
+                print(error)
                 completion(winCount: nil, error: error)
+            } else {
+                let winningBets = objects as! [Bet]
+                completion(winCount: winningBets.count, error: nil)
             }
         }
     }
 
     func getTotalLossesForUser(user: User, completion: (lossCount: Int?, error: NSError?) -> ()) {
         
-        var ownerBetsQuery = PFQuery(className: "Bet")
+        let ownerBetsQuery = PFQuery(className: "Bet")
         ownerBetsQuery.whereKey("owner", equalTo: user)
         
-        var opponentBetsQuery = PFQuery(className: "Bet")
+        let opponentBetsQuery = PFQuery(className: "Bet")
         opponentBetsQuery.whereKey("opponent", equalTo: user)
         
-        var mainQuery = PFQuery.orQueryWithSubqueries([ownerBetsQuery, opponentBetsQuery])
+        let mainQuery = PFQuery.orQueryWithSubqueries([ownerBetsQuery, opponentBetsQuery])
         
         mainQuery.whereKeyExists("winner")
         mainQuery.whereKey("winner", notEqualTo: user)
         
-        mainQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                var losingBets = objects as! [Bet]
-                completion(lossCount: losingBets.count, error: nil)
-            } else {
-                println(error)
+        mainQuery.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if let error = error {
+                print(error)
                 completion(lossCount: nil, error: error)
+            } else {
+                let losingBets = objects as! [Bet]
+                completion(lossCount: losingBets.count, error: nil)
             }
         }
         
@@ -219,8 +222,8 @@ class BetMoClient {
     }
     
     func updateMyLastOpenBetAt(bet: Bet) {
-        var currUser = PFUser.currentUser() as! User
-        currUser.setLastOpenBetAt(bet.createdAt)
+        let currUser = PFUser.currentUser() as! User
+        currUser.setLastOpenBetAt(bet.createdAt!)
         currUser.saveInBackground()
     }
     
@@ -236,11 +239,16 @@ class BetMoClient {
             //Add code
         //}
         
+        FBSDKGraphRequest(graphPath: "me/friends", parameters: nil).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
         
-        FBRequestConnection.startForMyFriendsWithCompletionHandler{ (connection, result, error: NSError!) -> Void in
-            if error == nil {
+        //FBRequestConnection.startForMyFriendsWithCompletionHandler{ (connection, result, error: NSError!) -> Void in
+            if let error = error {
+                print("Error requesting friends list form facebook")
+                print("\(error)")
+                completion(betMoFriendsList: nil, error: error)
+            } else {
                 // result will contain an array with your user's friends in the "data" key
-                var friendObjects = result["data"] as! [NSDictionary]
+                let friendObjects = result["data"] as! [NSDictionary]
                 
                 var allFbFriendIds: [String] = []
                 var allFbFriends: [User] = []
@@ -251,15 +259,19 @@ class BetMoClient {
                     //allFbFriends.append(friendObject as User)
                 }
                 
-                println("All FB Friends: \(friendObjects)")
+                print("All FB Friends: \(friendObjects)")
                 
                 // Issue a Parse query to filter the list by users using BetMo
-                var friendsQuery = PFQuery(className: "_User")
+                let friendsQuery = PFQuery(className: "_User")
                 friendsQuery.whereKey("fbId", containedIn: allFbFriendIds)
                 //friendsQuery.whereKey("searchName", hasPrefix: friendSearchBar.text.lowercaseString)
-                friendsQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-                    if error == nil {
-                        var friends = objects as! [User]
+                friendsQuery.findObjectsInBackgroundWithBlock {
+                    (objects: [PFObject]?, error: NSError?) -> Void in
+                    if let error = error {
+                        print("Error finding")
+                        completion(betMoFriendsList: nil, error: error)
+                    } else {
+                        let friends = objects as! [User]
                         var friendsList: [User]!
                         if friends.count == 0 {
                             //println("Not Found: \(self.friendSearchBar.text)")
@@ -270,17 +282,11 @@ class BetMoClient {
                         }
                         completion(betMoFriendsList: friendsList, error: nil)
                         //println("obtained friends list")
-                    } else {
-                        println("Error finding")
-                        completion(betMoFriendsList: nil, error: error)
                     }
                 }
                 
-                println("\(friendObjects.count)")
-            } else {
-                println("Error requesting friends list form facebook")
-                println("\(error)")
-                completion(betMoFriendsList: nil, error: error)
+                
+                print("\(friendObjects.count)")
             }
         }
     }

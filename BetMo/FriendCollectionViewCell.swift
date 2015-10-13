@@ -28,7 +28,7 @@ class FriendCollectionViewCell: UICollectionViewCell {
                 if error == nil {
                     self.friendImageView.image = userImage
                 } else {
-                    println(error)
+                    print(error)
                 }
             })
             

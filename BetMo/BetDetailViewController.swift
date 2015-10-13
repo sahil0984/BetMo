@@ -66,7 +66,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
         betDescriptionLabel.text = currBet.getDescription()
         betAmountLabel.text = "$\(currBet.getAmount()!)"
         
-        var currentUser = PFUser.currentUser() as! User
+        let currentUser = PFUser.currentUser() as! User
         
         
         //acceptButton
@@ -114,7 +114,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
     
     
     @IBAction func onWinnerSelect(sender: AnyObject) {
-        var currUser = PFUser.currentUser() as! User
+        let currUser = PFUser.currentUser() as! User
         
         if betDecisionSegmentControl.selectedSegmentIndex == 0 {
             setSegControlOwnerWinner()
@@ -154,7 +154,7 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
     
     
     @IBAction func onAcceptButton(sender: AnyObject) {
-        var currUser = PFUser.currentUser() as! User
+        let currUser = PFUser.currentUser() as! User
         
         if currBet.getOwner().getFbId() != currUser.getFbId() && (currBet.getOppenent() == nil || currBet.getOppenent()?.getFbId() == currUser.getFbId()) && !currBet.getIsAccepted() {
            UIAlertView(title: "Accept Bet", message: "Do you want to accept this bet?", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Yes").show()
@@ -162,15 +162,15 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
     }
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        println("clicked \(buttonIndex)")
+        print("clicked \(buttonIndex)")
         if buttonIndex == 1 {
             currBet.accept()
             acceptButton.hidden = true
             self.pendingAcceptLabel.hidden = true
             
-            var currUser = PFUser.currentUser() as! User
+            let currUser = PFUser.currentUser() as! User
             self.opponentUserNameLabel.text = currUser.getName()
-            var urlRequest = NSURLRequest(URL: NSURL(string: (currUser.getProfileImageUrl())!)!)
+            let urlRequest = NSURLRequest(URL: NSURL(string: (currUser.getProfileImageUrl())!)!)
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
                 if connectionError == nil && data != nil {
                     self.opponentUserImageView.image = UIImage(data: data!)
@@ -188,8 +188,8 @@ class BetDetailViewController: UIViewController, UIAlertViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        var paymentNavigationController = segue.destinationViewController as! UINavigationController
-        var paymentViewController = paymentNavigationController.viewControllers[0] as! PaymentViewController
+        let paymentNavigationController = segue.destinationViewController as! UINavigationController
+        let paymentViewController = paymentNavigationController.viewControllers[0] as! PaymentViewController
         paymentViewController.bet = currBet
     }
 }

@@ -120,7 +120,7 @@ class CustomCellNib: UIView {
                     self.ownerStampImage.hidden = false
                 }
             } else {
-                println(error)
+                print(error)
             }
         })
         
@@ -141,7 +141,7 @@ class CustomCellNib: UIView {
                         self.opponentStampImage.hidden = false
                     }
                 } else {
-                    println(error)
+                    print(error)
                 }
             })
         } else {
@@ -167,7 +167,7 @@ class CustomCellNib: UIView {
 
         var currUser = PFUser.currentUser() as! User
         var betOwner = currBet.getOwner()
-        var betOpponent = currBet.getOppenent()
+        let betOpponent = currBet.getOppenent()
         
         if currBet.isOpenBet() && !currBet.isUserOwner() {
             //Open bets - Accept button
@@ -216,7 +216,7 @@ class CustomCellNib: UIView {
             if error == nil {
                 self.winnerOwnerImageView.image = userImage
             } else {
-                println(error)
+                print(error)
             }
         })
         
@@ -227,7 +227,7 @@ class CustomCellNib: UIView {
                 if error == nil {
                     self.winnerOpponentImageView.image = userImage
                 } else {
-                    println(error)
+                    print(error)
                 }
             })
         }
@@ -249,13 +249,13 @@ class CustomCellNib: UIView {
         setup()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
     
     func setup() {
-        var nib = UINib(nibName: "CustomCellNib", bundle: nil)
+        let nib = UINib(nibName: "CustomCellNib", bundle: nil)
         nib.instantiateWithOwner(self, options: nil)
         
         setupCardView(mainContentView)
@@ -274,14 +274,14 @@ class CustomCellNib: UIView {
         setupStamps()
         setupButtons()
 
-        var rotation = -1 * CGFloat(Double(20) * M_PI / 180)
+        let rotation = -1 * CGFloat(Double(20) * M_PI / 180)
         ownerStampImage.transform = CGAffineTransformMakeRotation(rotation)
         opponentStampImage.transform = CGAffineTransformMakeRotation(rotation)
     }
     
     func setupCardView(cardView: UIView) {
         cardView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
-        cardView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        cardView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         cardView.center = CGPointMake(frame.width/2, frame.height/2)
         cardView.layer.cornerRadius = 15
         cardView.layer.masksToBounds = true
@@ -314,7 +314,7 @@ class CustomCellNib: UIView {
 
 
     @IBAction func onChooseWinnerTap(sender: UITapGestureRecognizer) {
-        var currBet = bet
+        let currBet = bet
         var currUser = PFUser.currentUser() as! User
         var betOwner = currBet.getOwner()
         var betOpponent = currBet.getOppenent()
@@ -325,27 +325,27 @@ class CustomCellNib: UIView {
     //Action Button pressed:
     //-------------------------
     @IBAction func onActionButton(sender: AnyObject) {
-        var currBet = bet
+        let currBet = bet
         var currUser = PFUser.currentUser() as! User
         var betOwner = currBet.getOwner()
         var betOpponent = currBet.getOppenent()
         
         if actionButton.titleLabel?.text == "Accept Bet" {
             //Open bets - Accept button
-            println("Accepted pressed")
+            print("Accepted pressed")
             swapViewWithAcceptView()
         } else if actionButton.titleLabel?.text == "Pick Winner" {
             //Undecided bets - Select Winner button
-            println("Pick winner pressed")
+            print("Pick winner pressed")
             swapViewWithWinnerView()
         } else if actionButton.titleLabel?.text == "Cancel Bet" {
             //Undecided bets - Select Winner button
-            println("Cancel bet pressed")
+            print("Cancel bet pressed")
             delegate?.betCancelled(self, cancelledBet: currBet)
             currBet.cancel()
         } else {
             //Either this is a closed bet or currUser is not a party to this bet
-            println("Cant press this button")
+            print("Cant press this button")
             swapViewWithMainView()
         }
     }
@@ -448,10 +448,10 @@ class CustomCellNib: UIView {
     }
 
     @IBAction func acceptTap(sender: UITapGestureRecognizer) {
-        var currUser = PFUser.currentUser() as! User
+        let currUser = PFUser.currentUser() as! User
         
         //Create a tmp bet and assign it to bet just to call the property observer.
-        var tmpBet = bet
+        let tmpBet = bet
         tmpBet.setIsAccepted(true)
         tmpBet.setOpponent(currUser)
         bet = tmpBet
@@ -469,10 +469,10 @@ class CustomCellNib: UIView {
     
     
     @IBAction func onAcceptButton(sender: AnyObject) {
-        var currUser = PFUser.currentUser() as! User
+        let currUser = PFUser.currentUser() as! User
         
         //Create a tmp bet and assign it to bet just to call the property observer.
-        var tmpBet = bet
+        let tmpBet = bet
         tmpBet.setIsAccepted(true)
         tmpBet.setOpponent(currUser)
         bet = tmpBet
@@ -496,7 +496,7 @@ class CustomCellNib: UIView {
     //--------------------------
     @IBAction func onOwnerImageTap(sender: UITapGestureRecognizer) {
         MBProgressHUD.showHUDAddedTo(self.mainContentView, animated: true)
-        var currUser = PFUser.currentUser() as! User
+        let currUser = PFUser.currentUser() as! User
         if currUser.getFbId() == bet.getOwner().getFbId() {
             bet.wonWithCompletion({ (bet, error) -> () in
                 if error == nil {
@@ -517,7 +517,7 @@ class CustomCellNib: UIView {
     }
     @IBAction func onOpponentImageTap(sender: UITapGestureRecognizer) {
         MBProgressHUD.showHUDAddedTo(self.mainContentView, animated: true)
-        var currUser = PFUser.currentUser() as! User
+        let currUser = PFUser.currentUser() as! User
         if currUser.getFbId() == bet.getOppenent()?.getFbId() {
             bet.wonWithCompletion({ (bet, error) -> () in
                 if error == nil {
@@ -542,7 +542,7 @@ class CustomCellNib: UIView {
         firstArrowImageView.frame.origin.y = arrowOriginalY
         secondArrowImageView.frame.origin.y = arrowOriginalY
 
-        UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.Repeat | UIViewAnimationOptions.Autoreverse, animations: { () -> Void in
+        UIView.animateWithDuration(0.4, delay: 0, options: [UIViewAnimationOptions.Repeat, UIViewAnimationOptions.Autoreverse], animations: { () -> Void in
             self.firstArrowImageView.frame.origin.y -= 10
             self.secondArrowImageView.frame.origin.y -= 10
         }, completion: nil)
@@ -580,9 +580,9 @@ class CustomCellNib: UIView {
     }
 
     func setupButtons() {
-        var blueColor = UIColor(red: 21/255.0, green: 91/255.0, blue: 151/255.0, alpha: 1)
-        var grayColor = UIColor(red: 208/255.0, green: 208/255.0, blue: 208/255.0, alpha: 1)
-        var buttonFont = UIFont(name: "OpenSans-Semibold", size: 14)
+        let blueColor = UIColor(red: 21/255.0, green: 91/255.0, blue: 151/255.0, alpha: 1)
+        let grayColor = UIColor(red: 208/255.0, green: 208/255.0, blue: 208/255.0, alpha: 1)
+        let buttonFont = UIFont(name: "OpenSans-Semibold", size: 14)
         
         cancelBetContainer.backgroundColor = grayColor
         cancelBetContainer.layer.cornerRadius = 5

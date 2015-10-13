@@ -17,11 +17,11 @@ class BetCell: UITableViewCell {
     var bet: Bet! {
         willSet(betInfo) {
             // Setup cell
-            var owner = betInfo.getOwner() as User
+            let owner = betInfo.getOwner() as User
             var ownerName = owner.getName()
-            var winner = betInfo.getWinner()
-            var opponent = betInfo.getOppenent()
-            var currentUser = PFUser.currentUser() as! User
+            let winner = betInfo.getWinner()
+            let opponent = betInfo.getOppenent()
+            let currentUser = PFUser.currentUser() as! User
             var profileImageUrl = owner.getProfileImageUrl()!
             var opponentName = ""
             if  opponent != nil {
@@ -31,7 +31,7 @@ class BetCell: UITableViewCell {
             if winner != nil {
                 winnerName = winner!.getName()
             }
-            var amount = "$" + betInfo.getAmount()!
+            let amount = "$" + betInfo.getAmount()!
             var betHeadline: NSString!
             var wantString = "wants"
             if opponentName == currentUser.getName() {
@@ -95,7 +95,7 @@ class BetCell: UITableViewCell {
             }
 
             // Create bold attribute
-            var boldFont = UIFont.boldSystemFontOfSize(14.0)
+            let boldFont = UIFont.boldSystemFontOfSize(14.0)
             let boldAttribute = [ NSFontAttributeName: boldFont ] as NSDictionary
 
             // Apply it to the owner name if it appears in the headline
@@ -132,7 +132,7 @@ class BetCell: UITableViewCell {
 //            descriptionLabel.text = betInfo.getDescription()
 //            timestampLabel.text = betInfo.getCreatedAt()
 
-            var urlRequest = NSURLRequest(URL: NSURL(string: profileImageUrl)!)
+            let urlRequest = NSURLRequest(URL: NSURL(string: profileImageUrl)!)
             self.profileImageView.alpha = 0
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse?, data: NSData?, connectionError: NSError?) -> Void in
                 if connectionError == nil && data != nil {

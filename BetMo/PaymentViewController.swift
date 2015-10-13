@@ -25,10 +25,10 @@ class PaymentViewController: UIViewController {
         // Do any additional setup after loading the view.
         if bet != nil {
             amountTextField.text = bet.getAmount()
-            var winner = bet.getWinner()
-            var opponent = bet.getOppenent()
-            var owner = bet.getOwner()
-            var currentUser = PFUser.currentUser() as! User
+            let winner = bet.getWinner()
+            let opponent = bet.getOppenent()
+            let owner = bet.getOwner()
+            let currentUser = PFUser.currentUser() as! User
             var requestTo = ""
             if currentUser.getFbId() == winner?.getFbId() {
                 if currentUser.getFbId() == owner.getFbId() {
@@ -57,7 +57,7 @@ class PaymentViewController: UIViewController {
 
     @IBAction func onSendButton(sender: AnyObject) {
         // Add Venmo logic
-        println("sent request")
+        print("sent request")
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
         })
     }

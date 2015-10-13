@@ -89,7 +89,7 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
             
             if betDescTextLength > 140 || betDescTextLength == 0 {
                 
-                var descFontColor = descCharCountLabel.textColor
+                let descFontColor = descCharCountLabel.textColor
                 UIView.transitionWithView(descCharCountLabel, duration: 0.25, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
                     self.descCharCountLabel.textColor = UIColor.greenColor()
                 }, completion: { (finished) -> Void in
@@ -135,13 +135,13 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
         } else if creationStep == 2 { //create final bet
             
             if isFriendSelected {
-                var currentUser = PFUser.currentUser() as! User
-                var newBet = Bet()
+                let currentUser = PFUser.currentUser() as! User
+                let newBet = Bet()
                 newBet.setOwner(currentUser)
                 newBet.setDescription(betDescView.text)
                 
-                var amountLabel = betAmountLabel.text
-                var parsedAmount = amountLabel?.stringByReplacingOccurrencesOfString("$", withString: "")
+                let amountLabel = betAmountLabel.text
+                let parsedAmount = amountLabel?.stringByReplacingOccurrencesOfString("$", withString: "")
                 newBet.setAmount(parsedAmount!)
                 newBet.setIsAccepted(false)
 //                if let opponent = selectedOpponent {
@@ -179,7 +179,7 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
     }
     
     @IBAction func onAmountSlider(sender: UISlider) {
-        var betAmount:Int = Int(1000 * sender.value / 5)
+        let betAmount:Int = Int(1000 * sender.value / 5)
         betAmountLabel.text = "$\(betAmount * 5)"
     }
     
@@ -190,7 +190,7 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
     //Logic for managing hint text and char count:
     //------------------------------------------------
     func AddEmptyBetHint() {
-        var betTextLength = betDescView.text as NSString
+        let betTextLength = betDescView.text as NSString
         if betTextLength.length == 0 {
             betDescView.text = betDefaultText
             setHintFont()
@@ -198,7 +198,7 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
     }
     
     func textViewDidChange(textView: UITextView) {
-        var betText = betDescView.text as NSString
+        let betText = betDescView.text as NSString
         betDescTextLength = betText.length
         
         descCharCountLabel.text = "\(140 - betDescTextLength)"
@@ -249,7 +249,7 @@ class AddBetViewController: UIViewController, UITextViewDelegate, FriendsListVie
     func animateBetAmountIn() {
         
         //Make TextView take occupy height that it needs to fit content
-        var textViewHeight = betDescView.sizeThatFits(betDescView.frame.size).height
+        let textViewHeight = betDescView.sizeThatFits(betDescView.frame.size).height
         betDescTextViewHeight.constant = textViewHeight
         
         //Set descriptionView to not editable

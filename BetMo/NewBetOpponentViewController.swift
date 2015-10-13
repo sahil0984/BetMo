@@ -33,10 +33,10 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
                 if error == nil {
                     self.allFriendsList = betMoFriendsList!
                     //self.updateFriendsList()
-                    println("Friends list preloaded")
+                    print("Friends list preloaded")
                     self.isFriendListLoaded = true
                 } else {
-                    println(error)
+                    print(error)
                 }
             })
         }
@@ -64,10 +64,10 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
                 if error == nil {
                     self.allFriendsList = friendsList!
                     self.updateFriendsList()
-                    println("Friends list preloaded")
+                    print("Friends list preloaded")
                     self.isFriendListLoaded = true
                 } else {
-                    println(error)
+                    print(error)
                 }
             })
         }
@@ -75,7 +75,7 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
     }
     
     func updateFriendsList() {
-        var searchString = friendSearchBar.text.lowercaseString
+        let searchString = friendSearchBar.text!.lowercaseString
         
         if searchString == "" {
             self.friendsList = allFriendsList
@@ -83,7 +83,7 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
             self.friendsList = []
             //regex searchString with seachName column of allFriendsList
             for friend in allFriendsList {
-                var searchName = friend.getSearchName()
+                let searchName = friend.getSearchName()
                 if let match = searchName!.rangeOfString(searchString, options: .RegularExpressionSearch) {
                     self.friendsList.append(friend)
                 }
@@ -108,7 +108,7 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         //var cell = collectionView.dequeueReusableCellWithIdentifier("FriendCell") as FriendTableViewCell
         
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("FriendCell", forIndexPath: indexPath) as! FriendCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FriendCell", forIndexPath: indexPath) as! FriendCollectionViewCell
         
         if indexPath.row == 0 {
             cell.cellSelectOverlayView.hidden = true
@@ -127,11 +127,11 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
         collectionView.deselectItemAtIndexPath(indexPath, animated: false)
         
         if lastSelectedCellIndexPath != nil {
-            var lastSelectedCell = collectionView.cellForItemAtIndexPath(lastSelectedCellIndexPath) as! FriendCollectionViewCell
+            let lastSelectedCell = collectionView.cellForItemAtIndexPath(lastSelectedCellIndexPath) as! FriendCollectionViewCell
             lastSelectedCell.cellSelectOverlayView.hidden = true
         }
         
-        var thisCell = collectionView.cellForItemAtIndexPath(indexPath) as! FriendCollectionViewCell
+        let thisCell = collectionView.cellForItemAtIndexPath(indexPath) as! FriendCollectionViewCell
         
         thisCell.cellSelectOverlayView.hidden = false
         UIView.animateWithDuration(0.7, animations: { () -> Void in
@@ -148,7 +148,7 @@ class NewBetOpponentViewController: UIViewController, UICollectionViewDataSource
     
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        var mElementSize = CGSizeMake(view.frame.width/3, view.frame.width/3)
+        let mElementSize = CGSizeMake(view.frame.width/3, view.frame.width/3)
         
         return mElementSize
     }

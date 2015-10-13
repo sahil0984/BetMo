@@ -52,7 +52,7 @@ class NewBetDescViewController: UIViewController, UITextViewDelegate {
         
         // Get the keyboard height and width from the notification
         // Size varies depending on OS, language, orientation
-        var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
+        let kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
         
         nextButtonBotConstraint.constant = kbSize.height + 5
     }
@@ -68,7 +68,7 @@ class NewBetDescViewController: UIViewController, UITextViewDelegate {
     
     
     func AddEmptyBetHint() {
-        var betTextLength = betDescTextView.text as NSString
+        let betTextLength = betDescTextView.text as NSString
         if betTextLength.length == 0 {
             betDescTextView.text = betDefaultText
             setHintFont()
@@ -76,7 +76,7 @@ class NewBetDescViewController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidChange(textView: UITextView) {
-        var betText = betDescTextView.text as NSString
+        let betText = betDescTextView.text as NSString
         betDescTextLength = betText.length
         
         if betDescTextLength == 0 {

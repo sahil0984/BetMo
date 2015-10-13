@@ -8,7 +8,7 @@
 
 import Foundation
 
-class User : PFUser, PFSubclassing {
+class User : PFUser {
     
     override class func initialize() {
         var onceToken : dispatch_once_t = 0;
@@ -70,7 +70,8 @@ class User : PFUser, PFSubclassing {
 
     //Only getter for banner
     func getBannerImageUrl() -> String? {
-        return "https://graph.facebook.com/\(self.getFbId()!)?fields=cover&access_token=\(PFFacebookUtils.session().accessTokenData)"
+        //return "https://graph.facebook.com/\(self.getFbId()!)?fields=cover&access_token=\(PFFacebookUtils.session().accessTokenData)"
+        return "https://graph.facebook.com/\(self.getFbId()!)?fields=cover&access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
     }
     
     func getSearchName() -> String? {

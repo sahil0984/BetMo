@@ -39,7 +39,7 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
             }
             if let newVC = activeViewController {
                 self.addChildViewController(newVC)
-                newVC.view.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+                newVC.view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
                 newVC.view.frame = self.contentView.bounds
                 self.contentView.addSubview(newVC.view)
                 newVC.didMoveToParentViewController(self)
@@ -116,7 +116,7 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
     
     func newOpponentSubmitted(betOpponent: User) {
         
-        var tmpBet = Bet(className: "Bet")
+        let tmpBet = Bet(className: "Bet")
         tmpBet.setAmount(newBet.getAmount()!)
         tmpBet.setDescription(newBet.getDescription()!)
         

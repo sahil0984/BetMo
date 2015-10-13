@@ -46,7 +46,7 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
             MBProgressHUD.showHUDAddedTo(betsFeedTableView, animated: true)
             BetMoClient.sharedInstance.getAllBets({ (bets, error) -> () in
                 if error != nil {
-                    println("Error while getting all bets")
+                    print("Error while getting all bets")
                 } else {
                     self.bets = BetMoClient.sharedInstance.feedBets
                     self.betsFeedTableView.reloadData()
@@ -70,8 +70,8 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
 
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if feedViewType == profileTab {
-            var offsetY = scrollView.contentOffset.y
-            var isBottomBounce = (offsetY >= (self.betsFeedTableView.contentSize.height - self.betsFeedTableView.bounds.size.height))
+            let offsetY = scrollView.contentOffset.y
+            let isBottomBounce = (offsetY >= (self.betsFeedTableView.contentSize.height - self.betsFeedTableView.bounds.size.height))
 
             if offsetY > 0 && offsetY < 111 && isBottomBounce == false {
                 profileHeaderTopConstraint.constant = -1*scrollView.contentOffset.y
@@ -86,7 +86,7 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
                 profileHeaderTopConstraint.constant = -110
             } else if offsetY <= 0 {
                 // Zoom header image!
-                var scale = 1 + (-1 * offsetY/150)
+                let scale = 1 + (-1 * offsetY/150)
                 profileHeaderView.bannerImageView.transform = CGAffineTransformMakeScale(scale, scale)
 //                profileHeaderView.proflieImageView.layer.transform = CATransform3DRotate(profileHeaderView.proflieImageView.layer.transform, -1*offsetY, 1, 0, 0)
             }
@@ -102,7 +102,7 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("betFeedCell") as! BetsFeedTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("betFeedCell") as! BetsFeedTableViewCell
         
         if feedViewType == requestTab || feedViewType == profileTab {
             cell.customBetCellView.isRequest = true
@@ -121,13 +121,13 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     func betAccepted(acceptedBet: Bet) {
-        println("bet accpeted: \(acceptedBet.getObjectId())")
+        print("bet accpeted: \(acceptedBet.getObjectId())")
     }
     
     func betRejected(customCellNib: CustomCellNib, rejectedBet: Bet) {
-        println("bet rejected: \(rejectedBet.getObjectId())")
+        print("bet rejected: \(rejectedBet.getObjectId())")
         
-        var rowIndex = customCellNib.rowIndex
+        let rowIndex = customCellNib.rowIndex
         if self.bets.count > rowIndex && self.bets[rowIndex] == rejectedBet {
             self.bets.removeAtIndex(rowIndex)
             self.betsFeedTableView.reloadData()
@@ -135,7 +135,7 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func betCancelled(customCellNib: CustomCellNib, cancelledBet: Bet) {
-        var rowIndex = customCellNib.rowIndex
+        let rowIndex = customCellNib.rowIndex
         if self.bets.count > rowIndex && self.bets[rowIndex] == cancelledBet {
             self.bets.removeAtIndex(rowIndex)
             self.betsFeedTableView.reloadData()
@@ -143,7 +143,7 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func winnerChosen(customCellNib: CustomCellNib, bet: Bet) {
-        var rowIndex = customCellNib.rowIndex
+        let rowIndex = customCellNib.rowIndex
         if self.bets.count > rowIndex {
             // replace with new info
             self.bets[rowIndex] = bet
@@ -166,7 +166,7 @@ class BetsFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     func refresh(sender: AnyObject) {
         BetMoClient.sharedInstance.getAllBets({ (bets, error) -> () in
             if error != nil {
-                println("Error while getting all bets")
+                print("Error while getting all bets")
             } else {
                 if self.feedViewType == self.profileTab {
                     self.bets = BetMoClient.sharedInstance.profileBets

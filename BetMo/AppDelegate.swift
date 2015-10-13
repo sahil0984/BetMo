@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ParseFacebookUtilsV4
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,27 +27,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Initialize Parse and Facebook
         Parse.setApplicationId(parseAppId, clientKey: parseClientKey)
-        PFFacebookUtils.initializeFacebook()
+        //PFFacebookUtils.initializeFacebook() //Changed to following post FBSDK 4.x
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+        //FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+
         
         //Parse Analytics to track app usage
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
-        
+                
         
         //Register for Push Notifications for both pre and post iOS 8
         if application.respondsToSelector(Selector("registerUserNotificationSettings:")) {
             // Register for Push Notitications, if running iOS 8
-            var userNotficationTypes = (UIUserNotificationType.Alert |
-                                        UIUserNotificationType.Badge |
-                                        UIUserNotificationType.Sound)
-            var settings = UIUserNotificationSettings(forTypes: userNotficationTypes, categories: nil)
+            let userNotficationTypes: UIUserNotificationType = ([UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound])
+            let settings = UIUserNotificationSettings(forTypes: userNotficationTypes, categories: nil)
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
         } else {
             // Register for Push Notifications before iOS 8
-            var userNotficationTypes = (UIRemoteNotificationType.Alert |
-                                        UIRemoteNotificationType.Badge |
-                                        UIRemoteNotificationType.Sound)
-            application.registerForRemoteNotificationTypes( userNotficationTypes )
+            //let userNotficationTypes: UIRemoteNotificationType = ([UIRemoteNotificationType.Alert, UIRemoteNotificationType.Badge, UIRemoteNotificationType.Sound])
+            //application.registerForRemoteNotificationTypes( userNotficationTypes )
         }
         
         
@@ -55,10 +55,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Logic for handling incoming notifications
         if launchOptions != nil {
             // Extract the notification data
-            var notificationPayload = launchOptions!["UIApplicationLaunchOptionsRemoteNotificationKey"] as? NSDictionary
+            let notificationPayload = launchOptions!["UIApplicationLaunchOptionsRemoteNotificationKey"] as? NSDictionary
             // Extract notification type
-            var notifyType = notificationPayload!["notifyType"] as? String
-            println("Received \(notifyType) notification")
+            let notifyType = notificationPayload!["notifyType"] as? String
+            print("Received \(notifyType) notification")
 
             //Fetch the new bet and push the view controller accordingly.
             BetMoClient.sharedInstance.getAllBets { (bets, error) -> () in
@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: "userDidLogoutNotification", object: nil)
 
         //If user is cached and linked to Facebook
-        if PFUser.currentUser() != nil && PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()) {
+        if PFUser.currentUser() != nil && PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()!) {
 //            var vc = storyboard.instantiateViewControllerWithIdentifier("HomeViewController") as UIViewController
 //            window?.rootViewController = vc
         }
@@ -82,13 +82,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func userDidLogout() {
         //Clear session tokens
-        PFFacebookUtils.session().closeAndClearTokenInformation()
-        
+        //PFFacebookUtils.session().closeAndClearTokenInformation()
+
         //Is this needed??
         PFUser.logOut()
 
         //Go to initial login view controller
-        var vc = storyboard.instantiateInitialViewController() as! UIViewController
+        let vc = storyboard.instantiateInitialViewController() as UIViewController!
         window?.rootViewController = vc
     }
     
@@ -96,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         
         // Store the deviceToken in the current installation and save it to Parse.
-        var currentInstallation = PFInstallation.currentInstallation()
+        let currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.setDeviceTokenFromData(deviceToken)
         currentInstallation.saveInBackground()
     }
@@ -106,8 +106,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFPush.handlePush(userInfo)
         
         //Logic for handling incoming notifications
-        var notifyType = userInfo["notifyType"] as! String
-        println("Received \(notifyType) notification")
+        let notifyType = userInfo["notifyType"] as! String
+        print("Received \(notifyType) notification")
 
         //Fetch the new bet and push the view controller accordingly.
         BetMoClient.sharedInstance.getAllBets { (bets, error) -> () in
@@ -133,11 +133,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 
-        FBAppCall.handleDidBecomeActiveWithSession(PFFacebookUtils.session())
+        FBSDKAppEvents.activateApp()
 
-        
         //Clear the notification badge
-        var currentInstallation = PFInstallation.currentInstallation()
+        let currentInstallation = PFInstallation.currentInstallation()
         
         if currentInstallation.badge != 0 {
             currentInstallation.badge = 0
@@ -149,16 +148,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         
         //Close the Facebook session
-        PFFacebookUtils.session().close()
+        //PFFacebookUtils.session().close() //Cant find something similar in sdk 4.x
     }
-
+    
     //openURL call for Facebook
     func application(application: UIApplication,
-        openURL url: NSURL,
-        sourceApplication: String?,
-        annotation: AnyObject?) -> Bool {
-            return FBAppCall.handleOpenURL(url, sourceApplication:sourceApplication,
-                withSession:PFFacebookUtils.session())
+                     openURL url: NSURL,
+                     sourceApplication: String?,
+                     annotation: AnyObject) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(application,
+                                                                     openURL: url,
+                                                                     sourceApplication: sourceApplication,
+                                                                     annotation: annotation)
     }
 
 }

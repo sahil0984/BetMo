@@ -47,7 +47,7 @@ class HomeViewController: UIViewController, NewBetViewControllerDelegate {
             }
             if let newVC = activeViewController {
                 self.addChildViewController(newVC)
-                newVC.view.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+                newVC.view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
                 newVC.view.frame = self.viewContainer.bounds
                 self.viewContainer.addSubview(newVC.view)
                 newVC.didMoveToParentViewController(self)
@@ -58,7 +58,7 @@ class HomeViewController: UIViewController, NewBetViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
         // Create all view controllers
         homeFeedContainer = storyboard.instantiateViewControllerWithIdentifier("BetsFeedViewController") as! BetsFeedViewController
@@ -141,31 +141,35 @@ class HomeViewController: UIViewController, NewBetViewControllerDelegate {
     
     //TODO: Need to figure out a better place to do this in order to slim down this controller
     func loadUserData() {
-        var request = FBRequest.requestForMe()
+        //let request = FBRequest.requestForMe()
+        
+        let requestParameters = ["fields": "id, email, first_name, last_name"]
+        let request = FBSDKGraphRequest.init(graphPath: "me", parameters: requestParameters)
+        
         request.startWithCompletionHandler { (connection, result, error: NSError?) -> Void in
             if error == nil {
-                println(result)
-                var userData = result as! NSDictionary
-                var fbId = userData["id"] as! String
-                var currUser = PFUser.currentUser() as! User
+                print(result)
+                let userData = result as! NSDictionary
+                let fbId = userData["id"] as! String
+                let currUser = PFUser.currentUser() as! User
                 currUser.setFbId(userData["id"] as! String)
                 currUser.setFirstName(userData["first_name"] as! String)
                 currUser.setLastName(userData["last_name"] as! String)
                 currUser.setUserEmail(userData["email"] as! String)
                 currUser.setProfileImageUrl("https://graph.facebook.com/\(fbId)/picture?type=large&return_ssl_resources=1" as String)
                 
-                var searchName = currUser.getName().lowercaseString
+                let searchName = currUser.getName().lowercaseString
                 currUser.setSearchName(searchName)
                 
                 if currUser.getLastOpenBetAt() === nil {
                     
-                    var today = NSDate()
-                    var gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-                    var offsetComponents = NSDateComponents()
+                    let today = NSDate()
+                    let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+                    let offsetComponents = NSDateComponents()
                     offsetComponents.year = 20
-                    var tenYearsLater = gregorian?.dateByAddingComponents(offsetComponents, toDate: today, options: nil)
+                    let tenYearsLater = gregorian?.dateByAddingComponents(offsetComponents, toDate: today, options: [])
                 
-                    println("twenty years later date: \(tenYearsLater)")
+                    print("twenty years later date: \(tenYearsLater)")
                     currUser.setLastOpenBetAt(tenYearsLater!)
                 }
                 
@@ -174,13 +178,13 @@ class HomeViewController: UIViewController, NewBetViewControllerDelegate {
                 
 
             } else {
-                println("Facebook request error: \(error)")
+                print("Facebook request error: \(error)")
             }
         }
         
         
         // Associate the device with a user
-        var installation = PFInstallation.currentInstallation()
+        let installation = PFInstallation.currentInstallation()
         installation["user"] = PFUser.currentUser()
         installation.saveInBackground()
     }
@@ -192,7 +196,7 @@ class HomeViewController: UIViewController, NewBetViewControllerDelegate {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        var newBetViewController = segue.destinationViewController as! NewBetViewController
+        let newBetViewController = segue.destinationViewController as! NewBetViewController
         
         newBetViewController.delegate = self
     }

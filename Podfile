@@ -1,9 +1,12 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, "8.1"
+platform :ios, "8.3"
 
 pod "AFNetworking"
-pod "Bolts"
 pod "Parse"
-pod "Facebook-iOS-SDK"
-pod "ParseFacebookUtils"
+pod "ParseUI"
+pod "ParseFacebookUtilsV4"
+pod "FBSDKCoreKit"
+pod "FBSDKLoginKit"
+pod "FBSDKShareKit"
+pod "FBSDKMessengerShareKit"
 pod "MBProgressHUD"

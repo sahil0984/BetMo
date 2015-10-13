@@ -26,25 +26,25 @@ class ProfileHeaderView: UIView {
         setup()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
     
     func setup() {
-        var nib = UINib(nibName: "ProfileHeaderView", bundle: nil)
+        let nib = UINib(nibName: "ProfileHeaderView", bundle: nil)
         nib.instantiateWithOwner(self, options: nil)
         setupHeaderView(headerView)
         addSubview(headerView)
         
         proflieImageView.layer.cornerRadius = 32
         let currentUser = PFUser.currentUser() as! User
-        var bannerUrl = currentUser.getBannerImageUrl()
+        let bannerUrl = currentUser.getBannerImageUrl()
         BetMoGetImage.sharedInstance.getUserImage(currentUser.getProfileImageUrl(), completion: { (userImage, error) -> () in
             if error == nil {
                 self.proflieImageView.image = userImage
             } else {
-                println(error)
+                print(error)
             }
         })
         BetMoGetImage.sharedInstance.getUserBannerImage(bannerUrl, completion: { (userBannerImage, error) -> () in
@@ -62,7 +62,7 @@ class ProfileHeaderView: UIView {
         visualEffectView.alpha = 0
         bannerImageView.addSubview(visualEffectView)
 
-        visualEffectView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        visualEffectView.translatesAutoresizingMaskIntoConstraints = false
         visualEffectViewTopConstraint = NSLayoutConstraint(item: visualEffectView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: bannerImageView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
         bannerImageView.addConstraint(visualEffectViewTopConstraint)
         bannerImageView.addConstraint(NSLayoutConstraint(item: visualEffectView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: bannerImageView, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0))
@@ -72,7 +72,7 @@ class ProfileHeaderView: UIView {
 
     func setupHeaderView(cardView: UIView) {
         headerView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
-        headerView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        headerView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         headerView.center = CGPointMake(frame.width/2, frame.height/2)
         headerView.layer.masksToBounds = true
     }

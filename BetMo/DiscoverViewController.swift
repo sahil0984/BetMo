@@ -39,7 +39,7 @@ class DiscoverViewController: UIViewController {
         cardViewOne.isDiscoverView = true
         cardViewTwo.isDiscoverView = true
 
-        var lastCardRotation = -1 * CGFloat(Double(lastCardRotationDegress) * M_PI / 180)
+        let lastCardRotation = -1 * CGFloat(Double(lastCardRotationDegress) * M_PI / 180)
         noMoreBetsView.transform = CGAffineTransformRotate(noMoreBetsView.transform, lastCardRotation)
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         // Do any additional setup after loading the view.
@@ -52,7 +52,7 @@ class DiscoverViewController: UIViewController {
                     self.cardViewOne.removeFromSuperview()
                     self.cardViewTwo.removeFromSuperview()
                     self.activeCardView = self.noMoreBetsView
-                    var lastCardRotation = CGFloat(Double(self.lastCardRotationDegress) * M_PI / 180)
+                    let lastCardRotation = CGFloat(Double(self.lastCardRotationDegress) * M_PI / 180)
                     self.noMoreBetsView.transform = CGAffineTransformRotate(self.noMoreBetsView.transform, lastCardRotation)
                     
                     // We have accepted/rejected the very last bet, hide action buttons
@@ -107,7 +107,7 @@ class DiscoverViewController: UIViewController {
             cardView.center = CGPoint(x: endPositionX, y: cardView.center.y)
             panGestureRecognizer.setTranslation(CGPointZero, inView: self.view)
 
-            var rotation = CGFloat(Double( translation.x/20) * M_PI / 180)
+            let rotation = CGFloat(Double( translation.x/20) * M_PI / 180)
             // Rotate the card
             cardView.transform = CGAffineTransformRotate(cardView.transform, rotation)
             // Add to the current rotation value
@@ -117,7 +117,7 @@ class DiscoverViewController: UIViewController {
             if scale < 1 {
                 scale = 1
             }
-            var stamp = -1 * CGFloat(Double(10) * M_PI / 180)
+            let stamp = -1 * CGFloat(Double(10) * M_PI / 180)
             // Show rejection/acceptance label
             if currentCenterX < superViewCenter {
                 cardView.rejectedStampLabel.alpha = labelAlpha
@@ -209,13 +209,13 @@ class DiscoverViewController: UIViewController {
                 self.activeCardView.rejectedStampLabel.alpha = 0
         })
         
-        var bet = bets[0] as Bet
+        let bet = bets[0] as Bet
         BetMoClient.sharedInstance.updateMyLastOpenBetAt(bet)
     }
 
     func handleAcceptance() {
         handleLastBetCase()
-        var bet = bets[0] as Bet
+        let bet = bets[0] as Bet
         // Add to the profile bets
         bet.acceptWithCompletion { (bet, error) -> () in
             if error == nil {
@@ -266,7 +266,7 @@ class DiscoverViewController: UIViewController {
     func handleLastBetCase() {
         if bets.count == 1 {
             // Remove rotation of last card
-            var lastCardRotation = CGFloat(Double(lastCardRotationDegress) * M_PI / 180)
+            let lastCardRotation = CGFloat(Double(lastCardRotationDegress) * M_PI / 180)
             noMoreBetsView.transform = CGAffineTransformRotate(noMoreBetsView.transform, lastCardRotation)
 
             // We have accepted/rejected the very last bet, hide action buttons

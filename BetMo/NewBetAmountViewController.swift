@@ -67,7 +67,7 @@ class NewBetAmountViewController: UIViewController, UITextFieldDelegate {
         
         // Get the keyboard height and width from the notification
         // Size varies depending on OS, language, orientation
-        var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
+        let kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
         
         nextButtonBotConstraint.constant = kbSize.height + 5
     }
@@ -77,7 +77,7 @@ class NewBetAmountViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func onNextButton(sender: AnyObject) {
-        delegate?.newBetAmountSubmitted("\(betTextField.text)")
+        delegate?.newBetAmountSubmitted(betTextField.text!)
     }
     
     @IBAction func onTapGesture(sender: AnyObject) {
@@ -98,11 +98,11 @@ class NewBetAmountViewController: UIViewController, UITextFieldDelegate {
         arrowsImage.hidden = true
         finger.hidden = true
 
-        var point = panGestureRecognizer.locationInView(view)
-        var velocity = panGestureRecognizer.velocityInView(view)
-        var dist = panGestureRecognizer.translationInView(view)
-        var absVelocityX = abs(velocity.x)
-        var absVelocityY = abs(velocity.y)
+        let point = panGestureRecognizer.locationInView(view)
+        let velocity = panGestureRecognizer.velocityInView(view)
+        let dist = panGestureRecognizer.translationInView(view)
+        let absVelocityX = abs(velocity.x)
+        let absVelocityY = abs(velocity.y)
         var absDistX = abs(dist.x)
         var absDistY = abs(dist.y)
         var dir: Float
@@ -121,7 +121,7 @@ class NewBetAmountViewController: UIViewController, UITextFieldDelegate {
 
             if absVelocityX > 20 && absVelocityY < 20 {
                 
-                println("absVelocityX = \(absVelocityX)")
+                print("absVelocityX = \(absVelocityX)")
 
                 
                 if absVelocityX > 20 {
@@ -164,16 +164,16 @@ class NewBetAmountViewController: UIViewController, UITextFieldDelegate {
     
     
     func animateFinger() {
-        UIView.animateWithDuration(1, delay: 0, options: nil, animations: { () -> Void in
+        UIView.animateWithDuration(1, delay: 0, options: [], animations: { () -> Void in
             self.finger.frame.origin.x += 75
             }) { (Bool) -> Void in
-                UIView.animateWithDuration(1, delay: 0, options: nil, animations: { () -> Void in
+                UIView.animateWithDuration(1, delay: 0, options: [], animations: { () -> Void in
                     self.finger.frame.origin.x = self.originalFingerX
                     }, completion: { (Bool) -> Void in
-                        UIView.animateWithDuration(1, delay: 0, options: nil, animations: { () -> Void in
+                        UIView.animateWithDuration(1, delay: 0, options: [], animations: { () -> Void in
                                 self.finger.frame.origin.x -= 75
                             }, completion: { (Bool) -> Void in
-                                UIView.animateWithDuration(1, delay: 0, options: nil, animations: { () -> Void in
+                                UIView.animateWithDuration(1, delay: 0, options: [], animations: { () -> Void in
                                     self.finger.frame.origin.x = self.originalFingerX
                                     }, completion: { (Bool) -> Void in
                                         self.animateFinger()
@@ -187,7 +187,7 @@ class NewBetAmountViewController: UIViewController, UITextFieldDelegate {
         var result = true
         
         if textField == betTextField {
-            if count(string) > 0 {
+            if string.characters.count > 0 {
                 let disallowedCharacterSet = NSCharacterSet(charactersInString: "0123456789").invertedSet
                 let replacementStringIsLegal = string.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
                 result = replacementStringIsLegal

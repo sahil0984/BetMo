@@ -37,7 +37,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             betsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
             BetMoClient.sharedInstance.getAllBets({ (bets, error) -> () in
                 if error != nil {
-                    println("Error while getting all bets")
+                    print("Error while getting all bets")
                 } else {
                     self.bets = BetMoClient.sharedInstance.feedBets
                     self.betsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
@@ -77,7 +77,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = betsTableView.dequeueReusableCellWithIdentifier("BetCell") as! BetCell
+        let cell = betsTableView.dequeueReusableCellWithIdentifier("BetCell") as! BetCell
         cell.bet = bets[indexPath.row] as Bet
         
         CellAnimator.animateCellAppear(cell)
@@ -89,19 +89,19 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
 
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        var bet = bets[indexPath.row] as Bet
-        var currentUser = PFUser.currentUser() as! User
-        var owner = bet.getOwner() as User
-        var opponent = bet.getOppenent()
-        var winner = bet.getWinner()
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let bet = bets[indexPath.row] as Bet
+        let currentUser = PFUser.currentUser() as! User
+        let owner = bet.getOwner() as User
+        let opponent = bet.getOppenent()
+        let winner = bet.getWinner()
         var button1: UITableViewRowAction!
         var button2: UITableViewRowAction!
 
         if owner.getFbId() == currentUser.getFbId() {
             if opponent == nil || bet.getIsAccepted() == false {
                 button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Cancel Bet", handler:{action, indexpath in
-                    println("Bet Cancelled");
+                    print("Bet Cancelled");
                     bet.cancel()
                     self.bets.removeAtIndex(indexPath.row)
                     self.betsTableView.reloadData()
@@ -109,14 +109,14 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 return [button1]
             } else if opponent != nil && bet.getIsAccepted() == true && winner == nil {
                 button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Won", handler:{action, indexpath in
-                    println("I won the bet")
+                    print("I won the bet")
                     bet.won()
                     self.betsTableView.reloadData()
                 });
                 button1.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
                 
                 button2 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Lost", handler:{action, indexpath in
-                    println("I lost the bet");
+                    print("I lost the bet");
                     bet.lost()
                     self.betsTableView.reloadData()
                 });
@@ -128,14 +128,14 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if opponent != nil {
             if opponent!.getFbId() == currentUser.getFbId() && bet.getIsAccepted() == false {
                 button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Accept", handler:{action, indexpath in
-                    println("Accepted Bet Request");
+                    print("Accepted Bet Request");
                     bet.accept()
                     self.betsTableView.reloadData()
                 });
                 button1.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
 
                 button2 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Reject", handler:{action, indexpath in
-                    println("Rejected Bet Request");
+                    print("Rejected Bet Request");
                     bet.reject()
                     self.bets.removeAtIndex(indexPath.row)
                     self.betsTableView.reloadData()
@@ -144,14 +144,14 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 return [button1, button2]
             } else if opponent!.getFbId() == currentUser.getFbId() && bet.getIsAccepted() == true && winner == nil {
                 button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Won", handler:{action, indexpath in
-                    println("I won the bet");
+                    print("I won the bet");
                     bet.won()
                     self.betsTableView.reloadData()
                 });
                 button1.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
                 
                 button2 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Lost", handler:{action, indexpath in
-                    println("I lost the bet");
+                    print("I lost the bet");
                     bet.lost()
                     self.betsTableView.reloadData()
                 });
@@ -162,7 +162,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         if opponent == nil {
             button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Accept Bet", handler:{action, indexpath in
-                println("Accepted Open Bet");
+                print("Accepted Open Bet");
                 bet.accept()
                 self.bets.removeAtIndex(indexPath.row)
                 self.betsTableView.reloadData()
@@ -173,7 +173,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         button1 = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "More", handler:{action, indexpath in
             // Invoke details view segue
-            println("More Info");
+            print("More Info");
             self.selectedBet = bet
             self.performSegueWithIdentifier("betDetail", sender: "More")
         });
@@ -193,10 +193,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "betDetail" {
-            var betDetailViewController = segue.destinationViewController as! BetDetailViewController
+            let betDetailViewController = segue.destinationViewController as! BetDetailViewController
             
             if (sender as? String) != "More" {
-                var selectedRow = self.betsTableView.indexPathForSelectedRow()?.row
+                let selectedRow = self.betsTableView.indexPathForSelectedRow?.row
                 self.selectedBet = self.bets[selectedRow!]
             }
             betDetailViewController.currBet = self.selectedBet
@@ -206,11 +206,11 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func acceptedBet(betAccepted: Bet) {
-        for (index,bet) in enumerate(bets) {
+        for (index,bet) in bets.enumerate() {
             if bet.getObjectId() == betAccepted.getObjectId() {
                 bets.removeAtIndex(index)
                 BetMoClient.sharedInstance.openBets = bets
-                println("removed : \(index)")
+                print("removed : \(index)")
                 betsTableView.reloadData()
                 break
             }
@@ -220,7 +220,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func refresh(sender: AnyObject) {
         BetMoClient.sharedInstance.getAllBets({ (bets, error) -> () in
             if error != nil {
-                println("Error while getting all bets")
+                print("Error while getting all bets")
             } else {
                 if self.feedViewType == self.profileTab {
                     self.bets = BetMoClient.sharedInstance.profileBets
