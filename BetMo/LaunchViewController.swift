@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ParseFacebookUtilsV4
 
 class LaunchViewController: UIViewController {
 
