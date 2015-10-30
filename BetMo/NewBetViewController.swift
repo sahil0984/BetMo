@@ -57,7 +57,7 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
         navTitleLabel.font = UIFont(name: "OpenSans-Regular", size: 15)
 
         
-        var currentUser = PFUser.currentUser() as! User
+        let currentUser = PFUser.currentUser() as! User
         
         newBetDescViewController = storyboard?.instantiateViewControllerWithIdentifier("NewBetDescViewController") as? NewBetDescViewController
         
@@ -115,6 +115,8 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
     }
     
     func newOpponentSubmitted(betOpponent: User) {
+        let currentUser = PFUser.currentUser() as! User
+        newBet.setWatcherList(currentUser)
         
         let tmpBet = Bet(className: "Bet")
         tmpBet.setAmount(newBet.getAmount()!)
@@ -122,6 +124,8 @@ class NewBetViewController: UIViewController, NewBetDescViewControllerDelegate, 
         
         if betOpponent.getFirstName() != "Open Bet" {
             tmpBet.setOpponent(betOpponent)
+            
+            tmpBet.setWatcherList(betOpponent)
         }
         newBetConfirmViewController.newBet = tmpBet
         

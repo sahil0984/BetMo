@@ -35,36 +35,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
                 
         
-        //Register for Push Notifications for both pre and post iOS 8
-        if application.respondsToSelector(Selector("registerUserNotificationSettings:")) {
-            // Register for Push Notitications, if running iOS 8
-            let userNotficationTypes: UIUserNotificationType = ([UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound])
-            let settings = UIUserNotificationSettings(forTypes: userNotficationTypes, categories: nil)
-            application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
-        } else {
-            // Register for Push Notifications before iOS 8
-            //let userNotficationTypes: UIRemoteNotificationType = ([UIRemoteNotificationType.Alert, UIRemoteNotificationType.Badge, UIRemoteNotificationType.Sound])
-            //application.registerForRemoteNotificationTypes( userNotficationTypes )
-        }
+        //Register for Push Notifications
+        let userNotificationTypes: UIUserNotificationType = ([UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound])
+        
+        let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
         
         
-        
-
-        //Logic for handling incoming notifications
-        if launchOptions != nil {
-            // Extract the notification data
-            let notificationPayload = launchOptions!["UIApplicationLaunchOptionsRemoteNotificationKey"] as? NSDictionary
+        // Extract the notification data
+        if let notificationPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
+            
             // Extract notification type
-            let notifyType = notificationPayload!["notifyType"] as? String
+            let notifyType = notificationPayload["notifyType"] as? String
             print("Received \(notifyType) notification")
-
+            
             //Fetch the new bet and push the view controller accordingly.
             BetMoClient.sharedInstance.getAllBets { (bets, error) -> () in
                 //var vc = self.storyboard.instantiateViewControllerWithIdentifier("HomeViewController") as HomeViewController
                 //vc.activeViewController = vc.discoverViewController
             }
         }
+        
         
         
         //Add a notification center to monitor logout action
@@ -102,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         
-        PFPush.handlePush(userInfo)
+        //PFPush.handlePush(userInfo)
         
         //Logic for handling incoming notifications
         let notifyType = userInfo["notifyType"] as! String

@@ -124,14 +124,15 @@ class Bet : PFObject, PFSubclassing {
                     pushQuery!.whereKey("user", matchesQuery: opponentQuery!)
                     //Send push notification to opponent
                     
-                    let data: NSDictionary = [  "alert": "\(currentUser.getName()) has challenged you to a $\(self.getAmount()!) bet.\n\(self.getDescription()!)",
-                                                "badge": "Increment",
-                                                "notifyType": "create" ]
+                    let data = [  "alert": "\(currentUser.getName()) has challenged you to a $\(self.getAmount()!) bet.\n\(self.getDescription()!)",
+                                  "badge": "Increment",
+                                  "notifyType": "create" ]
                     
                     let push = PFPush()
                     push.setQuery(pushQuery)
-                    push.setData(data as [NSObject : AnyObject])
+                    push.setData(data)
                     push.sendPushInBackground()
+
                 }
                 
             } else {
@@ -545,7 +546,7 @@ class Bet : PFObject, PFSubclassing {
         let watchersList = self.getWatcherList()
         let pushQuery = PFInstallation.query()
         pushQuery!.whereKey("user", containedIn: watchersList!)
-        pushQuery!.whereKey("user", notEqualTo: currentUser)
+        pushQuery!.whereKey("user", notEqualTo: currentUser) //When using multiple whereKey it acts like AND
         
 
         var winnerUser = User()

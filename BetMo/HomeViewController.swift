@@ -134,7 +134,7 @@ class HomeViewController: UIViewController, NewBetViewControllerDelegate {
     }
     
     
-    func newBetCreated(newBet: Bet) {
+    func newBetCreated(newBet: Bet) {        
         self.newBet = newBet
         BetMoClient.sharedInstance.allBets.insert(newBet, atIndex: 0)
     }

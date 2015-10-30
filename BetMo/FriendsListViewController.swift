@@ -67,7 +67,7 @@ class FriendsListViewController: UIViewController, UITextViewDelegate, UITableVi
 //        })
         
         
-        FBSDKGraphRequest(graphPath: "me/friends", parameters: nil).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
+        FBSDKGraphRequest(graphPath: "me/friends", parameters: ["fields": "email"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
             if let error = error {
                 print("Error requesting friends list form facebook")
                 print("\(error)")

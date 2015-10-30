@@ -238,8 +238,7 @@ class BetMoClient {
 //        FBRequestConnection.startWithGraphPath("/me/invitable_friends", parameters: nil, HTTPMethod: "GET") { (connection, result, error: NSError!) -> Void in
             //Add code
         //}
-        
-        FBSDKGraphRequest(graphPath: "me/friends", parameters: nil).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
+        FBSDKGraphRequest(graphPath: "me/friends", parameters: ["fields": "email"]).startWithCompletionHandler { (connection: FBSDKGraphRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
         
         //FBRequestConnection.startForMyFriendsWithCompletionHandler{ (connection, result, error: NSError!) -> Void in
             if let error = error {
